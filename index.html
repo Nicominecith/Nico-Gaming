@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NICO GAMING | Official eSports</title>
+    <!-- Tailwind CSS for modern utility styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;700&display=swap');
+
+        :root {
+            --brand-red: #cc0000;
+            --brand-black: #0a0a0a;
+            --brand-gray: #1a1a1a;
+            --brand-silver: #e0e0e0;
+        }
+
+        body {
+            background-color: var(--brand-black);
+            color: var(--brand-silver);
+            font-family: 'Rajdhani', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        h1, h2, h3, .font-gamer {
+            font-family: 'Orbitron', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .hero-pattern {
+            background-color: #0a0a0a;
+            background-image: radial-gradient(var(--brand-red) 0.5px, transparent 0.5px);
+            background-size: 30px 30px;
+            background-position: 0 0, 15px 15px;
+            opacity: 0.1;
+            position: absolute;
+            inset: 0;
+            z-index: -1;
+        }
+
+        .glass-card {
+            background: rgba(26, 26, 26, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(204, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .glass-card:hover {
+            border-color: var(--brand-red);
+            box-shadow: 0 0 20px rgba(204, 0, 0, 0.3);
+            transform: translateY(-5px);
+        }
+
+        .slanted {
+            clip-path: polygon(5% 0, 100% 0, 95% 100%, 0 100%);
+        }
+
+        .btn-pro {
+            position: relative;
+            background: var(--brand-red);
+            color: white;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
+            padding: 1rem 2rem;
+            overflow: hidden;
+            transition: 0.3s;
+            clip-path: polygon(10% 0, 100% 0, 90% 100%, 0 100%);
+            display: inline-block;
+            text-align: center;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-pro:hover {
+            background: white;
+            color: var(--brand-red);
+            transform: scale(1.05);
+        }
+
+        .nav-link {
+            position: relative;
+            transition: 0.3s;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--brand-red);
+            transition: 0.3s;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        #aim-canvas {
+            background: radial-gradient(circle, #1a1a1a 0%, #000 100%);
+            cursor: crosshair;
+            border: 2px solid #333;
+            width: 100%;
+            height: 400px;
+            touch-action: none;
+        }
+        
+        .controller-status {
+            font-size: 0.7rem;
+            padding: 2px 8px;
+            border-radius: 10px;
+        }
+        
+        .status-connected { background: #10b981; color: white; }
+        .status-disconnected { background: #333; color: #666; }
+
+        .setup-item {
+            border-left: 2px solid #cc0000;
+            padding-left: 1rem;
+            background: rgba(255, 255, 255, 0.02);
+            padding: 0.75rem;
+            transition: 0.2s;
+            display: block;
+            text-decoration: none;
+        }
+        .setup-item:hover {
+            background: rgba(204, 0, 0, 0.15);
+            border-left-width: 6px;
+        }
+
+        input::placeholder, select::placeholder {
+            color: rgba(255,255,255,0.3);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-black/90 border-b border-red-900/30 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <img src="nico.png" alt="N1CO Logo" class="w-10 h-10 object-contain rounded" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                <div style="display:none" class="w-10 h-10 bg-red-600 rounded flex items-center justify-center font-bold text-white italic">N</div>
+                <span class="font-gamer font-bold text-xl text-white">NICO<span class="text-red-600">GAMING</span></span>
+            </div>
+            <div class="hidden md:flex gap-8 font-gamer text-sm">
+                <a href="#home" class="nav-link text-white">Home</a>
+                <a href="#about" class="nav-link text-white">Founder</a>
+                <a href="#aim-trainer" class="nav-link text-white">Training</a>
+                <a href="#contract" class="nav-link text-white">Regeln</a>
+                <a href="#sign" class="nav-link text-red-600 font-bold">Join Us</a>
+                <a href="#twitch" class="nav-link text-white">Live</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
+        <div class="hero-pattern"></div>
+        <div class="container mx-auto px-6 text-center z-10">
+            <div class="mb-8 inline-block relative">
+                <img src="nico.png" alt="N1CO Logo Large" class="w-48 h-48 md:w-64 md:h-64 mx-auto drop-shadow-[0_0_35px_rgba(204,0,0,0.6)] animate-pulse object-contain" onerror="this.parentElement.innerHTML='<div class=\'w-48 h-48 md:w-64 md:h-64 mx-auto bg-red-600/20 rounded-full flex items-center justify-center border-2 border-red-600\'><span class=\'text-7xl font-black italic\'>N1CO</span></div>'">
+            </div>
+            <h1 class="text-6xl md:text-8xl font-black mb-4 italic">NICO GAMING</h1>
+            <p class="text-xl md:text-2xl text-gray-400 mb-8 max-w-2xl mx-auto font-light">
+                Official E-Sport Club gegründet von <span class="text-white font-bold uppercase tracking-widest">Nico Hofmann</span>. <br>
+                High-Performance in <span class="text-red-600 font-bold uppercase">Apex Legends</span>, <span class="text-red-600 font-bold uppercase">The Finals</span> & Pro-Leagues.
+            </p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="#aim-trainer" class="btn-pro tracking-tighter uppercase">Warm-up starten</a>
+                <a href="#sign" class="bg-transparent border-2 border-white/20 hover:border-red-600 py-3 px-8 text-white font-bold transition-all slanted">ZUM VERTRAG</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About & Hardware -->
+    <section id="about" class="container mx-auto px-6 py-24 border-t border-white/5">
+        <div class="grid lg:grid-cols-2 gap-16 items-center">
+            <div class="relative order-2 lg:order-1">
+                <div class="absolute -inset-4 bg-red-600/10 blur-3xl rounded-full"></div>
+                <div class="glass-card p-6 rounded-2xl relative border-t-4 border-red-600">
+                    <h3 class="font-gamer text-2xl mb-8 flex items-center gap-4">
+                        <span class="w-8 h-[2px] bg-red-600"></span> 
+                        Founder's Gear
+                    </h3>
+                    
+                    <div class="space-y-4">
+                        <a href="https://www.amazon.de/Microsoft-Xbox-Halo-Infinite-Limited/dp/B09NMWSLR6" target="_blank" class="setup-item group">
+                            <div class="text-[10px] uppercase text-red-600 font-bold tracking-widest mb-1 italic">Konsole</div>
+                            <div class="text-white font-bold text-lg group-hover:text-red-400 transition">Xbox Series X</div>
+                            <div class="text-gray-500 text-sm italic font-light">Halo Infinite Limited Edition</div>
+                        </a>
+                        <a href="https://de.turtlebeach.com/products/recon-controller" target="_blank" class="setup-item group">
+                            <div class="text-[10px] uppercase text-red-600 font-bold tracking-widest mb-1 italic">Controller</div>
+                            <div class="text-white font-bold text-lg group-hover:text-red-400 transition">Turtle Beach Recon™</div>
+                            <div class="text-gray-500 text-sm italic font-light">Wired Performance Controller</div>
+                        </a>
+                        <a href="https://de.turtlebeach.com/products/atlas-200-headset?Platform=Multiplatform&Color=Schwarz" target="_blank" class="setup-item group">
+                            <div class="text-[10px] uppercase text-red-600 font-bold tracking-widest mb-1 italic">Headset</div>
+                            <div class="text-white font-bold text-lg group-hover:text-red-400 transition">Turtle Beach Atlas 200</div>
+                            <div class="text-gray-500 text-sm italic font-light">Amplified Pro Gaming Headset</div>
+                        </a>
+                        <a href="https://www.amazon.de/Philips-273V7QDAB-Monitor-Reaktionszeit-schwarz/dp/B06ZZV3QHL" target="_blank" class="setup-item group">
+                            <div class="text-[10px] uppercase text-red-600 font-bold tracking-widest mb-1 italic">Monitor</div>
+                            <div class="text-white font-bold text-lg group-hover:text-red-400 transition">Philips 273V7QDAB</div>
+                            <div class="text-gray-500 text-sm italic font-light">27" IPS Full HD Monitor</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="order-1 lg:order-2">
+                <h2 class="text-5xl font-black mb-8 italic uppercase leading-tight">Nico <br><span class="text-red-600">Hofmann</span></h2>
+                <p class="text-lg text-gray-400 mb-6 leading-relaxed">
+                    Gründer und Team-Kapitän von NICO GAMING. Wir bauen eine Community auf, in der Skill und Hardware auf Profi-Niveau aufeinandertreffen.
+                </p>
+                <div class="grid grid-cols-2 gap-4 font-gamer">
+                    <div class="p-6 bg-white/5 rounded border border-white/10 text-center">
+                        <div class="text-4xl font-black text-white mb-1">PRO</div>
+                        <div class="text-[10px] uppercase text-red-600 font-bold">HARDWARE</div>
+                    </div>
+                    <div class="p-6 bg-white/5 rounded border border-white/10 text-center">
+                        <div class="text-4xl font-black text-white mb-1">N1CO</div>
+                        <div class="text-[10px] uppercase text-red-600 font-bold">CLUB LEADER</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Aim Trainer Section -->
+    <section id="aim-trainer" class="container mx-auto px-6 py-24 border-y border-white/5">
+        <div class="text-center mb-12">
+            <h2 class="text-4xl font-black mb-2 italic uppercase">Pro Aim Trainer</h2>
+            <div class="flex items-center justify-center gap-4 mb-4">
+                <span id="controller-label" class="controller-status status-disconnected uppercase font-bold">Turtle Beach: Getrennt</span>
+            </div>
+            <div class="flex justify-center gap-8 font-gamer text-2xl text-red-600">
+                <div>SCORE: <span id="aim-score" class="text-white">0</span></div>
+                <div>ZEIT: <span id="aim-time" class="text-white">30</span>s</div>
+            </div>
+        </div>
+        <div class="max-w-4xl mx-auto relative group">
+            <canvas id="aim-canvas" class="rounded-lg shadow-2xl"></canvas>
+            <div id="aim-start-overlay" class="absolute inset-0 flex items-center justify-center bg-black/60 rounded-lg backdrop-blur-sm transition-opacity">
+                <button onclick="startAimGame()" class="btn-pro text-xl px-12 uppercase italic">Training Starten</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contract Terms Section -->
+    <section id="contract" class="container mx-auto px-6 py-24">
+        <div class="text-center mb-16">
+            <h2 class="text-4xl font-black mb-4 uppercase italic">Pro-Vertragsregeln</h2>
+            <p class="text-gray-400 italic">Auszug aus dem offiziellen Spielerstatut</p>
+        </div>
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 font-gamer">
+            <div class="glass-card p-6 border-l-4 border-red-600">
+                <div class="text-red-600 font-black mb-2 uppercase text-[10px]">§ 1 Name</div>
+                <h3 class="text-xl font-bold mb-3 uppercase italic">N1CO TAG</h3>
+                <p class="text-[11px] text-gray-400 font-sans tracking-normal">Alle Mitglieder müssen das Kürzel "N1CO |" vor ihrem Namen führen.</p>
+            </div>
+            <div class="glass-card p-6 border-l-4 border-red-600">
+                <div class="text-red-600 font-black mb-2 uppercase text-[10px]">§ 2 Ziel</div>
+                <h3 class="text-xl font-bold mb-3 uppercase italic">500€ Cap</h3>
+                <p class="text-[11px] text-gray-400 font-sans tracking-normal">Mindestumsatz an Preisgeldern/Sponsoring innerhalb von 3 Monaten.</p>
+            </div>
+            <div class="glass-card p-6 border-l-4 border-red-600">
+                <div class="text-red-600 font-black mb-2 uppercase text-[10px]">§ 3 Money</div>
+                <h3 class="text-xl font-bold mb-3 uppercase italic">85% Split</h3>
+                <p class="text-[11px] text-gray-400 font-sans tracking-normal">Größter Anteil der Einnahmen geht direkt an den aktiven Spieler.</p>
+            </div>
+            <div class="glass-card p-6 border-l-4 border-red-600">
+                <div class="text-red-600 font-black mb-2 uppercase text-[10px]">§ 4 Ethik</div>
+                <h3 class="text-xl font-bold mb-3 uppercase italic">Kodex</h3>
+                <p class="text-[11px] text-gray-400 font-sans tracking-normal">Respektvolles Verhalten. Cheating führt zum sofortigen Bann.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Recruitment Section (Netlify Optimized) -->
+    <section id="sign" class="container mx-auto px-6 py-20 bg-gradient-to-t from-red-900/10 to-transparent">
+        <div class="grid lg:grid-cols-2 gap-16 items-start">
+            <div>
+                <h2 class="text-5xl font-black mb-6 italic uppercase leading-none">Werde <br><span class="text-red-600 italic">N1CO Elite</span></h2>
+                <p class="text-xl text-gray-400 mb-8 leading-relaxed">
+                    Wir suchen Verstärkung für unsere Squads in Apex, The Finals und Valorant. Sende uns deine Bewerbung für die Probezeit.
+                </p>
+                <div class="space-y-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-3 h-3 bg-red-600 rounded-full animate-pulse"></div>
+                        <span class="text-sm uppercase tracking-widest font-bold">Offizielle E-Sport Aufnahme</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-card p-8 md:p-12 rounded-xl border-t-4 border-red-600">
+                <h3 class="text-2xl font-black mb-8 italic uppercase">Vertrag Anfordern</h3>
+                
+                <form name="pro-application" method="POST" data-netlify="true" class="space-y-6">
+                    <input type="hidden" name="form-name" value="pro-application" />
+                    
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-xs font-bold text-gray-500 uppercase mb-2 italic">Vor- & Nachname</label>
+                            <input type="text" name="full_name" placeholder="Vollständiger Name" class="w-full bg-black/50 border border-white/10 p-3 rounded focus:border-red-600 outline-none transition text-white" required>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-gray-500 uppercase mb-2 italic">Ingame Name</label>
+                            <input type="text" name="nickname" placeholder="Dein Nickname" class="w-full bg-black/50 border border-white/10 p-3 rounded focus:border-red-600 outline-none transition text-white" required>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-xs font-bold text-gray-500 uppercase mb-2 italic">E-Mail Kontakt</label>
+                        <input type="email" name="email" placeholder="beispiel@mail.com" class="w-full bg-black/50 border border-white/10 p-3 rounded focus:border-red-600 outline-none transition text-white" required>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-gray-500 uppercase mb-2 italic">Primäres Spiel</label>
+                        <select name="game" class="w-full bg-black/50 border border-white/10 p-3 rounded focus:border-red-600 outline-none transition text-white appearance-none">
+                            <option value="apex">Apex Legends</option>
+                            <option value="finals">The Finals</option>
+                            <option value="valorant">Valorant</option>
+                            <option value="fortnite">Fortnite</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="w-full btn-pro text-lg italic uppercase">Bewerbung Absenden</button>
+                    <p class="text-[10px] text-center text-gray-600 uppercase tracking-widest mt-4">Verarbeitung via Netlify Forms &bull; Nico Gaming</p>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Twitch Section -->
+    <section id="twitch" class="container mx-auto px-6 py-20 text-center">
+        <div class="bg-gradient-to-r from-[#6441a5]/10 via-[#6441a5]/20 to-black rounded-3xl border border-[#6441a5]/30 p-12">
+            <h2 class="text-4xl font-black mb-2 italic uppercase">Watch us Live</h2>
+            <div class="text-5xl md:text-7xl font-black mb-8 text-white uppercase tracking-tighter italic">Nicominecith_TTV</div>
+            <a href="https://www.twitch.tv/Nicominecith_TTV" target="_blank" class="bg-[#6441a5] hover:bg-[#7d5bbe] text-white px-12 py-5 font-black rounded-sm transition-all flex items-center justify-center gap-3 w-fit mx-auto slanted">
+                TWITCH STREAM <span class="animate-ping inline-flex h-3 w-3 rounded-full bg-red-400 opacity-75"></span>
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-white/5 py-16 text-center text-gray-600 bg-black">
+        <div class="mb-12">
+             <img src="nico.png" alt="N1CO Logo Footer" class="w-16 h-16 mx-auto mb-4 hover:scale-110 transition cursor-pointer object-contain" onclick="window.scrollTo(0,0)" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
+             <div style="display:none" class="text-red-600 font-black italic text-2xl mx-auto mb-4">N1CO</div>
+            <p class="font-gamer text-xs uppercase tracking-widest text-white">NICO GAMING ESPORTS</p>
+        </div>
+        <p class="font-gamer text-[10px] uppercase tracking-[0.3em]">
+            &copy; 2026 NICO GAMING | FOUNDER: NICO HOFMANN | ESPORT CLUB
+        </p>
+    </footer>
+
+    <script>
+        const canvas = document.getElementById('aim-canvas');
+        const ctx = canvas.getContext('2d');
+        const scoreEl = document.getElementById('aim-score');
+        const timeEl = document.getElementById('aim-time');
+        const overlay = document.getElementById('aim-start-overlay');
+        const controllerLabel = document.getElementById('controller-label');
+
+        let score = 0;
+        let timeLeft = 30;
+        let gameActive = false;
+        let target = { x: 0, y: 0, radius: 20 };
+        let crosshair = { x: 200, y: 200 };
+
+        function resize() {
+            const rect = canvas.parentNode.getBoundingClientRect();
+            canvas.width = rect.width;
+            canvas.height = 400;
+            crosshair.x = canvas.width / 2;
+            crosshair.y = canvas.height / 2;
+        }
+        window.addEventListener('resize', resize);
+        resize();
+
+        function spawnTarget() {
+            const margin = 50;
+            target.x = margin + Math.random() * (canvas.width - margin * 2);
+            target.y = margin + Math.random() * (canvas.height - margin * 2);
+            target.radius = 12 + Math.random() * 10;
+        }
+
+        function startAimGame() {
+            score = 0;
+            timeLeft = 30;
+            gameActive = true;
+            scoreEl.innerText = score;
+            timeEl.innerText = timeLeft;
+            overlay.style.opacity = '0';
+            overlay.style.pointerEvents = 'none';
+            spawnTarget();
+            requestAnimationFrame(gameLoop);
+            
+            const timer = setInterval(() => {
+                if (!gameActive) { clearInterval(timer); return; }
+                timeLeft--;
+                timeEl.innerText = timeLeft;
+                if (timeLeft <= 0) {
+                    gameActive = false;
+                    overlay.style.opacity = '1';
+                    overlay.style.pointerEvents = 'all';
+                    overlay.innerHTML = `<div class='text-center'><h3 class='text-2xl font-black mb-2 italic uppercase'>Session Ende</h3><p class='mb-6 font-gamer text-red-600'>Final Score: ${score}</p><button onclick='startAimGame()' class='btn-pro'>Re-Session</button></div>`;
+                }
+            }, 1000);
+        }
+
+        function checkHit(x, y) {
+            const dist = Math.hypot(x - target.x, y - target.y);
+            if (dist < target.radius) {
+                score += 100;
+                scoreEl.innerText = score;
+                spawnTarget();
+                const pads = navigator.getGamepads();
+                if (pads[0]?.vibrationActuator) {
+                    pads[0].vibrationActuator.playEffect("dual-rumble", { duration: 150, weakMagnitude: 1.0, strongMagnitude: 0.5 });
+                }
+            }
+        }
+
+        canvas.addEventListener('mousedown', (e) => {
+            if (!gameActive) return;
+            const rect = canvas.getBoundingClientRect();
+            checkHit(e.clientX - rect.left, e.clientY - rect.top);
+        });
+
+        window.addEventListener("gamepadconnected", () => {
+            controllerLabel.innerText = "Controller: Aktiv";
+            controllerLabel.className = "controller-status status-connected uppercase font-bold";
+        });
+
+        let triggerPressed = false;
+        function updateGamepad() {
+            const pad = navigator.getGamepads()[0];
+            if (!pad || !gameActive) return;
+            const stickX = Math.abs(pad.axes[0]) > 0.1 ? pad.axes[0] : (Math.abs(pad.axes[2]) > 0.1 ? pad.axes[2] : 0);
+            const stickY = Math.abs(pad.axes[1]) > 0.1 ? pad.axes[1] : (Math.abs(pad.axes[3]) > 0.1 ? pad.axes[3] : 0);
+            crosshair.x = Math.max(0, Math.min(canvas.width, crosshair.x + stickX * 12));
+            crosshair.y = Math.max(0, Math.min(canvas.height, crosshair.y + stickY * 12));
+            const isFiring = pad.buttons[7].pressed || pad.buttons[0].pressed;
+            if (isFiring && !triggerPressed) { checkHit(crosshair.x, crosshair.y); triggerPressed = true; }
+            else if (!isFiring) { triggerPressed = false; }
+        }
+
+        function gameLoop() {
+            if (!gameActive) return;
+            updateGamepad();
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.beginPath();
+            ctx.arc(target.x, target.y, target.radius, 0, Math.PI * 2);
+            ctx.fillStyle = '#cc0000';
+            ctx.fill();
+            if (navigator.getGamepads()[0]) {
+                ctx.strokeStyle = '#00ff00';
+                ctx.lineWidth = 1;
+                ctx.beginPath();
+                ctx.moveTo(crosshair.x-15, crosshair.y); ctx.lineTo(crosshair.x+15, crosshair.y);
+                ctx.moveTo(crosshair.x, crosshair.y-15); ctx.lineTo(crosshair.x, crosshair.y+15);
+                ctx.stroke();
+            }
+            requestAnimationFrame(gameLoop);
+        }
+    </script>
+</body>
+</html>
