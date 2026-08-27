@@ -975,32 +975,32 @@
             <div class="card reveal" style="padding:2rem">
                 <h3 style="font-family:'Orbitron',monospace;font-size:1.1rem;font-weight:900;margin-bottom:1.5rem;color:white">VERTRAG ANFORDERN</h3>
                 
-                <!-- MAILTO FORMULAR -->
-                <form action="mailto:nicominecithclips@gmail.com" method="POST" enctype="text/plain">
+                <!-- MAILTO FORMULAR OPTIMIERT -->
+                <form id="applyForm" onsubmit="sendMail(event)">
                     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:1rem">
                         <div class="form-group">
                             <label>NAME *</label>
-                            <input type="text" name="Vollständiger_Name" placeholder="Vollständiger Name" required>
+                            <input type="text" id="fname" placeholder="Vollständiger Name" required>
                         </div>
                         <div class="form-group">
                             <label>INGAME NAME *</label>
-                            <input type="text" name="Nickname" placeholder="Nickname" required>
+                            <input type="text" id="fnick" placeholder="Nickname" required>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label>E-MAIL *</label>
-                        <input type="email" name="E-Mail" placeholder="mail@beispiel.com" required>
+                        <input type="email" id="femail" placeholder="mail@beispiel.com" required>
                     </div>
 
                     <div class="form-group">
                         <label>ALTER *</label>
-                        <input type="number" name="Alter" placeholder="Min. 13" min="13" max="99" required>
+                        <input type="number" id="fage" placeholder="Min. 13" min="13" max="99" required>
                     </div>
 
                     <div class="form-group">
                         <label>PRIMÄRES SPIEL *</label>
-                        <select name="Spiel" required>
+                        <select id="fgame" required>
                             <option value="">Spiel wählen...</option>
                             <option value="The Finals">The Finals</option>
                             <option value="Fortnite">Fortnite</option>
@@ -1009,12 +1009,12 @@
 
                     <div class="form-group">
                         <label>DISCORD TAG</label>
-                        <input type="text" name="Discord" placeholder="name#0000 (optional)">
+                        <input type="text" id="fdisc" placeholder="name#0000 (optional)">
                     </div>
 
                     <div style="margin-bottom:1.25rem">
                         <label style="display:flex;align-items:flex-start;gap:0.75rem;cursor:pointer;font-size:0.8rem;color:rgba(200,200,208,0.6);line-height:1.4">
-                            <input type="checkbox" name="Bestätigung" value="Akzeptiert" required style="margin-top:2px;width:auto;accent-color:var(--red)">
+                            <input type="checkbox" id="fcheck" required style="margin-top:2px;width:auto;accent-color:var(--red)">
                             Ich bestätige eigenes Equipment & Mindestalter (13).
                         </label>
                     </div>
@@ -1023,6 +1023,35 @@
                         📋 BEWERBUNG PER E-MAIL SENDEN
                     </button>
                 </form>
+
+                <script>
+                function sendMail(e) {
+                    e.preventDefault();
+                    const name = document.getElementById('fname').value;
+                    const nick = document.getElementById('fnick').value;
+                    const email = document.getElementById('femail').value;
+                    const age = document.getElementById('fage').value;
+                    const game = document.getElementById('fgame').value;
+                    const disc = document.getElementById('fdisc').value || 'Kein Angabe';
+
+                    const subject = encodeURIComponent("🎮 Neue Bewerbung: " + nick + " (" + game + ")");
+                    const body = encodeURIComponent(
+                        "Hi Nico,\n\nhier ist eine neue Bewerbung für NICO GAMING:\n\n" +
+                        "----------------------------------------\n" +
+                        "• Name: " + name + "\n" +
+                        "• Ingame-Name: " + nick + "\n" +
+                        "• E-Mail: " + email + "\n" +
+                        "• Alter: " + age + "\n" +
+                        "• Spiel: " + game + "\n" +
+                        "• Discord: " + disc + "\n" +
+                        "• Regeln/Equipment: Akzeptiert\n" +
+                        "----------------------------------------\n\n" +
+                        "Gesendet über die NICO GAMING Website."
+                    );
+
+                    window.location.href = `mailto:nicominecithclips@gmail.com?subject=${subject}&body=${body}`;
+                }
+                </script>
             </div>
         </div>
     </div>
