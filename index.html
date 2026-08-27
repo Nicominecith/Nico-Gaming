@@ -15,7 +15,6 @@
             --panel: #0f0f14;
             --panel2: #16161d;
             --silver: #c8c8d0;
-            --gold: #f5c842;
         }
 
         * { box-sizing: border-box; }
@@ -53,6 +52,11 @@
             z-index: 9999;
             transform: translate(-50%, -50%);
         }
+        @media (max-width: 768px) {
+            #cursor, #cursor-dot { display: none; }
+            body { cursor: auto; }
+        }
+
         body:has(a:hover) #cursor,
         body:has(button:hover) #cursor {
             width: 40px;
@@ -84,7 +88,7 @@
             background: rgba(7,7,9,0.92);
             backdrop-filter: blur(20px);
             border-bottom: 1px solid rgba(230,0,18,0.25);
-            padding: 0 2rem;
+            padding: 0 1.5rem;
             height: 60px;
             display: flex;
             align-items: center;
@@ -94,15 +98,15 @@
         nav .logo {
             font-family: 'Orbitron', monospace;
             font-weight: 900;
-            font-size: 1.1rem;
-            letter-spacing: 3px;
+            font-size: 1rem;
+            letter-spacing: 2px;
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
         }
 
         nav .logo img {
-            width: 36px; height: 36px;
+            width: 32px; height: 32px;
             object-fit: contain;
             filter: drop-shadow(0 0 8px var(--red));
         }
@@ -110,7 +114,7 @@
         nav ul {
             display: flex;
             list-style: none;
-            gap: 2rem;
+            gap: 1.5rem;
             margin: 0; padding: 0;
         }
 
@@ -136,7 +140,6 @@
 
         nav a:hover { color: white; }
         nav a:hover::after { right: 0; }
-        nav a.active { color: var(--red); }
 
         /* HERO */
         #home {
@@ -146,7 +149,7 @@
             justify-content: center;
             position: relative;
             overflow: hidden;
-            padding-top: 60px;
+            padding: 80px 1rem 4rem 1rem;
         }
 
         .grid-bg {
@@ -166,7 +169,7 @@
 
         .hero-glow {
             position: absolute;
-            width: 600px; height: 600px;
+            width: min(600px, 90vw); height: min(600px, 90vw);
             background: radial-gradient(circle, rgba(230,0,18,0.15) 0%, transparent 70%);
             top: 50%; left: 50%;
             transform: translate(-50%, -50%);
@@ -179,11 +182,13 @@
             position: relative;
             z-index: 10;
             text-align: center;
+            width: 100%;
+            max-width: 900px;
         }
 
         .hero-logo {
-            width: 180px; height: 180px;
-            margin: 0 auto 2rem;
+            width: 140px; height: 140px;
+            margin: 0 auto 1.5rem;
             object-fit: contain;
             filter: drop-shadow(0 0 40px rgba(230,0,18,0.8));
             animation: float 6s ease-in-out infinite;
@@ -192,7 +197,7 @@
         @keyframes float { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-12px);} }
 
         .hero-title {
-            font-size: clamp(3rem, 10vw, 7rem);
+            font-size: clamp(2.5rem, 8vw, 6rem);
             font-weight: 900;
             line-height: 0.9;
             margin-bottom: 0.5rem;
@@ -203,7 +208,7 @@
         }
 
         .hero-sub {
-            font-size: clamp(1rem, 2vw, 1.4rem);
+            font-size: clamp(0.95rem, 2vw, 1.3rem);
             color: rgba(200,200,208,0.6);
             max-width: 600px;
             margin: 1rem auto 2rem;
@@ -215,9 +220,7 @@
         .hero-sub .game { color: var(--red); font-weight: 900; }
 
         /* GLITCH EFFECT */
-        .glitch {
-            position: relative;
-        }
+        .glitch { position: relative; }
         .glitch::before, .glitch::after {
             content: attr(data-text);
             position: absolute;
@@ -253,6 +256,7 @@
         .btn-primary {
             display: inline-flex;
             align-items: center;
+            justify-content: center;
             gap: 0.5rem;
             background: var(--red);
             color: white;
@@ -260,29 +264,21 @@
             font-weight: 900;
             font-size: 0.75rem;
             letter-spacing: 3px;
-            padding: 1rem 2.5rem;
+            padding: 1rem 2rem;
             border: none;
             clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
-            cursor: none;
+            cursor: pointer;
             text-decoration: none;
             transition: background 0.2s, transform 0.2s;
             position: relative;
             overflow: hidden;
         }
-        .btn-primary::before {
-            content: '';
-            position: absolute;
-            top: 0; left: -100%;
-            width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            transition: left 0.4s;
-        }
-        .btn-primary:hover::before { left: 100%; }
         .btn-primary:hover { background: #ff1a2e; transform: scale(1.03); }
 
         .btn-outline {
             display: inline-flex;
             align-items: center;
+            justify-content: center;
             gap: 0.5rem;
             background: transparent;
             color: white;
@@ -290,17 +286,17 @@
             font-weight: 700;
             font-size: 0.7rem;
             letter-spacing: 3px;
-            padding: 1rem 2.5rem;
+            padding: 1rem 2rem;
             border: 1px solid rgba(255,255,255,0.2);
             clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
-            cursor: none;
+            cursor: pointer;
             text-decoration: none;
             transition: border-color 0.2s, background 0.2s;
         }
         .btn-outline:hover { border-color: var(--red); background: rgba(230,0,18,0.08); }
 
         /* SECTIONS */
-        section { padding: 6rem 2rem; position: relative; }
+        section { padding: 5rem 1.5rem; position: relative; }
         .container { max-width: 1200px; margin: 0 auto; }
 
         .section-label {
@@ -312,7 +308,7 @@
         }
 
         .section-title {
-            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-size: clamp(1.8rem, 4vw, 3.2rem);
             font-weight: 900;
             line-height: 1;
             margin-bottom: 1.5rem;
@@ -387,13 +383,13 @@
         }
         .stat-number {
             font-family: 'Orbitron', monospace;
-            font-size: 2.5rem;
+            font-size: 2.2rem;
             font-weight: 900;
             color: white;
         }
         .stat-label {
-            font-size: 0.65rem;
-            letter-spacing: 3px;
+            font-size: 0.6rem;
+            letter-spacing: 2px;
             color: var(--red);
             font-family: 'Share Tech Mono', monospace;
         }
@@ -401,79 +397,11 @@
         /* AIM TRAINER */
         #aim-canvas {
             background: radial-gradient(ellipse at center, #0a0a12 0%, #000 100%);
-            cursor: none;
             width: 100%;
-            height: 400px;
+            height: 350px;
             display: block;
             border: 1px solid rgba(230,0,18,0.3);
-        }
-
-        /* YUGIOH SECTION */
-        .duel-card {
-            background: linear-gradient(135deg, #0a0a14 0%, #1a1a2e 100%);
-            border: 1px solid rgba(200,170,80,0.4);
-            border-radius: 4px;
-            padding: 1.5rem;
-            text-align: center;
-            transition: transform 0.3s, box-shadow 0.3s;
-            position: relative;
-            overflow: hidden;
-        }
-        .duel-card::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg, rgba(200,170,80,0.05) 0%, transparent 60%);
-        }
-        .duel-card:hover {
-            transform: translateY(-8px) rotate(-1deg);
-            box-shadow: 0 20px 60px rgba(200,170,80,0.2);
-        }
-        .duel-card .card-type {
-            font-family: 'Share Tech Mono', monospace;
-            font-size: 0.6rem;
-            letter-spacing: 3px;
-            color: var(--gold);
-            margin-bottom: 0.5rem;
-        }
-        .duel-card .card-name {
-            font-family: 'Orbitron', monospace;
-            font-size: 0.9rem;
-            font-weight: 900;
-            color: white;
-            margin-bottom: 0.5rem;
-        }
-        .duel-card .card-atk {
-            font-family: 'Share Tech Mono', monospace;
-            font-size: 0.75rem;
-            color: var(--gold);
-        }
-        .duel-card .card-emoji {
-            font-size: 3rem;
-            margin-bottom: 0.75rem;
-            display: block;
-        }
-
-        /* DUELING TIMER */
-        #duel-arena {
-            background: linear-gradient(180deg, #00001a 0%, #000 100%);
-            border: 1px solid rgba(200,170,80,0.4);
-            border-radius: 4px;
-            padding: 2rem;
-            position: relative;
-            overflow: hidden;
-        }
-        #duel-arena::before {
-            content: 'YU-GI-OH!';
-            position: absolute;
-            top: 50%; left: 50%;
-            transform: translate(-50%,-50%);
-            font-family: 'Orbitron', monospace;
-            font-size: 5rem;
-            font-weight: 900;
-            color: rgba(200,170,80,0.04);
-            white-space: nowrap;
-            pointer-events: none;
+            touch-action: none;
         }
 
         /* CONTRACT */
@@ -523,7 +451,6 @@
             transition: border-color 0.2s, box-shadow 0.2s;
             border-radius: 0;
             -webkit-appearance: none;
-            cursor: none;
         }
         .form-group input:focus,
         .form-group select:focus,
@@ -531,37 +458,28 @@
             border-color: var(--red);
             box-shadow: 0 0 0 2px rgba(230,0,18,0.1);
         }
-        .form-group input::placeholder,
-        .form-group textarea::placeholder { color: rgba(255,255,255,0.2); }
         .form-group select option { background: #111; }
 
         /* LEADERBOARD */
         .lb-row {
             display: grid;
-            grid-template-columns: 40px 1fr auto auto;
+            grid-template-columns: 35px 1fr auto auto;
             align-items: center;
             padding: 0.75rem 1rem;
             border-bottom: 1px solid rgba(255,255,255,0.05);
-            gap: 1rem;
+            gap: 0.5rem;
             font-family: 'Share Tech Mono', monospace;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
         }
         .lb-row.header {
-            font-size: 0.6rem;
+            font-size: 0.55rem;
             letter-spacing: 2px;
             color: rgba(200,200,208,0.4);
             border-bottom: 1px solid rgba(230,0,18,0.3);
         }
         .lb-rank { color: var(--red); font-weight: 900; }
-        .lb-rank.gold { color: var(--gold); }
+        .lb-rank.gold { color: #f5c842; }
         .lb-score { color: var(--red); }
-
-        /* TWITCH */
-        .twitch-section {
-            background: linear-gradient(135deg, rgba(100,65,165,0.1) 0%, transparent 100%);
-            border: 1px solid rgba(100,65,165,0.3);
-            border-radius: 4px;
-        }
 
         /* SCROLL REVEAL */
         .reveal {
@@ -574,7 +492,7 @@
             transform: translateY(0);
         }
 
-        /* MOBILE NAV */
+        /* MOBILE MENU */
         .mobile-menu {
             display: none;
             position: fixed;
@@ -584,15 +502,15 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 2rem;
+            gap: 1.5rem;
         }
         .mobile-menu.open { display: flex; }
         .mobile-menu a {
             font-family: 'Orbitron', monospace;
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             color: white;
             text-decoration: none;
-            letter-spacing: 4px;
+            letter-spacing: 3px;
         }
         .mobile-menu a:hover { color: var(--red); }
 
@@ -600,7 +518,7 @@
             display: none;
             flex-direction: column;
             gap: 5px;
-            cursor: none;
+            cursor: pointer;
             background: none;
             border: none;
             padding: 0;
@@ -616,6 +534,7 @@
         @media (max-width: 768px) {
             .desktop-nav { display: none; }
             .hamburger { display: flex; }
+            section { padding: 4rem 1rem; }
         }
 
         /* AGE BADGE */
@@ -627,7 +546,7 @@
             border: 1px solid rgba(230,0,18,0.4);
             padding: 0.4rem 1rem;
             font-family: 'Share Tech Mono', monospace;
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             letter-spacing: 2px;
             color: var(--red);
             margin-bottom: 1.5rem;
@@ -671,7 +590,7 @@
             box-shadow: 0 0 20px rgba(230,0,18,0.1);
         }
         .roster-avatar {
-            width: 80px; height: 80px;
+            width: 70px; height: 70px;
             border-radius: 50%;
             border: 2px solid rgba(230,0,18,0.4);
             margin: 0 auto 1rem;
@@ -679,7 +598,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2rem;
+            font-size: 1.8rem;
         }
 
         /* TICKER */
@@ -693,13 +612,13 @@
         .ticker {
             display: flex;
             gap: 4rem;
-            animation: ticker 30s linear infinite;
+            animation: ticker 25s linear infinite;
             white-space: nowrap;
         }
         @keyframes ticker { from{transform:translateX(0);} to{transform:translateX(-50%);} }
         .ticker span {
             font-family: 'Share Tech Mono', monospace;
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             letter-spacing: 2px;
             color: rgba(200,200,208,0.5);
         }
@@ -709,7 +628,7 @@
         footer {
             border-top: 1px solid rgba(255,255,255,0.05);
             background: #000;
-            padding: 3rem 2rem;
+            padding: 3rem 1.5rem;
             text-align: center;
         }
     </style>
@@ -722,11 +641,10 @@
 
 <!-- MOBILE MENU -->
 <div class="mobile-menu" id="mobileMenu">
-    <button onclick="toggleMenu()" style="position:absolute;top:1rem;right:1.5rem;background:none;border:none;color:white;font-size:2rem;cursor:none;">✕</button>
+    <button onclick="toggleMenu()" style="position:absolute;top:1.2rem;right:1.5rem;background:none;border:none;color:white;font-size:2rem;cursor:pointer;">✕</button>
     <a href="#home" onclick="toggleMenu()">HOME</a>
     <a href="#about" onclick="toggleMenu()">FOUNDER</a>
     <a href="#skills" onclick="toggleMenu()">SKILLS</a>
-    <a href="#yugioh" onclick="toggleMenu()">YU-GI-OH</a>
     <a href="#aim-trainer" onclick="toggleMenu()">TRAINING</a>
     <a href="#roster" onclick="toggleMenu()">TEAM</a>
     <a href="#contract" onclick="toggleMenu()">REGELN</a>
@@ -744,7 +662,6 @@
         <li><a href="#home">Home</a></li>
         <li><a href="#about">Founder</a></li>
         <li><a href="#skills">Skills</a></li>
-        <li><a href="#yugioh">Yu-Gi-Oh</a></li>
         <li><a href="#aim-trainer">Training</a></li>
         <li><a href="#roster">Team</a></li>
         <li><a href="#contract">Regeln</a></li>
@@ -762,28 +679,23 @@
         <span class="hl">◆ NICO GAMING ESPORTS</span>
         <span>THE FINALS</span>
         <span class="hl">◆ FORTNITE</span>
-        <span>YU-GI-OH! DUEL MASTERS</span>
-        <span class="hl">◆ TURTLE BEACH PARTNER</span>
-        <span>PRO LEAGUE 2026</span>
-        <span class="hl">◆ NICO GAMING ESPORTS</span>
+        <span>TURTLE BEACH PARTNER</span>
+        <span class="hl">◆ PRO LEAGUE 2026</span>
         <span>THE FINALS</span>
         <span class="hl">◆ FORTNITE</span>
-        <span>YU-GI-OH! DUEL MASTERS</span>
-        <span class="hl">◆ TURTLE BEACH PARTNER</span>
-        <span>PRO LEAGUE 2026</span>
     </div>
 </div>
 
 <!-- HERO -->
-<section id="home" style="padding-top:96px">
+<section id="home">
     <div class="grid-bg"></div>
     <div class="hero-glow"></div>
     <div class="hero-content">
-        <img src="nico.png" alt="N1CO Logo" class="hero-logo" onerror="this.outerHTML='<div style=\'width:180px;height:180px;margin:0 auto 2rem;background:rgba(230,0,18,0.1);border:2px solid var(--red);display:flex;align-items:center;justify-content:center;font-family:Orbitron,monospace;font-size:3rem;font-weight:900;animation:float 6s ease-in-out infinite;\'>N1CO</div>'">
+        <img src="nico.png" alt="N1CO Logo" class="hero-logo" onerror="this.outerHTML='<div style=\'width:140px;height:140px;margin:0 auto 1.5rem;background:rgba(230,0,18,0.1);border:2px solid var(--red);display:flex;align-items:center;justify-content:center;font-family:Orbitron,monospace;font-size:2.5rem;font-weight:900;animation:float 6s ease-in-out infinite;\'>N1CO</div>'">
         <h1 class="hero-title glitch orb" data-text="NICO GAMING">NICO GAMING</h1>
         <p class="hero-sub">
             Official E-Sport Club gegründet von <strong>Nico Hofmann</strong><br>
-            <span class="game">The Finals</span> · <span class="game">Fortnite</span> · <span class="game">Yu-Gi-Oh!</span>
+            <span class="game">The Finals</span> · <span class="game">Fortnite</span>
         </p>
         <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
             <a href="#aim-trainer" class="btn-primary">⚡ WARM-UP STARTEN</a>
@@ -795,9 +707,9 @@
 <hr class="divider">
 
 <!-- STATS BAR -->
-<section style="padding:3rem 2rem">
+<section style="padding:2.5rem 1rem">
     <div class="container">
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1rem">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:1rem">
             <div class="stat-box reveal">
                 <div class="stat-number" data-count="13">0</div>
                 <div class="stat-label">MIN. ALTER</div>
@@ -827,69 +739,49 @@
 <!-- ABOUT -->
 <section id="about">
     <div class="container">
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start" class="reveal">
-            <!-- Left: Founder Info -->
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:3rem;align-items:start" class="reveal">
             <div>
                 <div class="section-label">// ÜBER DEN GRÜNDER</div>
                 <h2 class="section-title">NICO<br><span style="color:var(--red)">HOFMANN</span></h2>
                 <div class="age-badge">⚠ MINDESTALTER: 13 JAHRE</div>
-                <p style="color:rgba(200,200,208,0.7);line-height:1.8;margin-bottom:1.5rem;font-size:1.1rem">
-                    Gründer & Team-Kapitän von NICO GAMING. Unser Club steht für High-Performance, Respekt und echten Competitive Spirit in The Finals und Fortnite. Von Xbox bis Tournament-Stage — wir spielen auf Profi-Niveau.
+                <p style="color:rgba(200,200,208,0.7);line-height:1.8;margin-bottom:1.5rem;font-size:1rem">
+                    Gründer & Team-Kapitän von NICO GAMING. Unser Club steht für High-Performance, Respekt und echten Competitive Spirit in The Finals und Fortnite.
                 </p>
-                <p style="color:rgba(200,200,208,0.5);line-height:1.8;font-size:1rem;margin-bottom:2rem">
-                    Neben dem Shooter-Game ist Yu-Gi-Oh! eine echte Leidenschaft — vom digitalen Duel Links bis zu physischen Karten. Das Team lebt Gaming in all seinen Facetten.
-                </p>
-                <!-- Founder Photo -->
-                <div style="position:relative;display:inline-block">
+                <div style="position:relative;display:inline-block;max-width:100%;">
                     <div style="position:absolute;inset:-8px;border:1px solid rgba(230,0,18,0.3);pointer-events:none"></div>
-                    <div style="position:absolute;top:-8px;left:-8px;width:20px;height:20px;border-top:2px solid var(--red);border-left:2px solid var(--red)"></div>
-                    <div style="position:absolute;bottom:-8px;right:-8px;width:20px;height:20px;border-bottom:2px solid var(--red);border-right:2px solid var(--red)"></div>
-                    <img src="Nicobild.png" alt="Nico Hofmann" style="width:280px;height:320px;object-fit:cover;display:block;filter:grayscale(20%) contrast(1.1)" onerror="this.outerHTML='<div style=\'width:280px;height:320px;background:rgba(230,0,18,0.05);border:1px solid rgba(230,0,18,0.2);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:0.5rem\'><div style=\'font-size:5rem\'>🎮</div><div style=\'font-family:Orbitron,monospace;font-size:0.7rem;letter-spacing:3px;color:var(--red)\'>NICO HOFMANN</div></div>'">
+                    <img src="Nicobild.png" alt="Nico Hofmann" style="width:100%;max-width:260px;height:300px;object-fit:cover;display:block;filter:grayscale(20%) contrast(1.1)" onerror="this.outerHTML='<div style=\'width:260px;height:300px;background:rgba(230,0,18,0.05);border:1px solid rgba(230,0,18,0.2);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:0.5rem\'><div style=\'font-size:4rem\'>🎮</div><div style=\'font-family:Orbitron,monospace;font-size:0.7rem;letter-spacing:3px;color:var(--red)\'>NICO HOFMANN</div></div>'">
                 </div>
             </div>
-            <!-- Right: Gear -->
             <div>
                 <div class="section-label">// FOUNDER'S GEAR</div>
                 <h2 class="section-title" style="font-size:1.8rem">SETUP<br><span style="color:var(--red)">ÜBERSICHT</span></h2>
-                <div style="background:rgba(230,0,18,0.06);border:1px solid rgba(230,0,18,0.15);padding:1rem;margin-bottom:1.5rem;font-family:'Share Tech Mono',monospace;font-size:0.65rem;letter-spacing:2px;color:rgba(200,200,208,0.5)">
-                    ⚠ HINWEIS: Alle Produkte sind das persönliche Equipment des Gründers. Equipment muss von jedem Spieler selbst angeschafft werden. Keine gesponserden Produkte.
+                <div style="background:rgba(230,0,18,0.06);border:1px solid rgba(230,0,18,0.15);padding:1rem;margin-bottom:1.5rem;font-family:'Share Tech Mono',monospace;font-size:0.6rem;letter-spacing:2px;color:rgba(200,200,208,0.5)">
+                    ⚠ HINWEIS: Alle Produkte sind das persönliche Equipment des Gründers. Equipment muss selbst angeschafft werden.
                 </div>
                 <div class="card" style="overflow:hidden">
                     <a href="https://www.amazon.de/Microsoft-Xbox-Halo-Infinite-Limited/dp/B09NMWSLR6" target="_blank" class="gear-item">
                         <div class="gear-icon">🎮</div>
                         <div>
-                            <div style="font-size:0.55rem;letter-spacing:3px;color:var(--red);font-family:'Share Tech Mono',monospace">KONSOLE</div>
-                            <div style="color:white;font-weight:700;font-size:1.1rem">Xbox Series X</div>
-                            <div style="color:rgba(200,200,208,0.4);font-size:0.85rem">Halo Infinite Limited Edition</div>
+                            <div style="font-size:0.5rem;letter-spacing:3px;color:var(--red);font-family:'Share Tech Mono',monospace">KONSOLE</div>
+                            <div style="color:white;font-weight:700;font-size:1rem">Xbox Series X</div>
+                            <div style="color:rgba(200,200,208,0.4);font-size:0.8rem">Halo Infinite Limited Edition</div>
                         </div>
-                        <div style="margin-left:auto;color:rgba(200,200,208,0.3);font-size:0.8rem">→</div>
                     </a>
                     <a href="https://de.turtlebeach.com/products/recon-controller" target="_blank" class="gear-item">
                         <div class="gear-icon">🕹️</div>
                         <div>
-                            <div style="font-size:0.55rem;letter-spacing:3px;color:var(--red);font-family:'Share Tech Mono',monospace">CONTROLLER</div>
-                            <div style="color:white;font-weight:700;font-size:1.1rem">Turtle Beach Recon™</div>
-                            <div style="color:rgba(200,200,208,0.4);font-size:0.85rem">Wired Performance Controller</div>
+                            <div style="font-size:0.5rem;letter-spacing:3px;color:var(--red);font-family:'Share Tech Mono',monospace">CONTROLLER</div>
+                            <div style="color:white;font-weight:700;font-size:1rem">Turtle Beach Recon™</div>
+                            <div style="color:rgba(200,200,208,0.4);font-size:0.8rem">Wired Performance Controller</div>
                         </div>
-                        <div style="margin-left:auto;color:rgba(200,200,208,0.3);font-size:0.8rem">→</div>
                     </a>
-                    <a href="https://de.turtlebeach.com/products/atlas-200-headset?Platform=Multiplatform&Color=Schwarz" target="_blank" class="gear-item">
+                    <a href="https://de.turtlebeach.com/products/atlas-200-headset" target="_blank" class="gear-item">
                         <div class="gear-icon">🎧</div>
                         <div>
-                            <div style="font-size:0.55rem;letter-spacing:3px;color:var(--red);font-family:'Share Tech Mono',monospace">HEADSET</div>
-                            <div style="color:white;font-weight:700;font-size:1.1rem">Turtle Beach Atlas 200</div>
-                            <div style="color:rgba(200,200,208,0.4);font-size:0.85rem">Amplified Pro Gaming Headset</div>
+                            <div style="font-size:0.5rem;letter-spacing:3px;color:var(--red);font-family:'Share Tech Mono',monospace">HEADSET</div>
+                            <div style="color:white;font-weight:700;font-size:1rem">Turtle Beach Atlas 200</div>
+                            <div style="color:rgba(200,200,208,0.4);font-size:0.8rem">Amplified Pro Gaming Headset</div>
                         </div>
-                        <div style="margin-left:auto;color:rgba(200,200,208,0.3);font-size:0.8rem">→</div>
-                    </a>
-                    <a href="https://www.amazon.de/Philips-273V7QDAB-Monitor-Reaktionszeit-schwarz/dp/B06ZZV3QHL" target="_blank" class="gear-item">
-                        <div class="gear-icon">🖥️</div>
-                        <div>
-                            <div style="font-size:0.55rem;letter-spacing:3px;color:var(--red);font-family:'Share Tech Mono',monospace">MONITOR</div>
-                            <div style="color:white;font-weight:700;font-size:1.1rem">Philips 273V7QDAB</div>
-                            <div style="color:rgba(200,200,208,0.4);font-size:0.85rem">27" IPS Full HD</div>
-                        </div>
-                        <div style="margin-left:auto;color:rgba(200,200,208,0.3);font-size:0.8rem">→</div>
                     </a>
                 </div>
             </div>
@@ -904,7 +796,7 @@
     <div class="container reveal">
         <div class="section-label">// GAMER PROFIL</div>
         <h2 class="section-title">SKILL<br><span style="color:var(--red)">ANALYSE</span></h2>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:3rem;margin-top:2rem">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:2rem;margin-top:2rem">
             <div>
                 <div class="skill-bar">
                     <div class="label"><span>THE FINALS</span><span>95%</span></div>
@@ -928,97 +820,6 @@
                     <div class="label"><span>TEAMWORK</span><span>96%</span></div>
                     <div class="track"><div class="fill" data-width="96"></div></div>
                 </div>
-                <div class="skill-bar">
-                    <div class="label"><span>YU-GI-OH DUELL</span><span>83%</span></div>
-                    <div class="track"><div class="fill" data-width="83"></div></div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<hr class="divider">
-
-<!-- YU-GI-OH SECTION -->
-<section id="yugioh" style="background:linear-gradient(180deg,rgba(200,170,80,0.03) 0%,transparent 100%)">
-    <div class="container">
-        <div class="section-label reveal">// BONUS LEIDENSCHAFT</div>
-        <h2 class="section-title reveal">YU-GI-OH!<br><span style="color:var(--gold)">DUELL BEREICH</span></h2>
-        <p style="color:rgba(200,200,208,0.6);max-width:500px;margin-bottom:3rem;font-size:1.1rem" class="reveal">
-            Neben dem Shooter-Gaming ist Yu-Gi-Oh! eine echte Passion im Club. Hier duellieren wir uns — digital & physisch. Es ist Zeit zu DUELLIEREN!
-        </p>
-
-        <!-- Duell Game -->
-        <div id="duel-arena" class="reveal">
-            <div style="display:grid;grid-template-columns:1fr auto 1fr;gap:2rem;align-items:center;margin-bottom:2rem">
-                <!-- Player field -->
-                <div>
-                    <div style="font-family:'Share Tech Mono',monospace;font-size:0.6rem;letter-spacing:3px;color:var(--gold);margin-bottom:0.5rem">⚔ SPIELER</div>
-                    <div style="font-family:'Orbitron',monospace;font-size:1.5rem;font-weight:900;color:white" id="playerLP">8000 LP</div>
-                    <div id="playerHandDisplay" style="display:flex;gap:0.5rem;margin-top:1rem;flex-wrap:wrap"></div>
-                </div>
-                <!-- Center -->
-                <div style="text-align:center">
-                    <div style="font-family:'Orbitron',monospace;font-size:2rem;font-weight:900;color:var(--gold);margin-bottom:0.5rem" id="duelPhase">⚡</div>
-                    <div style="font-family:'Share Tech Mono',monospace;font-size:0.6rem;letter-spacing:2px;color:rgba(200,200,208,0.4)" id="duelStatus">BEREIT ZUM DUELL</div>
-                </div>
-                <!-- Opponent -->
-                <div style="text-align:right">
-                    <div style="font-family:'Share Tech Mono',monospace;font-size:0.6rem;letter-spacing:3px;color:var(--red);margin-bottom:0.5rem">GEGNER ⚔</div>
-                    <div style="font-family:'Orbitron',monospace;font-size:1.5rem;font-weight:900;color:white" id="opponentLP">8000 LP</div>
-                </div>
-            </div>
-            <!-- Duel log -->
-            <div id="duelLog" style="background:rgba(0,0,0,0.5);border:1px solid rgba(200,170,80,0.2);padding:1rem;height:120px;overflow-y:auto;font-family:'Share Tech Mono',monospace;font-size:0.7rem;color:rgba(200,200,208,0.6);margin-bottom:1.5rem">
-                <div>[ System ] Willkommen im Duel Arena! Drücke START um zu duellieren...</div>
-            </div>
-            <div style="display:flex;gap:1rem;flex-wrap:wrap">
-                <button onclick="startDuel()" id="duelBtn" style="background:var(--gold);color:#000;font-family:'Orbitron',monospace;font-weight:900;font-size:0.75rem;letter-spacing:2px;padding:0.75rem 2rem;border:none;cursor:none;clip-path:polygon(8px 0,100% 0,calc(100% - 8px) 100%,0 100%);transition:0.2s">
-                    ⚡ DUELL STARTEN
-                </button>
-                <button onclick="drawCard()" id="drawBtn" style="display:none;background:rgba(200,170,80,0.1);color:var(--gold);border:1px solid rgba(200,170,80,0.4);font-family:'Orbitron',monospace;font-weight:700;font-size:0.7rem;letter-spacing:2px;padding:0.75rem 2rem;cursor:none;transition:0.2s">
-                    🃏 KARTE ZIEHEN
-                </button>
-                <button onclick="attackOpponent()" id="attackBtn" style="display:none;background:rgba(230,0,18,0.1);color:var(--red);border:1px solid rgba(230,0,18,0.4);font-family:'Orbitron',monospace;font-weight:700;font-size:0.7rem;letter-spacing:2px;padding:0.75rem 2rem;cursor:none;transition:0.2s">
-                    ⚔ ANGRIFF!
-                </button>
-            </div>
-        </div>
-
-        <!-- Favs Cards -->
-        <div style="margin-top:3rem">
-            <div class="section-label">// LIEBLINGS-MONSTER</div>
-            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1rem;margin-top:1.5rem">
-                <div class="duel-card reveal">
-                    <span class="card-emoji">🐉</span>
-                    <div class="card-type">DRACHEN / EFFEKT</div>
-                    <div class="card-name">BLUE-EYES WHITE DRAGON</div>
-                    <div class="card-atk">ATK 3000 / DEF 2500</div>
-                </div>
-                <div class="duel-card reveal">
-                    <span class="card-emoji">⚡</span>
-                    <div class="card-type">ZAUBERER / NORMAL</div>
-                    <div class="card-name">DARK MAGICIAN</div>
-                    <div class="card-atk">ATK 2500 / DEF 2100</div>
-                </div>
-                <div class="duel-card reveal">
-                    <span class="card-emoji">👁️</span>
-                    <div class="card-type">FIEND / EFFEKT</div>
-                    <div class="card-name">EXODIA THE FORBIDDEN ONE</div>
-                    <div class="card-atk">ATK ??? / SOFORT-SIEG</div>
-                </div>
-                <div class="duel-card reveal">
-                    <span class="card-emoji">🌊</span>
-                    <div class="card-type">FISCH / EFFEKT</div>
-                    <div class="card-name">SLIFER THE SKY DRAGON</div>
-                    <div class="card-atk">ATK ∞ / DEF ∞</div>
-                </div>
-                <div class="duel-card reveal">
-                    <span class="card-emoji">🔥</span>
-                    <div class="card-type">MASCHINE / EFFEKT</div>
-                    <div class="card-name">RED-EYES BLACK DRAGON</div>
-                    <div class="card-atk">ATK 2400 / DEF 2000</div>
-                </div>
             </div>
         </div>
     </div>
@@ -1032,31 +833,30 @@
         <div class="section-label reveal">// INTERAKTIV</div>
         <h2 class="section-title reveal">PRO AIM<br><span style="color:var(--red)">TRAINER</span></h2>
         <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;margin-bottom:1.5rem" class="reveal">
-            <div style="display:flex;gap:2rem;font-family:'Share Tech Mono',monospace;font-size:1.1rem">
+            <div style="display:flex;gap:1.5rem;font-family:'Share Tech Mono',monospace;font-size:0.9rem">
                 <div>SCORE: <span id="aim-score" style="color:var(--red);font-weight:900">0</span></div>
                 <div>ZEIT: <span id="aim-time" style="color:white;font-weight:900">30</span>s</div>
-                <div>ACC: <span id="aim-acc" style="color:var(--gold);font-weight:900">0%</span></div>
+                <div>ACC: <span id="aim-acc" style="color:#f5c842;font-weight:900">0%</span></div>
             </div>
             <div>
-                <span id="controller-label" style="background:#1a1a1a;color:#444;font-family:'Share Tech Mono',monospace;font-size:0.6rem;padding:0.25rem 0.75rem;border-radius:99px;letter-spacing:2px">◉ CONTROLLER: GETRENNT</span>
+                <span id="controller-label" style="background:#1a1a1a;color:#444;font-family:'Share Tech Mono',monospace;font-size:0.55rem;padding:0.25rem 0.5rem;border-radius:99px;letter-spacing:1px">◉ CONTROLLER: GETRENNT</span>
             </div>
         </div>
         <div class="reveal" style="position:relative">
-            <canvas id="aim-canvas" style="border-radius:2px"></canvas>
-            <div id="aim-start-overlay" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.7);backdrop-filter:blur(6px);border-radius:2px">
-                <div style="text-align:center">
-                    <div style="font-family:'Orbitron',monospace;font-size:1.5rem;font-weight:900;margin-bottom:0.5rem">AIM TRAINER</div>
-                    <div style="font-family:'Share Tech Mono',monospace;font-size:0.7rem;color:rgba(200,200,208,0.5);margin-bottom:1.5rem;letter-spacing:2px">KLICK ODER CONTROLLER ZUM STARTEN</div>
+            <canvas id="aim-canvas"></canvas>
+            <div id="aim-start-overlay" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.8);backdrop-filter:blur(6px);">
+                <div style="text-align:center;padding:1rem;">
+                    <div style="font-family:'Orbitron',monospace;font-size:1.3rem;font-weight:900;margin-bottom:0.5rem">AIM TRAINER</div>
+                    <div style="font-family:'Share Tech Mono',monospace;font-size:0.65rem;color:rgba(200,200,208,0.5);margin-bottom:1.5rem;letter-spacing:1px">KLICK ODER TIPPEN ZUM STARTEN</div>
                     <button onclick="startAimGame()" class="btn-primary">⚡ TRAINING STARTEN</button>
                 </div>
             </div>
         </div>
-        <!-- Leaderboard -->
         <div style="margin-top:2rem" class="reveal">
             <div class="section-label">// SESSION HIGHSCORES</div>
             <div class="card" style="margin-top:1rem;overflow:hidden">
                 <div class="lb-row header">
-                    <span>#</span><span>SPIELER</span><span>GENAUIGKEIT</span><span>SCORE</span>
+                    <span>#</span><span>SPIELER</span><span>ACC</span><span>SCORE</span>
                 </div>
                 <div id="leaderboard">
                     <div class="lb-row">
@@ -1078,36 +878,30 @@
     <div class="container">
         <div class="section-label reveal">// DAS SQUAD</div>
         <h2 class="section-title reveal">TEAM<br><span style="color:var(--red)">ROSTER</span></h2>
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.5rem;margin-top:2rem">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1.5rem;margin-top:2rem">
             <div class="roster-card reveal">
                 <div class="roster-avatar">👑</div>
                 <div style="font-family:'Orbitron',monospace;font-weight:900;color:white;margin-bottom:0.25rem">N1CO</div>
-                <div style="font-size:0.6rem;letter-spacing:3px;color:var(--gold);font-family:'Share Tech Mono',monospace;margin-bottom:0.5rem">FOUNDER / IGL</div>
-                <div style="font-size:0.85rem;color:rgba(200,200,208,0.5)">The Finals · Fortnite</div>
+                <div style="font-size:0.55rem;letter-spacing:2px;color:#f5c842;font-family:'Share Tech Mono',monospace;margin-bottom:0.5rem">FOUNDER / IGL</div>
+                <div style="font-size:0.8rem;color:rgba(200,200,208,0.5)">The Finals · Fortnite</div>
             </div>
             <div class="roster-card reveal">
                 <div class="roster-avatar">🎯</div>
                 <div style="font-family:'Orbitron',monospace;font-weight:900;color:white;margin-bottom:0.25rem">SLOT OFFEN</div>
-                <div style="font-size:0.6rem;letter-spacing:3px;color:var(--red);font-family:'Share Tech Mono',monospace;margin-bottom:0.5rem">FRAGGER</div>
-                <div style="font-size:0.85rem;color:rgba(200,200,208,0.5)">Bewirb dich jetzt</div>
+                <div style="font-size:0.55rem;letter-spacing:2px;color:var(--red);font-family:'Share Tech Mono',monospace;margin-bottom:0.5rem">FRAGGER</div>
+                <div style="font-size:0.8rem;color:rgba(200,200,208,0.5)">Bewirb dich jetzt</div>
             </div>
             <div class="roster-card reveal">
                 <div class="roster-avatar">🛡️</div>
                 <div style="font-family:'Orbitron',monospace;font-weight:900;color:white;margin-bottom:0.25rem">SLOT OFFEN</div>
-                <div style="font-size:0.6rem;letter-spacing:3px;color:var(--red);font-family:'Share Tech Mono',monospace;margin-bottom:0.5rem">SUPPORT</div>
-                <div style="font-size:0.85rem;color:rgba(200,200,208,0.5)">Bewirb dich jetzt</div>
+                <div style="font-size:0.55rem;letter-spacing:2px;color:var(--red);font-family:'Share Tech Mono',monospace;margin-bottom:0.5rem">SUPPORT</div>
+                <div style="font-size:0.8rem;color:rgba(200,200,208,0.5)">Bewirb dich jetzt</div>
             </div>
             <div class="roster-card reveal">
                 <div class="roster-avatar">🔍</div>
                 <div style="font-family:'Orbitron',monospace;font-weight:900;color:white;margin-bottom:0.25rem">SLOT OFFEN</div>
-                <div style="font-size:0.6rem;letter-spacing:3px;color:var(--red);font-family:'Share Tech Mono',monospace;margin-bottom:0.5rem">BUILDER / SCOUT</div>
-                <div style="font-size:0.85rem;color:rgba(200,200,208,0.5)">Bewirb dich jetzt</div>
-            </div>
-            <div class="roster-card reveal">
-                <div class="roster-avatar">🃏</div>
-                <div style="font-family:'Orbitron',monospace;font-weight:900;color:white;margin-bottom:0.25rem">SLOT OFFEN</div>
-                <div style="font-size:0.6rem;letter-spacing:3px;color:var(--gold);font-family:'Share Tech Mono',monospace;margin-bottom:0.5rem">YU-GI-OH DUELIST</div>
-                <div style="font-size:0.85rem;color:rgba(200,200,208,0.5)">Duell Sektion</div>
+                <div style="font-size:0.55rem;letter-spacing:2px;color:var(--red);font-family:'Share Tech Mono',monospace;margin-bottom:0.5rem">BUILDER / SCOUT</div>
+                <div style="font-size:0.8rem;color:rgba(200,200,208,0.5)">Bewirb dich jetzt</div>
             </div>
         </div>
     </div>
@@ -1124,43 +918,29 @@
             <div class="contract-clause">
                 <div class="clause-num">§ 01 — IDENTITÄT</div>
                 <div class="clause-title">N1CO TAG</div>
-                <p style="color:rgba(200,200,208,0.5);font-size:0.95rem;line-height:1.7">
-                    Alle aktiven Mitglieder müssen das Kürzel <strong style="color:white">"N1CO |"</strong> vor ihrem Ingame-Namen führen. Pflicht bei allen offiziellen Matches.
+                <p style="color:rgba(200,200,208,0.5);font-size:0.9rem;line-height:1.7">
+                    Alle aktiven Mitglieder müssen das Kürzel <strong style="color:white">"N1CO |"</strong> vor ihrem Ingame-Namen führen.
                 </p>
             </div>
             <div class="contract-clause">
                 <div class="clause-num">§ 02 — ALTER</div>
                 <div class="clause-title">MIN. 13 JAHRE</div>
-                <p style="color:rgba(200,200,208,0.5);font-size:0.95rem;line-height:1.7">
-                    Bewerber müssen <strong style="color:var(--red)">mindestens 13 Jahre</strong> alt sein. Unter 18 Jahren ist die Zustimmung eines Erziehungsberechtigten erforderlich.
+                <p style="color:rgba(200,200,208,0.5);font-size:0.9rem;line-height:1.7">
+                    Bewerber müssen <strong style="color:var(--red)">mindestens 13 Jahre</strong> alt sein. Unter 18 Jahren ist die Zustimmung der Eltern erforderlich.
                 </p>
             </div>
             <div class="contract-clause">
                 <div class="clause-num">§ 03 — FINANZIELL</div>
                 <div class="clause-title">500€ CAP / 85% SPLIT</div>
-                <p style="color:rgba(200,200,208,0.5);font-size:0.95rem;line-height:1.7">
-                    Mindestumsatz an Preisgeldern innerhalb von 3 Monaten. <strong style="color:white">85%</strong> der Einnahmen gehen direkt an den Spieler.
+                <p style="color:rgba(200,200,208,0.5);font-size:0.9rem;line-height:1.7">
+                    Mindestumsatz an Preisgeldern in 3 Monaten. <strong style="color:white">85%</strong> der Einnahmen gehen direkt an den Spieler.
                 </p>
             </div>
             <div class="contract-clause">
                 <div class="clause-num">§ 04 — EQUIPMENT</div>
                 <div class="clause-title">SELBST BESCHAFFEN</div>
-                <p style="color:rgba(200,200,208,0.5);font-size:0.95rem;line-height:1.7">
-                    Jeder Spieler ist für sein eigenes Equipment verantwortlich. <strong style="color:var(--red)">Es werden keine Geräte gestellt.</strong> Eigenes Setup ist Pflicht.
-                </p>
-            </div>
-            <div class="contract-clause">
-                <div class="clause-num">§ 05 — ETHIK</div>
-                <div class="clause-title">KODEX & RESPEKT</div>
-                <p style="color:rgba(200,200,208,0.5);font-size:0.95rem;line-height:1.7">
-                    Respektvolles Verhalten gegenüber Teamkameraden und Gegnern. Cheating, Toxizität oder Rassismus führen zum <strong style="color:var(--red)">sofortigen Bann</strong>.
-                </p>
-            </div>
-            <div class="contract-clause">
-                <div class="clause-num">§ 06 — AKTIVITÄT</div>
-                <div class="clause-title">ANWESENHEIT</div>
-                <p style="color:rgba(200,200,208,0.5);font-size:0.95rem;line-height:1.7">
-                    Regelmäßige Teilnahme an Team-Sessions wird erwartet. Abwesenheit muss im Voraus gemeldet werden. Inaktivität führt zur Suspendierung.
+                <p style="color:rgba(200,200,208,0.5);font-size:0.9rem;line-height:1.7">
+                    Jeder Spieler ist für sein eigenes Equipment verantwortlich. <strong style="color:var(--red)">Es werden keine Geräte gestellt.</strong>
                 </p>
             </div>
         </div>
@@ -1172,59 +952,52 @@
 <!-- APPLICATION FORM -->
 <section id="sign" style="background:linear-gradient(180deg,rgba(230,0,18,0.04) 0%,transparent 100%)">
     <div class="container">
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:3rem;align-items:start">
             <div class="reveal">
                 <div class="section-label">// BEWERBUNG</div>
                 <h2 class="section-title">WERDE<br><span style="color:var(--red)">N1CO ELITE</span></h2>
                 <div class="age-badge">⚠ MINDESTALTER: 13 JAHRE ERFORDERLICH</div>
-                <p style="color:rgba(200,200,208,0.6);font-size:1.1rem;line-height:1.8;margin-bottom:2rem">
-                    Wir suchen ambitionierte Spieler für unsere Squads in The Finals und Fortnite. Bewirb dich jetzt und werde Teil des Teams.
+                <p style="color:rgba(200,200,208,0.6);font-size:1rem;line-height:1.8;margin-bottom:2rem">
+                    Wir suchen ambitionierte Spieler für unsere Squads in The Finals und Fortnite. Bewirb dich jetzt.
                 </p>
                 <div style="display:flex;flex-direction:column;gap:1rem">
                     <div style="display:flex;align-items:center;gap:0.75rem">
-                        <div style="width:6px;height:6px;background:var(--red);border-radius:50%;animation:pulse 2s infinite"></div>
-                        <span style="font-size:0.8rem;letter-spacing:2px;font-family:'Share Tech Mono',monospace">THE FINALS SQUAD SUCHT SPIELER</span>
+                        <div style="width:6px;height:6px;background:var(--red);border-radius:50%;"></div>
+                        <span style="font-size:0.75rem;letter-spacing:1px;font-family:'Share Tech Mono',monospace">THE FINALS SQUAD OFFEN</span>
                     </div>
                     <div style="display:flex;align-items:center;gap:0.75rem">
-                        <div style="width:6px;height:6px;background:var(--red);border-radius:50%;animation:pulse 2s infinite 0.3s"></div>
-                        <span style="font-size:0.8rem;letter-spacing:2px;font-family:'Share Tech Mono',monospace">FORTNITE SQUAD OFFEN</span>
-                    </div>
-                    <div style="display:flex;align-items:center;gap:0.75rem">
-                        <div style="width:6px;height:6px;background:var(--gold);border-radius:50%;animation:pulse 2s infinite 0.6s"></div>
-                        <span style="font-size:0.8rem;letter-spacing:2px;font-family:'Share Tech Mono',monospace">YU-GI-OH DUELIST GESUCHT</span>
+                        <div style="width:6px;height:6px;background:var(--red);border-radius:50%;"></div>
+                        <span style="font-size:0.75rem;letter-spacing:1px;font-family:'Share Tech Mono',monospace">FORTNITE SQUAD OFFEN</span>
                     </div>
                 </div>
             </div>
 
-            <!-- NETLIFY FORM -->
-            <div class="card reveal" style="padding:2.5rem">
-                <h3 style="font-family:'Orbitron',monospace;font-size:1.2rem;font-weight:900;margin-bottom:2rem;color:white">VERTRAG ANFORDERN</h3>
+            <div class="card reveal" style="padding:2rem">
+                <h3 style="font-family:'Orbitron',monospace;font-size:1.1rem;font-weight:900;margin-bottom:1.5rem;color:white">VERTRAG ANFORDERN</h3>
                 
                 <form name="pro-application" method="POST" data-netlify="true" netlify-honeypot="bot-field">
                     <input type="hidden" name="form-name" value="pro-application">
-                    <p style="display:none">
-                        <label>Nicht ausfüllen: <input name="bot-field"></label>
-                    </p>
+                    <p style="display:none"><label>Nicht ausfüllen: <input name="bot-field"></label></p>
 
-                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+                    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:1rem">
                         <div class="form-group">
-                            <label>VOR- & NACHNAME *</label>
+                            <label>NAME *</label>
                             <input type="text" name="full_name" placeholder="Vollständiger Name" required>
                         </div>
                         <div class="form-group">
                             <label>INGAME NAME *</label>
-                            <input type="text" name="nickname" placeholder="Dein Nickname" required>
+                            <input type="text" name="nickname" placeholder="Nickname" required>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label>E-MAIL *</label>
-                        <input type="email" name="email" placeholder="beispiel@mail.com" required>
+                        <input type="email" name="email" placeholder="mail@beispiel.com" required>
                     </div>
 
                     <div class="form-group">
                         <label>ALTER *</label>
-                        <input type="number" name="age" placeholder="Mindestalter: 13 Jahre" min="13" max="99" required>
+                        <input type="number" name="age" placeholder="Min. 13" min="13" max="99" required>
                     </div>
 
                     <div class="form-group">
@@ -1233,7 +1006,6 @@
                             <option value="">Spiel wählen...</option>
                             <option value="finals">The Finals</option>
                             <option value="fortnite">Fortnite</option>
-                            <option value="yugioh">Yu-Gi-Oh!</option>
                         </select>
                     </div>
 
@@ -1242,24 +1014,16 @@
                         <input type="text" name="discord" placeholder="name#0000 (optional)">
                     </div>
 
-                    <div class="form-group">
-                        <label>WARUM NICO GAMING?</label>
-                        <textarea name="motivation" rows="3" placeholder="Erzähl uns von dir..." style="resize:vertical"></textarea>
-                    </div>
-
                     <div style="margin-bottom:1.25rem">
-                        <label style="display:flex;align-items:flex-start;gap:0.75rem;cursor:none;font-size:0.85rem;color:rgba(200,200,208,0.6);line-height:1.5">
-                            <input type="checkbox" name="equipment_confirm" required style="margin-top:2px;width:auto;cursor:none;accent-color:var(--red)">
-                            Ich bestätige, dass ich eigenes Gaming-Equipment besitze und verstehe, dass keine Geräte gestellt werden. Ich bin mindestens 13 Jahre alt.
+                        <label style="display:flex;align-items:flex-start;gap:0.75rem;cursor:pointer;font-size:0.8rem;color:rgba(200,200,208,0.6);line-height:1.4">
+                            <input type="checkbox" name="equipment_confirm" required style="margin-top:2px;width:auto;accent-color:var(--red)">
+                            Ich bestätige eigenes Equipment & Mindestalter (13).
                         </label>
                     </div>
 
-                    <button type="submit" class="btn-primary" style="width:100%;justify-content:center;font-size:0.8rem">
+                    <button type="submit" class="btn-primary" style="width:100%;font-size:0.75rem">
                         📋 BEWERBUNG ABSENDEN
                     </button>
-                    <div style="text-align:center;margin-top:1rem;font-family:'Share Tech Mono',monospace;font-size:0.55rem;letter-spacing:2px;color:rgba(200,200,208,0.25)">
-                        VERARBEITUNG VIA NETLIFY FORMS · NICO GAMING ESPORTS
-                    </div>
                 </form>
             </div>
         </div>
@@ -1271,16 +1035,15 @@
 <!-- TWITCH -->
 <section id="twitch">
     <div class="container">
-        <div class="twitch-section reveal" style="padding:3rem;text-align:center">
-            <div style="font-family:'Share Tech Mono',monospace;font-size:0.65rem;letter-spacing:4px;color:rgba(100,65,165,0.8);margin-bottom:1rem">// LIVE AUF TWITCH</div>
-            <div style="font-family:'Orbitron',monospace;font-size:clamp(1.5rem,5vw,3.5rem);font-weight:900;color:white;margin-bottom:0.5rem">NICOMINECITH_TTV</div>
-            <div style="display:flex;align-items:center;justify-content:center;gap:0.5rem;margin-bottom:2rem">
+        <div class="card reveal" style="padding:2.5rem 1.5rem;text-align:center;background:linear-gradient(135deg, rgba(100,65,165,0.1) 0%, transparent 100%);border-color:rgba(100,65,165,0.3);">
+            <div style="font-family:'Share Tech Mono',monospace;font-size:0.6rem;letter-spacing:3px;color:rgba(100,65,165,0.9);margin-bottom:1rem">// LIVE AUF TWITCH</div>
+            <div style="font-family:'Orbitron',monospace;font-size:clamp(1.2rem,4vw,2.5rem);font-weight:900;color:white;margin-bottom:0.5rem">NICOMINECITH_TTV</div>
+            <div style="display:flex;align-items:center;justify-content:center;gap:0.5rem;margin-bottom:1.5rem">
                 <div style="width:8px;height:8px;background:#ff4455;border-radius:50%;animation:pulse 1.5s infinite"></div>
-                <span style="font-family:'Share Tech Mono',monospace;font-size:0.7rem;letter-spacing:2px;color:rgba(200,200,208,0.5)">STREAMS: THE FINALS · FORTNITE · YU-GI-OH!</span>
+                <span style="font-family:'Share Tech Mono',monospace;font-size:0.65rem;letter-spacing:1px;color:rgba(200,200,208,0.5)">STREAMS: THE FINALS · FORTNITE</span>
             </div>
-            <a href="https://www.twitch.tv/Nicominecith_TTV" target="_blank" style="display:inline-flex;align-items:center;gap:0.75rem;background:#6441a5;color:white;font-family:'Orbitron',monospace;font-weight:900;font-size:0.75rem;letter-spacing:3px;padding:1rem 3rem;text-decoration:none;clip-path:polygon(8px 0,100% 0,calc(100% - 8px) 100%,0 100%);transition:background 0.2s" onmouseover="this.style.background='#7d5bbe'" onmouseout="this.style.background='#6441a5'">
+            <a href="https://www.twitch.tv/Nicominecith_TTV" target="_blank" style="display:inline-flex;align-items:center;gap:0.75rem;background:#6441a5;color:white;font-family:'Orbitron',monospace;font-weight:900;font-size:0.7rem;letter-spacing:2px;padding:0.9rem 2rem;text-decoration:none;clip-path:polygon(8px 0,100% 0,calc(100% - 8px) 100%,0 100%);transition:background 0.2s">
                 🎥 JETZT ZUSCHAUEN
-                <span style="display:inline-block;width:8px;height:8px;background:#ff4455;border-radius:50%;animation:pulse 1s infinite"></span>
             </a>
         </div>
     </div>
@@ -1291,31 +1054,24 @@
 <!-- FOOTER -->
 <footer>
     <div style="max-width:1200px;margin:0 auto">
-        <img src="nico.png" alt="N1CO" style="width:48px;height:48px;object-fit:contain;margin:0 auto 1rem;display:block;filter:drop-shadow(0 0 8px rgba(230,0,18,0.5));cursor:none" onclick="window.scrollTo({top:0,behavior:'smooth'})" onerror="this.style.display='none'">
-        <div style="font-family:'Orbitron',monospace;font-size:1rem;font-weight:900;color:white;margin-bottom:0.5rem">NICO<span style="color:var(--red)">GAMING</span></div>
-        <div style="font-family:'Share Tech Mono',monospace;font-size:0.6rem;letter-spacing:3px;color:rgba(200,200,208,0.2)">
+        <div style="font-family:'Orbitron',monospace;font-size:0.9rem;font-weight:900;color:white;margin-bottom:0.5rem">NICO<span style="color:var(--red)">GAMING</span></div>
+        <div style="font-family:'Share Tech Mono',monospace;font-size:0.55rem;letter-spacing:2px;color:rgba(200,200,208,0.25)">
             © 2026 NICO GAMING ESPORTS · FOUNDER: NICO HOFMANN · MINDESTALTER: 13 JAHRE
-        </div>
-        <div style="margin-top:1.5rem;display:flex;justify-content:center;gap:2rem;flex-wrap:wrap">
-            <a href="#home" style="color:rgba(200,200,208,0.3);font-family:'Share Tech Mono',monospace;font-size:0.6rem;letter-spacing:2px;text-decoration:none;transition:color 0.2s" onmouseover="this.style.color='var(--red)'" onmouseout="this.style.color='rgba(200,200,208,0.3)'">HOME</a>
-            <a href="#about" style="color:rgba(200,200,208,0.3);font-family:'Share Tech Mono',monospace;font-size:0.6rem;letter-spacing:2px;text-decoration:none;transition:color 0.2s" onmouseover="this.style.color='var(--red)'" onmouseout="this.style.color='rgba(200,200,208,0.3)'">FOUNDER</a>
-            <a href="#yugioh" style="color:rgba(200,200,208,0.3);font-family:'Share Tech Mono',monospace;font-size:0.6rem;letter-spacing:2px;text-decoration:none;transition:color 0.2s" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='rgba(200,200,208,0.3)'">YU-GI-OH</a>
-            <a href="#aim-trainer" style="color:rgba(200,200,208,0.3);font-family:'Share Tech Mono',monospace;font-size:0.6rem;letter-spacing:2px;text-decoration:none;transition:color 0.2s" onmouseover="this.style.color='var(--red)'" onmouseout="this.style.color='rgba(200,200,208,0.3)'">TRAINING</a>
-            <a href="#sign" style="color:rgba(200,200,208,0.3);font-family:'Share Tech Mono',monospace;font-size:0.6rem;letter-spacing:2px;text-decoration:none;transition:color 0.2s" onmouseover="this.style.color='var(--red)'" onmouseout="this.style.color='rgba(200,200,208,0.3)'">JOIN</a>
-            <a href="#twitch" style="color:rgba(200,200,208,0.3);font-family:'Share Tech Mono',monospace;font-size:0.6rem;letter-spacing:2px;text-decoration:none;transition:color 0.2s" onmouseover="this.style.color='#6441a5'" onmouseout="this.style.color='rgba(200,200,208,0.3)'">TWITCH</a>
         </div>
     </div>
 </footer>
 
 <script>
-    // CURSOR
+    // CURSOR (PC only)
     const cursor = document.getElementById('cursor');
     const cursorDot = document.getElementById('cursor-dot');
     document.addEventListener('mousemove', e => {
-        cursor.style.left = e.clientX + 'px';
-        cursor.style.top = e.clientY + 'px';
-        cursorDot.style.left = e.clientX + 'px';
-        cursorDot.style.top = e.clientY + 'px';
+        if(window.innerWidth > 768) {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+            cursorDot.style.left = e.clientX + 'px';
+            cursorDot.style.top = e.clientY + 'px';
+        }
     });
 
     // MOBILE MENU
@@ -1328,7 +1084,6 @@
         entries.forEach(e => {
             if (e.isIntersecting) {
                 e.target.classList.add('visible');
-                // Skill bars
                 e.target.querySelectorAll('.fill').forEach(f => {
                     f.style.width = f.dataset.width + '%';
                 });
@@ -1336,18 +1091,6 @@
         });
     }, { threshold: 0.1 });
     document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
-
-    // Also trigger skill bars when section scrolls
-    const skillObserver = new IntersectionObserver(entries => {
-        entries.forEach(e => {
-            if (e.isIntersecting) {
-                e.target.querySelectorAll('.fill').forEach(f => {
-                    f.style.width = f.dataset.width + '%';
-                });
-            }
-        });
-    }, { threshold: 0.3 });
-    document.querySelectorAll('#skills').forEach(el => skillObserver.observe(el));
 
     // COUNTER ANIMATION
     const counterObserver = new IntersectionObserver(entries => {
@@ -1370,9 +1113,7 @@
     }, { threshold: 0.5 });
     document.querySelectorAll('.stat-box').forEach(el => counterObserver.observe(el.parentElement));
 
-    // ==========================================
     // AIM TRAINER
-    // ==========================================
     const canvas = document.getElementById('aim-canvas');
     const ctx = canvas.getContext('2d');
     const scoreEl = document.getElementById('aim-score');
@@ -1382,28 +1123,24 @@
     const controllerLabel = document.getElementById('controller-label');
 
     let score = 0, timeLeft = 30, gameActive = false;
-    let target = { x: 0, y: 0, radius: 20, life: 1, maxLife: 1 };
-    let crosshair = { x: 200, y: 200 };
+    let target = { x: 0, y: 0, radius: 20 };
+    let crosshair = { x: 200, y: 175 };
     let shots = 0, hits = 0;
     let sessionScores = [];
 
     function resizeCanvas() {
         const rect = canvas.parentNode.getBoundingClientRect();
         canvas.width = rect.width;
-        canvas.height = 400;
-        crosshair.x = canvas.width / 2;
-        crosshair.y = canvas.height / 2;
+        canvas.height = 350;
     }
     window.addEventListener('resize', resizeCanvas);
     resizeCanvas();
 
     function spawnTarget() {
-        const margin = 60;
+        const margin = 40;
         target.x = margin + Math.random() * (canvas.width - margin * 2);
         target.y = margin + Math.random() * (canvas.height - margin * 2);
-        target.radius = 10 + Math.random() * 16;
-        target.life = 1;
-        target.maxLife = 1;
+        target.radius = 12 + Math.random() * 14;
     }
 
     function startAimGame() {
@@ -1429,10 +1166,10 @@
                 updateLeaderboard();
                 overlay.style.opacity = '1';
                 overlay.style.pointerEvents = 'all';
-                overlay.innerHTML = `<div style="text-align:center">
-                    <div style="font-family:'Orbitron',monospace;font-size:1.2rem;font-weight:900;margin-bottom:0.5rem;color:white">SESSION ENDE</div>
-                    <div style="font-family:'Share Tech Mono',monospace;font-size:0.85rem;color:var(--red);margin-bottom:0.25rem">SCORE: ${score}</div>
-                    <div style="font-family:'Share Tech Mono',monospace;font-size:0.75rem;color:var(--gold);margin-bottom:1.5rem">GENAUIGKEIT: ${acc}%</div>
+                overlay.innerHTML = `<div style="text-align:center;padding:1rem;">
+                    <div style="font-family:'Orbitron',monospace;font-size:1.1rem;font-weight:900;margin-bottom:0.5rem;color:white">SESSION ENDE</div>
+                    <div style="font-family:'Share Tech Mono',monospace;font-size:0.8rem;color:var(--red);margin-bottom:0.2rem">SCORE: ${score}</div>
+                    <div style="font-family:'Share Tech Mono',monospace;font-size:0.75rem;color:#f5c842;margin-bottom:1.2rem">ACC: ${acc}%</div>
                     <button onclick="startAimGame()" class="btn-primary">🔄 RE-SESSION</button>
                 </div>`;
             }
@@ -1449,7 +1186,7 @@
             row.innerHTML = `
                 <span class="lb-rank ${i===0?'gold':''}">${i+1}</span>
                 <span>${names[i] || 'PLAYER_' + (i+1)}</span>
-                <span style="color:var(--gold)">${s.acc}%</span>
+                <span style="color:#f5c842">${s.acc}%</span>
                 <span class="lb-score">${s.score}</span>
             `;
             lb.appendChild(row);
@@ -1461,27 +1198,19 @@
         const dist = Math.hypot(x - target.x, y - target.y);
         if (dist < target.radius) {
             hits++;
-            const bonus = Math.floor((target.radius - dist) / target.radius * 50);
-            score += 100 + bonus;
+            score += 100;
             scoreEl.textContent = score;
-            accEl.textContent = Math.round((hits / shots) * 100) + '%';
             spawnTarget();
-            const pad = navigator.getGamepads()[0];
-            if (pad?.vibrationActuator) {
-                pad.vibrationActuator.playEffect("dual-rumble", { duration: 100, weakMagnitude: 1, strongMagnitude: 0.5 });
-            }
-        } else {
-            accEl.textContent = Math.round((hits / shots) * 100) + '%';
         }
+        accEl.textContent = (shots > 0 ? Math.round((hits / shots) * 100) : 0) + '%';
     }
 
-    canvas.addEventListener('mousedown', e => {
+    canvas.addEventListener('pointerdown', e => {
         if (!gameActive) return;
         const rect = canvas.getBoundingClientRect();
         checkHit(e.clientX - rect.left, e.clientY - rect.top);
     });
 
-    // Controller
     window.addEventListener('gamepadconnected', () => {
         controllerLabel.textContent = '◉ CONTROLLER: AKTIV';
         controllerLabel.style.background = '#10b981';
@@ -1499,8 +1228,8 @@
         if (!pad || !gameActive) return;
         const sx = Math.abs(pad.axes[0]) > 0.12 ? pad.axes[0] : 0;
         const sy = Math.abs(pad.axes[1]) > 0.12 ? pad.axes[1] : 0;
-        crosshair.x = Math.max(0, Math.min(canvas.width, crosshair.x + sx * 12));
-        crosshair.y = Math.max(0, Math.min(canvas.height, crosshair.y + sy * 12));
+        crosshair.x = Math.max(0, Math.min(canvas.width, crosshair.x + sx * 10));
+        crosshair.y = Math.max(0, Math.min(canvas.height, crosshair.y + sy * 10));
         const firing = pad.buttons[7]?.pressed || pad.buttons[0]?.pressed;
         if (firing && !triggerPressed) { checkHit(crosshair.x, crosshair.y); triggerPressed = true; }
         else if (!firing) triggerPressed = false;
@@ -1511,21 +1240,9 @@
         updateGamepad();
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-        const grd = ctx.createRadialGradient(target.x, target.y, 0, target.x, target.y, target.radius * 2);
-        grd.addColorStop(0, 'rgba(230,0,18,0.2)');
-        grd.addColorStop(1, 'transparent');
-        ctx.beginPath();
-        ctx.arc(target.x, target.y, target.radius * 2, 0, Math.PI * 2);
-        ctx.fillStyle = grd;
-        ctx.fill();
-
         ctx.beginPath();
         ctx.arc(target.x, target.y, target.radius, 0, Math.PI * 2);
         ctx.fillStyle = '#e60012';
-        ctx.fill();
-        ctx.beginPath();
-        ctx.arc(target.x, target.y, target.radius * 0.5, 0, Math.PI * 2);
-        ctx.fillStyle = '#ff4455';
         ctx.fill();
         ctx.beginPath();
         ctx.arc(target.x, target.y, 3, 0, Math.PI * 2);
@@ -1535,133 +1252,15 @@
         if (navigator.getGamepads()[0]) {
             ctx.strokeStyle = '#00ff88';
             ctx.lineWidth = 1.5;
-            ctx.globalAlpha = 0.8;
-            const s = 12;
+            const s = 10;
             ctx.beginPath();
             ctx.moveTo(crosshair.x - s, crosshair.y); ctx.lineTo(crosshair.x + s, crosshair.y);
             ctx.moveTo(crosshair.x, crosshair.y - s); ctx.lineTo(crosshair.x, crosshair.y + s);
             ctx.stroke();
-            ctx.globalAlpha = 1;
         }
 
         requestAnimationFrame(gameLoop);
     }
-
-    // ==========================================
-    // YU-GI-OH DUEL GAME
-    // ==========================================
-    const CARDS = [
-        { name: 'Blue-Eyes White Dragon', atk: 3000, type: 'Drachen', emoji: '🐉' },
-        { name: 'Dark Magician', atk: 2500, type: 'Zauberer', emoji: '⚡' },
-        { name: 'Red-Eyes Black Dragon', atk: 2400, type: 'Drachen', emoji: '🔥' },
-        { name: 'Summoned Skull', atk: 2500, type: 'Dämon', emoji: '💀' },
-        { name: 'Gaia The Fierce Knight', atk: 2300, type: 'Krieger', emoji: '⚔️' },
-        { name: 'Curse of Dragon', atk: 2000, type: 'Drachen', emoji: '🌀' },
-        { name: 'Celtic Guardian', atk: 1400, type: 'Krieger', emoji: '🛡️' },
-        { name: 'Kuriboh', atk: 300, type: 'Fiend', emoji: '🐾' },
-        { name: 'Man-Eater Bug', atk: 450, type: 'Insekt', emoji: '🐛' },
-        { name: 'Exodia', atk: 9999, type: 'Spellcaster', emoji: '👁️' },
-    ];
-
-    let duelActive = false;
-    let playerLP = 8000, opponentLP = 8000;
-    let playerHand = [], turn = 0;
-
-    function duelLog(msg, color = 'rgba(200,200,208,0.6)') {
-        const log = document.getElementById('duelLog');
-        const div = document.createElement('div');
-        div.style.color = color;
-        div.textContent = msg;
-        log.appendChild(div);
-        log.scrollTop = log.scrollHeight;
-    }
-
-    function startDuel() {
-        duelActive = true;
-        playerLP = 8000; opponentLP = 8000;
-        playerHand = [];
-        turn = 0;
-        document.getElementById('playerLP').textContent = '8000 LP';
-        document.getElementById('opponentLP').textContent = '8000 LP';
-        document.getElementById('playerHandDisplay').innerHTML = '';
-        document.getElementById('duelLog').innerHTML = '';
-        document.getElementById('duelBtn').style.display = 'none';
-        document.getElementById('drawBtn').style.display = 'inline-block';
-        document.getElementById('attackBtn').style.display = 'inline-block';
-        document.getElementById('duelPhase').textContent = '⚔';
-        document.getElementById('duelStatus').textContent = 'SPIELER AM ZUG';
-        duelLog('[ Duell ] Das Duell beginnt! Es ist Zeit zu DUELLIEREN!', 'var(--gold)');
-        duelLog('[ System ] Ziehe eine Karte um zu beginnen!', 'var(--red)');
-    }
-
-    function drawCard() {
-        if (!duelActive) return;
-        const card = CARDS[Math.floor(Math.random() * CARDS.length)];
-        playerHand.push(card);
-        duelLog(`[ Ziehen ] Du hast "${card.emoji} ${card.name}" gezogen (ATK: ${card.atk})`, 'rgba(200,200,208,0.8)');
-        renderHand();
-    }
-
-    function renderHand() {
-        const handDiv = document.getElementById('playerHandDisplay');
-        handDiv.innerHTML = '';
-        playerHand.slice(-5).forEach((c) => {
-            const div = document.createElement('div');
-            div.style.cssText = `background:rgba(200,170,80,0.1);border:1px solid rgba(200,170,80,0.3);padding:0.3rem 0.5rem;border-radius:2px;font-family:'Share Tech Mono',monospace;font-size:0.55rem;color:var(--gold);cursor:none;`;
-            div.textContent = `${c.emoji} ${c.name.split(' ')[0]}`;
-            div.title = `ATK: ${c.atk}`;
-            handDiv.appendChild(div);
-        });
-    }
-
-    function attackOpponent() {
-        if (!duelActive || playerHand.length === 0) {
-            duelLog('[ Fehler ] Ziehe zuerst eine Karte!', 'var(--red)');
-            return;
-        }
-        const playerCard = playerHand[playerHand.length - 1];
-        const opCard = CARDS[Math.floor(Math.random() * CARDS.length)];
-        duelLog(`[ Angriff ] ${playerCard.emoji} ${playerCard.name} (${playerCard.atk}) greift an!`, 'white');
-        duelLog(`[ Gegner ] Setzt ${opCard.emoji} ${opCard.name} (${opCard.atk}) ein!`, 'rgba(200,200,208,0.5)');
-
-        if (playerCard.atk > opCard.atk) {
-            const dmg = playerCard.atk - opCard.atk;
-            opponentLP = Math.max(0, opponentLP - dmg);
-            duelLog(`[ Treffer ] Gegner erleidet ${dmg} Schaden! Gegner LP: ${opponentLP}`, 'var(--red)');
-        } else if (opCard.atk > playerCard.atk) {
-            const dmg = opCard.atk - playerCard.atk;
-            playerLP = Math.max(0, playerLP - dmg);
-            duelLog(`[ Block ] Du erleidest ${dmg} Schaden! Deine LP: ${playerLP}`, 'orange');
-            playerHand.pop();
-            renderHand();
-        } else {
-            duelLog('[ Unentschieden ] Beide Monster vernichtet!', 'var(--gold)');
-            playerHand.pop();
-            renderHand();
-        }
-
-        document.getElementById('playerLP').textContent = playerLP + ' LP';
-        document.getElementById('opponentLP').textContent = opponentLP + ' LP';
-
-        if (playerLP <= 0) {
-            duelLog('[ GAME OVER ] Du hast verloren! SCHANDE!', 'var(--red)');
-            endDuel();
-        } else if (opponentLP <= 0) {
-            duelLog('[ SIEG ] Du hast das Duell gewonnen! EXCELLENT!', 'var(--gold)');
-            endDuel();
-        }
-        turn++;
-    }
-
-    function endDuel() {
-        duelActive = false;
-        document.getElementById('duelBtn').style.display = 'inline-block';
-        document.getElementById('duelBtn').textContent = '🔄 NEUES DUELL';
-        document.getElementById('drawBtn').style.display = 'none';
-        document.getElementById('attackBtn').style.display = 'none';
-    }
-
-    updateLeaderboard();
 </script>
 </body>
 </html>
