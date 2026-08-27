@@ -975,54 +975,25 @@
             <div class="card reveal" style="padding:2rem">
                 <h3 style="font-family:'Orbitron',monospace;font-size:1.1rem;font-weight:900;margin-bottom:1.5rem;color:white">VERTRAG ANFORDERN</h3>
                 
-                <form name="pro-application" method="POST" data-netlify="true" netlify-honeypot="bot-field">
-                    <input type="hidden" name="form-name" value="pro-application">
-                    <p style="display:none"><label>Nicht ausfüllen: <input name="bot-field"></label></p>
-
-                    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:1rem">
-                        <div class="form-group">
-                            <label>NAME *</label>
-                            <input type="text" name="full_name" placeholder="Vollständiger Name" required>
-                        </div>
-                        <div class="form-group">
-                            <label>INGAME NAME *</label>
-                            <input type="text" name="nickname" placeholder="Nickname" required>
-                        </div>
+                <!-- DEIN INTEGRIERTES MAILTO-FORMULAR -->
+                <form action="mailto:nicominecithclips@gmail.com" method="POST" enctype="text/plain">
+                    <div class="form-group">
+                        <label for="name">DEIN NAME:</label>
+                        <input type="text" id="name" name="Name" placeholder="Vollständiger Name" required>
                     </div>
 
                     <div class="form-group">
-                        <label>E-MAIL *</label>
-                        <input type="email" name="email" placeholder="mail@beispiel.com" required>
+                        <label for="kontakt">DISCORD / E-MAIL:</label>
+                        <input type="text" id="kontakt" name="Kontakt" placeholder="Discord Tag oder E-Mail" required>
                     </div>
 
                     <div class="form-group">
-                        <label>ALTER *</label>
-                        <input type="number" name="age" placeholder="Min. 13" min="13" max="99" required>
+                        <label for="nachricht">WARUM DU?:</label>
+                        <textarea id="nachricht" name="Bewerbungstext" rows="5" placeholder="Erzähl uns etwas über deine Skills..." required></textarea>
                     </div>
 
-                    <div class="form-group">
-                        <label>PRIMÄRES SPIEL *</label>
-                        <select name="game" required>
-                            <option value="">Spiel wählen...</option>
-                            <option value="finals">The Finals</option>
-                            <option value="fortnite">Fortnite</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label>DISCORD TAG</label>
-                        <input type="text" name="discord" placeholder="name#0000 (optional)">
-                    </div>
-
-                    <div style="margin-bottom:1.25rem">
-                        <label style="display:flex;align-items:flex-start;gap:0.75rem;cursor:pointer;font-size:0.8rem;color:rgba(200,200,208,0.6);line-height:1.4">
-                            <input type="checkbox" name="equipment_confirm" required style="margin-top:2px;width:auto;accent-color:var(--red)">
-                            Ich bestätige eigenes Equipment & Mindestalter (13).
-                        </label>
-                    </div>
-
-                    <button type="submit" class="btn-primary" style="width:100%;font-size:0.75rem">
-                        📋 BEWERBUNG ABSENDEN
+                    <button type="submit" class="btn-primary" style="width:100%;font-size:0.75Name">
+                        📋 BEWERBUNG ABSCHICKEN
                     </button>
                 </form>
             </div>
