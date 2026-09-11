@@ -15,6 +15,8 @@
             --panel: #0f0f14;
             --panel2: #16161d;
             --silver: #c8c8d0;
+            --ig-purple: #833ab4;
+            --gt-blue: #0066ff;
         }
 
         * { box-sizing: border-box; }
@@ -114,15 +116,16 @@
         nav ul {
             display: flex;
             list-style: none;
-            gap: 1.5rem;
+            gap: 1.2rem;
             margin: 0; padding: 0;
+            align-items: center;
         }
 
         nav a {
             color: var(--silver);
             text-decoration: none;
             font-family: 'Orbitron', monospace;
-            font-size: 0.65rem;
+            font-size: 0.6rem;
             letter-spacing: 2px;
             transition: color 0.2s;
             position: relative;
@@ -149,7 +152,7 @@
             justify-content: center;
             position: relative;
             overflow: hidden;
-            padding: 80px 1rem 4rem 1rem;
+            padding: 90px 1rem 4rem 1rem;
         }
 
         .grid-bg {
@@ -272,6 +275,7 @@
             transition: background 0.2s, transform 0.2s;
             position: relative;
             overflow: hidden;
+            text-align: center;
         }
         .btn-primary:hover { background: #ff1a2e; transform: scale(1.03); }
 
@@ -292,8 +296,22 @@
             cursor: pointer;
             text-decoration: none;
             transition: border-color 0.2s, background 0.2s;
+            text-align: center;
         }
         .btn-outline:hover { border-color: var(--red); background: rgba(230,0,18,0.08); }
+
+        .btn-gt {
+            background: #0052cc;
+            color: white;
+        }
+        .btn-gt:hover { background: #0066ff; }
+
+        .btn-ig {
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+            color: white;
+            border: none;
+        }
+        .btn-ig:hover { opacity: 0.9; transform: scale(1.03); }
 
         /* SECTIONS */
         section { padding: 5rem 1.5rem; position: relative; }
@@ -531,7 +549,7 @@
             transition: 0.3s;
         }
 
-        @media (max-width: 768px) {
+        @media (max-width: 900px) {
             .desktop-nav { display: none; }
             .hamburger { display: flex; }
             section { padding: 4rem 1rem; }
@@ -648,6 +666,7 @@
     <a href="#aim-trainer" onclick="toggleMenu()">TRAINING</a>
     <a href="#roster" onclick="toggleMenu()">TEAM</a>
     <a href="#contract" onclick="toggleMenu()">REGELN</a>
+    <a href="#socials" onclick="toggleMenu()">SOCIALS</a>
     <a href="#sign" onclick="toggleMenu()">JOIN</a>
     <a href="#twitch" onclick="toggleMenu()">LIVE</a>
 </div>
@@ -665,6 +684,7 @@
         <li><a href="#aim-trainer">Training</a></li>
         <li><a href="#roster">Team</a></li>
         <li><a href="#contract">Regeln</a></li>
+        <li><a href="#socials">Socials</a></li>
         <li><a href="#sign" style="color:var(--red)">Join</a></li>
         <li><a href="#twitch">Live</a></li>
     </ul>
@@ -679,10 +699,9 @@
         <span class="hl">◆ NICO GAMING ESPORTS</span>
         <span>THE FINALS</span>
         <span class="hl">◆ FORTNITE</span>
+        <span>GAMERTRANSFER PARTNER</span>
+        <span class="hl">◆ INSTAGRAM @NICO.GAMING2026</span>
         <span>TURTLE BEACH PARTNER</span>
-        <span class="hl">◆ PRO LEAGUE 2026</span>
-        <span>THE FINALS</span>
-        <span class="hl">◆ FORTNITE</span>
     </div>
 </div>
 
@@ -699,7 +718,7 @@
         </p>
         <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
             <a href="#aim-trainer" class="btn-primary">⚡ WARM-UP STARTEN</a>
-            <a href="#sign" class="btn-outline">📋 ZUM VERTRAG</a>
+            <a href="#sign" class="btn-outline">📋 BEWERBEN & ANMELDEN</a>
         </div>
     </div>
 </section>
@@ -780,6 +799,48 @@
                         </div>
                     </a>
                 </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<hr class="divider">
+
+<!-- SOCIALS & PARTNERS (NEW SECTION FOR INSTAGRAM & GAMERTRANSFER) -->
+<section id="socials" style="background:linear-gradient(180deg,transparent,rgba(230,0,18,0.03))">
+    <div class="container reveal">
+        <div class="section-label">// NETZWERK & COMMUNITY</div>
+        <h2 class="section-title">OFFIZZIELLE<br><span style="color:var(--red)">PLATTFORMEN</span></h2>
+        <p style="color:rgba(200,200,208,0.7);margin-bottom:2rem;max-width:600px">
+            Besuche unser offizielles Gamertransfer-Gesuch für das Recruiting oder folge uns auf Instagram für tägliche Updates, Clips und Teaser!
+        </p>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2rem">
+            <!-- Gamertransfer Card -->
+            <div class="card" style="padding:2rem;display:flex;flex-direction:column;justify-content:space-between">
+                <div>
+                    <div style="font-family:'Share Tech Mono',monospace;font-size:0.6rem;letter-spacing:3px;color:var(--gt-blue);margin-bottom:0.5rem">// PARTNER PLATTFORM</div>
+                    <h3 style="font-size:1.4rem;font-weight:900;color:white;margin-bottom:1rem">GAMERTRANSFER</h3>
+                    <p style="color:rgba(200,200,208,0.6);font-size:0.95rem;line-height:1.6;margin-bottom:1.5rem">
+                        Sieh dir unsere offizielle Team-Suchanzeige (LFM) für The Finals an, vernetze dich mit anderen Spielern oder bewirb dich direkt über die Plattform.
+                    </p>
+                </div>
+                <a href="https://gamertransfer.com/nico_gaming_the_finals-lfm-2-35968.html" target="_blank" class="btn-primary btn-gt" style="width:100%">
+                    🔗 ZUM GAMERTRANSFER INSERAT
+                </a>
+            </div>
+
+            <!-- Instagram Card -->
+            <div class="card" style="padding:2rem;display:flex;flex-direction:column;justify-content:space-between">
+                <div>
+                    <div style="font-family:'Share Tech Mono',monospace;font-size:0.6rem;letter-spacing:3px;color:#e1306c;margin-bottom:0.5rem">// SOCIAL MEDIA</div>
+                    <h3 style="font-size:1.4rem;font-weight:900;color:white;margin-bottom:1rem">INSTAGRAM</h3>
+                    <p style="color:rgba(200,200,208,0.6);font-size:0.95rem;line-height:1.6;margin-bottom:1.5rem">
+                        Folge <strong style="color:white">@nico.gaming2026</strong> auf Instagram, verpasse keine Team-Highlights und erhalte Einblicke hinter die Kulissen unseres eSports-Clubs.
+                    </p>
+                </div>
+                <a href="https://www.instagram.com/nico.gaming2026" target="_blank" class="btn-primary btn-ig" style="width:100%">
+                    📸 INSTAGRAM BESUCHEN
+                </a>
             </div>
         </div>
     </div>
@@ -885,19 +946,19 @@
                 <div class="roster-avatar">🎯</div>
                 <div style="font-family:'Orbitron',monospace;font-weight:900;color:white;margin-bottom:0.25rem">SLOT OFFEN</div>
                 <div style="font-size:0.55rem;letter-spacing:2px;color:var(--red);font-family:'Share Tech Mono',monospace;margin-bottom:0.5rem">FRAGGER</div>
-                <div style="font-size:0.8rem;color:rgba(200,200,208,0.5)">Bewirb dich jetzt</div>
+                <div style="font-size:0.8rem;color:rgba(200,200,208,0.5)">Über Gamertransfer bewerben</div>
             </div>
             <div class="roster-card reveal">
                 <div class="roster-avatar">🛡️</div>
                 <div style="font-family:'Orbitron',monospace;font-weight:900;color:white;margin-bottom:0.25rem">SLOT OFFEN</div>
                 <div style="font-size:0.55rem;letter-spacing:2px;color:var(--red);font-family:'Share Tech Mono',monospace;margin-bottom:0.5rem">SUPPORT</div>
-                <div style="font-size:0.8rem;color:rgba(200,200,208,0.5)">Bewirb dich jetzt</div>
+                <div style="font-size:0.8rem;color:rgba(200,200,208,0.5)">Über Gamertransfer bewerben</div>
             </div>
             <div class="roster-card reveal">
                 <div class="roster-avatar">🔍</div>
                 <div style="font-family:'Orbitron',monospace;font-weight:900;color:white;margin-bottom:0.25rem">SLOT OFFEN</div>
                 <div style="font-size:0.55rem;letter-spacing:2px;color:var(--red);font-family:'Share Tech Mono',monospace;margin-bottom:0.5rem">BUILDER / SCOUT</div>
-                <div style="font-size:0.8rem;color:rgba(200,200,208,0.5)">Bewirb dich jetzt</div>
+                <div style="font-size:0.8rem;color:rgba(200,200,208,0.5)">Über Gamertransfer bewerben</div>
             </div>
         </div>
     </div>
@@ -945,17 +1006,27 @@
 
 <hr class="divider">
 
-<!-- APPLICATION FORM -->
+<!-- APPLICATION FORM / LOGIN MODES -->
 <section id="sign" style="background:linear-gradient(180deg,rgba(230,0,18,0.04) 0%,transparent 100%)">
     <div class="container">
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:3rem;align-items:start">
             <div class="reveal">
-                <div class="section-label">// BEWERBUNG</div>
+                <div class="section-label">// BEWERBUNG & ANMELDUNG</div>
                 <h2 class="section-title">WERDE<br><span style="color:var(--red)">N1CO ELITE</span></h2>
                 <div class="age-badge">⚠ MINDESTALTER: 13 JAHRE ERFORDERLICH</div>
                 <p style="color:rgba(200,200,208,0.6);font-size:1rem;line-height:1.8;margin-bottom:2rem">
-                    Wir suchen ambitionierte Spieler für unsere Squads in The Finals und Fortnite. Bewirb dich jetzt.
+                    Bewirb dich jetzt für unsere Squads. Du kannst dich entweder direkt über unser <strong style="color:white">Gamertransfer-Profil</strong> anmelden oder das klassische <strong style="color:white">E-Mail-Formular</strong> nutzen.
                 </p>
+                
+                <!-- Quick Gamertransfer Action Box -->
+                <div class="card" style="padding:1.5rem;border-color:rgba(0,102,255,0.3);background:rgba(0,102,255,0.03);margin-bottom:1.5rem">
+                    <div style="font-family:'Share Tech Mono',monospace;font-size:0.6rem;letter-spacing:2px;color:var(--gt-blue);margin-bottom:0.4rem">DIREKTER EMPFOHLENER WEG</div>
+                    <div style="font-family:'Orbitron',monospace;font-weight:700;color:white;font-size:0.95rem;margin-bottom:0.75rem">ANMELDUNG ÜBER GAMERTRANSFER</div>
+                    <a href="https://gamertransfer.com/nico_gaming_the_finals-lfm-2-35968.html" target="_blank" class="btn-primary btn-gt" style="width:100%;font-size:0.7rem;padding:0.75rem">
+                        🌐 ZUM GAMERTRANSFER LOGIN / INSERAT
+                    </a>
+                </div>
+
                 <div style="display:flex;flex-direction:column;gap:1rem">
                     <div style="display:flex;align-items:center;gap:0.75rem">
                         <div style="width:6px;height:6px;background:var(--red);border-radius:50%;"></div>
@@ -969,9 +1040,10 @@
             </div>
 
             <div class="card reveal" style="padding:2rem">
-                <h3 style="font-family:'Orbitron',monospace;font-size:1.1rem;font-weight:900;margin-bottom:1.5rem;color:white">VERTRAG ANFORDERN</h3>
+                <h3 style="font-family:'Orbitron',monospace;font-size:1.1rem;font-weight:900;margin-bottom:0.5rem;color:white">E-MAIL BEWERBUNG</h3>
+                <p style="font-size:0.85rem;color:rgba(200,200,208,0.5);margin-bottom:1.5rem">Alternativ kannst du deine Daten direkt absenden:</p>
                 
-                <!-- MAILTO FORMULAR OPTIMIERT -->
+                <!-- MAILTO FORMULAR -->
                 <form id="applyForm" onsubmit="sendMail(event)">
                     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:1rem">
                         <div class="form-group">
@@ -1028,7 +1100,7 @@
                     const email = document.getElementById('femail').value;
                     const age = document.getElementById('fage').value;
                     const game = document.getElementById('fgame').value;
-                    const disc = document.getElementById('fdisc').value || 'Kein Angabe';
+                    const disc = document.getElementById('fdisc').value || 'Keine Angabe';
 
                     const subject = encodeURIComponent("🎮 Neue Bewerbung: " + nick + " (" + game + ")");
                     const body = encodeURIComponent(
@@ -1078,6 +1150,11 @@
 <footer>
     <div style="max-width:1200px;margin:0 auto">
         <div style="font-family:'Orbitron',monospace;font-size:0.9rem;font-weight:900;color:white;margin-bottom:0.5rem">NICO<span style="color:var(--red)">GAMING</span></div>
+        <div style="display:flex;justify-content:center;gap:1.5rem;margin:1rem 0;flex-wrap:wrap">
+            <a href="https://gamertransfer.com/nico_gaming_the_finals-lfm-2-35968.html" target="_blank" style="color:var(--silver);font-size:0.7rem;text-decoration:none;font-family:'Share Tech Mono',monospace">Gamertransfer</a>
+            <a href="https://www.instagram.com/nico.gaming2026" target="_blank" style="color:var(--silver);font-size:0.7rem;text-decoration:none;font-family:'Share Tech Mono',monospace">Instagram</a>
+            <a href="https://www.twitch.tv/Nicominecith_TTV" target="_blank" style="color:var(--silver);font-size:0.7rem;text-decoration:none;font-family:'Share Tech Mono',monospace">Twitch</a>
+        </div>
         <div style="font-family:'Share Tech Mono',monospace;font-size:0.55rem;letter-spacing:2px;color:rgba(200,200,208,0.25)">
             © 2026 NICO GAMING ESPORTS · FOUNDER: NICOMINECITH · MINDESTALTER: 13 JAHRE
         </div>
@@ -1089,7 +1166,7 @@
     const cursor = document.getElementById('cursor');
     const cursorDot = document.getElementById('cursor-dot');
     document.addEventListener('mousemove', e => {
-        if(window.innerWidth > 768) {
+        if(window.innerWidth > 900) {
             cursor.style.left = e.clientX + 'px';
             cursor.style.top = e.clientY + 'px';
             cursorDot.style.left = e.clientX + 'px';
