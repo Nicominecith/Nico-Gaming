@@ -9,18 +9,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Barlow+Condensed:ital,wght@0,300;0,700;0,900;1,900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
     <style>
         :root {
-            --red: #e60012;
-            --red-glow: rgba(230,0,18,0.5);
-            --dark: #070709;
-            --panel: #0f0f14;
-            --panel2: #16161d;
-            --silver: #c8c8d0;
-            --ig-purple: #833ab4;
+            --red: #ff1f3d;
+            --red-glow: rgba(255,31,61,0.6);
+            --dark: #040406;
+            --panel: #0b0b10;
+            --panel2: #12121a;
+            --silver: #d0d0dc;
             --gt-blue: #0066ff;
         }
 
         * { box-sizing: border-box; }
-
         html { scroll-behavior: smooth; }
 
         body {
@@ -34,14 +32,14 @@
         /* CUSTOM CURSOR */
         #cursor {
             position: fixed;
-            width: 20px;
-            height: 20px;
+            width: 16px;
+            height: 16px;
             border: 2px solid var(--red);
             border-radius: 50%;
             pointer-events: none;
             z-index: 9999;
             transform: translate(-50%, -50%);
-            transition: transform 0.08s, background 0.1s, width 0.15s, height 0.15s;
+            transition: transform 0.05s ease, background 0.1s ease, width 0.15s ease, height 0.15s ease;
             mix-blend-mode: screen;
         }
         #cursor-dot {
@@ -61,23 +59,23 @@
 
         body:has(a:hover) #cursor,
         body:has(button:hover) #cursor {
-            width: 40px;
-            height: 40px;
-            background: rgba(230,0,18,0.15);
+            width: 36px;
+            height: 36px;
+            background: rgba(255,31,61,0.12);
         }
 
         h1, h2, h3, .orb {
             font-family: 'Orbitron', monospace;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
         }
 
-        /* SCANLINE OVERLAY */
+        /* CYBER SCANLINES */
         body::before {
             content: '';
             position: fixed;
             inset: 0;
-            background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.08) 2px, rgba(0,0,0,0.08) 4px);
+            background: repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0,0,0,0.12) 3px, rgba(0,0,0,0.12) 6px);
             pointer-events: none;
             z-index: 9000;
         }
@@ -87,11 +85,11 @@
             position: fixed;
             top: 0; left: 0; right: 0;
             z-index: 5000;
-            background: rgba(7,7,9,0.92);
+            background: rgba(4,4,6,0.92);
             backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(230,0,18,0.25);
-            padding: 0 1.5rem;
-            height: 60px;
+            border-bottom: 1px solid rgba(255,31,61,0.25);
+            padding: 0 2rem;
+            height: 65px;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -100,23 +98,23 @@
         nav .logo {
             font-family: 'Orbitron', monospace;
             font-weight: 900;
-            font-size: 1rem;
+            font-size: 1.1rem;
             letter-spacing: 2px;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
         }
 
         nav .logo img {
-            width: 32px; height: 32px;
+            width: 38px; height: 38px;
             object-fit: contain;
-            filter: drop-shadow(0 0 8px var(--red));
+            filter: drop-shadow(0 0 10px var(--red));
         }
 
         nav ul {
             display: flex;
             list-style: none;
-            gap: 1.2rem;
+            gap: 1.5rem;
             margin: 0; padding: 0;
             align-items: center;
         }
@@ -125,7 +123,7 @@
             color: var(--silver);
             text-decoration: none;
             font-family: 'Orbitron', monospace;
-            font-size: 0.6rem;
+            font-size: 0.65rem;
             letter-spacing: 2px;
             transition: color 0.2s;
             position: relative;
@@ -136,15 +134,15 @@
             position: absolute;
             bottom: -4px;
             left: 0; right: 100%;
-            height: 1px;
+            height: 2px;
             background: var(--red);
-            transition: right 0.3s;
+            transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         nav a:hover { color: white; }
         nav a:hover::after { right: 0; }
 
-        /* HERO */
+        /* HERO REWORKED */
         #home {
             min-height: 100vh;
             display: flex;
@@ -152,169 +150,171 @@
             justify-content: center;
             position: relative;
             overflow: hidden;
-            padding: 90px 1rem 4rem 1rem;
+            padding: 110px 1.5rem 5rem 1.5rem;
         }
 
         .grid-bg {
             position: absolute;
             inset: 0;
             background-image:
-                linear-gradient(rgba(230,0,18,0.07) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(230,0,18,0.07) 1px, transparent 1px);
-            background-size: 60px 60px;
-            animation: gridMove 20s linear infinite;
+                linear-gradient(rgba(255,31,61,0.06) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,31,61,0.06) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridMove 15s linear infinite;
         }
 
         @keyframes gridMove {
             from { transform: translateY(0); }
-            to { transform: translateY(60px); }
+            to { transform: translateY(50px); }
         }
 
-        .hero-glow {
+        .hero-glow-intense {
             position: absolute;
-            width: min(600px, 90vw); height: min(600px, 90vw);
-            background: radial-gradient(circle, rgba(230,0,18,0.15) 0%, transparent 70%);
+            width: min(700px, 95vw); height: min(700px, 95vw);
+            background: radial-gradient(circle, rgba(255,31,61,0.22) 0%, rgba(255,31,61,0.03) 50%, transparent 75%);
             top: 50%; left: 50%;
             transform: translate(-50%, -50%);
-            animation: pulse 4s ease-in-out infinite;
+            animation: pulseGlow 5s ease-in-out infinite;
+            pointer-events: none;
         }
 
-        @keyframes pulse { 0%,100%{opacity:0.5;transform:translate(-50%,-50%) scale(1);} 50%{opacity:1;transform:translate(-50%,-50%) scale(1.1);} }
+        @keyframes pulseGlow { 
+            0%,100%{ opacity: 0.6; transform: translate(-50%,-50%) scale(1); } 
+            50%{ opacity: 1; transform: translate(-50%,-50%) scale(1.12); } 
+        }
 
         .hero-content {
             position: relative;
             z-index: 10;
             text-align: center;
             width: 100%;
-            max-width: 900px;
+            max-width: 950px;
+        }
+
+        /* HIGHLIGHTED LOGO */
+        .hero-logo-wrapper {
+            position: relative;
+            width: 180px; height: 180px;
+            margin: 0 auto 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-logo-wrapper::before {
+            content: '';
+            position: absolute;
+            inset: -15px;
+            background: radial-gradient(circle, rgba(255,31,61,0.4) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: pulseGlow 3s infinite;
+            z-index: -1;
         }
 
         .hero-logo {
-            width: 140px; height: 140px;
-            margin: 0 auto 1.5rem;
+            width: 100%; height: 100%;
             object-fit: contain;
-            filter: drop-shadow(0 0 40px rgba(230,0,18,0.8));
-            animation: float 6s ease-in-out infinite;
+            filter: drop-shadow(0 0 35px rgba(255,31,61,0.9)) drop-shadow(0 0 10px rgba(255,255,255,0.4));
+            animation: floatLogo 6s ease-in-out infinite;
         }
 
-        @keyframes float { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-12px);} }
+        @keyframes floatLogo { 
+            0%,100%{ transform: translateY(0) rotate(0deg); } 
+            50%{ transform: translateY(-10px) rotate(1deg); } 
+        }
 
         .hero-title {
-            font-size: clamp(2.5rem, 8vw, 6rem);
+            font-size: clamp(3rem, 9vw, 6.5rem);
             font-weight: 900;
-            line-height: 0.9;
-            margin-bottom: 0.5rem;
-            background: linear-gradient(135deg, #fff 0%, #888 60%, var(--red) 100%);
+            line-height: 0.88;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #ffffff 20%, #aaaaaa 70%, var(--red) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            text-shadow: 0 10px 40px rgba(255,31,61,0.3);
         }
 
         .hero-sub {
-            font-size: clamp(0.95rem, 2vw, 1.3rem);
-            color: rgba(200,200,208,0.6);
-            max-width: 600px;
-            margin: 1rem auto 2rem;
+            font-size: clamp(1rem, 2.2vw, 1.4rem);
+            color: rgba(208,208,220,0.7);
+            max-width: 650px;
+            margin: 0 auto 2.5rem;
             font-weight: 300;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
         }
 
         .hero-sub strong { color: white; font-weight: 700; }
         .hero-sub .game { color: var(--red); font-weight: 900; }
-
-        /* GLITCH EFFECT */
-        .glitch { position: relative; }
-        .glitch::before, .glitch::after {
-            content: attr(data-text);
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%;
-            background: linear-gradient(135deg, #fff 0%, #888 60%, var(--red) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        .glitch::before {
-            animation: glitch1 3.5s infinite;
-            clip-path: polygon(0 0, 100% 0, 100% 35%, 0 35%);
-        }
-        .glitch::after {
-            animation: glitch2 3.5s infinite;
-            clip-path: polygon(0 65%, 100% 65%, 100% 100%, 0 100%);
-        }
-        @keyframes glitch1 {
-            0%,90%,100%{transform:translate(0);}
-            92%{transform:translate(-3px,1px);}
-            94%{transform:translate(3px,-1px);}
-            96%{transform:translate(-2px,2px);}
-        }
-        @keyframes glitch2 {
-            0%,88%,100%{transform:translate(0);}
-            90%{transform:translate(3px,-2px);}
-            92%{transform:translate(-3px,2px);}
-            94%{transform:translate(2px,-1px);}
-        }
 
         /* BUTTONS */
         .btn-primary {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 0.5rem;
+            gap: 0.6rem;
             background: var(--red);
             color: white;
             font-family: 'Orbitron', monospace;
             font-weight: 900;
             font-size: 0.75rem;
             letter-spacing: 3px;
-            padding: 1rem 2rem;
+            padding: 1.1rem 2.2rem;
             border: none;
-            clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+            clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
             cursor: pointer;
             text-decoration: none;
-            transition: background 0.2s, transform 0.2s;
-            position: relative;
-            overflow: hidden;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 0 20px rgba(255,31,61,0.4);
             text-align: center;
         }
-        .btn-primary:hover { background: #ff1a2e; transform: scale(1.03); }
+        .btn-primary:hover { 
+            background: #ff3852; 
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 0 30px rgba(255,31,61,0.7);
+        }
 
         .btn-outline {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 0.5rem;
+            gap: 0.6rem;
             background: transparent;
             color: white;
             font-family: 'Orbitron', monospace;
             font-weight: 700;
             font-size: 0.7rem;
             letter-spacing: 3px;
-            padding: 1rem 2rem;
-            border: 1px solid rgba(255,255,255,0.2);
-            clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+            padding: 1.1rem 2.2rem;
+            border: 1px solid rgba(255,255,255,0.25);
+            clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
             cursor: pointer;
             text-decoration: none;
-            transition: border-color 0.2s, background 0.2s;
+            transition: all 0.25s;
             text-align: center;
         }
-        .btn-outline:hover { border-color: var(--red); background: rgba(230,0,18,0.08); }
-
-        .btn-gt {
-            background: #0052cc;
+        .btn-outline:hover { 
+            border-color: var(--red); 
+            background: rgba(255,31,61,0.1);
             color: white;
         }
-        .btn-gt:hover { background: #0066ff; }
+
+        .btn-gt {
+            background: linear-gradient(135deg, #0052cc 0%, #0066ff 100%);
+            box-shadow: 0 0 20px rgba(0,102,255,0.4);
+        }
+        .btn-gt:hover {
+            background: linear-gradient(135deg, #0066ff 0%, #3385ff 100%);
+            box-shadow: 0 0 30px rgba(0,102,255,0.7);
+        }
 
         .btn-ig {
             background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
-            color: white;
-            border: none;
+            box-shadow: 0 0 20px rgba(220,39,67,0.4);
         }
-        .btn-ig:hover { opacity: 0.9; transform: scale(1.03); }
 
-        /* SECTIONS */
-        section { padding: 5rem 1.5rem; position: relative; }
+        /* SECTIONS & CONTAINERS */
+        section { padding: 6rem 1.5rem; position: relative; }
         .container { max-width: 1200px; margin: 0 auto; }
 
         .section-label {
@@ -326,68 +326,37 @@
         }
 
         .section-title {
-            font-size: clamp(1.8rem, 4vw, 3.2rem);
+            font-size: clamp(2rem, 4.5vw, 3.5rem);
             font-weight: 900;
             line-height: 1;
             margin-bottom: 1.5rem;
         }
 
-        /* DIVIDER */
         .divider {
             border: none;
             height: 1px;
-            background: linear-gradient(90deg, transparent, var(--red), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255,31,61,0.4), transparent);
             margin: 0;
         }
 
         /* CARDS */
         .card {
             background: var(--panel);
-            border: 1px solid rgba(230,0,18,0.15);
-            border-radius: 2px;
-            transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
+            border: 1px solid rgba(255,31,61,0.18);
+            border-radius: 4px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
         .card:hover {
-            border-color: rgba(230,0,18,0.6);
-            box-shadow: 0 0 30px rgba(230,0,18,0.1);
-            transform: translateY(-4px);
-        }
-
-        /* GEAR ITEMS */
-        .gear-item {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            padding: 1rem;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-            text-decoration: none;
-            color: inherit;
-            transition: background 0.2s, border-left 0.2s;
-            border-left: 3px solid transparent;
-        }
-        .gear-item:hover {
-            background: rgba(230,0,18,0.08);
-            border-left-color: var(--red);
-        }
-        .gear-item:last-child { border-bottom: none; }
-
-        .gear-icon {
-            width: 40px; height: 40px;
-            background: rgba(230,0,18,0.1);
-            border: 1px solid rgba(230,0,18,0.3);
-            border-radius: 2px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            flex-shrink: 0;
+            border-color: rgba(255,31,61,0.7);
+            box-shadow: 0 0 35px rgba(255,31,61,0.15);
+            transform: translateY(-5px);
         }
 
         /* STATS COUNTER */
         .stat-box {
             text-align: center;
-            padding: 2rem 1rem;
-            border: 1px solid rgba(230,0,18,0.15);
+            padding: 2.5rem 1rem;
+            border: 1px solid rgba(255,31,61,0.18);
             background: var(--panel);
             position: relative;
             overflow: hidden;
@@ -396,136 +365,170 @@
             content: '';
             position: absolute;
             bottom: 0; left: 0; right: 0;
-            height: 2px;
+            height: 3px;
             background: var(--red);
+            box-shadow: 0 0 10px var(--red);
         }
         .stat-number {
             font-family: 'Orbitron', monospace;
-            font-size: 2.2rem;
+            font-size: 2.5rem;
             font-weight: 900;
             color: white;
         }
         .stat-label {
-            font-size: 0.6rem;
+            font-size: 0.65rem;
             letter-spacing: 2px;
             color: var(--red);
             font-family: 'Share Tech Mono', monospace;
+            margin-top: 0.5rem;
         }
 
-        /* AIM TRAINER */
+        /* GEAR ITEMS */
+        .gear-item {
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+            padding: 1.25rem;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            text-decoration: none;
+            color: inherit;
+            transition: background 0.2s, border-left 0.2s;
+            border-left: 3px solid transparent;
+        }
+        .gear-item:hover {
+            background: rgba(255,31,61,0.08);
+            border-left-color: var(--red);
+        }
+        .gear-item:last-child { border-bottom: none; }
+
+        .gear-icon {
+            width: 48px; height: 48px;
+            background: rgba(255,31,61,0.1);
+            border: 1px solid rgba(255,31,61,0.3);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            flex-shrink: 0;
+        }
+
+        /* AIM TRAINER CANVAS */
         #aim-canvas {
-            background: radial-gradient(ellipse at center, #0a0a12 0%, #000 100%);
+            background: radial-gradient(ellipse at center, #070710 0%, #020204 100%);
             width: 100%;
-            height: 350px;
+            height: 380px;
             display: block;
-            border: 1px solid rgba(230,0,18,0.3);
+            border: 1px solid rgba(255,31,61,0.35);
+            box-shadow: inset 0 0 30px rgba(0,0,0,0.8);
             touch-action: none;
         }
 
-        /* CONTRACT */
+        /* CONTRACT CLAUSES */
         .contract-clause {
             background: var(--panel);
-            border: 1px solid rgba(230,0,18,0.15);
-            border-left: 3px solid var(--red);
-            padding: 1.5rem;
+            border: 1px solid rgba(255,31,61,0.18);
+            border-left: 4px solid var(--red);
+            padding: 1.75rem;
             transition: background 0.2s;
         }
         .contract-clause:hover { background: var(--panel2); }
         .clause-num {
             font-family: 'Share Tech Mono', monospace;
-            font-size: 0.6rem;
+            font-size: 0.65rem;
             color: var(--red);
             letter-spacing: 3px;
         }
         .clause-title {
             font-family: 'Orbitron', monospace;
-            font-size: 1rem;
+            font-size: 1.1rem;
             font-weight: 700;
             color: white;
-            margin: 0.25rem 0 0.5rem;
+            margin: 0.3rem 0 0.6rem;
         }
 
-        /* FORM */
-        .form-group { margin-bottom: 1.25rem; }
+        /* FORMS */
+        .form-group { margin-bottom: 1.5rem; }
         .form-group label {
             display: block;
             font-family: 'Share Tech Mono', monospace;
-            font-size: 0.6rem;
+            font-size: 0.65rem;
             letter-spacing: 3px;
-            color: rgba(200,200,208,0.5);
-            margin-bottom: 0.4rem;
+            color: rgba(208,208,220,0.6);
+            margin-bottom: 0.5rem;
         }
         .form-group input,
         .form-group select,
         .form-group textarea {
             width: 100%;
-            background: rgba(0,0,0,0.5);
-            border: 1px solid rgba(255,255,255,0.08);
+            background: rgba(0,0,0,0.6);
+            border: 1px solid rgba(255,255,255,0.12);
             color: white;
-            padding: 0.75rem 1rem;
+            padding: 0.85rem 1.1rem;
             font-family: 'Barlow Condensed', sans-serif;
-            font-size: 1rem;
+            font-size: 1.05rem;
             outline: none;
-            transition: border-color 0.2s, box-shadow 0.2s;
-            border-radius: 0;
+            transition: all 0.2s;
+            border-radius: 2px;
             -webkit-appearance: none;
         }
         .form-group input:focus,
         .form-group select:focus,
         .form-group textarea:focus {
             border-color: var(--red);
-            box-shadow: 0 0 0 2px rgba(230,0,18,0.1);
+            box-shadow: 0 0 15px rgba(255,31,61,0.2);
+            background: rgba(10,10,15,0.9);
         }
-        .form-group select option { background: #111; }
+        .form-group select option { background: #0c0c12; color: white; }
 
         /* LEADERBOARD */
         .lb-row {
             display: grid;
-            grid-template-columns: 35px 1fr auto auto;
+            grid-template-columns: 40px 1fr auto auto;
             align-items: center;
-            padding: 0.75rem 1rem;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-            gap: 0.5rem;
+            padding: 0.9rem 1.2rem;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+            gap: 0.75rem;
             font-family: 'Share Tech Mono', monospace;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
         }
         .lb-row.header {
-            font-size: 0.55rem;
+            font-size: 0.6rem;
             letter-spacing: 2px;
-            color: rgba(200,200,208,0.4);
-            border-bottom: 1px solid rgba(230,0,18,0.3);
+            color: rgba(208,208,220,0.4);
+            border-bottom: 1px solid rgba(255,31,61,0.4);
         }
         .lb-rank { color: var(--red); font-weight: 900; }
         .lb-rank.gold { color: #f5c842; }
-        .lb-score { color: var(--red); }
+        .lb-score { color: var(--red); font-weight: 700; }
 
-        /* SCROLL REVEAL */
+        /* REVEAL ANIMATIONS */
         .reveal {
             opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.7s ease, transform 0.7s ease;
+            transform: translateY(35px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .reveal.visible {
             opacity: 1;
             transform: translateY(0);
         }
 
-        /* MOBILE MENU */
+        /* MOBILE NAVIGATION */
         .mobile-menu {
             display: none;
             position: fixed;
             inset: 0;
-            background: rgba(7,7,9,0.98);
+            background: rgba(4,4,6,0.98);
             z-index: 4999;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 1.5rem;
+            gap: 2rem;
         }
         .mobile-menu.open { display: flex; }
         .mobile-menu a {
             font-family: 'Orbitron', monospace;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             color: white;
             text-decoration: none;
             letter-spacing: 3px;
@@ -535,7 +538,7 @@
         .hamburger {
             display: none;
             flex-direction: column;
-            gap: 5px;
+            gap: 6px;
             cursor: pointer;
             background: none;
             border: none;
@@ -543,7 +546,7 @@
         }
         .hamburger span {
             display: block;
-            width: 24px;
+            width: 26px;
             height: 2px;
             background: white;
             transition: 0.3s;
@@ -552,80 +555,84 @@
         @media (max-width: 900px) {
             .desktop-nav { display: none; }
             .hamburger { display: flex; }
-            section { padding: 4rem 1rem; }
+            section { padding: 4.5rem 1rem; }
         }
 
-        /* AGE BADGE */
         .age-badge {
             display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
-            background: rgba(230,0,18,0.15);
-            border: 1px solid rgba(230,0,18,0.4);
-            padding: 0.4rem 1rem;
+            gap: 0.6rem;
+            background: rgba(255,31,61,0.12);
+            border: 1px solid rgba(255,31,61,0.35);
+            padding: 0.5rem 1.1rem;
             font-family: 'Share Tech Mono', monospace;
-            font-size: 0.65rem;
+            font-size: 0.7rem;
             letter-spacing: 2px;
             color: var(--red);
             margin-bottom: 1.5rem;
+            border-radius: 2px;
         }
 
-        /* PROGRESS BARS */
-        .skill-bar { margin-bottom: 1rem; }
+        /* SKILL PROGRESS BARS */
+        .skill-bar { margin-bottom: 1.25rem; }
         .skill-bar .label {
             display: flex;
             justify-content: space-between;
             font-family: 'Share Tech Mono', monospace;
-            font-size: 0.65rem;
+            font-size: 0.7rem;
             letter-spacing: 2px;
-            margin-bottom: 0.3rem;
+            margin-bottom: 0.4rem;
             color: var(--silver);
         }
         .skill-bar .track {
-            height: 4px;
-            background: rgba(255,255,255,0.05);
+            height: 5px;
+            background: rgba(255,255,255,0.06);
             position: relative;
             overflow: hidden;
+            border-radius: 2px;
         }
         .skill-bar .fill {
             height: 100%;
-            background: linear-gradient(90deg, var(--red), #ff4455);
+            background: linear-gradient(90deg, var(--red), #ff5572);
             width: 0;
-            transition: width 1.5s ease;
-            box-shadow: 0 0 8px var(--red);
+            transition: width 1.6s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 0 10px var(--red);
         }
 
-        /* TEAM ROSTER */
+        /* TEAM ROSTER CARDS */
         .roster-card {
             background: var(--panel);
-            border: 1px solid rgba(230,0,18,0.15);
-            padding: 1.5rem;
+            border: 1px solid rgba(255,31,61,0.18);
+            padding: 2rem 1.5rem;
             text-align: center;
             transition: 0.3s;
+            border-radius: 4px;
         }
         .roster-card:hover {
             border-color: var(--red);
-            box-shadow: 0 0 20px rgba(230,0,18,0.1);
+            box-shadow: 0 0 25px rgba(255,31,61,0.2);
+            transform: translateY(-4px);
         }
         .roster-avatar {
-            width: 70px; height: 70px;
+            width: 75px; height: 75px;
             border-radius: 50%;
-            border: 2px solid rgba(230,0,18,0.4);
-            margin: 0 auto 1rem;
-            background: rgba(230,0,18,0.1);
+            border: 2px solid rgba(255,31,61,0.5);
+            margin: 0 auto 1.2rem;
+            background: rgba(255,31,61,0.1);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.8rem;
+            font-size: 2rem;
+            box-shadow: 0 0 15px rgba(255,31,61,0.3);
         }
 
         /* TICKER */
         .ticker-wrap {
             overflow: hidden;
-            border-top: 1px solid rgba(230,0,18,0.2);
-            border-bottom: 1px solid rgba(230,0,18,0.2);
-            background: rgba(230,0,18,0.05);
-            padding: 0.5rem 0;
+            border-top: 1px solid rgba(255,31,61,0.3);
+            border-bottom: 1px solid rgba(255,31,61,0.3);
+            background: rgba(255,31,61,0.04);
+            padding: 0.6rem 0;
         }
         .ticker {
             display: flex;
@@ -636,17 +643,16 @@
         @keyframes ticker { from{transform:translateX(0);} to{transform:translateX(-50%);} }
         .ticker span {
             font-family: 'Share Tech Mono', monospace;
-            font-size: 0.65rem;
-            letter-spacing: 2px;
-            color: rgba(200,200,208,0.5);
+            font-size: 0.7rem;
+            letter-spacing: 2.5px;
+            color: rgba(208,208,220,0.6);
         }
-        .ticker span.hl { color: var(--red); }
+        .ticker span.hl { color: var(--red); text-shadow: 0 0 8px var(--red); }
 
-        /* FOOTER */
         footer {
-            border-top: 1px solid rgba(255,255,255,0.05);
-            background: #000;
-            padding: 3rem 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.06);
+            background: #020204;
+            padding: 3.5rem 1.5rem;
             text-align: center;
         }
     </style>
@@ -659,16 +665,15 @@
 
 <!-- MOBILE MENU -->
 <div class="mobile-menu" id="mobileMenu">
-    <button onclick="toggleMenu()" style="position:absolute;top:1.2rem;right:1.5rem;background:none;border:none;color:white;font-size:2rem;cursor:pointer;">✕</button>
+    <button onclick="toggleMenu()" style="position:absolute;top:1.5rem;right:2rem;background:none;border:none;color:white;font-size:2.2rem;cursor:pointer;">✕</button>
     <a href="#home" onclick="toggleMenu()">HOME</a>
     <a href="#about" onclick="toggleMenu()">FOUNDER</a>
+    <a href="#apply-hub" onclick="toggleMenu()">RECRUITING & GT</a>
     <a href="#skills" onclick="toggleMenu()">SKILLS</a>
     <a href="#aim-trainer" onclick="toggleMenu()">TRAINING</a>
     <a href="#roster" onclick="toggleMenu()">TEAM</a>
     <a href="#contract" onclick="toggleMenu()">REGELN</a>
-    <a href="#socials" onclick="toggleMenu()">SOCIALS</a>
-    <a href="#sign" onclick="toggleMenu()">JOIN</a>
-    <a href="#twitch" onclick="toggleMenu()">LIVE</a>
+    <a href="#twitch" onclick="toggleMenu()">LIVE STREAM</a>
 </div>
 
 <!-- NAV -->
@@ -680,12 +685,11 @@
     <ul class="desktop-nav">
         <li><a href="#home">Home</a></li>
         <li><a href="#about">Founder</a></li>
+        <li><a href="#apply-hub" style="color:var(--red);font-weight:700">Recruiting</a></li>
         <li><a href="#skills">Skills</a></li>
         <li><a href="#aim-trainer">Training</a></li>
         <li><a href="#roster">Team</a></li>
         <li><a href="#contract">Regeln</a></li>
-        <li><a href="#socials">Socials</a></li>
-        <li><a href="#sign" style="color:var(--red)">Join</a></li>
         <li><a href="#twitch">Live</a></li>
     </ul>
     <button class="hamburger" onclick="toggleMenu()">
@@ -694,31 +698,33 @@
 </nav>
 
 <!-- TICKER -->
-<div style="position:fixed;top:60px;left:0;right:0;z-index:4000" class="ticker-wrap">
-    <div class="ticker" id="ticker">
-        <span class="hl">◆ NICO GAMING ESPORTS</span>
-        <span>THE FINALS</span>
-        <span class="hl">◆ FORTNITE</span>
-        <span>GAMERTRANSFER PARTNER</span>
+<div style="position:fixed;top:65px;left:0;right:0;z-index:4000" class="ticker-wrap">
+    <div class="ticker">
+        <span class="hl">◆ NICO GAMING ESPORTS CLUB</span>
+        <span>THE FINALS SQUAD</span>
+        <span class="hl">◆ FORTNITE SQUAD</span>
+        <span>GAMERTRANSFER PARTNER LFM</span>
         <span class="hl">◆ INSTAGRAM @NICO.GAMING2026</span>
         <span>TURTLE BEACH PARTNER</span>
     </div>
 </div>
 
-<!-- HERO -->
+<!-- HERO WITH ENHANCED LOGO PRESENCE -->
 <section id="home">
     <div class="grid-bg"></div>
-    <div class="hero-glow"></div>
+    <div class="hero-glow-intense"></div>
     <div class="hero-content">
-        <img src="nico.png" alt="N1CO Logo" class="hero-logo" onerror="this.outerHTML='<div style=\'width:140px;height:140px;margin:0 auto 1.5rem;background:rgba(230,0,18,0.1);border:2px solid var(--red);display:flex;align-items:center;justify-content:center;font-family:Orbitron,monospace;font-size:2.5rem;font-weight:900;animation:float 6s ease-in-out infinite;\'>N1CO</div>'">
+        <div class="hero-logo-wrapper">
+            <img src="nico.png" alt="N1CO Logo" class="hero-logo" onerror="this.outerHTML='<div style=\'width:100%;height:100%;background:rgba(255,31,61,0.12);border:2px solid var(--red);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:Orbitron,monospace;font-size:3rem;font-weight:900;color:white;box-shadow:0 0 40px var(--red);\'>N1</div>'">
+        </div>
         <h1 class="hero-title glitch orb" data-text="NICO GAMING">NICO GAMING</h1>
         <p class="hero-sub">
-            Official E-Sport Club gegründet von <strong>nicominecith</strong><br>
-            <span class="game">The Finals</span> · <span class="game">Fortnite</span>
+            Offizieller eSports Club geleitet von <strong>nicominecith</strong>.<br>
+            <span class="game">The Finals</span> &middot; <span class="game">Fortnite</span> &mdash; Maximale Performance.
         </p>
-        <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
-            <a href="#aim-trainer" class="btn-primary">⚡ WARM-UP STARTEN</a>
-            <a href="#sign" class="btn-outline">📋 BEWERBEN & ANMELDEN</a>
+        <div style="display:flex;gap:1.2rem;justify-content:center;flex-wrap:wrap">
+            <a href="#apply-hub" class="btn-primary">🚀 ZUM RECRUITING & GT</a>
+            <a href="#aim-trainer" class="btn-outline">⚡ WARM-UP STARTEN</a>
         </div>
     </div>
 </section>
@@ -726,9 +732,9 @@
 <hr class="divider">
 
 <!-- STATS BAR -->
-<section style="padding:2.5rem 1rem">
+<section style="padding:3rem 1.5rem;background:rgba(0,0,0,0.4)">
     <div class="container">
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:1rem">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1.25rem">
             <div class="stat-box reveal">
                 <div class="stat-number" data-count="13">0</div>
                 <div class="stat-label">MIN. ALTER</div>
@@ -739,7 +745,7 @@
             </div>
             <div class="stat-box reveal">
                 <div class="stat-number" data-count="2">0</div>
-                <div class="stat-label">GAMES</div>
+                <div class="stat-label">ESPORTS GAMES</div>
             </div>
             <div class="stat-box reveal">
                 <div class="stat-number" data-count="500">0</div>
@@ -747,7 +753,7 @@
             </div>
             <div class="stat-box reveal">
                 <div class="stat-number" data-count="2026">0</div>
-                <div class="stat-label">GRÜNDUNGSJAHR</div>
+                <div class="stat-label">GRÜNDUNG</div>
             </div>
         </div>
     </div>
@@ -755,297 +761,57 @@
 
 <hr class="divider">
 
-<!-- ABOUT -->
-<section id="about">
+<!-- RECRUITING & GAMERTRANSFER HUB (REDESIGNED & OPTIMIZED) -->
+<section id="apply-hub" style="background:linear-gradient(180deg,rgba(255,31,61,0.03) 0%,rgba(0,102,255,0.03) 100%)">
     <div class="container">
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:3rem;align-items:start" class="reveal">
-            <div>
-                <div class="section-label">// ÜBER DEN GRÜNDER</div>
-                <h2 class="section-title">NICOMINECITH</h2>
-                <div class="age-badge">⚠ MINDESTALTER: 13 JAHRE</div>
-                <p style="color:rgba(200,200,208,0.7);line-height:1.8;margin-bottom:1.5rem;font-size:1rem">
-                    Gründer & Team-Kapitän von NICO GAMING. Unser Club steht für High-Performance, Respekt und echten Competitive Spirit in The Finals und Fortnite.
-                </p>
-            </div>
-            <div>
-                <div class="section-label">// FOUNDER'S GEAR</div>
-                <h2 class="section-title" style="font-size:1.8rem">SETUP<br><span style="color:var(--red)">ÜBERSICHT</span></h2>
-                <div style="background:rgba(230,0,18,0.06);border:1px solid rgba(230,0,18,0.15);padding:1rem;margin-bottom:1.5rem;font-family:'Share Tech Mono',monospace;font-size:0.6rem;letter-spacing:2px;color:rgba(200,200,208,0.5)">
-                    ⚠ HINWEIS: Alle Produkte sind das persönliche Equipment des Gründers. Equipment muss selbst angeschafft werden.
-                </div>
-                <div class="card" style="overflow:hidden">
-                    <a href="https://www.amazon.de/Microsoft-Xbox-Halo-Infinite-Limited/dp/B09NMWSLR6" target="_blank" class="gear-item">
-                        <div class="gear-icon">🎮</div>
-                        <div>
-                            <div style="font-size:0.5rem;letter-spacing:3px;color:var(--red);font-family:'Share Tech Mono',monospace">KONSOLE</div>
-                            <div style="color:white;font-weight:700;font-size:1rem">Xbox Series X</div>
-                            <div style="color:rgba(200,200,208,0.4);font-size:0.8rem">Halo Infinite Limited Edition</div>
-                        </div>
-                    </a>
-                    <a href="https://de.turtlebeach.com/products/recon-controller" target="_blank" class="gear-item">
-                        <div class="gear-icon">🕹️</div>
-                        <div>
-                            <div style="font-size:0.5rem;letter-spacing:3px;color:var(--red);font-family:'Share Tech Mono',monospace">CONTROLLER</div>
-                            <div style="color:white;font-weight:700;font-size:1rem">Turtle Beach Recon™</div>
-                            <div style="color:rgba(200,200,208,0.4);font-size:0.8rem">Wired Performance Controller</div>
-                        </div>
-                    </a>
-                    <a href="https://de.turtlebeach.com/products/atlas-200-headset" target="_blank" class="gear-item">
-                        <div class="gear-icon">🎧</div>
-                        <div>
-                            <div style="font-size:0.5rem;letter-spacing:3px;color:var(--red);font-family:'Share Tech Mono',monospace">HEADSET</div>
-                            <div style="color:white;font-weight:700;font-size:1rem">Turtle Beach Atlas 200</div>
-                            <div style="color:rgba(200,200,208,0.4);font-size:0.8rem">Amplified Pro Gaming Headset</div>
-                        </div>
-                    </a>
-                </div>
-            </div>
+        <div class="reveal" style="text-align:center;max-width:700px;margin:0 auto 3.5rem">
+            <div class="section-label">// RECRUITING & PLATTFORMEN</div>
+            <h2 class="section-title">WERDE TEIL DES<br><span style="color:var(--red)">N1CO SQUADS</span></h2>
+            <p style="color:rgba(208,208,220,0.7);font-size:1.05rem;line-height:1.7">
+                Wähle deinen Weg in unser Team. Nutze entweder unsere verifizierte Partnerschaft auf **Gamertransfer** für direkte Squad-Anfragen oder bewirb dich direkt über unser **E-Mail-Bewerbungsformular**.
+            </p>
         </div>
-    </div>
-</section>
 
-<hr class="divider">
-
-<!-- SOCIALS & PARTNERS (NEW SECTION FOR INSTAGRAM & GAMERTRANSFER) -->
-<section id="socials" style="background:linear-gradient(180deg,transparent,rgba(230,0,18,0.03))">
-    <div class="container reveal">
-        <div class="section-label">// NETZWERK & COMMUNITY</div>
-        <h2 class="section-title">OFFIZZIELLE<br><span style="color:var(--red)">PLATTFORMEN</span></h2>
-        <p style="color:rgba(200,200,208,0.7);margin-bottom:2rem;max-width:600px">
-            Besuche unser offizielles Gamertransfer-Gesuch für das Recruiting oder folge uns auf Instagram für tägliche Updates, Clips und Teaser!
-        </p>
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2rem">
-            <!-- Gamertransfer Card -->
-            <div class="card" style="padding:2rem;display:flex;flex-direction:column;justify-content:space-between">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:2.5rem;align-items:stretch">
+            
+            <!-- GAMERTRANSFER & SOCIALS HIGHLIGHT CARD -->
+            <div class="card reveal" style="padding:2.5rem;display:flex;flex-direction:column;justify-content:space-between;border-color:rgba(0,102,255,0.4);background:linear-gradient(145deg, var(--panel) 0%, rgba(0,102,255,0.06) 100%);">
                 <div>
-                    <div style="font-family:'Share Tech Mono',monospace;font-size:0.6rem;letter-spacing:3px;color:var(--gt-blue);margin-bottom:0.5rem">// PARTNER PLATTFORM</div>
-                    <h3 style="font-size:1.4rem;font-weight:900;color:white;margin-bottom:1rem">GAMERTRANSFER</h3>
-                    <p style="color:rgba(200,200,208,0.6);font-size:0.95rem;line-height:1.6;margin-bottom:1.5rem">
-                        Sieh dir unsere offizielle Team-Suchanzeige (LFM) für The Finals an, vernetze dich mit anderen Spielern oder bewirb dich direkt über die Plattform.
+                    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem">
+                        <span style="font-family:'Share Tech Mono',monospace;font-size:0.65rem;letter-spacing:3px;color:var(--gt-blue)">[ OFFIZIELLER PARTNER ]</span>
+                        <span style="background:rgba(0,102,255,0.2);color:#66a3ff;padding:0.2rem 0.6rem;font-size:0.6rem;font-family:'Share Tech Mono',monospace;border-radius:2px">AKTIVES LFM</span>
+                    </div>
+                    <h3 style="font-size:1.8rem;font-weight:900;color:white;margin-bottom:1rem">GAMERTRANSFER</h3>
+                    <p style="color:rgba(208,208,220,0.7);font-size:1rem;line-height:1.7;margin-bottom:2rem">
+                        Unser offizielles Inserat auf Gamertransfer ist der schnellste Weg für Spieler, um sich mit uns zu vernetzen, Statistiken abzugleichen und dem Team beizutreten.
                     </p>
-                </div>
-                <a href="https://gamertransfer.com/nico_gaming_the_finals-lfm-2-35968.html" target="_blank" class="btn-primary btn-gt" style="width:100%">
-                    🔗 ZUM GAMERTRANSFER INSERAT
-                </a>
-            </div>
-
-            <!-- Instagram Card -->
-            <div class="card" style="padding:2rem;display:flex;flex-direction:column;justify-content:space-between">
-                <div>
-                    <div style="font-family:'Share Tech Mono',monospace;font-size:0.6rem;letter-spacing:3px;color:#e1306c;margin-bottom:0.5rem">// SOCIAL MEDIA</div>
-                    <h3 style="font-size:1.4rem;font-weight:900;color:white;margin-bottom:1rem">INSTAGRAM</h3>
-                    <p style="color:rgba(200,200,208,0.6);font-size:0.95rem;line-height:1.6;margin-bottom:1.5rem">
-                        Folge <strong style="color:white">@nico.gaming2026</strong> auf Instagram, verpasse keine Team-Highlights und erhalte Einblicke hinter die Kulissen unseres eSports-Clubs.
-                    </p>
-                </div>
-                <a href="https://www.instagram.com/nico.gaming2026" target="_blank" class="btn-primary btn-ig" style="width:100%">
-                    📸 INSTAGRAM BESUCHEN
-                </a>
-            </div>
-        </div>
-    </div>
-</section>
-
-<hr class="divider">
-
-<!-- SKILLS -->
-<section id="skills">
-    <div class="container reveal">
-        <div class="section-label">// GAMER PROFIL</div>
-        <h2 class="section-title">SKILL<br><span style="color:var(--red)">ANALYSE</span></h2>
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:2rem;margin-top:2rem">
-            <div>
-                <div class="skill-bar">
-                    <div class="label"><span>THE FINALS</span><span>95%</span></div>
-                    <div class="track"><div class="fill" data-width="95"></div></div>
-                </div>
-                <div class="skill-bar">
-                    <div class="label"><span>FORTNITE</span><span>90%</span></div>
-                    <div class="track"><div class="fill" data-width="90"></div></div>
-                </div>
-            </div>
-            <div>
-                <div class="skill-bar">
-                    <div class="label"><span>AIM TRAINING</span><span>95%</span></div>
-                    <div class="track"><div class="fill" data-width="95"></div></div>
-                </div>
-                <div class="skill-bar">
-                    <div class="label"><span>GAME IQ</span><span>92%</span></div>
-                    <div class="track"><div class="fill" data-width="92"></div></div>
-                </div>
-                <div class="skill-bar">
-                    <div class="label"><span>TEAMWORK</span><span>96%</span></div>
-                    <div class="track"><div class="fill" data-width="96"></div></div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<hr class="divider">
-
-<!-- AIM TRAINER -->
-<section id="aim-trainer">
-    <div class="container">
-        <div class="section-label reveal">// INTERAKTIV</div>
-        <h2 class="section-title reveal">PRO AIM<br><span style="color:var(--red)">TRAINER</span></h2>
-        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;margin-bottom:1.5rem" class="reveal">
-            <div style="display:flex;gap:1.5rem;font-family:'Share Tech Mono',monospace;font-size:0.9rem">
-                <div>SCORE: <span id="aim-score" style="color:var(--red);font-weight:900">0</span></div>
-                <div>ZEIT: <span id="aim-time" style="color:white;font-weight:900">30</span>s</div>
-                <div>ACC: <span id="aim-acc" style="color:#f5c842;font-weight:900">0%</span></div>
-            </div>
-            <div>
-                <span id="controller-label" style="background:#1a1a1a;color:#444;font-family:'Share Tech Mono',monospace;font-size:0.55rem;padding:0.25rem 0.5rem;border-radius:99px;letter-spacing:1px">◉ CONTROLLER: GETRENNT</span>
-            </div>
-        </div>
-        <div class="reveal" style="position:relative">
-            <canvas id="aim-canvas"></canvas>
-            <div id="aim-start-overlay" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.8);backdrop-filter:blur(6px);">
-                <div style="text-align:center;padding:1rem;">
-                    <div style="font-family:'Orbitron',monospace;font-size:1.3rem;font-weight:900;margin-bottom:0.5rem">AIM TRAINER</div>
-                    <div style="font-family:'Share Tech Mono',monospace;font-size:0.65rem;color:rgba(200,200,208,0.5);margin-bottom:1.5rem;letter-spacing:1px">KLICK ODER TIPPEN ZUM STARTEN</div>
-                    <button onclick="startAimGame()" class="btn-primary">⚡ TRAINING STARTEN</button>
-                </div>
-            </div>
-        </div>
-        <div style="margin-top:2rem" class="reveal">
-            <div class="section-label">// SESSION HIGHSCORES</div>
-            <div class="card" style="margin-top:1rem;overflow:hidden">
-                <div class="lb-row header">
-                    <span>#</span><span>SPIELER</span><span>ACC</span><span>SCORE</span>
-                </div>
-                <div id="leaderboard">
-                    <div class="lb-row">
-                        <span class="lb-rank gold">1</span>
-                        <span>N1CO_PRO</span>
-                        <span style="color:rgba(200,200,208,0.4)">—</span>
-                        <span class="lb-score">—</span>
+                    <div style="display:flex;flex-direction:column;gap:0.75rem;margin-bottom:2.5rem;font-family:'Share Tech Mono',monospace;font-size:0.8rem;color:rgba(208,208,220,0.8)">
+                        <div style="display:flex;align-items:center;gap:0.75rem"><span style="color:var(--gt-blue)">✔</span> Direktes Squad-Matching</div>
+                        <div style="display:flex;align-items:center;gap:0.75rem"><span style="color:var(--gt-blue)">✔</span> Verifiziertes Team-Profil</div>
+                        <div style="display:flex;align-items:center;gap:0.75rem"><span style="color:var(--gt-blue)">✔</span> Schneller direkter Chat</div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<hr class="divider">
-
-<!-- TEAM ROSTER -->
-<section id="roster">
-    <div class="container">
-        <div class="section-label reveal">// DAS SQUAD</div>
-        <h2 class="section-title reveal">TEAM<br><span style="color:var(--red)">ROSTER</span></h2>
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1.5rem;margin-top:2rem">
-            <div class="roster-card reveal">
-                <div class="roster-avatar">👑</div>
-                <div style="font-family:'Orbitron',monospace;font-weight:900;color:white;margin-bottom:0.25rem">N1CO</div>
-                <div style="font-size:0.55rem;letter-spacing:2px;color:#f5c842;font-family:'Share Tech Mono',monospace;margin-bottom:0.5rem">FOUNDER / IGL</div>
-                <div style="font-size:0.8rem;color:rgba(200,200,208,0.5)">The Finals · Fortnite</div>
-            </div>
-            <div class="roster-card reveal">
-                <div class="roster-avatar">🎯</div>
-                <div style="font-family:'Orbitron',monospace;font-weight:900;color:white;margin-bottom:0.25rem">SLOT OFFEN</div>
-                <div style="font-size:0.55rem;letter-spacing:2px;color:var(--red);font-family:'Share Tech Mono',monospace;margin-bottom:0.5rem">FRAGGER</div>
-                <div style="font-size:0.8rem;color:rgba(200,200,208,0.5)">Über Gamertransfer bewerben</div>
-            </div>
-            <div class="roster-card reveal">
-                <div class="roster-avatar">🛡️</div>
-                <div style="font-family:'Orbitron',monospace;font-weight:900;color:white;margin-bottom:0.25rem">SLOT OFFEN</div>
-                <div style="font-size:0.55rem;letter-spacing:2px;color:var(--red);font-family:'Share Tech Mono',monospace;margin-bottom:0.5rem">SUPPORT</div>
-                <div style="font-size:0.8rem;color:rgba(200,200,208,0.5)">Über Gamertransfer bewerben</div>
-            </div>
-            <div class="roster-card reveal">
-                <div class="roster-avatar">🔍</div>
-                <div style="font-family:'Orbitron',monospace;font-weight:900;color:white;margin-bottom:0.25rem">SLOT OFFEN</div>
-                <div style="font-size:0.55rem;letter-spacing:2px;color:var(--red);font-family:'Share Tech Mono',monospace;margin-bottom:0.5rem">BUILDER / SCOUT</div>
-                <div style="font-size:0.8rem;color:rgba(200,200,208,0.5)">Über Gamertransfer bewerben</div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<hr class="divider">
-
-<!-- CONTRACT -->
-<section id="contract">
-    <div class="container">
-        <div class="section-label reveal">// OFFIZIELLES STATUT</div>
-        <h2 class="section-title reveal">PRO-VERTRAG<br><span style="color:var(--red)">REGELN</span></h2>
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1px;background:rgba(230,0,18,0.1);margin-top:2rem" class="reveal">
-            <div class="contract-clause">
-                <div class="clause-num">§ 01 — IDENTITÄT</div>
-                <div class="clause-title">N1CO TAG</div>
-                <p style="color:rgba(200,200,208,0.5);font-size:0.9rem;line-height:1.7">
-                    Alle aktiven Mitglieder müssen das Kürzel <strong style="color:white">"N1CO |"</strong> vor ihrem Ingame-Namen führen.
-                </p>
-            </div>
-            <div class="contract-clause">
-                <div class="clause-num">§ 02 — ALTER</div>
-                <div class="clause-title">MIN. 13 JAHRE</div>
-                <p style="color:rgba(200,200,208,0.5);font-size:0.9rem;line-height:1.7">
-                    Bewerber müssen <strong style="color:var(--red)">mindestens 13 Jahre</strong> alt sein. Unter 18 Jahren ist die Zustimmung der Eltern erforderlich.
-                </p>
-            </div>
-            <div class="contract-clause">
-                <div class="clause-num">§ 03 — FINANZIELL</div>
-                <div class="clause-title">500€ CAP / 85% SPLIT</div>
-                <p style="color:rgba(200,200,208,0.5);font-size:0.9rem;line-height:1.7">
-                    Mindestumsatz an Preisgeldern in 3 Monaten. <strong style="color:white">85%</strong> der Einnahmen gehen direkt an den Spieler.
-                </p>
-            </div>
-            <div class="contract-clause">
-                <div class="clause-num">§ 04 — EQUIPMENT</div>
-                <div class="clause-title">SELBST BESCHAFFEN</div>
-                <p style="color:rgba(200,200,208,0.5);font-size:0.9rem;line-height:1.7">
-                    Jeder Spieler ist für sein eigenes Equipment verantwortlich. <strong style="color:var(--red)">Es werden keine Geräte gestellt.</strong>
-                </p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<hr class="divider">
-
-<!-- APPLICATION FORM / LOGIN MODES -->
-<section id="sign" style="background:linear-gradient(180deg,rgba(230,0,18,0.04) 0%,transparent 100%)">
-    <div class="container">
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:3rem;align-items:start">
-            <div class="reveal">
-                <div class="section-label">// BEWERBUNG & ANMELDUNG</div>
-                <h2 class="section-title">WERDE<br><span style="color:var(--red)">N1CO ELITE</span></h2>
-                <div class="age-badge">⚠ MINDESTALTER: 13 JAHRE ERFORDERLICH</div>
-                <p style="color:rgba(200,200,208,0.6);font-size:1rem;line-height:1.8;margin-bottom:2rem">
-                    Bewirb dich jetzt für unsere Squads. Du kannst dich entweder direkt über unser <strong style="color:white">Gamertransfer-Profil</strong> anmelden oder das klassische <strong style="color:white">E-Mail-Formular</strong> nutzen.
-                </p>
-                
-                <!-- Quick Gamertransfer Action Box -->
-                <div class="card" style="padding:1.5rem;border-color:rgba(0,102,255,0.3);background:rgba(0,102,255,0.03);margin-bottom:1.5rem">
-                    <div style="font-family:'Share Tech Mono',monospace;font-size:0.6rem;letter-spacing:2px;color:var(--gt-blue);margin-bottom:0.4rem">DIREKTER EMPFOHLENER WEG</div>
-                    <div style="font-family:'Orbitron',monospace;font-weight:700;color:white;font-size:0.95rem;margin-bottom:0.75rem">ANMELDUNG ÜBER GAMERTRANSFER</div>
-                    <a href="https://gamertransfer.com/nico_gaming_the_finals-lfm-2-35968.html" target="_blank" class="btn-primary btn-gt" style="width:100%;font-size:0.7rem;padding:0.75rem">
-                        🌐 ZUM GAMERTRANSFER LOGIN / INSERAT
+                <div>
+                    <a href="https://gamertransfer.com/nico_gaming_the_finals-lfm-2-35968.html" target="_blank" class="btn-primary btn-gt" style="width:100%;margin-bottom:1rem">
+                        🌐 ZUM GAMERTRANSFER INSERAT
+                    </a>
+                    <a href="https://www.instagram.com/nico.gaming2026" target="_blank" class="btn-primary btn-ig" style="width:100%">
+                        📸 INSTAGRAM @NICO.GAMING2026
                     </a>
                 </div>
-
-                <div style="display:flex;flex-direction:column;gap:1rem">
-                    <div style="display:flex;align-items:center;gap:0.75rem">
-                        <div style="width:6px;height:6px;background:var(--red);border-radius:50%;"></div>
-                        <span style="font-size:0.75rem;letter-spacing:1px;font-family:'Share Tech Mono',monospace">THE FINALS SQUAD OFFEN</span>
-                    </div>
-                    <div style="display:flex;align-items:center;gap:0.75rem">
-                        <div style="width:6px;height:6px;background:var(--red);border-radius:50%;"></div>
-                        <span style="font-size:0.75rem;letter-spacing:1px;font-family:'Share Tech Mono',monospace">FORTNITE SQUAD OFFEN</span>
-                    </div>
-                </div>
             </div>
 
-            <div class="card reveal" style="padding:2rem">
-                <h3 style="font-family:'Orbitron',monospace;font-size:1.1rem;font-weight:900;margin-bottom:0.5rem;color:white">E-MAIL BEWERBUNG</h3>
-                <p style="font-size:0.85rem;color:rgba(200,200,208,0.5);margin-bottom:1.5rem">Alternativ kannst du deine Daten direkt absenden:</p>
+            <!-- ENHANCED EMAIL APPLICATION FORM -->
+            <div class="card reveal" style="padding:2.5rem;">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem">
+                    <span style="font-family:'Share Tech Mono',monospace;font-size:0.65rem;letter-spacing:3px;color:var(--red)">[ DIREKT-BEWERBUNG ]</span>
+                    <span class="age-badge" style="margin-bottom:0">MIN. 13 JAHRE</span>
+                </div>
+                <h3 style="font-size:1.8rem;font-weight:900;color:white;margin-bottom:0.5rem">E-MAIL FORMULAR</h3>
+                <p style="color:rgba(208,208,220,0.6);font-size:0.95rem;margin-bottom:2rem">Fülle das Formular aus, um deine Bewerbung direkt an unseren Posteingang zu senden:</p>
                 
-                <!-- MAILTO FORMULAR -->
                 <form id="applyForm" onsubmit="sendMail(event)">
-                    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:1rem">
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
                         <div class="form-group">
                             <label>NAME *</label>
                             <input type="text" id="fname" placeholder="Vollständiger Name" required>
@@ -1057,38 +823,39 @@
                     </div>
 
                     <div class="form-group">
-                        <label>E-MAIL *</label>
+                        <label>E-MAIL-ADRESSE *</label>
                         <input type="email" id="femail" placeholder="mail@beispiel.com" required>
                     </div>
 
-                    <div class="form-group">
-                        <label>ALTER *</label>
-                        <input type="number" id="fage" placeholder="Min. 13" min="13" max="99" required>
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+                        <div class="form-group">
+                            <label>ALTER *</label>
+                            <input type="number" id="fage" placeholder="Min. 13" min="13" max="99" required>
+                        </div>
+                        <div class="form-group">
+                            <label>ZIEL-SPIEL *</label>
+                            <select id="fgame" required>
+                                <option value="">Spiel wählen...</option>
+                                <option value="The Finals">The Finals</option>
+                                <option value="Fortnite">Fortnite</option>
+                            </select>
+                        </div>
                     </div>
 
                     <div class="form-group">
-                        <label>PRIMÄRES SPIEL *</label>
-                        <select id="fgame" required>
-                            <option value="">Spiel wählen...</option>
-                            <option value="The Finals">The Finals</option>
-                            <option value="Fortnite">Fortnite</option>
-                        </select>
+                        <label>DISCORD TAG (OPTIONAL)</label>
+                        <input type="text" id="fdisc" placeholder="username#0000">
                     </div>
 
-                    <div class="form-group">
-                        <label>DISCORD TAG</label>
-                        <input type="text" id="fdisc" placeholder="name#0000 (optional)">
-                    </div>
-
-                    <div style="margin-bottom:1.25rem">
-                        <label style="display:flex;align-items:flex-start;gap:0.75rem;cursor:pointer;font-size:0.8rem;color:rgba(200,200,208,0.6);line-height:1.4">
-                            <input type="checkbox" id="fcheck" required style="margin-top:2px;width:auto;accent-color:var(--red)">
-                            Ich bestätige eigenes Equipment & Mindestalter (13).
+                    <div style="margin-bottom:1.75rem">
+                        <label style="display:flex;align-items:flex-start;gap:0.75rem;cursor:pointer;font-size:0.85rem;color:rgba(208,208,220,0.7);line-height:1.4">
+                            <input type="checkbox" id="fcheck" required style="margin-top:3px;width:auto;accent-color:var(--red)">
+                            Ich bestätige das Mindestalter von 13 Jahren und das eigene Gaming-Equipment.
                         </label>
                     </div>
 
-                    <button type="submit" class="btn-primary" style="width:100%;font-size:0.75rem">
-                        📋 BEWERBUNG PER E-MAIL SENDEN
+                    <button type="submit" class="btn-primary" style="width:100%;font-size:0.8rem">
+                        📤 BEWERBUNG ALS E-MAIL ABSENDEN
                     </button>
                 </form>
 
@@ -1102,7 +869,7 @@
                     const game = document.getElementById('fgame').value;
                     const disc = document.getElementById('fdisc').value || 'Keine Angabe';
 
-                    const subject = encodeURIComponent("🎮 Neue Bewerbung: " + nick + " (" + game + ")");
+                    const subject = encodeURIComponent("🎮 Offizielle Bewerbung: " + nick + " (" + game + ")");
                     const body = encodeURIComponent(
                         "Hi nicominecith,\n\nhier ist eine neue Bewerbung für NICO GAMING:\n\n" +
                         "----------------------------------------\n" +
@@ -1110,11 +877,11 @@
                         "• Ingame-Name: " + nick + "\n" +
                         "• E-Mail: " + email + "\n" +
                         "• Alter: " + age + "\n" +
-                        "• Spiel: " + game + "\n" +
+                        "• Ziel-Spiel: " + game + "\n" +
                         "• Discord: " + disc + "\n" +
-                        "• Regeln/Equipment: Akzeptiert\n" +
+                        "• Bestätigung: Equipment & Alter (13+) vorhanden\n" +
                         "----------------------------------------\n\n" +
-                        "Gesendet über die NICO GAMING Website."
+                        "Gesendet über das offizielle NICO GAMING Webportal."
                     );
 
                     window.location.href = `mailto:nicominecithclips@gmail.com?subject=${subject}&body=${body}`;
@@ -1127,18 +894,227 @@
 
 <hr class="divider">
 
-<!-- TWITCH -->
+<!-- ABOUT FOUNDER -->
+<section id="about">
+    <div class="container">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:3.5rem;align-items:start" class="reveal">
+            <div>
+                <div class="section-label">// GRÜNDER & HEAD</div>
+                <h2 class="section-title">NICOMINECITH</h2>
+                <div class="age-badge">&#9888; MINDESTALTER IM TEAM: 13 JAHRE</div>
+                <p style="color:rgba(208,208,220,0.75);line-height:1.8;margin-bottom:1.5rem;font-size:1.05rem">
+                    Gründer, Ingame-Leader (IGL) und Kapitän von NICO GAMING. Der eSports-Club fokussiert sich auf kompromisslosen Skill, strategische Disziplin und Spitzenleistungen in <strong style="color:white">The Finals</strong> und <strong style="color:white">Fortnite</strong>.
+                </p>
+            </div>
+            <div>
+                <div class="section-label">// FOUNDER'S HARDWARE</div>
+                <h2 class="section-title" style="font-size:1.8rem">PROFI<br><span style="color:var(--red)">EQUIPMENT</span></h2>
+                <div style="background:rgba(255,31,61,0.05);border:1px solid rgba(255,31,61,0.2);padding:1.1rem;margin-bottom:1.5rem;font-family:'Share Tech Mono',monospace;font-size:0.65rem;letter-spacing:2px;color:rgba(208,208,220,0.6);border-radius:2px;">
+                    &#9888; HINWEIS: Das Equipment dient als professionelle Empfehlung. Jedes Mitglied beschafft seine Hardware eigenständig.
+                </div>
+                <div class="card" style="overflow:hidden">
+                    <a href="https://www.amazon.de/Microsoft-Xbox-Halo-Infinite-Limited/dp/B09NMWSLR6" target="_blank" class="gear-item">
+                        <div class="gear-icon">&#127918;</div>
+                        <div>
+                            <div style="font-size:0.55rem;letter-spacing:3px;color:var(--red);font-family:'Share Tech Mono',monospace">PLATTFORM</div>
+                            <div style="color:white;font-weight:700;font-size:1.05rem">Xbox Series X</div>
+                            <div style="color:rgba(208,208,220,0.5);font-size:0.85rem">Halo Infinite Limited Edition</div>
+                        </div>
+                    </a>
+                    <a href="https://de.turtlebeach.com/products/recon-controller" target="_blank" class="gear-item">
+                        <div class="gear-icon">&#127919;</div>
+                        <div>
+                            <div style="font-size:0.55rem;letter-spacing:3px;color:var(--red);font-family:'Share Tech Mono',monospace">CONTROLLER</div>
+                            <div style="color:white;font-weight:700;font-size:1.05rem">Turtle Beach Recon&trade;</div>
+                            <div style="color:rgba(208,208,220,0.5);font-size:0.85rem">High-Performance Wired Controller</div>
+                        </div>
+                    </a>
+                    <a href="https://de.turtlebeach.com/products/atlas-200-headset" target="_blank" class="gear-item">
+                        <div class="gear-icon">&#127911;</div>
+                        <div>
+                            <div style="font-size:0.55rem;letter-spacing:3px;color:var(--red);font-family:'Share Tech Mono',monospace">AUDIO</div>
+                            <div style="color:white;font-weight:700;font-size:1.05rem">Turtle Beach Atlas 200</div>
+                            <div style="color:rgba(208,208,220,0.5);font-size:0.85rem">Pro Gaming Headset</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<hr class="divider">
+
+<!-- SKILLS -->
+<section id="skills">
+    <div class="container reveal">
+        <div class="section-label">// PERFORMANCE METRIKEN</div>
+        <h2 class="section-title">SKILL<br><span style="color:var(--red)">ANALYSE</span></h2>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2.5rem;margin-top:2.5rem">
+            <div>
+                <div class="skill-bar">
+                    <div class="label"><span>THE FINALS META</span><span>95%</span></div>
+                    <div class="track"><div class="fill" data-width="95"></div></div>
+                </div>
+                <div class="skill-bar">
+                    <div class="label"><span>FORTNITE BUILD/EDIT</span><span>90%</span></div>
+                    <div class="track"><div class="fill" data-width="90"></div></div>
+                </div>
+            </div>
+            <div>
+                <div class="skill-bar">
+                    <div class="label"><span>AIM PRECISION</span><span>95%</span></div>
+                    <div class="track"><div class="fill" data-width="95"></div></div>
+                </div>
+                <div class="skill-bar">
+                    <div class="label"><span>TACTICAL GAME IQ</span><span>92%</span></div>
+                    <div class="track"><div class="fill" data-width="92"></div></div>
+                </div>
+                <div class="skill-bar">
+                    <div class="label"><span>TEAM SYNERGY</span><span>96%</span></div>
+                    <div class="track"><div class="fill" data-width="96"></div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<hr class="divider">
+
+<!-- AIM TRAINER -->
+<section id="aim-trainer">
+    <div class="container">
+        <div class="section-label reveal">// MINI-GAME</div>
+        <h2 class="section-title reveal">PRO AIM<br><span style="color:var(--red)">TRAINER</span></h2>
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;margin-bottom:1.5rem" class="reveal">
+            <div style="display:flex;gap:2rem;font-family:'Share Tech Mono',monospace;font-size:0.95rem">
+                <div>SCORE: <span id="aim-score" style="color:var(--red);font-weight:900">0</span></div>
+                <div>ZEIT: <span id="aim-time" style="color:white;font-weight:900">30</span>s</div>
+                <div>ACCURACY: <span id="aim-acc" style="color:#f5c842;font-weight:900">0%</span></div>
+            </div>
+            <div>
+                <span id="controller-label" style="background:#14141c;color:#666;font-family:'Share Tech Mono',monospace;font-size:0.6rem;padding:0.3rem 0.8rem;border-radius:99px;letter-spacing:1px;border:1px solid rgba(255,255,255,0.08)">&#9673; CONTROLLER: OFFLINE</span>
+            </div>
+        </div>
+        <div class="reveal" style="position:relative">
+            <canvas id="aim-canvas"></canvas>
+            <div id="aim-start-overlay" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(4,4,6,0.85);backdrop-filter:blur(8px);">
+                <div style="text-align:center;padding:1.5rem;">
+                    <div style="font-family:'Orbitron',monospace;font-size:1.4rem;font-weight:900;margin-bottom:0.5rem;color:white">AIM WARM-UP</div>
+                    <div style="font-family:'Share Tech Mono',monospace;font-size:0.7rem;color:rgba(208,208,220,0.6);margin-bottom:1.75rem;letter-spacing:1.5px">KLICKEN ODER TIPPEN UM ZU STARTEN</div>
+                    <button onclick="startAimGame()" class="btn-primary">&#9889; DRILL STARTEN</button>
+                </div>
+            </div>
+        </div>
+        <div style="margin-top:2.5rem" class="reveal">
+            <div class="section-label">// SESSION HIGH SCORES</div>
+            <div class="card" style="margin-top:1rem;overflow:hidden">
+                <div class="lb-row header">
+                    <span>#</span><span>SPIELER</span><span>GENAUIGKEIT</span><span>SCORE</span>
+                </div>
+                <div id="leaderboard">
+                    <div class="lb-row">
+                        <span class="lb-rank gold">1</span>
+                        <span>N1CO_PRO</span>
+                        <span style="color:rgba(208,208,220,0.4)">&mdash;</span>
+                        <span class="lb-score">&mdash;</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<hr class="divider">
+
+<!-- TEAM ROSTER -->
+<section id="roster">
+    <div class="container">
+        <div class="section-label reveal">// ACTIVE ROSTER</div>
+        <h2 class="section-title reveal">TEAM<br><span style="color:var(--red)">KADER</span></h2>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.75rem;margin-top:2.5rem">
+            <div class="roster-card reveal">
+                <div class="roster-avatar">&#128081;</div>
+                <div style="font-family:'Orbitron',monospace;font-weight:900;color:white;margin-bottom:0.25rem;font-size:1.1rem">N1CO</div>
+                <div style="font-size:0.6rem;letter-spacing:2px;color:#f5c842;font-family:'Share Tech Mono',monospace;margin-bottom:0.75rem">FOUNDER / IGL</div>
+                <div style="font-size:0.85rem;color:rgba(208,208,220,0.6)">The Finals &middot; Fortnite</div>
+            </div>
+            <div class="roster-card reveal">
+                <div class="roster-avatar">&#127919;</div>
+                <div style="font-family:'Orbitron',monospace;font-weight:900;color:white;margin-bottom:0.25rem;font-size:1.1rem">SLOT OFFEN</div>
+                <div style="font-size:0.6rem;letter-spacing:2px;color:var(--red);font-family:'Share Tech Mono',monospace;margin-bottom:0.75rem">FRAGGER</div>
+                <div style="font-size:0.85rem;color:rgba(208,208,220,0.6)">Bewerbung via Gamertransfer</div>
+            </div>
+            <div class="roster-card reveal">
+                <div class="roster-avatar">&#128737;</div>
+                <div style="font-family:'Orbitron',monospace;font-weight:900;color:white;margin-bottom:0.25rem;font-size:1.1rem">SLOT OFFEN</div>
+                <div style="font-size:0.6rem;letter-spacing:2px;color:var(--red);font-family:'Share Tech Mono',monospace;margin-bottom:0.75rem">SUPPORT</div>
+                <div style="font-size:0.85rem;color:rgba(208,208,220,0.6)">Bewerbung via Gamertransfer</div>
+            </div>
+            <div class="roster-card reveal">
+                <div class="roster-avatar">&#128269;</div>
+                <div style="font-family:'Orbitron',monospace;font-weight:900;color:white;margin-bottom:0.25rem;font-size:1.1rem">SLOT OFFEN</div>
+                <div style="font-size:0.6rem;letter-spacing:2px;color:var(--red);font-family:'Share Tech Mono',monospace;margin-bottom:0.75rem">BUILDER / SCOUT</div>
+                <div style="font-size:0.85rem;color:rgba(208,208,220,0.6)">Bewerbung via Gamertransfer</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<hr class="divider">
+
+<!-- CONTRACT RULES -->
+<section id="contract">
+    <div class="container">
+        <div class="section-label reveal">// CLUB STATUTEN</div>
+        <h2 class="section-title reveal">PRO-VERTRAG<br><span style="color:var(--red)">REGELN</span></h2>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem;margin-top:2.5rem" class="reveal">
+            <div class="contract-clause">
+                <div class="clause-num">&sect; 01 &mdash; IDENTIT&Auml;T</div>
+                <div class="clause-title">N1CO TAG PFLICHT</div>
+                <p style="color:rgba(208,208,220,0.6);font-size:0.95rem;line-height:1.7">
+                    Alle aktiven Club-Mitglieder führen verbindlich das Kürzel <strong style="color:white">&quot;N1CO |&quot;</strong> vor ihrem Ingame-Namen.
+                </p>
+            </div>
+            <div class="contract-clause">
+                <div class="clause-num">&sect; 02 &mdash; ALTER</div>
+                <div class="clause-title">MINDESTALTER 13 JAHRE</div>
+                <p style="color:rgba(208,208,220,0.6);font-size:0.95rem;line-height:1.7">
+                    Bewerber müssen <strong style="color:var(--red)">mindestens 13 Jahre</strong> alt sein. Bei Minderjährigen ist die Erlaubnis der Erziehungsberechtigten nötig.
+                </p>
+            </div>
+            <div class="contract-clause">
+                <div class="clause-num">&sect; 03 &mdash; FINANZEN</div>
+                <div class="clause-title">500€ CAP / 85% SPLIT</div>
+                <p style="color:rgba(208,208,220,0.6);font-size:0.95rem;line-height:1.7">
+                    Das Zielvolumen an Preisgeldern über 3 Monate. <strong style="color:white">85%</strong> der generierten Einnahmen verbleiben direkt beim Spieler.
+                </p>
+            </div>
+            <div class="contract-clause">
+                <div class="clause-num">&sect; 04 &mdash; EQUIPMENT</div>
+                <div class="clause-title">EIGENE BESCHAFFUNG</div>
+                <p style="color:rgba(208,208,220,0.6);font-size:0.95rem;line-height:1.7">
+                    Hardware und Peripherie sind vom Spieler selbst bereitzustellen. <strong style="color:var(--red)">Es werden keine Club-Geräte gestellt.</strong>
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<hr class="divider">
+
+<!-- TWITCH LIVE -->
 <section id="twitch">
     <div class="container">
-        <div class="card reveal" style="padding:2.5rem 1.5rem;text-align:center;background:linear-gradient(135deg, rgba(100,65,165,0.1) 0%, transparent 100%);border-color:rgba(100,65,165,0.3);">
-            <div style="font-family:'Share Tech Mono',monospace;font-size:0.6rem;letter-spacing:3px;color:rgba(100,65,165,0.9);margin-bottom:1rem">// LIVE AUF TWITCH</div>
-            <div style="font-family:'Orbitron',monospace;font-size:clamp(1.2rem,4vw,2.5rem);font-weight:900;color:white;margin-bottom:0.5rem">NICOMINECITH_TTV</div>
-            <div style="display:flex;align-items:center;justify-content:center;gap:0.5rem;margin-bottom:1.5rem">
-                <div style="width:8px;height:8px;background:#ff4455;border-radius:50%;animation:pulse 1.5s infinite"></div>
-                <span style="font-family:'Share Tech Mono',monospace;font-size:0.65rem;letter-spacing:1px;color:rgba(200,200,208,0.5)">STREAMS: THE FINALS · FORTNITE</span>
+        <div class="card reveal" style="padding:3rem 1.5rem;text-align:center;background:linear-gradient(135deg, rgba(100,65,165,0.12) 0%, transparent 100%);border-color:rgba(100,65,165,0.4);">
+            <div style="font-family:'Share Tech Mono',monospace;font-size:0.65rem;letter-spacing:3px;color:rgba(180,140,255,0.9);margin-bottom:1rem">// LIVE STREAMING</div>
+            <div style="font-family:'Orbitron',monospace;font-size:clamp(1.3rem,4vw,2.5rem);font-weight:900;color:white;margin-bottom:0.5rem">NICOMINECITH_TTV</div>
+            <div style="display:flex;align-items:center;justify-content:center;gap:0.5rem;margin-bottom:1.75rem">
+                <div style="width:9px;height:9px;background:#ff3344;border-radius:50%;animation:pulseGlow 1.5s infinite"></div>
+                <span style="font-family:'Share Tech Mono',monospace;font-size:0.7rem;letter-spacing:1px;color:rgba(208,208,220,0.6)">STREAMS: THE FINALS &middot; FORTNITE</span>
             </div>
-            <a href="https://www.twitch.tv/Nicominecith_TTV" target="_blank" style="display:inline-flex;align-items:center;gap:0.75rem;background:#6441a5;color:white;font-family:'Orbitron',monospace;font-weight:900;font-size:0.7rem;letter-spacing:2px;padding:0.9rem 2rem;text-decoration:none;clip-path:polygon(8px 0,100% 0,calc(100% - 8px) 100%,0 100%);transition:background 0.2s">
-                🎥 JETZT ZUSCHAUEN
+            <a href="https://www.twitch.tv/Nicominecith_TTV" target="_blank" style="display:inline-flex;align-items:center;gap:0.75rem;background:#6441a5;color:white;font-family:'Orbitron',monospace;font-weight:900;font-size:0.75rem;letter-spacing:2px;padding:1rem 2.2rem;text-decoration:none;clip-path:polygon(10px 0,100% 0,calc(100% - 10px) 100%,0 100%);box-shadow:0 0 20px rgba(100,65,165,0.4);transition:0.2s">
+                &#127909; ZUM TWITCH STREAM
             </a>
         </div>
     </div>
@@ -1149,20 +1125,20 @@
 <!-- FOOTER -->
 <footer>
     <div style="max-width:1200px;margin:0 auto">
-        <div style="font-family:'Orbitron',monospace;font-size:0.9rem;font-weight:900;color:white;margin-bottom:0.5rem">NICO<span style="color:var(--red)">GAMING</span></div>
-        <div style="display:flex;justify-content:center;gap:1.5rem;margin:1rem 0;flex-wrap:wrap">
-            <a href="https://gamertransfer.com/nico_gaming_the_finals-lfm-2-35968.html" target="_blank" style="color:var(--silver);font-size:0.7rem;text-decoration:none;font-family:'Share Tech Mono',monospace">Gamertransfer</a>
-            <a href="https://www.instagram.com/nico.gaming2026" target="_blank" style="color:var(--silver);font-size:0.7rem;text-decoration:none;font-family:'Share Tech Mono',monospace">Instagram</a>
-            <a href="https://www.twitch.tv/Nicominecith_TTV" target="_blank" style="color:var(--silver);font-size:0.7rem;text-decoration:none;font-family:'Share Tech Mono',monospace">Twitch</a>
+        <div style="font-family:'Orbitron',monospace;font-size:1rem;font-weight:900;color:white;margin-bottom:0.75rem">NICO<span style="color:var(--red)">GAMING</span></div>
+        <div style="display:flex;justify-content:center;gap:2rem;margin:1.2rem 0;flex-wrap:wrap">
+            <a href="https://gamertransfer.com/nico_gaming_the_finals-lfm-2-35968.html" target="_blank" style="color:var(--silver);font-size:0.75rem;text-decoration:none;font-family:'Share Tech Mono',monospace">Gamertransfer</a>
+            <a href="https://www.instagram.com/nico.gaming2026" target="_blank" style="color:var(--silver);font-size:0.75rem;text-decoration:none;font-family:'Share Tech Mono',monospace">Instagram</a>
+            <a href="https://www.twitch.tv/Nicominecith_TTV" target="_blank" style="color:var(--silver);font-size:0.75rem;text-decoration:none;font-family:'Share Tech Mono',monospace">Twitch</a>
         </div>
-        <div style="font-family:'Share Tech Mono',monospace;font-size:0.55rem;letter-spacing:2px;color:rgba(200,200,208,0.25)">
-            © 2026 NICO GAMING ESPORTS · FOUNDER: NICOMINECITH · MINDESTALTER: 13 JAHRE
+        <div style="font-family:'Share Tech Mono',monospace;font-size:0.6rem;letter-spacing:2.5px;color:rgba(208,208,220,0.3)">
+            &copy; 2026 NICO GAMING ESPORTS &middot; FOUNDER: NICOMINECITH &middot; MINDESTALTER: 13 JAHRE
         </div>
     </div>
 </footer>
 
 <script>
-    // CURSOR (PC only)
+    // CUSTOM CURSOR
     const cursor = document.getElementById('cursor');
     const cursorDot = document.getElementById('cursor-dot');
     document.addEventListener('mousemove', e => {
@@ -1213,7 +1189,7 @@
     }, { threshold: 0.5 });
     document.querySelectorAll('.stat-box').forEach(el => counterObserver.observe(el.parentElement));
 
-    // AIM TRAINER
+    // AIM TRAINER MINI-GAME
     const canvas = document.getElementById('aim-canvas');
     const ctx = canvas.getContext('2d');
     const scoreEl = document.getElementById('aim-score');
@@ -1223,24 +1199,24 @@
     const controllerLabel = document.getElementById('controller-label');
 
     let score = 0, timeLeft = 30, gameActive = false;
-    let target = { x: 0, y: 0, radius: 20 };
-    let crosshair = { x: 200, y: 175 };
+    let target = { x: 0, y: 0, radius: 22 };
+    let crosshair = { x: 200, y: 190 };
     let shots = 0, hits = 0;
     let sessionScores = [];
 
     function resizeCanvas() {
         const rect = canvas.parentNode.getBoundingClientRect();
         canvas.width = rect.width;
-        canvas.height = 350;
+        canvas.height = 380;
     }
     window.addEventListener('resize', resizeCanvas);
     resizeCanvas();
 
     function spawnTarget() {
-        const margin = 40;
+        const margin = 50;
         target.x = margin + Math.random() * (canvas.width - margin * 2);
         target.y = margin + Math.random() * (canvas.height - margin * 2);
-        target.radius = 12 + Math.random() * 14;
+        target.radius = 14 + Math.random() * 14;
     }
 
     function startAimGame() {
@@ -1266,11 +1242,11 @@
                 updateLeaderboard();
                 overlay.style.opacity = '1';
                 overlay.style.pointerEvents = 'all';
-                overlay.innerHTML = `<div style="text-align:center;padding:1rem;">
-                    <div style="font-family:'Orbitron',monospace;font-size:1.1rem;font-weight:900;margin-bottom:0.5rem;color:white">SESSION ENDE</div>
-                    <div style="font-family:'Share Tech Mono',monospace;font-size:0.8rem;color:var(--red);margin-bottom:0.2rem">SCORE: ${score}</div>
-                    <div style="font-family:'Share Tech Mono',monospace;font-size:0.75rem;color:#f5c842;margin-bottom:1.2rem">ACC: ${acc}%</div>
-                    <button onclick="startAimGame()" class="btn-primary">🔄 RE-SESSION</button>
+                overlay.innerHTML = `<div style="text-align:center;padding:1.5rem;">
+                    <div style="font-family:'Orbitron',monospace;font-size:1.2rem;font-weight:900;margin-bottom:0.5rem;color:white">DRILL BEENDET</div>
+                    <div style="font-family:'Share Tech Mono',monospace;font-size:0.85rem;color:var(--red);margin-bottom:0.3rem">SCORE: ${score}</div>
+                    <div style="font-family:'Share Tech Mono',monospace;font-size:0.8rem;color:#f5c842;margin-bottom:1.5rem">GENAUIGKEIT: ${acc}%</div>
+                    <button onclick="startAimGame()" class="btn-primary">&#8635; NEUE RUNDE</button>
                 </div>`;
             }
         }, 1000);
@@ -1312,14 +1288,16 @@
     });
 
     window.addEventListener('gamepadconnected', () => {
-        controllerLabel.textContent = '◉ CONTROLLER: AKTIV';
-        controllerLabel.style.background = '#10b981';
-        controllerLabel.style.color = 'white';
+        controllerLabel.textContent = '◉ CONTROLLER: VERBUNDEN';
+        controllerLabel.style.background = 'rgba(16,185,129,0.2)';
+        controllerLabel.style.color = '#10b981';
+        controllerLabel.style.borderColor = '#10b981';
     });
     window.addEventListener('gamepaddisconnected', () => {
-        controllerLabel.textContent = '◉ CONTROLLER: GETRENNT';
-        controllerLabel.style.background = '#1a1a1a';
-        controllerLabel.style.color = '#444';
+        controllerLabel.textContent = '◉ CONTROLLER: OFFLINE';
+        controllerLabel.style.background = '#14141c';
+        controllerLabel.style.color = '#666';
+        controllerLabel.style.borderColor = 'rgba(255,255,255,0.08)';
     });
 
     let triggerPressed = false;
@@ -1342,17 +1320,21 @@
 
         ctx.beginPath();
         ctx.arc(target.x, target.y, target.radius, 0, Math.PI * 2);
-        ctx.fillStyle = '#e60012';
+        ctx.fillStyle = '#ff1f3d';
+        ctx.shadowColor = '#ff1f3d';
+        ctx.shadowBlur = 15;
         ctx.fill();
+        ctx.shadowBlur = 0;
+
         ctx.beginPath();
-        ctx.arc(target.x, target.y, 3, 0, Math.PI * 2);
+        ctx.arc(target.x, target.y, 4, 0, Math.PI * 2);
         ctx.fillStyle = 'white';
         ctx.fill();
 
         if (navigator.getGamepads()[0]) {
             ctx.strokeStyle = '#00ff88';
-            ctx.lineWidth = 1.5;
-            const s = 10;
+            ctx.lineWidth = 2;
+            const s = 12;
             ctx.beginPath();
             ctx.moveTo(crosshair.x - s, crosshair.y); ctx.lineTo(crosshair.x + s, crosshair.y);
             ctx.moveTo(crosshair.x, crosshair.y - s); ctx.lineTo(crosshair.x, crosshair.y + s);
