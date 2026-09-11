@@ -1,883 +1,1249 @@
 <!DOCTYPE html>
-<html lang="de" class="dark">
+<html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NICO GAMING | Official eSports Club</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Barlow+Condensed:ital,wght@0,300;0,700;0,900;1,900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        cyberred: '#ff1f3d',
-                        cyberblue: '#0066ff',
-                        darkbg: '#040406',
-                        panel: '#0b0b10',
-                        panel2: '#12121a',
-                    },
-                    fontFamily: {
-                        orbitron: ['Orbitron', 'sans-serif'],
-                        barlow: ['Barlow Condensed', 'sans-serif'],
-                        mono: ['Share Tech Mono', 'monospace'],
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        * { box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
-        
-        body {
-            background-color: #040406;
-            color: #d0d0dc;
-            font-family: 'Barlow Condensed', sans-serif;
-            overflow-x: hidden;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="NICO GAMING – Official eSports Club für The Finals & Fortnite. Bewerbungen über Gamertransfer oder direkt per E-Mail.">
+<title>NICO GAMING | Official eSports Club</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Barlow+Condensed:ital,wght@0,300;0,400;0,600;0,700;1,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 
-        /* Scanline Overlay */
-        body::before {
-            content: '';
-            position: fixed;
-            inset: 0;
-            background: repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0,0,0,0.1) 3px, rgba(0,0,0,0.1) 6px);
-            pointer-events: none;
-            z-index: 999;
-        }
+<style>
+:root{
+  --red:#ff1f3d;
+  --red-dim:#c4152c;
+  --dark:#050506;
+  --panel:#0c0c11;
+  --panel2:#131319;
+  --line:rgba(255,255,255,.08);
+  --line-red:rgba(255,31,61,.22);
+  --ink:#d7d7e2;
+  --ink-dim:#8c8c9a;
+  --gt:#2d7dff;
+  --gold:#f0b429;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--dark);color:var(--ink);
+  font-family:'Barlow Condensed',sans-serif;font-size:1.05rem;
+  overflow-x:hidden;cursor:none
+}
+@media(max-width:860px){body{cursor:auto}}
+::selection{background:var(--red);color:#fff}
+#cursor,#cursor-dot{
+  position:fixed;pointer-events:none;z-index:9999;
+  transform:translate(-50%,-50%)
+}
+#cursor{
+  width:15px;height:15px;border:1.5px solid var(--red);border-radius:50%;
+  transition:width .15s,height .15s,background .15s;mix-blend-mode:screen
+}
+#cursor-dot{width:3px;height:3px;background:var(--red);border-radius:50%}
+body:has(a:hover) #cursor,body:has(button:hover) #cursor{
+  width:34px;height:34px;background:rgba(255,31,61,.15)
+}
+@media(max-width:860px){#cursor,#cursor-dot{display:none}}
+h1,h2,h3{font-family:'Orbitron',sans-serif;letter-spacing:.5px}
+body::before{
+  content:'';position:fixed;inset:0;z-index:8000;pointer-events:none;
+  background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,0,0,.09) 3px,rgba(0,0,0,.09) 6px);
+  opacity:.5
+}
 
-        /* Glow & Glitch Utilities */
-        .text-glow-red {
-            text-shadow: 0 0 20px rgba(255, 31, 61, 0.6);
-        }
-        .text-glow-blue {
-            text-shadow: 0 0 20px rgba(0, 102, 255, 0.6);
-        }
-        .box-glow-red {
-            box-shadow: 0 0 30px rgba(255, 31, 61, 0.25);
-        }
-        .box-glow-blue {
-            box-shadow: 0 0 30px rgba(0, 102, 255, 0.25);
-        }
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:5000;height:64px;
+  padding:0 clamp(1rem,4vw,2.5rem);display:flex;align-items:center;
+  justify-content:space-between;background:rgba(5,5,6,.82);
+  backdrop-filter:blur(16px);border-bottom:1px solid var(--line)
+}
+.brand{display:flex;align-items:center;gap:.7rem;text-decoration:none;color:#fff}
+.brand img{width:34px;height:34px;object-fit:contain;filter:drop-shadow(0 0 8px rgba(255,31,61,.6))}
+.brand .word{font-family:'Orbitron',sans-serif;font-weight:800;font-size:1.02rem;letter-spacing:1px}
+.brand .word span{color:var(--red)}
+.desktop-nav{display:flex;gap:2.1rem;list-style:none}
+.desktop-nav a{
+  color:var(--ink-dim);text-decoration:none;font-size:.92rem;font-weight:600;
+  transition:color .2s;position:relative;padding-bottom:3px
+}
+.desktop-nav a:hover{color:#fff}
+.desktop-nav a.cta{color:var(--red)}
+.desktop-nav a::after{
+  content:'';position:absolute;left:0;right:100%;bottom:-4px;height:1.5px;
+  background:var(--red);transition:right .3s cubic-bezier(.4,0,.2,1)
+}
+.desktop-nav a:hover::after{right:0}
+.hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer}
+.hamburger span{width:22px;height:2px;background:#fff}
+@media(max-width:940px){.desktop-nav{display:none}.hamburger{display:flex}}
+.mobile-menu{
+  display:none;position:fixed;inset:0;z-index:4999;background:rgba(5,5,6,.98);
+  flex-direction:column;align-items:center;justify-content:center;gap:1.9rem
+}
+.mobile-menu.open{display:flex}
+.mobile-menu a{color:#fff;text-decoration:none;font-family:'Orbitron',sans-serif;font-size:1.15rem}
+.mobile-menu a:hover{color:var(--red)}
+.mobile-close{position:absolute;top:1.4rem;right:1.6rem;background:none;border:none;color:#fff;font-size:1.8rem;cursor:pointer}
 
-        /* Cyber Button Clip-Path */
-        .cyber-btn {
-            clip-path: polygon(12px 0%, 100% 0%, calc(100% - 12px) 100%, 0% 100%);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
+/* TICKER */
+.ticker-wrap{
+  position:fixed;top:64px;left:0;right:0;z-index:4000;overflow:hidden;
+  background:rgba(255,31,61,.05);border-bottom:1px solid var(--line-red);padding:.45rem 0
+}
+.ticker{display:flex;gap:3.5rem;white-space:nowrap;animation:ticker 28s linear infinite;width:max-content}
+.ticker:hover{animation-play-state:paused}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.ticker span{font-family:'Space Mono',monospace;font-size:.68rem;letter-spacing:1.5px;color:var(--ink-dim)}
+.ticker span.hl{color:var(--red)}
 
-        /* Infinite Ticker Animation */
-        @keyframes tickerMove {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
-        .animate-ticker {
-            display: flex;
-            width: max-content;
-            animation: tickerMove 25s linear infinite;
-        }
-        .animate-ticker:hover {
-            animation-play-state: paused;
-        }
+/* HERO */
+#home{
+  min-height:100vh;display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;padding:150px 1.5rem 5rem;text-align:center
+}
+.grid-bg{
+  position:absolute;inset:0;
+  background-image:linear-gradient(rgba(255,31,61,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,31,61,.05) 1px,transparent 1px);
+  background-size:46px 46px;
+  mask-image:radial-gradient(ellipse 60% 55% at 50% 40%,#000 55%,transparent 100%)
+}
+.hero-glow{
+  position:absolute;width:min(640px,90vw);height:min(640px,90vw);left:50%;top:38%;
+  transform:translate(-50%,-50%);
+  background:radial-gradient(circle,rgba(255,31,61,.24),rgba(255,31,61,.02) 55%,transparent 75%);
+  filter:blur(4px);pointer-events:none
+}
+.hero-inner{position:relative;z-index:2;max-width:880px}
+.hero-logo{
+  width:132px;height:132px;object-fit:contain;margin:0 auto 1.8rem;display:block;
+  filter:drop-shadow(0 0 30px rgba(255,31,61,.55));animation:float 6s ease-in-out infinite
+}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:.5rem;font-family:'Space Mono',monospace;
+  font-size:.68rem;letter-spacing:2px;color:var(--red);border:1px solid var(--line-red);
+  background:rgba(255,31,61,.06);padding:.4rem .9rem;border-radius:2px;margin-bottom:1.6rem
+}
+.hero-eyebrow .dot,.tag-live .dot,.application-status span,.twitch-live .dot{
+  width:6px;height:6px;border-radius:50%;background:currentColor;animation:pulse 1.6s infinite
+}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.hero-title{
+  font-size:clamp(2.7rem,8.4vw,5.6rem);font-weight:900;line-height:.94;margin-bottom:1.1rem;
+  color:#fff;text-shadow:0 0 44px rgba(255,31,61,.35)
+}
+.hero-title em{
+  font-style:normal;background:linear-gradient(120deg,#fff 20%,var(--red) 100%);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent
+}
+.hero-sub{font-size:clamp(1rem,2vw,1.25rem);color:var(--ink-dim);max-width:600px;margin:0 auto 2.4rem;font-weight:400;line-height:1.6}
+.hero-sub strong{color:#fff}.hero-sub .game{color:var(--red);font-weight:700}
+.hero-actions{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:.55rem;
+  font-family:'Orbitron',sans-serif;font-weight:700;font-size:.74rem;letter-spacing:1.6px;
+  padding:1rem 1.9rem;border:none;cursor:pointer;text-decoration:none;
+  clip-path:polygon(10px 0,100% 0,calc(100% - 10px) 100%,0 100%);
+  transition:transform .2s,box-shadow .2s,background .2s
+}
+.btn-red{background:var(--red);color:#fff;box-shadow:0 0 22px rgba(255,31,61,.4)}
+.btn-red:hover{background:#ff3852;transform:translateY(-2px);box-shadow:0 0 30px rgba(255,31,61,.65)}
+.btn-ghost{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.22)}
+.btn-ghost:hover{border-color:var(--red);background:rgba(255,31,61,.08)}
+.btn-blue{background:linear-gradient(135deg,#1d5fd1,var(--gt));color:#fff;box-shadow:0 0 22px rgba(45,125,255,.35)}
+.btn-blue:hover{box-shadow:0 0 30px rgba(45,125,255,.6);transform:translateY(-2px)}
+.btn-block{width:100%}
+hr.div{border:none;height:1px;background:linear-gradient(90deg,transparent,var(--line-red),transparent)}
+section{padding:5.5rem 1.5rem;position:relative}
+.container{max-width:1180px;margin:0 auto}
+.eyebrow{font-family:'Space Mono',monospace;font-size:.68rem;color:var(--red);letter-spacing:2.5px;margin-bottom:.6rem}
+.h2{font-size:clamp(1.9rem,4.2vw,3.1rem);font-weight:900;line-height:1.02;color:#fff;margin-bottom:1.3rem}
+.h2 span{color:var(--red)}
+.lede{color:var(--ink-dim);font-size:1.08rem;line-height:1.7;max-width:640px}
 
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #040406; }
-        ::-webkit-scrollbar-thumb { background: #ff1f3d; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #ff3852; }
-    </style>
+/* STATS */
+.stat-strip{padding:2.6rem 1.5rem;background:var(--panel);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.stat-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--line);max-width:1180px;margin:0 auto}
+.stat-box{background:var(--dark);padding:1.9rem 1rem;text-align:center}
+.stat-num{font-family:'Orbitron',sans-serif;font-weight:900;font-size:clamp(1.5rem,3vw,2.2rem);color:#fff}
+.stat-label{font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:1.6px;color:var(--red);margin-top:.4rem}
+@media(max-width:760px){.stat-grid{grid-template-columns:repeat(2,1fr)}}
+
+/* RECRUITING */
+#apply-hub{background:radial-gradient(ellipse 90% 60% at 50% 0%,rgba(255,31,61,.05),transparent 60%)}
+.hub-head{text-align:center;max-width:720px;margin:0 auto 3.4rem}
+.hub-head .lede{margin:0 auto}
+.application-methods{display:grid;grid-template-columns:1.15fr 1fr;gap:1.5rem;align-items:stretch}
+@media(max-width:900px){.application-methods{grid-template-columns:1fr}}
+.application-card{
+  position:relative;overflow:hidden;background:linear-gradient(145deg,rgba(18,18,25,.98),rgba(8,8,12,.98));
+  border:1px solid var(--line);border-radius:8px;padding:2.2rem;
+  transition:transform .3s,border-color .3s,box-shadow .3s
+}
+.application-card:hover{transform:translateY(-4px)}
+.gamertransfer-card{border-color:rgba(45,125,255,.35);box-shadow:0 0 50px rgba(45,125,255,.06),inset 0 1px 0 rgba(255,255,255,.04)}
+.gamertransfer-card:hover{border-color:rgba(45,125,255,.7);box-shadow:0 15px 50px rgba(45,125,255,.12)}
+.email-card:hover{border-color:rgba(255,31,61,.35)}
+.application-glow{
+  position:absolute;width:400px;height:400px;top:-250px;right:-150px;
+  background:radial-gradient(circle,rgba(45,125,255,.18),transparent 65%);pointer-events:none
+}
+.application-top{position:relative;z-index:2;display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem}
+.application-icon{
+  width:58px;height:58px;flex-shrink:0;display:flex;align-items:center;justify-content:center;
+  border-radius:7px;font-family:'Orbitron',sans-serif;font-weight:900;font-size:1rem
+}
+.gt-icon{color:#fff;background:linear-gradient(135deg,#174ca8,var(--gt));border:1px solid rgba(90,160,255,.5);box-shadow:0 0 25px rgba(45,125,255,.25)}
+.email-icon{color:#fff;background:linear-gradient(135deg,#8d1025,var(--red));border:1px solid rgba(255,31,61,.4)}
+.application-label{font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:1.7px;color:var(--ink-dim);margin-bottom:.25rem}
+.blue-label{color:#5c9cff}
+.application-card h3{color:#fff;font-size:1.8rem;line-height:1}
+.application-status{
+  margin-left:auto;display:flex;align-items:center;gap:.45rem;font-family:'Space Mono',monospace;
+  font-size:.58rem;letter-spacing:1.4px;color:#3ecf8e;padding:.35rem .65rem;
+  border:1px solid rgba(62,207,142,.25);background:rgba(62,207,142,.07);border-radius:3px
+}
+.application-status span{background:#3ecf8e;box-shadow:0 0 8px #3ecf8e}
+.application-description{position:relative;z-index:2;color:var(--ink-dim);line-height:1.7;font-size:.98rem;margin-bottom:1.7rem}
+.application-features{display:grid;gap:.7rem;margin-bottom:1.8rem}
+.application-features>div{
+  display:grid;grid-template-columns:28px 1fr;column-gap:.6rem;align-items:center;
+  padding:.65rem .8rem;background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.05);border-radius:4px
+}
+.application-features span{
+  grid-row:span 2;display:flex;align-items:center;justify-content:center;width:25px;height:25px;
+  border-radius:4px;background:rgba(45,125,255,.12);color:#5c9cff;font-family:'Space Mono',monospace;font-size:.7rem
+}
+.application-features strong{color:#fff;font-size:.9rem;line-height:1.1}
+.application-features small{color:var(--ink-dim);font-size:.76rem;margin-top:.15rem}
+.application-button{min-height:54px;font-size:.68rem}
+.application-button span{font-size:1rem;transition:transform .2s}
+.application-button:hover span{transform:translateX(4px)}
+.application-note{margin-top:1rem;text-align:center;font-family:'Space Mono',monospace;font-size:.56rem;letter-spacing:1px;color:#555560}
+.email-card .form-row{gap:.8rem}.email-card .fgroup{margin-bottom:1rem}.email-card .fgroup label{font-size:.58rem}
+.email-card .fgroup input,.email-card .fgroup select{padding:.7rem .85rem;font-size:.95rem}
+.recruiting-info{
+  display:grid;grid-template-columns:repeat(3,1fr);margin-top:1.5rem;background:rgba(255,255,255,.018);
+  border:1px solid var(--line);border-radius:6px;overflow:hidden
+}
+.recruiting-info>div{display:flex;align-items:center;gap:.9rem;padding:1rem 1.2rem;border-right:1px solid var(--line)}
+.recruiting-info>div:last-child{border-right:none}
+.info-number{font-family:'Orbitron',sans-serif;font-size:.8rem;color:var(--red)}
+.recruiting-info strong{display:block;color:#fff;font-family:'Orbitron',sans-serif;font-size:.7rem}
+.recruiting-info small{display:block;color:var(--ink-dim);font-size:.75rem;margin-top:.2rem}
+@media(max-width:700px){
+  .recruiting-info{grid-template-columns:1fr}
+  .recruiting-info>div{border-right:none;border-bottom:1px solid var(--line)}
+  .recruiting-info>div:last-child{border-bottom:none}
+  .application-card{padding:1.5rem}
+  .application-status{display:none}
+}
+
+/* FORMS */
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+@media(max-width:480px){.form-row{grid-template-columns:1fr}}
+.fgroup{margin-bottom:1.25rem}
+.fgroup label{display:block;font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:1.8px;color:var(--ink-dim);margin-bottom:.4rem}
+.fgroup input,.fgroup select{
+  width:100%;background:rgba(0,0,0,.55);border:1px solid var(--line);color:#fff;
+  padding:.75rem 1rem;font-family:'Barlow Condensed',sans-serif;font-size:1.02rem;border-radius:3px;outline:none;
+  transition:border .2s,box-shadow .2s
+}
+.fgroup input:focus,.fgroup select:focus{border-color:var(--red);box-shadow:0 0 0 3px rgba(255,31,61,.12)}
+.fgroup select option{background:#0c0c11}
+.age-note{
+  display:inline-flex;align-items:center;gap:.5rem;font-family:'Space Mono',monospace;font-size:.65rem;
+  letter-spacing:1.5px;color:var(--red);border:1px solid var(--line-red);background:rgba(255,31,61,.07);
+  padding:.35rem .8rem;border-radius:2px
+}
+.consent{display:flex;align-items:flex-start;gap:.7rem;margin:1.5rem 0 1.6rem;font-size:.86rem;color:var(--ink-dim);line-height:1.5;cursor:pointer}
+.consent input{margin-top:3px;accent-color:var(--red)}
+
+/* ABOUT */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start}
+@media(max-width:860px){.about-grid{grid-template-columns:1fr}}
+.about-grid p{color:var(--ink-dim);line-height:1.8;font-size:1.05rem;margin-bottom:1.2rem}
+.about-grid strong{color:#fff}
+.gear-note{background:rgba(255,31,61,.05);border:1px solid var(--line-red);padding:.9rem 1.1rem;font-family:'Space Mono',monospace;font-size:.68rem;color:var(--ink-dim);border-radius:3px;margin-bottom:1.4rem;line-height:1.6}
+.gear-item{display:flex;align-items:center;gap:1.1rem;padding:1.1rem 1.3rem;text-decoration:none;color:inherit;border-left:3px solid transparent;border-bottom:1px solid var(--line);transition:background .2s,border-color .2s}
+.gear-item:last-child{border-bottom:none}.gear-item:hover{background:rgba(255,31,61,.07);border-left-color:var(--red)}
+.gear-icon{width:44px;height:44px;flex-shrink:0;background:rgba(255,31,61,.1);border:1px solid var(--line-red);border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:1.25rem}
+.gear-kicker{font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:2px;color:var(--red)}
+.gear-title{color:#fff;font-weight:700;font-size:1.02rem}.gear-sub{color:var(--ink-dim);font-size:.85rem}
+
+/* SKILLS */
+.skill-cols{display:grid;grid-template-columns:1fr 1fr;gap:2.5rem;margin-top:2rem}
+@media(max-width:700px){.skill-cols{grid-template-columns:1fr}}
+.skill{margin-bottom:1.3rem}.skill .lbl{display:flex;justify-content:space-between;font-family:'Space Mono',monospace;font-size:.72rem;letter-spacing:1.2px;margin-bottom:.4rem}
+.skill .track{height:5px;border-radius:3px;background:rgba(255,255,255,.07);overflow:hidden}
+.skill .fill{height:100%;background:linear-gradient(90deg,var(--red),#ff5f78);width:0;transition:width 1.4s cubic-bezier(.16,1,.3,1);box-shadow:0 0 8px var(--red)}
+
+/* AIM */
+.trainer-hud{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;margin-bottom:1.3rem}
+.hud-stats{display:flex;gap:1.8rem;font-family:'Space Mono',monospace;font-size:.9rem}
+.hud-stats b{color:var(--red);font-weight:700}
+#controller-label{background:var(--panel2);color:#7c7c8a;font-family:'Space Mono',monospace;font-size:.6rem;padding:.35rem .8rem;border-radius:99px;letter-spacing:1px;border:1px solid var(--line)}
+.trainer-wrap{position:relative;border-radius:5px;overflow:hidden;border:1px solid var(--line-red)}
+#aim-canvas{background:radial-gradient(ellipse at center,#0a0a10 0%,#020203 100%);width:100%;height:380px;display:block;touch-action:none}
+#aim-overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(5,5,6,.86);backdrop-filter:blur(6px);text-align:center}
+#aim-overlay .t{font-family:'Orbitron',sans-serif;font-size:1.3rem;font-weight:800;color:#fff;margin-bottom:.5rem}
+#aim-overlay .s{font-family:'Space Mono',monospace;font-size:.68rem;color:var(--ink-dim);letter-spacing:1.5px;margin-bottom:1.6rem}
+.lb{margin-top:2.2rem}.lb-row{display:grid;grid-template-columns:36px 1fr auto auto;align-items:center;gap:.7rem;padding:.8rem 1.1rem;font-family:'Space Mono',monospace;font-size:.82rem;border-bottom:1px solid var(--line)}
+.lb-row.head{font-size:.6rem;letter-spacing:1.5px;color:var(--ink-dim);border-bottom:1px solid var(--line-red)}
+.lb-rank{color:var(--red);font-weight:700}.lb-rank.gold{color:var(--gold)}.lb-score{color:var(--red);font-weight:700}
+
+/* ROSTER */
+.roster-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.4rem;margin-top:2rem}
+@media(max-width:820px){.roster-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:500px){.roster-grid{grid-template-columns:1fr}}
+.roster-card{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:1.9rem 1.2rem;text-align:center;transition:border-color .2s,transform .2s}
+.roster-card:hover{border-color:var(--line-red);transform:translateY(-3px)}
+.roster-card.lead{border-color:var(--line-red);background:linear-gradient(165deg,var(--panel),rgba(255,31,61,.05))}
+.avatar{width:64px;height:64px;border-radius:50%;margin:0 auto 1rem;background:rgba(255,31,61,.1);border:1.5px solid var(--line-red);display:flex;align-items:center;justify-content:center;font-size:1.6rem}
+.roster-name{font-family:'Orbitron',sans-serif;font-weight:800;color:#fff;font-size:.95rem;margin-bottom:.3rem}
+.roster-role{font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:1.5px;color:var(--gold);margin-bottom:.6rem}
+.roster-role.open{color:var(--red)}.roster-sub{color:var(--ink-dim);font-size:.85rem}
+
+/* RULES */
+.clause-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.2rem;margin-top:2rem}
+@media(max-width:900px){.clause-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.clause-grid{grid-template-columns:1fr}}
+.clause{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--red);border-radius:0 5px 5px 0;padding:1.6rem}
+.clause-num{font-family:'Space Mono',monospace;font-size:.62rem;color:var(--red);letter-spacing:1.5px}
+.clause-title{font-family:'Orbitron',sans-serif;font-weight:800;color:#fff;font-size:1rem;margin:.45rem 0 .6rem}
+.clause p{color:var(--ink-dim);font-size:.92rem;line-height:1.65}.clause strong{color:#fff}
+
+/* TWITCH */
+.twitch-card{padding:3rem 1.8rem;text-align:center;background:linear-gradient(150deg,rgba(147,90,255,.1),transparent 70%);border:1px solid rgba(147,90,255,.28);border-radius:6px}
+.twitch-kicker{font-family:'Space Mono',monospace;font-size:.65rem;letter-spacing:2px;color:#b89bff;margin-bottom:.8rem}
+.twitch-name{font-family:'Orbitron',sans-serif;font-weight:900;font-size:clamp(1.3rem,4vw,2.1rem);color:#fff;margin-bottom:.5rem}
+.twitch-live{display:flex;align-items:center;justify-content:center;gap:.5rem;margin-bottom:1.7rem;color:#ff3d4d}
+.twitch-live span:last-child{font-family:'Space Mono',monospace;font-size:.7rem;color:var(--ink-dim);letter-spacing:1px}
+.btn-twitch{background:#6441a5;color:#fff;box-shadow:0 0 22px rgba(100,65,165,.4)}
+.btn-twitch:hover{background:#7452ba;box-shadow:0 0 30px rgba(100,65,165,.6);transform:translateY(-2px)}
+
+/* FOOTER */
+footer{border-top:1px solid var(--line);background:#020203;padding:3.4rem 1.5rem;text-align:center}
+.foot-brand{font-family:'Orbitron',sans-serif;font-weight:900;color:#fff;font-size:1.05rem;margin-bottom:1rem}
+.foot-brand span{color:var(--red)}
+.foot-links{display:flex;justify-content:center;gap:1.8rem;flex-wrap:wrap;margin-bottom:1.4rem}
+.foot-links a{color:var(--ink-dim);text-decoration:none;font-family:'Space Mono',monospace;font-size:.72rem;transition:color .2s}
+.foot-links a:hover{color:var(--red)}
+.foot-fine{font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:1.5px;color:#4a4a54}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
+}
+</style>
 </head>
-<body class="bg-darkbg text-silver selection:bg-cyberred selection:text-white">
 
-    <!-- TOP TICKER -->
-    <div class="fixed top-0 left-0 right-0 z-50 bg-[#040406]/95 border-b border-cyberred/20 py-2 overflow-hidden shadow-lg backdrop-blur-md">
-        <div class="animate-ticker whitespace-nowrap text-xs font-mono tracking-widest text-gray-400">
-            <span class="mx-6 text-cyberred font-bold">◆ NICO GAMING ESPORTS CLUB</span>
-            <span class="mx-6">THE FINALS SQUAD</span>
-            <span class="mx-6 text-cyberred font-bold">◆ FORTNITE SQUAD</span>
-            <span class="mx-6">GAMERTRANSFER PARTNER ACTIVE LFM</span>
-            <span class="mx-6 text-cyberred font-bold">◆ INSTAGRAM @NICO.GAMING2026</span>
-            <span class="mx-6">TURTLE BEACH & XBOX SERIES X PRO SETUP</span>
-            <!-- Duplicate for seamless looping -->
-            <span class="mx-6 text-cyberred font-bold">◆ NICO GAMING ESPORTS CLUB</span>
-            <span class="mx-6">THE FINALS SQUAD</span>
-            <span class="mx-6 text-cyberred font-bold">◆ FORTNITE SQUAD</span>
-            <span class="mx-6">GAMERTRANSFER PARTNER ACTIVE LFM</span>
-            <span class="mx-6 text-cyberred font-bold">◆ INSTAGRAM @NICO.GAMING2026</span>
-            <span class="mx-6">TURTLE BEACH & XBOX SERIES X PRO SETUP</span>
-        </div>
+<body>
+
+<div id="cursor"></div>
+<div id="cursor-dot"></div>
+
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" onclick="toggleMenu()" aria-label="Menü schließen">&#10005;</button>
+  <a href="#home" onclick="toggleMenu()">Home</a>
+  <a href="#apply-hub" onclick="toggleMenu()">Recruiting</a>
+  <a href="#about" onclick="toggleMenu()">Founder</a>
+  <a href="#skills" onclick="toggleMenu()">Skills</a>
+  <a href="#aim-trainer" onclick="toggleMenu()">Training</a>
+  <a href="#roster" onclick="toggleMenu()">Team</a>
+  <a href="#contract" onclick="toggleMenu()">Regeln</a>
+  <a href="#twitch" onclick="toggleMenu()">Live</a>
+</div>
+
+<nav>
+  <a href="#home" class="brand">
+    <!-- Logo: __LOGO_B64__ durch deinen Base64-Logo-Inhalt ersetzen -->
+    <img src="data:image/webp;base64,__LOGO_B64__" alt="NICO GAMING Logo">
+    <span class="word">NICO<span>GAMING</span></span>
+  </a>
+
+  <ul class="desktop-nav">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#apply-hub" class="cta">Recruiting</a></li>
+    <li><a href="#about">Founder</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#aim-trainer">Training</a></li>
+    <li><a href="#roster">Team</a></li>
+    <li><a href="#contract">Regeln</a></li>
+    <li><a href="#twitch">Live</a></li>
+  </ul>
+
+  <button class="hamburger" onclick="toggleMenu()" aria-label="Menü öffnen">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="ticker-wrap">
+  <div class="ticker">
+    <span class="hl">&#9670; NICO GAMING ESPORTS CLUB</span>
+    <span>THE FINALS SQUAD</span>
+    <span class="hl">&#9670; FORTNITE SQUAD</span>
+    <span>GAMERTRANSFER PARTNER &middot; AKTIVES LFM</span>
+    <span class="hl">&#9670; INSTAGRAM @NICO.GAMING2026</span>
+    <span>TWITCH LIVE: NICOMINECITH_TTV</span>
+    <span class="hl">&#9670; NICO GAMING ESPORTS CLUB</span>
+    <span>THE FINALS SQUAD</span>
+    <span class="hl">&#9670; FORTNITE SQUAD</span>
+    <span>GAMERTRANSFER PARTNER &middot; AKTIVES LFM</span>
+    <span class="hl">&#9670; INSTAGRAM @NICO.GAMING2026</span>
+    <span>TWITCH LIVE: NICOMINECITH_TTV</span>
+  </div>
+</div>
+
+<section id="home">
+  <div class="grid-bg"></div>
+  <div class="hero-glow"></div>
+
+  <div class="hero-inner">
+    <img class="hero-logo" src="data:image/webp;base64,__LOGO_B64__" alt="NICO GAMING">
+
+    <div class="hero-eyebrow">
+      <span class="dot"></span>
+      OFFIZIELLER ESPORTS CLUB &middot; SAISON 2026
     </div>
 
-    <!-- MAIN NAVBAR -->
-    <nav class="fixed top-[37px] left-0 right-0 z-45 bg-darkbg/90 backdrop-blur-xl border-b border-cyberred/30 px-4 md:px-8 h-16 flex items-center justify-between">
-        <a href="#home" class="flex items-center gap-3 group">
-            <div class="w-10 h-10 rounded-full bg-cyberred/10 border border-cyberred flex items-center justify-center font-orbitron font-black text-cyberred text-lg shadow-[0_0_15px_rgba(255,31,61,0.5)] group-hover:scale-105 transition-transform">
-                N1
-            </div>
-            <span class="font-orbitron font-black tracking-wider text-white text-base md:text-lg">
-                NICO<span class="text-cyberred">GAMING</span>
-            </span>
+    <h1 class="hero-title">NICO <em>GAMING</em></h1>
+
+    <p class="hero-sub">
+      Geleitet von <strong>nicominecith</strong>. Ein Squad für
+      <span class="game">The Finals</span> &amp;
+      <span class="game">Fortnite</span>
+      &mdash; kompromissloser Skill, klare Regeln, fairer Split.
+    </p>
+
+    <div class="hero-actions">
+      <a href="#apply-hub" class="btn btn-red">Jetzt bewerben</a>
+      <a href="#aim-trainer" class="btn btn-ghost">Warm-up starten</a>
+    </div>
+  </div>
+</section>
+
+<hr class="div">
+
+<div class="stat-strip">
+  <div class="stat-grid">
+    <div class="stat-box reveal"><div class="stat-num" data-count="13">0</div><div class="stat-label">MIN. ALTER</div></div>
+    <div class="stat-box reveal"><div class="stat-num" data-count="85">0</div><div class="stat-label">% SPIELER-SPLIT</div></div>
+    <div class="stat-box reveal"><div class="stat-num" data-count="2">0</div><div class="stat-label">ESPORTS TITEL</div></div>
+    <div class="stat-box reveal"><div class="stat-num" data-count="500">0</div><div class="stat-label">&euro; 3-MONATS-ZIEL</div></div>
+    <div class="stat-box reveal"><div class="stat-num" data-count="2026">0</div><div class="stat-label">GEGRÜNDET</div></div>
+  </div>
+</div>
+
+<hr class="div">
+
+<section id="apply-hub">
+  <div class="container">
+
+    <div class="hub-head reveal">
+      <div class="eyebrow">JOIN THE SQUAD</div>
+      <h2 class="h2">Dein Weg zu <span>N1CO GAMING</span></h2>
+      <p class="lede">
+        Du möchtest Teil unseres Teams werden?
+        Bewirb dich direkt über <strong style="color:#fff">Gamertransfer</strong>
+        oder sende uns deine Bewerbung per E-Mail.
+        Beide Wege führen direkt zu unserem Recruiting.
+      </p>
+    </div>
+
+    <div class="application-methods">
+
+      <!-- GAMERTRANSFER -->
+      <div class="application-card gamertransfer-card reveal">
+        <div class="application-glow"></div>
+
+        <div class="application-top">
+          <div class="application-icon gt-icon">GT</div>
+
+          <div>
+            <div class="application-label blue-label">EMPFOHLENER BEWERBUNGSWEG</div>
+            <h3>Gamertransfer</h3>
+          </div>
+
+          <span class="application-status">
+            <span></span> AKTIV
+          </span>
+        </div>
+
+        <p class="application-description">
+          Bewirb dich direkt über unser Gamertransfer-Teamprofil.
+          Dort kannst du dein Spielerprofil, deine Erfahrung und
+          deine Stats hinterlegen und direkt mit uns in Kontakt treten.
+        </p>
+
+        <div class="application-features">
+          <div>
+            <span>✓</span>
+            <strong>Direkte Bewerbung</strong>
+            <small>Ohne E-Mail schreiben zu müssen</small>
+          </div>
+
+          <div>
+            <span>✓</span>
+            <strong>Spielerprofil</strong>
+            <small>Stats &amp; Erfahrungen übersichtlich</small>
+          </div>
+
+          <div>
+            <span>✓</span>
+            <strong>Direkter Kontakt</strong>
+            <small>Chat mit unserem Recruiting</small>
+          </div>
+        </div>
+
+        <a
+          href="https://gamertransfer.com/nico_gaming_the_finals-lfm-2-35968.html"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn btn-blue btn-block application-button"
+        >
+          ÜBER GAMERTRANSFER BEWERBEN <span>↗</span>
         </a>
 
-        <!-- Desktop Links -->
-        <ul class="hidden lg:flex items-center gap-8 font-orbitron text-xs tracking-widest">
-            <li><a href="#home" class="hover:text-cyberred transition-colors">Home</a></li>
-            <li><a href="#apply-hub" class="text-cyberred font-bold hover:text-white transition-colors flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-cyberred animate-ping"></span>Recruiting & GT</a></li>
-            <li><a href="#about" class="hover:text-cyberred transition-colors">Founder</a></li>
-            <li><a href="#skills" class="hover:text-cyberred transition-colors">Skills</a></li>
-            <li><a href="#aim-trainer" class="hover:text-cyberred transition-colors">Training</a></li>
-            <li><a href="#roster" class="hover:text-cyberred transition-colors">Roster</a></li>
-            <li><a href="#contract" class="hover:text-cyberred transition-colors">Rules</a></li>
-            <li><a href="#twitch" class="hover:text-cyberred transition-colors">Stream</a></li>
-        </ul>
+        <div class="application-note">
+          Gamertransfer · NICO GAMING · The Finals / Fortnite
+        </div>
+      </div>
 
-        <!-- Mobile Menu Toggle -->
-        <button id="menuBtn" onclick="toggleMobileMenu()" aria-label="Menü öffnen" class="lg:hidden flex flex-col justify-center items-center w-10 h-10 gap-1.5 bg-panel border border-cyberred/30 rounded focus:outline-none">
-            <span class="w-5 h-0.5 bg-white transition-transform duration-300" id="bar1"></span>
-            <span class="w-5 h-0.5 bg-cyberred transition-opacity duration-300" id="bar2"></span>
-            <span class="w-5 h-0.5 bg-white transition-transform duration-300" id="bar3"></span>
-        </button>
-    </nav>
+      <!-- EMAIL -->
+      <div class="application-card email-card reveal">
 
-    <!-- MOBILE MENU OVERLAY -->
-    <div id="mobileMenu" class="fixed inset-0 z-40 bg-darkbg/98 backdrop-blur-2xl flex flex-col items-center justify-center gap-6 translate-x-full transition-transform duration-300 lg:hidden">
-        <a href="#home" onclick="toggleMobileMenu()" class="font-orbitron text-xl font-bold tracking-widest text-white hover:text-cyberred">HOME</a>
-        <a href="#apply-hub" onclick="toggleMobileMenu()" class="font-orbitron text-xl font-bold tracking-widest text-cyberred">RECRUITING & GT</a>
-        <a href="#about" onclick="toggleMobileMenu()" class="font-orbitron text-xl font-bold tracking-widest text-white hover:text-cyberred">FOUNDER</a>
-        <a href="#skills" onclick="toggleMobileMenu()" class="font-orbitron text-xl font-bold tracking-widest text-white hover:text-cyberred">SKILLS</a>
-        <a href="#aim-trainer" onclick="toggleMobileMenu()" class="font-orbitron text-xl font-bold tracking-widest text-white hover:text-cyberred">TRAINING</a>
-        <a href="#roster" onclick="toggleMobileMenu()" class="font-orbitron text-xl font-bold tracking-widest text-white hover:text-cyberred">ROSTER</a>
-        <a href="#contract" onclick="toggleMobileMenu()" class="font-orbitron text-xl font-bold tracking-widest text-white hover:text-cyberred">REGELN</a>
-        <a href="#twitch" onclick="toggleMobileMenu()" class="font-orbitron text-xl font-bold tracking-widest text-white hover:text-cyberred">TWITCH LIVE</a>
+        <div class="application-top">
+          <div class="application-icon email-icon">@</div>
+
+          <div>
+            <div class="application-label">ALTERNATIVE BEWERBUNG</div>
+            <h3>E-Mail</h3>
+          </div>
+        </div>
+
+        <p class="application-description">
+          Du möchtest dich lieber direkt bei uns melden?
+          Fülle unser kurzes Formular aus und dein E-Mail-Programm
+          erstellt automatisch eine fertige Bewerbung.
+        </p>
+
+        <form id="applyForm">
+
+          <div class="form-row">
+            <div class="fgroup">
+              <label for="fname">NAME *</label>
+              <input type="text" id="fname" placeholder="Dein Name" required>
+            </div>
+
+            <div class="fgroup">
+              <label for="fnick">INGAME NAME *</label>
+              <input type="text" id="fnick" placeholder="Nickname" required>
+            </div>
+          </div>
+
+          <div class="fgroup">
+            <label for="femail">E-MAIL-ADRESSE *</label>
+            <input type="email" id="femail" placeholder="mail@beispiel.de" required>
+          </div>
+
+          <div class="form-row">
+            <div class="fgroup">
+              <label for="fage">ALTER *</label>
+              <input type="number" id="fage" placeholder="13+" min="13" max="99" required>
+            </div>
+
+            <div class="fgroup">
+              <label for="fgame">SPIEL *</label>
+              <select id="fgame" required>
+                <option value="" disabled selected>Spiel wählen…</option>
+                <option value="The Finals">The Finals</option>
+                <option value="Fortnite">Fortnite</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="fgroup">
+            <label for="fdisc">DISCORD TAG</label>
+            <input type="text" id="fdisc" placeholder="Optional">
+          </div>
+
+          <label class="consent">
+            <input type="checkbox" id="fcheck" required>
+            <span>
+              Ich bestätige, dass ich mindestens 13 Jahre alt bin
+              und eigenes Gaming-Equipment besitze.
+            </span>
+          </label>
+
+          <button type="submit" class="btn btn-red btn-block application-button">
+            BEWERBUNG PER E-MAIL <span>→</span>
+          </button>
+        </form>
+      </div>
     </div>
 
-    <!-- HERO SECTION -->
-    <header id="home" class="relative min-h-screen pt-36 pb-20 flex items-center justify-center px-4 overflow-hidden">
-        <!-- Background Grid & Glow -->
-        <div class="absolute inset-0 bg-[linear-gradient(to_right,#ff1f3d0a_1px,transparent_1px),linear-gradient(to_bottom,#ff1f3d0a_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)]"></div>
-        <div class="absolute w-[350px] h-[350px] md:w-[600px] md:h-[600px] bg-cyberred/15 rounded-full blur-[120px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none"></div>
+    <div class="recruiting-info reveal">
+      <div>
+        <span class="info-number">01</span>
+        <div><strong>Gamertransfer</strong><small>Direkt &amp; schnell bewerben</small></div>
+      </div>
 
-        <div class="relative z-10 max-w-5xl mx-auto text-center">
-            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded bg-cyberred/10 border border-cyberred/30 text-cyberred font-mono text-xs tracking-widest mb-6">
-                <span class="w-2 h-2 rounded-full bg-cyberred animate-pulse"></span>
-                OFFICIAL ESPORTS CLUB 2026
-            </div>
-            
-            <h1 class="font-orbitron font-black text-4xl sm:text-6xl md:text-8xl tracking-wider text-white text-glow-red mb-4 uppercase">
-                NICO GAMING
-            </h1>
-            
-            <p class="font-barlow text-lg sm:text-2xl text-gray-300 max-w-2xl mx-auto mb-10 tracking-wide font-light">
-                Geleitet von <strong class="text-white font-bold">nicominecith</strong>. Elite Squad für <span class="text-cyberred font-bold">The Finals</span> &amp; <span class="text-cyberred font-bold">Fortnite</span>. Kompromissloser Skill &amp; Taktik.
-            </p>
+      <div>
+        <span class="info-number">02</span>
+        <div><strong>E-Mail</strong><small>Persönliche Bewerbung senden</small></div>
+      </div>
 
-            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-                <a href="#apply-hub" class="cyber-btn w-full sm:w-auto px-8 py-4 bg-cyberred text-white font-orbitron font-bold text-sm tracking-widest shadow-[0_0_25px_rgba(255,31,61,0.5)] hover:bg-[#ff3852] hover:scale-105 text-center">
-                    🚀 ZUM RECRUITING & GT
-                </a>
-                <a href="#aim-trainer" class="cyber-btn w-full sm:w-auto px-8 py-4 bg-panel border border-white/20 text-white font-orbitron font-bold text-sm tracking-widest hover:border-cyberred hover:bg-cyberred/10 text-center">
-                    ⚡ WARM-UP STARTEN
-                </a>
-            </div>
+      <div>
+        <span class="info-number">03</span>
+        <div><strong>Recruiting</strong><small>Wir melden uns bei dir</small></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<hr class="div">
+
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+
+      <div class="reveal">
+        <div class="eyebrow">Gründer &amp; Head</div>
+        <h2 class="h2">nicominecith</h2>
+
+        <div class="age-note" style="margin-bottom:1.4rem">
+          &#9888; Mindestalter im Club: 13 Jahre
         </div>
-    </header>
 
-    <div class="h-px bg-gradient-to-r from-transparent via-cyberred/50 to-transparent"></div>
+        <p>
+          Gründer, Ingame-Leader (IGL) und Kapitän von NICO GAMING.
+          Der Club fokussiert sich auf kompromisslosen Skill,
+          taktische Präzision und Spitzenleistungen in
+          <strong>The Finals</strong> und <strong>Fortnite</strong>.
+        </p>
 
-    <!-- STATS COUNTER -->
-    <section class="py-12 bg-panel/40 backdrop-blur">
-        <div class="max-w-7xl mx-auto px-4">
-            <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
-                <div class="bg-panel border border-cyberred/20 p-6 text-center relative overflow-hidden group hover:border-cyberred transition-colors">
-                    <div class="absolute bottom-0 left-0 right-0 h-1 bg-cyberred"></div>
-                    <div class="font-orbitron font-black text-3xl md:text-4xl text-white mb-1" data-count="13">0</div>
-                    <div class="font-mono text-xs text-cyberred tracking-widest">MIN. ALTER</div>
-                </div>
-                <div class="bg-panel border border-cyberred/20 p-6 text-center relative overflow-hidden group hover:border-cyberred transition-colors">
-                    <div class="absolute bottom-0 left-0 right-0 h-1 bg-cyberred"></div>
-                    <div class="font-orbitron font-black text-3xl md:text-4xl text-white mb-1" data-count="85">0</div>
-                    <div class="font-mono text-xs text-cyberred tracking-widest">% SPIELER-SPLIT</div>
-                </div>
-                <div class="bg-panel border border-cyberred/20 p-6 text-center relative overflow-hidden group hover:border-cyberred transition-colors">
-                    <div class="absolute bottom-0 left-0 right-0 h-1 bg-cyberred"></div>
-                    <div class="font-orbitron font-black text-3xl md:text-4xl text-white mb-1" data-count="2">0</div>
-                    <div class="font-mono text-xs text-cyberred tracking-widest">ESPORTS GAMES</div>
-                </div>
-                <div class="bg-panel border border-cyberred/20 p-6 text-center relative overflow-hidden group hover:border-cyberred transition-colors">
-                    <div class="absolute bottom-0 left-0 right-0 h-1 bg-cyberred"></div>
-                    <div class="font-orbitron font-black text-3xl md:text-4xl text-white mb-1" data-count="500">0</div>
-                    <div class="font-mono text-xs text-cyberred tracking-widest">€ 3-MONATS-ZIEL</div>
-                </div>
-                <div class="col-span-2 md:col-span-1 bg-panel border border-cyberred/20 p-6 text-center relative overflow-hidden group hover:border-cyberred transition-colors">
-                    <div class="absolute bottom-0 left-0 right-0 h-1 bg-cyberred"></div>
-                    <div class="font-orbitron font-black text-3xl md:text-4xl text-white mb-1" data-count="2026">0</div>
-                    <div class="font-mono text-xs text-cyberred tracking-widest">GRÜNDUNG</div>
-                </div>
-            </div>
+        <p>
+          Mit klaren Regeln, einem fairen 85&nbsp;% Spieler-Split
+          und zielgerichtetem Training bauen wir eine starke
+          Gaming-Community auf.
+        </p>
+      </div>
+
+      <div class="reveal">
+        <div class="eyebrow">Founder's Hardware</div>
+        <h2 class="h2" style="font-size:1.7rem">Profi <span>Equipment</span></h2>
+
+        <div class="gear-note">
+          &#9888; Hinweis: Dieses Equipment dient als Pro-Empfehlung.
+          Jedes Mitglied beschafft seine Hardware eigenständig.
         </div>
-    </section>
 
-    <div class="h-px bg-gradient-to-r from-transparent via-cyberred/50 to-transparent"></div>
-
-    <!-- RECRUITING & GAMERTRANSFER HUB -->
-    <section id="apply-hub" class="py-24 px-4 bg-gradient-to-b from-darkbg via-[#080812] to-darkbg relative">
-        <div class="max-w-7xl mx-auto">
-            
-            <div class="text-center max-w-3xl mx-auto mb-16">
-                <div class="font-mono text-xs text-cyberred tracking-widest mb-2">// RECRUITING & PARTNERSCHAFTEN</div>
-                <h2 class="font-orbitron font-black text-3xl sm:text-5xl text-white tracking-wider mb-6">
-                    WERDE TEIL DES <span class="text-cyberred text-glow-red">N1CO SQUADS</span>
-                </h2>
-                <p class="text-gray-300 text-lg font-light leading-relaxed">
-                    Wähle deinen direkten Weg ins Team. Nutze unsere offizielle <strong class="text-white">Gamertransfer</strong> Partnerschaft für sofortiges Squad-Matching oder bewirb dich über unser direktes E-Mail-Bewerbungsformular.
-                </p>
+        <div class="card" style="overflow:hidden;background:var(--panel);border:1px solid var(--line);border-radius:6px">
+          <a href="https://www.amazon.de/Microsoft-Xbox-Halo-Infinite-Limited/dp/B09NMWSLR6" target="_blank" rel="noopener noreferrer" class="gear-item">
+            <div class="gear-icon">&#127918;</div>
+            <div>
+              <div class="gear-kicker">PLATTFORM</div>
+              <div class="gear-title">Xbox Series X</div>
+              <div class="gear-sub">Halo Infinite Limited Edition</div>
             </div>
+          </a>
 
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
-                
-                <!-- GAMERTRANSFER CARD -->
-                <div class="bg-panel border-2 border-cyberblue/40 rounded-lg p-6 sm:p-10 flex flex-col justify-between box-glow-blue relative overflow-hidden group hover:border-cyberblue transition-all">
-                    <div class="absolute top-0 right-0 w-32 h-32 bg-cyberblue/10 rounded-full blur-2xl group-hover:bg-cyberblue/25 transition-all"></div>
-                    
-                    <div>
-                        <div class="flex flex-wrap items-center justify-between gap-2 mb-6">
-                            <span class="font-mono text-xs text-cyberblue tracking-widest bg-cyberblue/10 px-3 py-1 rounded border border-cyberblue/30">[ OFFIZIELLER PARTNER ]</span>
-                            <span class="font-mono text-xs text-emerald-400 bg-emerald-500/10 px-3 py-1 rounded border border-emerald-500/30 flex items-center gap-1.5">
-                                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> AKTIVES LFM
-                            </span>
-                        </div>
-
-                        <h3 class="font-orbitron font-black text-2xl sm:text-4xl text-white mb-4 text-glow-blue">
-                            GAMERTRANSFER
-                        </h3>
-                        
-                        <p class="text-gray-300 text-base sm:text-lg leading-relaxed mb-8">
-                            Unser verifiziertes Inserat auf Gamertransfer ist der schnellste Weg, um Statistiken abzugleichen, direkt mit dem Team zu chatten und dem Squad beizutreten.
-                        </p>
-
-                        <div class="space-y-4 mb-10 font-mono text-sm text-gray-200">
-                            <div class="flex items-center gap-3 p-3 rounded bg-panel2 border border-white/5">
-                                <span class="text-cyberblue font-bold text-lg">✓</span> Direktes Squad-Matching &amp; Statistiken
-                            </div>
-                            <div class="flex items-center gap-3 p-3 rounded bg-panel2 border border-white/5">
-                                <span class="text-cyberblue font-bold text-lg">✓</span> Offiziell verifiziertes Team-Profil
-                            </div>
-                            <div class="flex items-center gap-3 p-3 rounded bg-panel2 border border-white/5">
-                                <span class="text-cyberblue font-bold text-lg">✓</span> Schneller direkter Chat mit nicominecith
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="space-y-4">
-                        <a href="https://gamertransfer.com/nico_gaming_the_finals-lfm-2-35968.html" target="_blank" rel="noopener noreferrer" class="cyber-btn block w-full py-4 px-6 bg-gradient-to-r from-blue-700 to-cyberblue text-white font-orbitron font-bold text-sm tracking-widest text-center shadow-[0_0_25px_rgba(0,102,255,0.4)] hover:brightness-125 transition-all">
-                            🌐 ZUM GAMERTRANSFER INSERAT
-                        </a>
-                        <a href="https://www.instagram.com/nico.gaming2026" target="_blank" rel="noopener noreferrer" class="cyber-btn block w-full py-4 px-6 bg-gradient-to-r from-amber-600 via-rose-600 to-purple-700 text-white font-orbitron font-bold text-sm tracking-widest text-center shadow-[0_0_25px_rgba(220,39,67,0.4)] hover:brightness-125 transition-all">
-                            📸 INSTAGRAM @NICO.GAMING2026
-                        </a>
-                    </div>
-                </div>
-
-                <!-- EMAIL APPLICATION FORM CARD -->
-                <div class="bg-panel border-2 border-cyberred/40 rounded-lg p-6 sm:p-10 flex flex-col justify-between box-glow-red relative overflow-hidden group hover:border-cyberred transition-all">
-                    <div class="absolute top-0 right-0 w-32 h-32 bg-cyberred/10 rounded-full blur-2xl group-hover:bg-cyberred/25 transition-all"></div>
-                    
-                    <div>
-                        <div class="flex flex-wrap items-center justify-between gap-2 mb-6">
-                            <span class="font-mono text-xs text-cyberred tracking-widest bg-cyberred/10 px-3 py-1 rounded border border-cyberred/30">[ DIREKT-BEWERBUNG ]</span>
-                            <span class="font-mono text-xs text-cyberred bg-cyberred/10 px-3 py-1 rounded border border-cyberred/30">MIN. 13 JAHRE</span>
-                        </div>
-
-                        <h3 class="font-orbitron font-black text-2xl sm:text-4xl text-white mb-2 text-glow-red">
-                            E-MAIL FORMULAR
-                        </h3>
-                        <p class="text-gray-400 text-sm mb-6">Fülle die Felder aus, um deine Bewerbung direkt abzusenden:</p>
-
-                        <form id="applyForm" onsubmit="submitApplication(event)" class="space-y-4 mb-6">
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                <div>
-                                    <label class="block font-mono text-xs text-gray-400 tracking-wider mb-2">NAME *</label>
-                                    <input type="text" id="fname" required placeholder="Vollständiger Name" class="w-full bg-darkbg border border-white/15 rounded p-3 text-white font-barlow text-lg focus:outline-none focus:border-cyberred focus:ring-1 focus:ring-cyberred transition-all">
-                                </div>
-                                <div>
-                                    <label class="block font-mono text-xs text-gray-400 tracking-wider mb-2">INGAME NAME *</label>
-                                    <input type="text" id="fnick" required placeholder="Nickname" class="w-full bg-darkbg border border-white/15 rounded p-3 text-white font-barlow text-lg focus:outline-none focus:border-cyberred focus:ring-1 focus:ring-cyberred transition-all">
-                                </div>
-                            </div>
-
-                            <div>
-                                <label class="block font-mono text-xs text-gray-400 tracking-wider mb-2">E-MAIL-ADRESSE *</label>
-                                <input type="email" id="femail" required placeholder="mail@beispiel.com" class="w-full bg-darkbg border border-white/15 rounded p-3 text-white font-barlow text-lg focus:outline-none focus:border-cyberred focus:ring-1 focus:ring-cyberred transition-all">
-                            </div>
-
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                <div>
-                                    <label class="block font-mono text-xs text-gray-400 tracking-wider mb-2">ALTER *</label>
-                                    <input type="number" id="fage" required min="13" max="99" placeholder="Min. 13" class="w-full bg-darkbg border border-white/15 rounded p-3 text-white font-barlow text-lg focus:outline-none focus:border-cyberred focus:ring-1 focus:ring-cyberred transition-all">
-                                </div>
-                                <div>
-                                    <label class="block font-mono text-xs text-gray-400 tracking-wider mb-2">ZIEL-SPIEL *</label>
-                                    <select id="fgame" required class="w-full bg-darkbg border border-white/15 rounded p-3 text-white font-barlow text-lg focus:outline-none focus:border-cyberred focus:ring-1 focus:ring-cyberred transition-all">
-                                        <option value="" disabled selected>Spiel wählen...</option>
-                                        <option value="The Finals">The Finals</option>
-                                        <option value="Fortnite">Fortnite</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div>
-                                <label class="block font-mono text-xs text-gray-400 tracking-wider mb-2">DISCORD TAG (OPTIONAL)</label>
-                                <input type="text" id="fdisc" placeholder="username#0000" class="w-full bg-darkbg border border-white/15 rounded p-3 text-white font-barlow text-lg focus:outline-none focus:border-cyberred focus:ring-1 focus:ring-cyberred transition-all">
-                            </div>
-
-                            <div class="flex items-start gap-3 pt-2">
-                                <input type="checkbox" id="fcheck" required class="mt-1 w-4 h-4 accent-cyberred rounded cursor-pointer">
-                                <label for="fcheck" class="text-xs text-gray-300 font-barlow leading-relaxed cursor-pointer">
-                                    Ich bestätige das Mindestalter von 13 Jahren sowie eigenes Gaming-Equipment für den eSports-Club.
-                                </label>
-                            </div>
-
-                            <button type="submit" class="cyber-btn w-full py-4 px-6 bg-cyberred text-white font-orbitron font-bold text-sm tracking-widest shadow-[0_0_25px_rgba(255,31,61,0.5)] hover:bg-[#ff3852] transition-all">
-                                📤 BEWERBUNG ALS E-MAIL ABSENDEN
-                            </button>
-                        </form>
-                    </div>
-
-                    <div id="formSuccessMessage" class="hidden p-4 rounded bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 font-mono text-xs text-center">
-                        ✓ Bewerbung vorbereitet! Dein E-Mail-Client wurde geöffnet.
-                    </div>
-                </div>
-
+          <a href="https://de.turtlebeach.com/products/recon-controller" target="_blank" rel="noopener noreferrer" class="gear-item">
+            <div class="gear-icon">&#127919;</div>
+            <div>
+              <div class="gear-kicker">CONTROLLER</div>
+              <div class="gear-title">Turtle Beach Recon™</div>
+              <div class="gear-sub">High-Performance Wired Controller</div>
             </div>
+          </a>
+
+          <a href="https://de.turtlebeach.com/products/atlas-200-headset" target="_blank" rel="noopener noreferrer" class="gear-item">
+            <div class="gear-icon">&#127911;</div>
+            <div>
+              <div class="gear-kicker">AUDIO</div>
+              <div class="gear-title">Turtle Beach Atlas 200</div>
+              <div class="gear-sub">Pro Gaming Headset</div>
+            </div>
+          </a>
         </div>
-    </section>
+      </div>
 
-    <div class="h-px bg-gradient-to-r from-transparent via-cyberred/50 to-transparent"></div>
+    </div>
+  </div>
+</section>
 
-    <!-- ABOUT FOUNDER -->
-    <section id="about" class="py-24 px-4 bg-panel/20">
-        <div class="max-w-7xl mx-auto">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                <div>
-                    <div class="font-mono text-xs text-cyberred tracking-widest mb-2">// GRÜNDER & HEAD</div>
-                    <h2 class="font-orbitron font-black text-3xl sm:text-5xl text-white tracking-wider mb-6">
-                        NICOMINECITH
-                    </h2>
-                    <div class="inline-flex items-center gap-2 px-3 py-1 bg-cyberred/10 border border-cyberred/30 text-cyberred font-mono text-xs mb-6 rounded">
-                        ⚠ MINDESTALTER IM CLUB: 13 JAHRE
-                    </div>
-                    <p class="text-gray-300 font-light text-lg leading-relaxed mb-6">
-                        Gründer, Ingame-Leader (IGL) und Kapitän von NICO GAMING. Der Club fokussiert sich auf kompromisslosen Skill, taktische Präzision und Spitzenleistungen in <strong class="text-white font-bold">The Finals</strong> und <strong class="text-white font-bold">Fortnite</strong>.
-                    </p>
-                    <p class="text-gray-400 font-light text-base leading-relaxed">
-                        Mit klaren Regeln, einem fairen 85% Spieler-Split und zielgerichtetem Training bauen wir eine der stärksten esports-Communitys auf.
-                    </p>
-                </div>
+<hr class="div">
 
-                <div>
-                    <div class="font-mono text-xs text-cyberred tracking-widest mb-2">// FOUNDER'S HARDWARE & SETUP</div>
-                    <h3 class="font-orbitron font-black text-2xl sm:text-3xl text-white tracking-wider mb-4">
-                        PROFI <span class="text-cyberred">EQUIPMENT</span>
-                    </h3>
-                    <div class="p-3 bg-cyberred/5 border border-cyberred/20 text-xs font-mono text-gray-300 mb-6 rounded">
-                        ⚠ HINWEIS: Dieses Equipment dient als offizielle Pro-Empfehlung. Jedes Mitglied beschafft seine Hardware eigenständig.
-                    </div>
+<section id="skills">
+  <div class="container reveal">
+    <div class="eyebrow">Performance-Metriken</div>
+    <h2 class="h2">Skill <span>Analyse</span></h2>
 
-                    <div class="bg-panel border border-cyberred/20 rounded divide-y divide-white/5 overflow-hidden">
-                        <a href="https://www.amazon.de/Microsoft-Xbox-Halo-Infinite-Limited/dp/B09NMWSLR6" target="_blank" rel="noopener noreferrer" class="flex items-center gap-4 p-4 hover:bg-cyberred/10 transition-colors border-l-4 border-l-transparent hover:border-l-cyberred">
-                            <div class="w-12 h-12 bg-cyberred/10 border border-cyberred/30 rounded flex items-center justify-center text-xl shrink-0">🎮</div>
-                            <div>
-                                <div class="font-mono text-xs text-cyberred tracking-widest">PLATTFORM</div>
-                                <div class="text-white font-bold text-lg">Xbox Series X</div>
-                                <div class="text-gray-400 text-sm">Halo Infinite Limited Edition</div>
-                            </div>
-                        </a>
-                        <a href="https://de.turtlebeach.com/products/recon-controller" target="_blank" rel="noopener noreferrer" class="flex items-center gap-4 p-4 hover:bg-cyberred/10 transition-colors border-l-4 border-l-transparent hover:border-l-cyberred">
-                            <div class="w-12 h-12 bg-cyberred/10 border border-cyberred/30 rounded flex items-center justify-center text-xl shrink-0">🎯</div>
-                            <div>
-                                <div class="font-mono text-xs text-cyberred tracking-widest">CONTROLLER</div>
-                                <div class="text-white font-bold text-lg">Turtle Beach Recon™</div>
-                                <div class="text-gray-400 text-sm">High-Performance Wired Controller</div>
-                            </div>
-                        </a>
-                        <a href="https://de.turtlebeach.com/products/atlas-200-headset" target="_blank" rel="noopener noreferrer" class="flex items-center gap-4 p-4 hover:bg-cyberred/10 transition-colors border-l-4 border-l-transparent hover:border-l-cyberred">
-                            <div class="w-12 h-12 bg-cyberred/10 border border-cyberred/30 rounded flex items-center justify-center text-xl shrink-0">🎧</div>
-                            <div>
-                                <div class="font-mono text-xs text-cyberred tracking-widest">AUDIO</div>
-                                <div class="text-white font-bold text-lg">Turtle Beach Atlas 200</div>
-                                <div class="text-gray-400 text-sm">Pro Gaming Headset</div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
+    <div class="skill-cols">
+      <div>
+        <div class="skill">
+          <div class="lbl"><span>THE FINALS META</span><span>95%</span></div>
+          <div class="track"><div class="fill" data-width="95"></div></div>
         </div>
-    </section>
 
-    <div class="h-px bg-gradient-to-r from-transparent via-cyberred/50 to-transparent"></div>
-
-    <!-- SKILLS SECTION -->
-    <section id="skills" class="py-24 px-4 bg-darkbg">
-        <div class="max-w-7xl mx-auto">
-            <div class="font-mono text-xs text-cyberred tracking-widest mb-2">// PERFORMANCE METRIKEN</div>
-            <h2 class="font-orbitron font-black text-3xl sm:text-5xl text-white tracking-wider mb-12">
-                SKILL <span class="text-cyberred">ANALYSE</span>
-            </h2>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
-                <div class="space-y-6">
-                    <div>
-                        <div class="flex justify-between font-mono text-xs tracking-wider text-gray-300 mb-2">
-                            <span>THE FINALS META</span><span class="text-cyberred font-bold">95%</span>
-                        </div>
-                        <div class="h-2 bg-panel2 rounded overflow-hidden border border-white/10">
-                            <div class="h-full bg-gradient-to-r from-cyberred to-rose-500 w-[95%] shadow-[0_0_10px_var(--cyberred)]"></div>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="flex justify-between font-mono text-xs tracking-wider text-gray-300 mb-2">
-                            <span>FORTNITE BUILD/EDIT</span><span class="text-cyberred font-bold">90%</span>
-                        </div>
-                        <div class="h-2 bg-panel2 rounded overflow-hidden border border-white/10">
-                            <div class="h-full bg-gradient-to-r from-cyberred to-rose-500 w-[90%] shadow-[0_0_10px_var(--cyberred)]"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="space-y-6">
-                    <div>
-                        <div class="flex justify-between font-mono text-xs tracking-wider text-gray-300 mb-2">
-                            <span>AIM PRECISION</span><span class="text-cyberred font-bold">95%</span>
-                        </div>
-                        <div class="h-2 bg-panel2 rounded overflow-hidden border border-white/10">
-                            <div class="h-full bg-gradient-to-r from-cyberred to-rose-500 w-[95%] shadow-[0_0_10px_var(--cyberred)]"></div>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="flex justify-between font-mono text-xs tracking-wider text-gray-300 mb-2">
-                            <span>TACTICAL GAME IQ</span><span class="text-cyberred font-bold">92%</span>
-                        </div>
-                        <div class="h-2 bg-panel2 rounded overflow-hidden border border-white/10">
-                            <div class="h-full bg-gradient-to-r from-cyberred to-rose-500 w-[92%] shadow-[0_0_10px_var(--cyberred)]"></div>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="flex justify-between font-mono text-xs tracking-wider text-gray-300 mb-2">
-                            <span>TEAM SYNERGY</span><span class="text-cyberred font-bold">96%</span>
-                        </div>
-                        <div class="h-2 bg-panel2 rounded overflow-hidden border border-white/10">
-                            <div class="h-full bg-gradient-to-r from-cyberred to-rose-500 w-[96%] shadow-[0_0_10px_var(--cyberred)]"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="skill">
+          <div class="lbl"><span>FORTNITE BUILD/EDIT</span><span>90%</span></div>
+          <div class="track"><div class="fill" data-width="90"></div></div>
         </div>
-    </section>
+      </div>
 
-    <div class="h-px bg-gradient-to-r from-transparent via-cyberred/50 to-transparent"></div>
-
-    <!-- AIM TRAINER MINI-GAME -->
-    <section id="aim-trainer" class="py-24 px-4 bg-panel/30">
-        <div class="max-w-4xl mx-auto">
-            <div class="text-center mb-10">
-                <div class="font-mono text-xs text-cyberred tracking-widest mb-2">// MINI-GAME TRAINING</div>
-                <h2 class="font-orbitron font-black text-3xl sm:text-4xl text-white tracking-wider mb-4">
-                    PRO AIM <span class="text-cyberred">TRAINER</span>
-                </h2>
-                <p class="text-gray-400 text-sm">Teste deine Reflexe im Mini-Drill. Kompatibel mit Maus und Touch.</p>
-            </div>
-
-            <div class="flex flex-wrap justify-between items-center bg-panel border border-cyberred/30 p-4 rounded-t-lg font-mono text-sm gap-4">
-                <div class="flex gap-6">
-                    <div>SCORE: <span id="aim-score" class="text-cyberred font-bold text-lg">0</span></div>
-                    <div>ZEIT: <span id="aim-time" class="text-white font-bold text-lg">30</span>s</div>
-                    <div>ACCURACY: <span id="aim-acc" class="text-amber-400 font-bold text-lg">0%</span></div>
-                </div>
-                <div>
-                    <span id="controller-label" class="px-3 py-1 rounded bg-panel2 border border-white/10 text-xs text-gray-400">⚡ CONTROLLER: OFFLINE</span>
-                </div>
-            </div>
-
-            <div class="relative w-full h-[380px] bg-[#070710] border-x border-b border-cyberred/30 rounded-b-lg overflow-hidden shadow-[inset_0_0_40px_rgba(0,0,0,0.9)]">
-                <canvas id="aim-canvas" class="w-full h-full block cursor-crosshair touch-none"></canvas>
-                
-                <div id="aim-start-overlay" class="absolute inset-0 bg-darkbg/90 backdrop-blur-md flex flex-col items-center justify-center p-6 text-center">
-                    <h3 class="font-orbitron font-black text-2xl text-white mb-2">AIM WARM-UP DRILL</h3>
-                    <p class="font-mono text-xs text-gray-400 tracking-wider mb-6">KLICKEN ODER TIPPEN UM DIE RUNDE ZU STARTEN</p>
-                    <button onclick="startAimGame()" class="cyber-btn px-8 py-3 bg-cyberred text-white font-orbitron font-bold text-sm tracking-widest shadow-[0_0_20px_rgba(255,31,61,0.5)]">
-                        ⚡ DRILL STARTEN
-                    </button>
-                </div>
-            </div>
-
-            <!-- Leaderboard -->
-            <div class="mt-10">
-                <div class="font-mono text-xs text-cyberred tracking-widest mb-3">// SESSION HIGH SCORES</div>
-                <div class="bg-panel border border-cyberred/20 rounded overflow-hidden font-mono text-xs sm:text-sm">
-                    <div class="grid grid-cols-4 p-3 border-b border-cyberred/30 text-gray-400 tracking-widest font-bold">
-                        <span>#</span><span>SPIELER</span><span>GENAUIGKEIT</span><span>SCORE</span>
-                    </div>
-                    <div id="leaderboard">
-                        <div class="grid grid-cols-4 p-3 border-b border-white/5 items-center">
-                            <span class="text-amber-400 font-bold">1</span>
-                            <span class="text-white">N1CO_PRO</span>
-                            <span class="text-gray-400">&mdash;</span>
-                            <span class="text-cyberred font-bold">&mdash;</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+      <div>
+        <div class="skill">
+          <div class="lbl"><span>AIM PRECISION</span><span>95%</span></div>
+          <div class="track"><div class="fill" data-width="95"></div></div>
         </div>
-    </section>
 
-    <div class="h-px bg-gradient-to-r from-transparent via-cyberred/50 to-transparent"></div>
-
-    <!-- TEAM ROSTER -->
-    <section id="roster" class="py-24 px-4 bg-darkbg">
-        <div class="max-w-7xl mx-auto">
-            <div class="font-mono text-xs text-cyberred tracking-widest mb-2">// ACTIVE ROSTER</div>
-            <h2 class="font-orbitron font-black text-3xl sm:text-5xl text-white tracking-wider mb-12">
-                TEAM <span class="text-cyberred">KADER</span>
-            </h2>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="bg-panel border border-cyberred/30 rounded p-6 text-center hover:border-cyberred hover:shadow-[0_0_25px_rgba(255,31,61,0.2)] transition-all group">
-                    <div class="w-20 h-20 mx-auto rounded-full bg-cyberred/10 border-2 border-cyberred flex items-center justify-center text-3xl mb-4 shadow-[0_0_15px_rgba(255,31,61,0.4)] group-hover:scale-105 transition-transform">👑</div>
-                    <div class="font-orbitron font-black text-lg text-white mb-1">N1CO</div>
-                    <div class="font-mono text-xs text-amber-400 tracking-widest mb-3">FOUNDER / IGL</div>
-                    <div class="text-xs text-gray-400">The Finals &middot; Fortnite</div>
-                </div>
-
-                <div class="bg-panel border border-white/10 rounded p-6 text-center hover:border-cyberred hover:shadow-[0_0_25px_rgba(255,31,61,0.2)] transition-all group">
-                    <div class="w-20 h-20 mx-auto rounded-full bg-panel2 border-2 border-cyberred/40 flex items-center justify-center text-3xl mb-4 group-hover:scale-105 transition-transform">🎯</div>
-                    <div class="font-orbitron font-black text-lg text-white mb-1">SLOT OFFEN</div>
-                    <div class="font-mono text-xs text-cyberred tracking-widest mb-3">FRAGGER</div>
-                    <div class="text-xs text-gray-400">Bewerbung via Gamertransfer</div>
-                </div>
-
-                <div class="bg-panel border border-white/10 rounded p-6 text-center hover:border-cyberred hover:shadow-[0_0_25px_rgba(255,31,61,0.2)] transition-all group">
-                    <div class="w-20 h-20 mx-auto rounded-full bg-panel2 border-2 border-cyberred/40 flex items-center justify-center text-3xl mb-4 group-hover:scale-105 transition-transform">🛡️</div>
-                    <div class="font-orbitron font-black text-lg text-white mb-1">SLOT OFFEN</div>
-                    <div class="font-mono text-xs text-cyberred tracking-widest mb-3">SUPPORT</div>
-                    <div class="text-xs text-gray-400">Bewerbung via Gamertransfer</div>
-                </div>
-
-                <div class="bg-panel border border-white/10 rounded p-6 text-center hover:border-cyberred hover:shadow-[0_0_25px_rgba(255,31,61,0.2)] transition-all group">
-                    <div class="w-20 h-20 mx-auto rounded-full bg-panel2 border-2 border-cyberred/40 flex items-center justify-center text-3xl mb-4 group-hover:scale-105 transition-transform">⚡</div>
-                    <div class="font-orbitron font-black text-lg text-white mb-1">SLOT OFFEN</div>
-                    <div class="font-mono text-xs text-cyberred tracking-widest mb-3">BUILDER / SCOUT</div>
-                    <div class="text-xs text-gray-400">Bewerbung via Gamertransfer</div>
-                </div>
-            </div>
+        <div class="skill">
+          <div class="lbl"><span>TACTICAL GAME IQ</span><span>92%</span></div>
+          <div class="track"><div class="fill" data-width="92"></div></div>
         </div>
-    </section>
 
-    <div class="h-px bg-gradient-to-r from-transparent via-cyberred/50 to-transparent"></div>
-
-    <!-- CONTRACT RULES -->
-    <section id="contract" class="py-24 px-4 bg-panel/20">
-        <div class="max-w-7xl mx-auto">
-            <div class="font-mono text-xs text-cyberred tracking-widest mb-2">// CLUB STATUTEN</div>
-            <h2 class="font-orbitron font-black text-3xl sm:text-5xl text-white tracking-wider mb-12">
-                PRO-VERTRAG <span class="text-cyberred">REGELN</span>
-            </h2>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="bg-panel border border-cyberred/20 border-l-4 border-l-cyberred p-6 rounded">
-                    <div class="font-mono text-xs text-cyberred tracking-widest mb-2">&sect; 01 &mdash; IDENTITÄT</div>
-                    <div class="font-orbitron font-bold text-lg text-white mb-3">N1CO TAG PFLICHT</div>
-                    <p class="text-gray-300 text-sm leading-relaxed">Alle aktiven Club-Mitglieder führen verbindlich das Kürzel <strong class="text-white">&quot;N1CO |&quot;</strong> vor ihrem Ingame-Namen.</p>
-                </div>
-                <div class="bg-panel border border-cyberred/20 border-l-4 border-l-cyberred p-6 rounded">
-                    <div class="font-mono text-xs text-cyberred tracking-widest mb-2">&sect; 02 &mdash; ALTER</div>
-                    <div class="font-orbitron font-bold text-lg text-white mb-3">MINDESTALTER 13</div>
-                    <p class="text-gray-300 text-sm leading-relaxed">Bewerber müssen <strong class="text-cyberred font-bold">mindestens 13 Jahre</strong> alt sein. Bei Minderjährigen ist die Erlaubnis der Erziehungsberechtigten erforderlich.</p>
-                </div>
-                <div class="bg-panel border border-cyberred/20 border-l-4 border-l-cyberred p-6 rounded">
-                    <div class="font-mono text-xs text-cyberred tracking-widest mb-2">&sect; 03 &mdash; FINANZEN</div>
-                    <div class="font-orbitron font-bold text-lg text-white mb-3">500€ / 85% SPLIT</div>
-                    <p class="text-gray-300 text-sm leading-relaxed">Zielvolumen an Preisgeldern. <strong class="text-white font-bold">85%</strong> der generierten Einnahmen verbleiben direkt beim aktiven Spieler.</p>
-                </div>
-                <div class="bg-panel border border-cyberred/20 border-l-4 border-l-cyberred p-6 rounded">
-                    <div class="font-mono text-xs text-cyberred tracking-widest mb-2">&sect; 04 &mdash; EQUIPMENT</div>
-                    <div class="font-orbitron font-bold text-lg text-white mb-3">EIGENE BESCHAFFUNG</div>
-                    <p class="text-gray-300 text-sm leading-relaxed">Hardware und Peripherie sind vom Spieler selbst bereitzustellen. <strong class="text-cyberred font-bold">Es werden keine Club-Geräte gestellt.</strong></p>
-                </div>
-            </div>
+        <div class="skill">
+          <div class="lbl"><span>TEAM SYNERGY</span><span>96%</span></div>
+          <div class="track"><div class="fill" data-width="96"></div></div>
         </div>
-    </section>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <div class="h-px bg-gradient-to-r from-transparent via-cyberred/50 to-transparent"></div>
+<hr class="div">
 
-    <!-- TWITCH LIVE -->
-    <section id="twitch" class="py-24 px-4 bg-darkbg">
-        <div class="max-w-4xl mx-auto">
-            <div class="bg-gradient-to-br from-[#6441a5]/20 via-panel to-darkbg border border-[#6441a5]/50 rounded-2xl p-8 sm:p-12 text-center relative overflow-hidden shadow-[0_0_40px_rgba(100,65,165,0.2)]">
-                <div class="font-mono text-xs text-purple-400 tracking-widest mb-2">// LIVE STREAMING</div>
-                <h3 class="font-orbitron font-black text-2xl sm:text-4xl text-white mb-3">NICOMINECITH_TTV</h3>
-                <div class="flex items-center justify-center gap-2 mb-8 font-mono text-xs text-gray-300">
-                    <span class="w-2.5 h-2.5 rounded-full bg-red-500 animate-pulse"></span> STREAMS: THE FINALS &middot; FORTNITE
-                </div>
-                <a href="https://www.twitch.tv/Nicominecith_TTV" target="_blank" rel="noopener noreferrer" class="cyber-btn inline-flex items-center gap-3 px-8 py-4 bg-[#6441a5] text-white font-orbitron font-bold text-sm tracking-widest shadow-[0_0_25px_rgba(100,65,165,0.5)] hover:bg-[#7749bc] transition-all">
-                    🎮 ZUM TWITCH STREAM
-                </a>
-            </div>
+<section id="aim-trainer">
+  <div class="container">
+    <div class="eyebrow reveal">Mini-Game Training</div>
+    <h2 class="h2 reveal">Pro Aim <span>Trainer</span></h2>
+
+    <div class="trainer-hud reveal">
+      <div class="hud-stats">
+        <div>SCORE: <b id="aim-score">0</b></div>
+        <div>ZEIT: <b id="aim-time" style="color:#fff">30</b>s</div>
+        <div>ACCURACY: <b id="aim-acc" style="color:var(--gold)">0%</b></div>
+      </div>
+      <span id="controller-label">&#9673; CONTROLLER: OFFLINE</span>
+    </div>
+
+    <div class="trainer-wrap reveal">
+      <canvas id="aim-canvas"></canvas>
+
+      <div id="aim-overlay">
+        <div>
+          <div class="t">Aim Warm-Up Drill</div>
+          <div class="s">KLICKEN ODER TIPPEN, UM ZU STARTEN</div>
+          <button onclick="startAimGame()" class="btn btn-red">Drill starten</button>
         </div>
-    </section>
+      </div>
+    </div>
 
-    <!-- FOOTER -->
-    <footer class="bg-[#020204] border-t border-white/10 py-16 px-4 text-center">
-        <div class="max-w-7xl mx-auto">
-            <div class="font-orbitron font-black text-xl text-white tracking-wider mb-4">
-                NICO<span class="text-cyberred">GAMING</span>
-            </div>
-            <div class="flex flex-wrap justify-center gap-8 font-mono text-xs text-gray-400 mb-8">
-                <a href="https://gamertransfer.com/nico_gaming_the_finals-lfm-2-35968.html" target="_blank" rel="noopener noreferrer" class="hover:text-cyberblue transition-colors">Gamertransfer</a>
-                <a href="https://www.instagram.com/nico.gaming2026" target="_blank" rel="noopener noreferrer" class="hover:text-rose-500 transition-colors">Instagram</a>
-                <a href="https://www.twitch.tv/Nicominecith_TTV" target="_blank" rel="noopener noreferrer" class="hover:text-purple-400 transition-colors">Twitch</a>
-            </div>
-            <div class="font-mono text-xs text-gray-600 tracking-widest">
-                &copy; 2026 NICO GAMING ESPORTS &middot; FOUNDER: NICOMINECITH &middot; MINDESTALTER: 13 JAHRE
-            </div>
+    <div class="lb reveal">
+      <div class="eyebrow">Session High Scores</div>
+
+      <div class="card" style="overflow:hidden;background:var(--panel);border:1px solid var(--line);border-radius:6px">
+        <div class="lb-row head">
+          <span>#</span><span>SPIELER</span><span>GENAUIGKEIT</span><span>SCORE</span>
         </div>
-    </footer>
 
-    <script>
-        // MOBILE MENU TOGGLE
-        function toggleMobileMenu() {
-            const menu = document.getElementById('mobileMenu');
-            const bar1 = document.getElementById('bar1');
-            const bar2 = document.getElementById('bar2');
-            const bar3 = document.getElementById('bar3');
-            
-            menu.classList.toggle('translate-x-full');
-            document.body.classList.toggle('overflow-hidden');
+        <div id="leaderboard">
+          <div class="lb-row">
+            <span class="lb-rank gold">1</span>
+            <span>N1CO_PRO</span>
+            <span style="color:var(--ink-dim)">—</span>
+            <span class="lb-score">—</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-            if (!menu.classList.contains('translate-x-full')) {
-                bar1.style.transform = 'rotate(45deg) translate(5px, 5px)';
-                bar2.style.opacity = '0';
-                bar3.style.transform = 'rotate(-45deg) translate(5px, -5px)';
-            } else {
-                bar1.style.transform = 'none';
-                bar2.style.opacity = '1';
-                bar3.style.transform = 'none';
-            }
-        }
+<hr class="div">
 
-        // EMAIL APPLICATION FORM HANDLER
-        function submitApplication(e) {
-            e.preventDefault();
-            const name = document.getElementById('fname').value;
-            const nick = document.getElementById('fnick').value;
-            const email = document.getElementById('femail').value;
-            const age = document.getElementById('fage').value;
-            const game = document.getElementById('fgame').value;
-            const disc = document.getElementById('fdisc').value || 'Keine Angabe';
+<section id="roster">
+  <div class="container">
+    <div class="eyebrow reveal">Active Roster</div>
+    <h2 class="h2 reveal">Team <span>Kader</span></h2>
 
-            const subject = encodeURIComponent("🎮 Offizielle Bewerbung: " + nick + " (" + game + ")");
-            const body = encodeURIComponent(
-                "Hi nicominecith,\n\nhier ist eine neue Bewerbung für NICO GAMING:\n\n" +
-                "----------------------------------------\n" +
-                "• Name: " + name + "\n" +
-                "• Ingame-Name: " + nick + "\n" +
-                "• E-Mail: " + email + "\n" +
-                "• Alter: " + age + "\n" +
-                "• Ziel-Spiel: " + game + "\n" +
-                "• Discord: " + disc + "\n" +
-                "• Bestätigung: Equipment & Alter (13+) vorhanden\n" +
-                "----------------------------------------\n\n" +
-                "Gesendet über das offizielle NICO GAMING Webportal."
-            );
+    <div class="roster-grid">
+      <div class="roster-card lead reveal">
+        <div class="avatar">&#128081;</div>
+        <div class="roster-name">N1CO</div>
+        <div class="roster-role">FOUNDER / IGL</div>
+        <div class="roster-sub">The Finals &middot; Fortnite</div>
+      </div>
 
-            document.getElementById('formSuccessMessage').classList.remove('hidden');
-            window.location.href = `mailto:nicominecithclips@gmail.com?subject=${subject}&body=${body}`;
-        }
+      <div class="roster-card reveal">
+        <div class="avatar">&#127919;</div>
+        <div class="roster-name">Slot offen</div>
+        <div class="roster-role open">FRAGGER</div>
+        <div class="roster-sub">Bewerbung via Gamertransfer</div>
+      </div>
 
-        // STATS COUNTER ANIMATION
-        const counterObserver = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.querySelectorAll('[data-count]').forEach(el => {
-                        const target = parseInt(el.dataset.count);
-                        let current = 0;
-                        const duration = 1500;
-                        const stepTime = 16;
-                        const increment = target / (duration / stepTime);
-                        const timer = setInterval(() => {
-                            current += increment;
-                            if (current >= target) {
-                                el.textContent = target;
-                                clearInterval(timer);
-                            } else {
-                                el.textContent = Math.floor(current);
-                            }
-                        }, stepTime);
-                    });
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.3 });
+      <div class="roster-card reveal">
+        <div class="avatar">&#128737;&#65039;</div>
+        <div class="roster-name">Slot offen</div>
+        <div class="roster-role open">SUPPORT</div>
+        <div class="roster-sub">Bewerbung via Gamertransfer</div>
+      </div>
 
-        document.querySelectorAll('section').forEach(sec => counterObserver.observe(sec));
+      <div class="roster-card reveal">
+        <div class="avatar">&#128269;</div>
+        <div class="roster-name">Slot offen</div>
+        <div class="roster-role open">BUILDER / SCOUT</div>
+        <div class="roster-sub">Bewerbung via Gamertransfer</div>
+      </div>
+    </div>
+  </div>
+</section>
 
-        // AIM TRAINER MINI-GAME LOGIC
-        const canvas = document.getElementById('aim-canvas');
-        const ctx = canvas.getContext('2d');
-        const scoreEl = document.getElementById('aim-score');
-        const timeEl = document.getElementById('aim-time');
-        const accEl = document.getElementById('aim-acc');
-        const overlay = document.getElementById('aim-start-overlay');
-        const controllerLabel = document.getElementById('controller-label');
+<hr class="div">
 
-        let score = 0, timeLeft = 30, gameActive = false;
-        let target = { x: 0, y: 0, radius: 24 };
-        let crosshair = { x: 200, y: 190 };
-        let shots = 0, hits = 0;
-        let sessionScores = [];
+<section id="contract">
+  <div class="container">
+    <div class="eyebrow reveal">Club-Statuten</div>
+    <h2 class="h2 reveal">Pro-Vertrag <span>Regeln</span></h2>
 
-        function resizeCanvas() {
-            const rect = canvas.getBoundingClientRect();
-            canvas.width = rect.width;
-            canvas.height = 380;
-        }
-        window.addEventListener('resize', resizeCanvas);
-        resizeCanvas();
+    <div class="clause-grid reveal">
+      <div class="clause">
+        <div class="clause-num">&sect; 01 &mdash; IDENTITÄT</div>
+        <div class="clause-title">N1CO-Tag Pflicht</div>
+        <p>Alle aktiven Club-Mitglieder führen verbindlich das Kürzel <strong>"N1CO |"</strong> vor ihrem Ingame-Namen.</p>
+      </div>
 
-        function spawnTarget() {
-            const margin = 50;
-            target.x = margin + Math.random() * (canvas.width - margin * 2);
-            target.y = margin + Math.random() * (canvas.height - margin * 2);
-            target.radius = 16 + Math.random() * 14;
-        }
+      <div class="clause">
+        <div class="clause-num">&sect; 02 &mdash; ALTER</div>
+        <div class="clause-title">Mindestalter 13 Jahre</div>
+        <p>Bewerber müssen <strong>mindestens 13 Jahre</strong> alt sein. Bei Minderjährigen ist die Zustimmung der Erziehungsberechtigten erforderlich.</p>
+      </div>
 
-        function startAimGame() {
-            score = 0; timeLeft = 30; shots = 0; hits = 0;
-            gameActive = true;
-            scoreEl.textContent = '0';
-            timeEl.textContent = '30';
-            accEl.textContent = '0%';
-            overlay.style.opacity = '0';
-            overlay.style.pointerEvents = 'none';
-            spawnTarget();
-            requestAnimationFrame(gameLoop);
+      <div class="clause">
+        <div class="clause-num">&sect; 03 &mdash; FINANZEN</div>
+        <div class="clause-title">500€ Ziel / 85% Split</div>
+        <p>Zielvolumen an Preisgeldern über 3 Monate. <strong>85&nbsp;%</strong> der generierten Einnahmen verbleiben direkt beim Spieler.</p>
+      </div>
 
-            const timer = setInterval(() => {
-                if (!gameActive) { clearInterval(timer); return; }
-                timeLeft--;
-                timeEl.textContent = timeLeft;
-                if (timeLeft <= 0) {
-                    gameActive = false;
-                    const acc = shots > 0 ? Math.round((hits / shots) * 100) : 0;
-                    sessionScores.push({ score, acc });
-                    sessionScores.sort((a, b) => b.score - a.score);
-                    updateLeaderboard();
-                    overlay.style.opacity = '1';
-                    overlay.style.pointerEvents = 'all';
-                    overlay.innerHTML = `
-                        <h3 class="font-orbitron font-black text-2xl text-white mb-2">DRILL BEENDET</h3>
-                        <p class="font-mono text-sm text-cyberred mb-1">FINAL SCORE: ${score}</p>
-                        <p class="font-mono text-sm text-amber-400 mb-6">GENAUIGKEIT: ${acc}%</p>
-                        <button onclick="startAimGame()" class="cyber-btn px-8 py-3 bg-cyberred text-white font-orbitron font-bold text-sm tracking-widest shadow-[0_0_20px_rgba(255,31,61,0.5)]">
-                            🔄 NEUE RUNDE STARTEN
-                        </button>
-                    `;
-                }
-            }, 1000);
-        }
+      <div class="clause">
+        <div class="clause-num">&sect; 04 &mdash; EQUIPMENT</div>
+        <div class="clause-title">Eigene Beschaffung</div>
+        <p>Hardware und Peripherie stellt jedes Mitglied selbst. <strong>Der Club stellt keine Geräte.</strong></p>
+      </div>
+    </div>
+  </div>
+</section>
 
-        function updateLeaderboard() {
-            const lb = document.getElementById('leaderboard');
-            lb.innerHTML = '';
-            const names = ['N1CO_PRO', 'FINALS_GOD', 'TARGET_X', 'RECON_ACE', 'SNIPER_K'];
-            sessionScores.slice(0, 5).forEach((s, i) => {
-                const row = document.createElement('div');
-                row.className = 'grid grid-cols-4 p-3 border-b border-white/5 items-center';
-                row.innerHTML = `
-                    <span class="${i===0?'text-amber-400 font-bold':''}">${i+1}</span>
-                    <span class="text-white">${names[i] || 'PLAYER_' + (i+1)}</span>
-                    <span class="text-amber-400">${s.acc}%</span>
-                    <span class="text-cyberred font-bold">${s.score}</span>
-                `;
-                lb.appendChild(row);
-            });
-        }
+<hr class="div">
 
-        function checkHit(x, y) {
-            if (!gameActive) return;
-            shots++;
-            const dist = Math.hypot(x - target.x, y - target.y);
-            if (dist < target.radius) {
-                hits++;
-                score += 100;
-                scoreEl.textContent = score;
-                spawnTarget();
-            }
-            accEl.textContent = (shots > 0 ? Math.round((hits / shots) * 100) : 0) + '%';
-        }
+<section id="twitch">
+  <div class="container">
+    <div class="twitch-card reveal">
+      <div class="twitch-kicker">LIVE STREAMING</div>
+      <div class="twitch-name">nicominecith_ttv</div>
 
-        canvas.addEventListener('pointerdown', e => {
-            const rect = canvas.getBoundingClientRect();
-            checkHit(e.clientX - rect.left, e.clientY - rect.top);
-        });
+      <div class="twitch-live">
+        <span class="dot"></span>
+        <span>STREAMS: THE FINALS &middot; FORTNITE</span>
+      </div>
 
-        window.addEventListener('gamepadconnected', () => {
-            controllerLabel.textContent = '⚡ CONTROLLER: VERBUNDEN';
-            controllerLabel.className = 'px-3 py-1 rounded bg-emerald-500/10 border border-emerald-500/30 text-xs text-emerald-400';
-        });
+      <a href="https://www.twitch.tv/Nicominecith_TTV" target="_blank" rel="noopener noreferrer" class="btn btn-twitch">
+        Zum Twitch-Stream
+      </a>
+    </div>
+  </div>
+</section>
 
-        window.addEventListener('gamepaddisconnected', () => {
-            controllerLabel.textContent = '⚡ CONTROLLER: OFFLINE';
-            controllerLabel.className = 'px-3 py-1 rounded bg-panel2 border border-white/10 text-xs text-gray-400';
-        });
+<footer>
+  <div class="foot-brand">NICO<span>GAMING</span></div>
 
-        let triggerPressed = false;
-        function updateGamepad() {
-            const pad = navigator.getGamepads()[0];
-            if (!pad || !gameActive) return;
-            const sx = Math.abs(pad.axes[0]) > 0.12 ? pad.axes[0] : 0;
-            const sy = Math.abs(pad.axes[1]) > 0.12 ? pad.axes[1] : 0;
-            crosshair.x = Math.max(0, Math.min(canvas.width, crosshair.x + sx * 10));
-            crosshair.y = Math.max(0, Math.min(canvas.height, crosshair.y + sy * 10));
-            const firing = pad.buttons[7]?.pressed || pad.buttons[0]?.pressed;
-            if (firing && !triggerPressed) { checkHit(crosshair.x, crosshair.y); triggerPressed = true; }
-            else if (!firing) triggerPressed = false;
-        }
+  <div class="foot-links">
+    <a href="https://gamertransfer.com/nico_gaming_the_finals-lfm-2-35968.html" target="_blank" rel="noopener noreferrer">Gamertransfer</a>
+    <a href="https://www.instagram.com/nico.gaming2026" target="_blank" rel="noopener noreferrer">Instagram</a>
+    <a href="https://www.twitch.tv/Nicominecith_TTV" target="_blank" rel="noopener noreferrer">Twitch</a>
+  </div>
 
-        function gameLoop() {
-            if (!gameActive) return;
-            updateGamepad();
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
+  <div class="foot-fine">
+    &copy; 2026 NICO GAMING ESPORTS &middot; FOUNDER: NICOMINECITH &middot; MINDESTALTER: 13 JAHRE
+  </div>
+</footer>
 
-            // Draw Target
-            ctx.beginPath();
-            ctx.arc(target.x, target.y, target.radius, 0, Math.PI * 2);
-            ctx.fillStyle = '#ff1f3d';
-            ctx.shadowColor = '#ff1f3d';
-            ctx.shadowBlur = 15;
-            ctx.fill();
-            ctx.shadowBlur = 0;
+<script>
+/* CUSTOM CURSOR */
+const cursor=document.getElementById('cursor');
+const cursorDot=document.getElementById('cursor-dot');
 
-            ctx.beginPath();
-            ctx.arc(target.x, target.y, 4, 0, Math.PI * 2);
-            ctx.fillStyle = '#ffffff';
-            ctx.fill();
+document.addEventListener('mousemove',e=>{
+  if(window.innerWidth>860){
+    cursor.style.left=e.clientX+'px';
+    cursor.style.top=e.clientY+'px';
+    cursorDot.style.left=e.clientX+'px';
+    cursorDot.style.top=e.clientY+'px';
+  }
+});
 
-            // Draw Crosshair if gamepad active
-            if (navigator.getGamepads()[0]) {
-                ctx.strokeStyle = '#00ff88';
-                ctx.lineWidth = 2;
-                const s = 12;
-                ctx.beginPath();
-                ctx.moveTo(crosshair.x - s, crosshair.y); ctx.lineTo(crosshair.x + s, crosshair.y);
-                ctx.moveTo(crosshair.x, crosshair.y - s); ctx.lineTo(crosshair.x, crosshair.y + s);
-                ctx.stroke();
-            }
+/* MOBILE MENU */
+function toggleMenu(){
+  document.getElementById('mobileMenu').classList.toggle('open');
+}
 
-            requestAnimationFrame(gameLoop);
-        }
-    </script>
+/* SCROLL REVEAL + SKILL BARS */
+const revealObserver=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.classList.add('visible');
+
+      e.target.querySelectorAll('.fill').forEach(f=>{
+        f.style.width=f.dataset.width+'%';
+      });
+    }
+  });
+},{threshold:.15});
+
+document.querySelectorAll('.reveal').forEach(el=>{
+  revealObserver.observe(el);
+});
+
+/* COUNTERS */
+const counterObserver=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.querySelectorAll('[data-count]').forEach(el=>{
+        const target=parseInt(el.dataset.count,10);
+        const duration=1400;
+        const step=target/(duration/16);
+        let cur=0;
+
+        const t=setInterval(()=>{
+          cur=Math.min(cur+step,target);
+          el.textContent=Math.floor(cur);
+
+          if(cur>=target){
+            clearInterval(t);
+          }
+        },16);
+      });
+
+      counterObserver.unobserve(e.target);
+    }
+  });
+},{threshold:.4});
+
+document.querySelectorAll('.stat-grid').forEach(el=>{
+  counterObserver.observe(el);
+});
+
+/* EMAIL APPLICATION */
+document.getElementById('applyForm').addEventListener('submit',function(e){
+  e.preventDefault();
+
+  const name=document.getElementById('fname').value.trim();
+  const nick=document.getElementById('fnick').value.trim();
+  const email=document.getElementById('femail').value.trim();
+  const age=document.getElementById('fage').value;
+  const game=document.getElementById('fgame').value;
+  const disc=document.getElementById('fdisc').value.trim() || 'Keine Angabe';
+
+  if(Number(age)<13){
+    alert('Das Mindestalter für NICO GAMING beträgt 13 Jahre.');
+    return;
+  }
+
+  const subject=encodeURIComponent(
+    'Bewerbung: '+nick+' ('+game+')'
+  );
+
+  const body=encodeURIComponent(
+`Hi nicominecith,
+
+hier ist eine neue Bewerbung für NICO GAMING:
+
+----------------------------------------
+- Name: ${name}
+- Ingame-Name: ${nick}
+- E-Mail: ${email}
+- Alter: ${age}
+- Ziel-Spiel: ${game}
+- Discord: ${disc}
+- Bestätigung: Equipment & Alter (13+) vorhanden
+----------------------------------------
+
+Gesendet über das offizielle NICO GAMING Webportal.`
+  );
+
+  window.location.href=
+    'mailto:nicominecithclips@gmail.com?subject='+
+    subject+'&body='+body;
+});
+
+/* AIM TRAINER */
+const canvas=document.getElementById('aim-canvas');
+const ctx=canvas.getContext('2d');
+
+const scoreEl=document.getElementById('aim-score');
+const timeEl=document.getElementById('aim-time');
+const accEl=document.getElementById('aim-acc');
+const overlay=document.getElementById('aim-overlay');
+const controllerLabel=document.getElementById('controller-label');
+
+let score=0;
+let timeLeft=30;
+let gameActive=false;
+let shots=0;
+let hits=0;
+let sessionScores=[];
+let timer=null;
+
+let target={x:0,y:0,radius:22};
+let crosshair={x:200,y:190};
+
+function resizeCanvas(){
+  const r=canvas.parentNode.getBoundingClientRect();
+  canvas.width=Math.max(300,r.width);
+  canvas.height=380;
+}
+
+window.addEventListener('resize',resizeCanvas);
+resizeCanvas();
+
+function spawnTarget(){
+  const m=50;
+  target.x=m+Math.random()*(canvas.width-m*2);
+  target.y=m+Math.random()*(canvas.height-m*2);
+  target.radius=14+Math.random()*14;
+}
+
+function startAimGame(){
+  if(timer) clearInterval(timer);
+
+  score=0;
+  timeLeft=30;
+  shots=0;
+  hits=0;
+  gameActive=true;
+
+  scoreEl.textContent='0';
+  timeEl.textContent='30';
+  accEl.textContent='0%';
+
+  overlay.style.opacity='0';
+  overlay.style.pointerEvents='none';
+
+  spawnTarget();
+  requestAnimationFrame(gameLoop);
+
+  timer=setInterval(()=>{
+    if(!gameActive){
+      clearInterval(timer);
+      return;
+    }
+
+    timeLeft--;
+    timeEl.textContent=timeLeft;
+
+    if(timeLeft<=0){
+      endAimGame();
+    }
+  },1000);
+}
+
+function endAimGame(){
+  gameActive=false;
+
+  if(timer){
+    clearInterval(timer);
+    timer=null;
+  }
+
+  const acc=shots>0?Math.round((hits/shots)*100):0;
+
+  sessionScores.push({score,acc});
+  sessionScores.sort((a,b)=>b.score-a.score);
+
+  updateLeaderboard();
+
+  overlay.style.opacity='1';
+  overlay.style.pointerEvents='all';
+
+  overlay.innerHTML=
+    '<div>'+
+      '<div class="t">Drill beendet</div>'+
+      '<div class="s" style="color:var(--red)">SCORE: '+score+' &middot; GENAUIGKEIT: '+acc+'%</div>'+
+      '<button onclick="startAimGame()" class="btn btn-red">Neue Runde</button>'+
+    '</div>';
+}
+
+function updateLeaderboard(){
+  const lb=document.getElementById('leaderboard');
+  lb.innerHTML='';
+
+  const names=[
+    'N1CO_PRO',
+    'FINALS_GOD',
+    'TARGET_X',
+    'RECON_ACE',
+    'SNIPER_K'
+  ];
+
+  sessionScores.slice(0,5).forEach((s,i)=>{
+    const row=document.createElement('div');
+    row.className='lb-row';
+
+    row.innerHTML=
+      '<span class="lb-rank'+(i===0?' gold':'')+'">'+(i+1)+'</span>'+
+      '<span>'+(names[i]||'PLAYER_'+(i+1))+'</span>'+
+      '<span style="color:var(--gold)">'+s.acc+'%</span>'+
+      '<span class="lb-score">'+s.score+'</span>';
+
+    lb.appendChild(row);
+  });
+}
+
+function checkHit(x,y){
+  if(!gameActive)return;
+
+  shots++;
+
+  const dist=Math.hypot(
+    x-target.x,
+    y-target.y
+  );
+
+  if(dist<target.radius){
+    hits++;
+    score+=100;
+    scoreEl.textContent=score;
+    spawnTarget();
+  }
+
+  accEl.textContent=
+    (shots>0?Math.round((hits/shots)*100):0)+'%';
+}
+
+canvas.addEventListener('pointerdown',e=>{
+  const r=canvas.getBoundingClientRect();
+
+  checkHit(
+    e.clientX-r.left,
+    e.clientY-r.top
+  );
+});
+
+/* GAMEPAD */
+window.addEventListener('gamepadconnected',()=>{
+  controllerLabel.textContent='◎ CONTROLLER: VERBUNDEN';
+  controllerLabel.style.color='#3ecf8e';
+  controllerLabel.style.borderColor='#3ecf8e';
+  controllerLabel.style.background='rgba(62,207,142,.12)';
+});
+
+window.addEventListener('gamepaddisconnected',()=>{
+  controllerLabel.textContent='◎ CONTROLLER: OFFLINE';
+  controllerLabel.style.color='#7c7c8a';
+  controllerLabel.style.borderColor='var(--line)';
+  controllerLabel.style.background='var(--panel2)';
+});
+
+let triggerPressed=false;
+
+function updateGamepad(){
+  const pads=navigator.getGamepads ? navigator.getGamepads() : [];
+  const pad=pads[0];
+
+  if(!pad||!gameActive)return;
+
+  const sx=Math.abs(pad.axes[0]||0)>.12?pad.axes[0]:0;
+  const sy=Math.abs(pad.axes[1]||0)>.12?pad.axes[1]:0;
+
+  crosshair.x=Math.max(
+    0,
+    Math.min(canvas.width,crosshair.x+sx*10)
+  );
+
+  crosshair.y=Math.max(
+    0,
+    Math.min(canvas.height,crosshair.y+sy*10)
+  );
+
+  const firing=
+    (pad.buttons[7] && pad.buttons[7].pressed) ||
+    (pad.buttons[0] && pad.buttons[0].pressed);
+
+  if(firing&&!triggerPressed){
+    checkHit(crosshair.x,crosshair.y);
+    triggerPressed=true;
+  }else if(!firing){
+    triggerPressed=false;
+  }
+}
+
+function gameLoop(){
+  if(!gameActive)return;
+
+  updateGamepad();
+
+  ctx.clearRect(
+    0,
+    0,
+    canvas.width,
+    canvas.height
+  );
+
+  /* TARGET */
+  ctx.beginPath();
+  ctx.arc(
+    target.x,
+    target.y,
+    target.radius,
+    0,
+    Math.PI*2
+  );
+
+  ctx.fillStyle='#ff1f3d';
+  ctx.shadowColor='#ff1f3d';
+  ctx.shadowBlur=15;
+  ctx.fill();
+  ctx.shadowBlur=0;
+
+  ctx.beginPath();
+  ctx.arc(
+    target.x,
+    target.y,
+    4,
+    0,
+    Math.PI*2
+  );
+
+  ctx.fillStyle='#fff';
+  ctx.fill();
+
+  /* CONTROLLER CROSSHAIR */
+  const pads=navigator.getGamepads ? navigator.getGamepads() : [];
+
+  if(pads[0]){
+    ctx.strokeStyle='#3ecf8e';
+    ctx.lineWidth=2;
+
+    const s=12;
+
+    ctx.beginPath();
+    ctx.moveTo(crosshair.x-s,crosshair.y);
+    ctx.lineTo(crosshair.x+s,crosshair.y);
+    ctx.moveTo(crosshair.x,crosshair.y-s);
+    ctx.lineTo(crosshair.x,crosshair.y+s);
+    ctx.stroke();
+  }
+
+  requestAnimationFrame(gameLoop);
+}
+</script>
+
 </body>
 </html>
