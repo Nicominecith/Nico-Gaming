@@ -53,7 +53,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Barlow+Condensed:wght@300;400;600;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 
 <style>
-:root{--red:#e60012;--red2:#ff2940;--dark:#070709;--panel:#0f0f14;--panel2:#16161d;--silver:#c8c8d0;--blue:#2d7dff;--green:#18d889}
+:root{--red:#e60012;--red2:#ff2940;--dark:#070709;--panel:#0f0f14;--panel2:#16161d;--silver:#c8c8d0;--blue:#2d7dff;--green:#18d889;--teamplay:#ff5500}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{margin:0;background:var(--dark);color:var(--silver);font-family:'Barlow Condensed',sans-serif;overflow-x:hidden;cursor:none}
@@ -66,116 +66,121 @@ body::before{content:"";position:fixed;inset:0;background:repeating-linear-gradi
 body:has(a:hover) #cursor,body:has(button:hover) #cursor{width:40px;height:40px;background:rgba(230,0,18,.14)}
 @media(max-width:768px){#cursor,#cursor-dot{display:none}body{cursor:auto}}
 
-nav{position:fixed;top:0;left:0;right:0;height:60px;z-index:5000;display:flex;align-items:center;justify-content:space-between;padding:0 1.5rem;background:rgba(7,7,9,.94);backdrop-filter:blur(18px);border-bottom:1px solid rgba(230,0,18,.25)}
-nav .logo{display:flex;align-items:center;gap:10px;font-family:'Orbitron';font-weight:900;font-size:1rem;letter-spacing:2px;color:#fff}
-nav .logo img{width:34px;height:34px;object-fit:contain;filter:drop-shadow(0 0 8px var(--red))}
-.nav-right{display:flex;align-items:center;gap:1.35rem;}
-nav ul{display:flex;gap:1.35rem;list-style:none;margin:0;padding:0}
-nav a{color:var(--silver);font-family:'Orbitron';font-size:.62rem;letter-spacing:2px;position:relative;transition:.2s}
+nav{position:fixed;top:0;left:0;right:0;height:60px;z-index:5000;display:flex;align-items:center;justify-content:space-between;padding:0 1rem;background:rgba(7,7,9,.94);backdrop-filter:blur(18px);border-bottom:1px solid rgba(230,0,18,.25)}
+nav .logo{display:flex;align-items:center;gap:8px;font-family:'Orbitron';font-weight:900;font-size:.9rem;letter-spacing:1px;color:#fff;white-space:nowrap}
+nav .logo img{width:30px;height:30px;object-fit:contain;filter:drop-shadow(0 0 8px var(--red))}
+.nav-right{display:flex;align-items:center;gap:1rem;}
+nav ul{display:flex;gap:1rem;list-style:none;margin:0;padding:0}
+nav a{color:var(--silver);font-family:'Orbitron';font-size:.58rem;letter-spacing:1px;position:relative;transition:.2s}
 nav a:after{content:"";position:absolute;left:0;right:100%;bottom:-5px;height:1px;background:var(--red);transition:.25s}
 nav a:hover{color:#fff}nav a:hover:after{right:0}
 
-.lang-btn{background:rgba(230,0,18,.1);border:1px solid rgba(230,0,18,.4);color:#fff;font-family:'Share Tech Mono';font-size:.65rem;padding:.3rem .7rem;cursor:pointer;letter-spacing:1px;transition:.2s}
+.lang-btn{background:rgba(230,0,18,.1);border:1px solid rgba(230,0,18,.4);color:#fff;font-family:'Share Tech Mono';font-size:.6rem;padding:.25rem .5rem;cursor:pointer;letter-spacing:1px;transition:.2s}
 .lang-btn:hover{background:var(--red);border-color:var(--red)}
 
 .hamburger{display:none;background:none;border:0;padding:0;cursor:pointer}
 .hamburger span{display:block;width:25px;height:2px;background:#fff;margin:5px}
 
-.mobile-menu{display:none;position:fixed;inset:0;z-index:4999;background:rgba(7,7,9,.98);align-items:center;justify-content:center;flex-direction:column;gap:1.5rem}
+.mobile-menu{display:none;position:fixed;inset:0;z-index:4999;background:rgba(7,7,9,.98);align-items:center;justify-content:center;flex-direction:column;gap:1.2rem}
 .mobile-menu.open{display:flex}
-.mobile-menu a{font-family:'Orbitron';font-size:1.15rem;color:#fff;letter-spacing:3px}
+.mobile-menu a{font-family:'Orbitron';font-size:1.1rem;color:#fff;letter-spacing:2px}
 .mobile-menu a:hover{color:var(--red)}
 
-.ticker-wrap{position:fixed;top:60px;left:0;right:0;z-index:4000;overflow:hidden;border-bottom:1px solid rgba(230,0,18,.2);background:rgba(230,0,18,.05);padding:.5rem 0}
-.ticker{display:flex;width:max-content;gap:4rem;animation:ticker 28s linear infinite}
-.ticker span{font-family:'Share Tech Mono';font-size:.62rem;letter-spacing:2px;color:rgba(200,200,208,.5);white-space:nowrap}
+.ticker-wrap{position:fixed;top:60px;left:0;right:0;z-index:4000;overflow:hidden;border-bottom:1px solid rgba(230,0,18,.2);background:rgba(230,0,18,.05);padding:.4rem 0}
+.ticker{display:flex;width:max-content;gap:3rem;animation:ticker 28s linear infinite}
+.ticker span{font-family:'Share Tech Mono';font-size:.6rem;letter-spacing:1px;color:rgba(200,200,208,.5);white-space:nowrap}
 .ticker .hl{color:var(--red)}
 @keyframes ticker{to{transform:translateX(-50%)}}
 
-#home{min-height:100vh;padding:150px 1rem 4rem;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+#home{min-height:100vh;padding:140px 1rem 4rem;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
 .grid-bg{position:absolute;inset:0;background-image:linear-gradient(rgba(230,0,18,.065) 1px,transparent 1px),linear-gradient(90deg,rgba(230,0,18,.065) 1px,transparent 1px);background-size:60px 60px;animation:gridMove 20s linear infinite}
 @keyframes gridMove{to{transform:translateY(60px)}}
 .hero-glow{position:absolute;width:min(650px,95vw);height:min(650px,95vw);top:50%;left:50%;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(230,0,18,.16),transparent 70%);animation:pulse 4s ease-in-out infinite}
 @keyframes pulse{50%{opacity:1;transform:translate(-50%,-50%) scale(1.08)}}
 .hero-content{position:relative;z-index:10;text-align:center;width:100%;max-width:950px}
-.hero-logo{width:150px;height:150px;object-fit:contain;margin:0 auto 1.4rem;filter:drop-shadow(0 0 40px rgba(230,0,18,.8));animation:float 6s ease-in-out infinite}
+.hero-logo{width:130px;height:130px;object-fit:contain;margin:0 auto 1.2rem;filter:drop-shadow(0 0 40px rgba(230,0,18,.8));animation:float 6s ease-in-out infinite}
 @keyframes float{50%{transform:translateY(-12px)}}
-.hero-title{font-size:clamp(2.6rem,8vw,6rem);font-weight:900;line-height:.9;margin:0 0 .7rem;background:linear-gradient(135deg,#fff 0%,#888 60%,var(--red) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero-title{font-size:clamp(2.4rem,7vw,5.5rem);font-weight:900;line-height:.9;margin:0 0 .7rem;background:linear-gradient(135deg,#fff 0%,#888 60%,var(--red) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 .glitch{position:relative}
 .glitch:before,.glitch:after{content:attr(data-text);position:absolute;inset:0;background:linear-gradient(135deg,#fff 0%,#888 60%,var(--red) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 .glitch:before{animation:glitch1 3.5s infinite;clip-path:polygon(0 0,100% 0,100% 35%,0 35%)}
 .glitch:after{animation:glitch2 3.5s infinite;clip-path:polygon(0 65%,100% 65%,100% 100%,0 100%)}
 @keyframes glitch1{92%{transform:translate(-3px,1px)}94%{transform:translate(3px,-1px)}96%{transform:translate(-2px,2px)}}
 @keyframes glitch2{90%{transform:translate(3px,-2px)}92%{transform:translate(-3px,2px)}94%{transform:translate(2px,-1px)}}
-.hero-sub{font-size:clamp(1rem,2vw,1.3rem);color:rgba(200,200,208,.6);max-width:650px;margin:1rem auto 2rem;line-height:1.5}
+.hero-sub{font-size:clamp(.95rem,2vw,1.25rem);color:rgba(200,200,208,.6);max-width:650px;margin:1rem auto 1.8rem;line-height:1.4}
 .hero-sub strong{color:#fff}.game{color:var(--red);font-weight:900}
 
-.btn-primary,.btn-outline{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;padding:1rem 1.8rem;font-family:'Orbitron';font-size:.68rem;letter-spacing:2px;font-weight:900;cursor:pointer;clip-path:polygon(8px 0,100% 0,calc(100% - 8px) 100%,0 100%);transition:.2s}
+.btn-primary,.btn-outline,.btn-teamplay{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;padding:.9rem 1.6rem;font-family:'Orbitron';font-size:.64rem;letter-spacing:1px;font-weight:900;cursor:pointer;clip-path:polygon(8px 0,100% 0,calc(100% - 8px) 100%,0 100%);transition:.2s}
 .btn-primary{background:var(--red);color:#fff;border:0}.btn-primary:hover{background:var(--red2);transform:scale(1.03)}
 .btn-outline{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.2)}.btn-outline:hover{background:rgba(230,0,18,.08);border-color:var(--red)}
+.btn-teamplay{background:rgba(255,85,0,.15);color:#ff8844;border:1px solid rgba(255,85,0,.4)}.btn-teamplay:hover{background:var(--teamplay);color:#fff;border-color:var(--teamplay);transform:scale(1.03)}
 
-section{padding:5rem 1.5rem;position:relative}.container{max-width:1200px;margin:auto}
+section{padding:4.5rem 1rem;position:relative}.container{max-width:1200px;margin:auto}
 .divider{border:0;height:1px;background:linear-gradient(90deg,transparent,var(--red),transparent)}
-.section-label{font-family:'Share Tech Mono';font-size:.68rem;color:var(--red);letter-spacing:4px;margin-bottom:.5rem}
-.section-title{font-size:clamp(1.8rem,4vw,3.2rem);font-weight:900;line-height:1;margin:0 0 1.5rem}
+.section-label{font-family:'Share Tech Mono';font-size:.65rem;color:var(--red);letter-spacing:3px;margin-bottom:.4rem}
+.section-title{font-size:clamp(1.7rem,3.8vw,3rem);font-weight:900;line-height:1;margin:0 0 1.2rem}
 .card{background:var(--panel);border:1px solid rgba(230,0,18,.15);border-radius:2px;transition:.3s}
 .card:hover{border-color:rgba(230,0,18,.55);box-shadow:0 0 30px rgba(230,0,18,.1);transform:translateY(-3px)}
 
-.stat-box{padding:2rem 1rem;text-align:center;border:1px solid rgba(230,0,18,.15);background:var(--panel);position:relative;overflow:hidden}
+.stat-box{padding:1.8rem 1rem;text-align:center;border:1px solid rgba(230,0,18,.15);background:var(--panel);position:relative;overflow:hidden}
 .stat-box:after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--red)}
-.stat-number{font-family:'Orbitron';font-size:2.2rem;font-weight:900;color:#fff}
-.stat-label{font-family:'Share Tech Mono';font-size:.58rem;letter-spacing:2px;color:var(--red);margin-top:.3rem}
+.stat-number{font-family:'Orbitron';font-size:2rem;font-weight:900;color:#fff}
+.stat-label{font-family:'Share Tech Mono';font-size:.55rem;letter-spacing:1px;color:var(--red);margin-top:.3rem}
 
-.age-badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(230,0,18,.13);border:1px solid rgba(230,0,18,.4);padding:.4rem 1rem;font-family:'Share Tech Mono';font-size:.62rem;letter-spacing:2px;color:var(--red);margin-bottom:1.5rem}
-.gear-item{display:flex;align-items:center;gap:1rem;padding:1rem;border-bottom:1px solid rgba(255,255,255,.05);border-left:3px solid transparent;color:inherit;transition:.2s}
+.age-badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(230,0,18,.13);border:1px solid rgba(230,0,18,.4);padding:.4rem 1rem;font-family:'Share Tech Mono';font-size:.6rem;letter-spacing:1px;color:var(--red);margin-bottom:1.2rem}
+.gear-item{display:flex;align-items:center;gap:1rem;padding:.9rem;border-bottom:1px solid rgba(255,255,255,.05);border-left:3px solid transparent;color:inherit;transition:.2s}
 .gear-item:hover{background:rgba(230,0,18,.08);border-left-color:var(--red)}.gear-item:last-child{border-bottom:0}
-.gear-icon{width:40px;height:40px;background:rgba(230,0,18,.1);border:1px solid rgba(230,0,18,.3);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.gear-icon{width:38px;height:38px;background:rgba(230,0,18,.1);border:1px solid rgba(230,0,18,.3);display:flex;align-items:center;justify-content:center;flex-shrink:0}
 
-#aim-canvas{width:100%;height:350px;display:block;background:radial-gradient(ellipse at center,#0a0a12,#000);border:1px solid rgba(230,0,18,.3);touch-action:none}
-.lb-row{display:grid;grid-template-columns:35px 1fr auto auto;gap:.5rem;padding:.75rem 1rem;border-bottom:1px solid rgba(255,255,255,.05);font-family:'Share Tech Mono';font-size:.8rem}
-.lb-row.header{font-size:.55rem;letter-spacing:2px;color:rgba(200,200,208,.4)}
+#aim-canvas{width:100%;height:320px;display:block;background:radial-gradient(ellipse at center,#0a0a12,#000);border:1px solid rgba(230,0,18,.3);touch-action:none}
+.lb-row{display:grid;grid-template-columns:30px 1fr auto auto;gap:.5rem;padding:.7rem 1rem;border-bottom:1px solid rgba(255,255,255,.05);font-family:'Share Tech Mono';font-size:.75rem}
+.lb-row.header{font-size:.52rem;letter-spacing:1px;color:rgba(200,200,208,.4)}
 .lb-rank{color:var(--red)}.lb-score{color:var(--red)}
 
-.roster-card{background:var(--panel);border:1px solid rgba(230,0,18,.15);padding:1.5rem;text-align:center;transition:.3s;position:relative}
+.roster-card{background:var(--panel);border:1px solid rgba(230,0,18,.15);padding:1.4rem;text-align:center;transition:.3s;position:relative}
 .roster-card:hover{border-color:var(--red);box-shadow:0 0 20px rgba(230,0,18,.1)}
-.roster-avatar{width:70px;height:70px;border-radius:50%;border:2px solid rgba(230,0,18,.4);margin:0 auto 1rem;background:rgba(230,0,18,.1);display:flex;align-items:center;justify-content:center;font-size:1.8rem}
+.roster-avatar{width:65px;height:65px;border-radius:50%;border:2px solid rgba(230,0,18,.4);margin:0 auto .9rem;background:rgba(230,0,18,.1);display:flex;align-items:center;justify-content:center;font-size:1.6rem}
 
-.contract-clause{background:var(--panel);border:1px solid rgba(230,0,18,.15);border-left:3px solid var(--red);padding:1.5rem}
-.clause-num{font-family:'Share Tech Mono';font-size:.6rem;color:var(--red);letter-spacing:3px}
-.clause-title{font-family:'Orbitron';font-size:1rem;font-weight:700;color:#fff;margin:.25rem 0 .5rem}
+.contract-clause{background:var(--panel);border:1px solid rgba(230,0,18,.15);border-left:3px solid var(--red);padding:1.4rem}
+.clause-num{font-family:'Share Tech Mono';font-size:.58rem;color:var(--red);letter-spacing:2px}
+.clause-title{font-family:'Orbitron';font-size:.95rem;font-weight:700;color:#fff;margin:.25rem 0 .4rem}
 
-.form-group{margin-bottom:1.15rem}
-.form-group label{display:block;font-family:'Share Tech Mono';font-size:.58rem;letter-spacing:3px;color:rgba(200,200,208,.5);margin-bottom:.4rem}
-.form-group input,.form-group select{width:100%;background:rgba(0,0,0,.5);border:1px solid rgba(255,255,255,.08);color:#fff;padding:.75rem 1rem;font-family:'Barlow Condensed';font-size:1rem;outline:0}
+.form-group{margin-bottom:1.1rem}
+.form-group label{display:block;font-family:'Share Tech Mono';font-size:.56rem;letter-spacing:2px;color:rgba(200,200,208,.5);margin-bottom:.35rem}
+.form-group input,.form-group select{width:100%;background:rgba(0,0,0,.5);border:1px solid rgba(255,255,255,.08);color:#fff;padding:.7rem .9rem;font-family:'Barlow Condensed';font-size:.95rem;outline:0}
 .form-group input:focus,.form-group select:focus{border-color:var(--red);box-shadow:0 0 0 2px rgba(230,0,18,.1)}
 .form-group select option{background:#111}
 
-.application-methods{display:grid;grid-template-columns:1.15fr .85fr;gap:1.5rem;margin-top:2rem}
-.application-card{position:relative;overflow:hidden;background:linear-gradient(145deg,#12121a,#09090c);border:1px solid rgba(255,255,255,.08);padding:2rem}
+.application-methods{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.2rem;margin-top:1.8rem}
+.application-card{position:relative;overflow:hidden;background:linear-gradient(145deg,#12121a,#09090c);border:1px solid rgba(255,255,255,.08);padding:1.6rem}
 .application-card:hover{transform:translateY(-5px);border-color:rgba(255,255,255,.18);box-shadow:0 20px 50px rgba(0,0,0,.35)}
 .gamertransfer-card{border-color:rgba(45,125,255,.45);background:linear-gradient(145deg,rgba(45,125,255,.13),#0b0c12 55%)}
-.application-glow{position:absolute;width:220px;height:220px;right:-90px;top:-90px;border-radius:50%;background:rgba(45,125,255,.2);filter:blur(35px);pointer-events:none}
-.application-top{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;margin-bottom:1.5rem}
-.application-icon{width:52px;height:52px;display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,.1);font-size:1.4rem;background:rgba(0,0,0,.3)}
+.teamplay-card{border-color:rgba(255,85,0,.45);background:linear-gradient(145deg,rgba(255,85,0,.13),#0b0c12 55%)}
+.application-glow{position:absolute;width:200px;height:200px;right:-80px;top:-80px;border-radius:50%;background:rgba(45,125,255,.2);filter:blur(35px);pointer-events:none}
+.teamplay-glow{background:rgba(255,85,0,.2)}
+.application-top{display:flex;justify-content:space-between;align-items:flex-start;gap:.8rem;margin-bottom:1.2rem}
+.application-icon{width:48px;height:48px;display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,.1);font-size:1.3rem;background:rgba(0,0,0,.3)}
 .gt-icon{border-color:rgba(45,125,255,.45);background:rgba(45,125,255,.1)}
+.tp-icon{border-color:rgba(255,85,0,.45);background:rgba(255,85,0,.1)}
 .email-icon{border-color:rgba(230,0,18,.35);background:rgba(230,0,18,.08)}
-.application-label{font-family:'Share Tech Mono';font-size:.55rem;letter-spacing:2px;color:rgba(200,200,208,.5)}
+.application-label{font-family:'Share Tech Mono';font-size:.52rem;letter-spacing:1px;color:rgba(200,200,208,.5)}
 .blue-label{color:#5b9aff}
-.application-card h3{font-size:1.55rem;margin:.25rem 0;color:#fff}
-.application-status{font-family:'Share Tech Mono';font-size:.6rem;color:var(--green);letter-spacing:1px}
-.application-description{color:rgba(200,200,208,.6);line-height:1.65;margin:0 0 1.3rem}
-.application-features{display:grid;gap:.7rem;margin:1.2rem 0 1.5rem}
-.application-features div{font-family:'Share Tech Mono';font-size:.62rem;color:rgba(255,255,255,.7)}
+.orange-label{color:#ff9966}
+.application-card h3{font-size:1.35rem;margin:.2rem 0;color:#fff}
+.application-status{font-family:'Share Tech Mono';font-size:.58rem;color:var(--green);letter-spacing:1px}
+.application-description{color:rgba(200,200,208,.6);line-height:1.55;font-size:.92rem;margin:0 0 1.1rem}
+.application-features{display:grid;gap:.6rem;margin:1rem 0 1.3rem}
+.application-features div{font-family:'Share Tech Mono';font-size:.58rem;color:rgba(255,255,255,.7)}
 .application-features span{color:var(--green);margin-right:.4rem}
 .application-button{width:100%;text-align:center}
-.application-note{font-family:'Share Tech Mono';font-size:.52rem;letter-spacing:1px;color:rgba(200,200,208,.3);margin-top:.8rem;text-align:center}
+.application-note{font-family:'Share Tech Mono';font-size:.5rem;letter-spacing:1px;color:rgba(200,200,208,.3);margin-top:.7rem;text-align:center}
 
 .reveal{opacity:0;transform:translateY(30px);transition:opacity .7s,transform .7s}
 .reveal.visible{opacity:1;transform:translateY(0)}
-footer{border-top:1px solid rgba(255,255,255,.05);background:#000;padding:3rem 1.5rem;text-align:center}
+footer{border-top:1px solid rgba(255,255,255,.05);background:#000;padding:2.5rem 1rem;text-align:center}
 
-@media(max-width:900px){nav ul{gap:.8rem}.application-methods{grid-template-columns:1fr}}
-@media(max-width:768px){.desktop-nav{display:none}.hamburger{display:block}section{padding:4rem 1rem}.hero-logo{width:125px;height:125px}}
+@media(max-width:1024px){.application-methods{grid-template-columns:1fr}}
+@media(max-width:768px){.desktop-nav{display:none}.hamburger{display:block}section{padding:3.5rem 1rem}.hero-logo{width:115px;height:115px}}
 </style>
 </head>
 
@@ -183,14 +188,14 @@ footer{border-top:1px solid rgba(255,255,255,.05);background:#000;padding:3rem 1
 <div id="cursor"></div><div id="cursor-dot"></div>
 
 <div class="mobile-menu" id="mobileMenu">
-<button onclick="toggleMenu()" style="position:absolute;top:1rem;right:1.4rem;background:none;border:0;color:#fff;font-size:2rem">✕</button>
+<button onclick="toggleMenu()" style="position:absolute;top:1rem;right:1.2rem;background:none;border:0;color:#fff;font-size:1.8rem">✕</button>
 <a href="#home" onclick="toggleMenu()" data-i18n="nav-home">HOME</a>
 <a href="#about" onclick="toggleMenu()" data-i18n="nav-founder">FOUNDER</a>
 <a href="#aim-trainer" onclick="toggleMenu()" data-i18n="nav-training">TRAINING</a>
 <a href="#roster" onclick="toggleMenu()" data-i18n="nav-team">TEAM</a>
 <a href="#contract" onclick="toggleMenu()" data-i18n="nav-rules">RULES</a>
 <a href="#sign" onclick="toggleMenu()" data-i18n="nav-join">JOIN</a>
-<button class="lang-btn" onclick="toggleLanguage()" id="mobileLangBtn" style="margin-top:1rem;">DE / EN</button>
+<button class="lang-btn" onclick="toggleLanguage()" id="mobileLangBtn" style="margin-top:.8rem;">DE / EN</button>
 </div>
 
 <nav>
@@ -210,8 +215,8 @@ footer{border-top:1px solid rgba(255,255,255,.05);background:#000;padding:3rem 1
 </nav>
 
 <div class="ticker-wrap"><div class="ticker">
-<span class="hl">◆ NICO GAMING ESPORTS</span><span>THE FINALS & FORTNITE</span><span class="hl">◆ 2 COACHES & 5 PLAYERS</span>
-<span>GAMERTRANSFER</span><span class="hl">◆ RECRUITING OPEN (8/8 SLOTS)</span><span>N1CO TAG REQUIRED</span><span class="hl">◆ JOIN NOW</span>
+<span class="hl">◆ NICO GAMING ESPORTS</span><span>THE FINALS & FORTNITE</span><span class="hl">◆ 2 COACHES & 5 PLAYERS + IGL</span>
+<span>TEAMPLAY PARTNER</span><span class="hl">◆ GAMERTRANSFER</span><span>RECRUITING OPEN (8/8 SLOTS)</span><span class="hl">◆ N1CO TAG REQUIRED</span><span>JOIN NOW</span>
 </div></div>
 
 <section id="home">
@@ -219,9 +224,10 @@ footer{border-top:1px solid rgba(255,255,255,.05);background:#000;padding:3rem 1
 <div class="hero-content">
 <img src="https://nico-gaming.netlify.app/nico.png" alt="N1CO Logo" class="hero-logo">
 <h1 class="hero-title glitch orb" data-text="NICO GAMING">NICO GAMING</h1>
-<p class="hero-sub" data-i18n="hero-sub">Official eSports club for <span class="game">The Finals</span> & <span class="game">Fortnite</span>. Founded and led by <span style="color:#fff;font-weight:700">nicominecith</span>.</p>
+<p class="hero-sub" data-i18n="hero-sub">Official eSports club for <span class="game">The Finals</span> & <span class="game">Fortnite</span>. Founded and led by <span style="color:#fff;font-weight:700">nicominecith</span>. Official Partner of <a href="https://teamplay.gg/api/og/posts/428c1d2c-3156-49f4-a014-5d9f145f304e/1789319000338" target="_blank" rel="noopener" style="color:#ff8844;font-weight:700">Teamplay.gg</a>.</p>
 <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
 <a href="#sign" class="btn-primary" data-i18n="btn-apply">⚡ APPLY NOW</a>
+<a href="https://teamplay.gg/api/og/posts/428c1d2c-3156-49f4-a014-5d9f145f304e/1789319000338" target="_blank" rel="noopener" class="btn-teamplay" data-i18n="btn-teamplay-partner">🤝 TEAMPLAY PARTNER</a>
 <a href="#aim-trainer" class="btn-outline" data-i18n="btn-warmup">🎯 START WARM-UP</a>
 </div>
 </div>
@@ -230,9 +236,9 @@ footer{border-top:1px solid rgba(255,255,255,.05);background:#000;padding:3rem 1
 <hr class="divider">
 
 <!-- Stats Bar -->
-<section style="padding:2.5rem 1rem">
+<section style="padding:2.2rem 1rem">
 <div class="container">
-<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:1rem">
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:1rem">
 <div class="stat-box reveal"><div class="stat-number">8</div><div class="stat-label" data-i18n="stat-slots">TOTAL SQUAD SLOTS</div></div>
 <div class="stat-box reveal"><div class="stat-number">2</div><div class="stat-label" data-i18n="stat-games">GAMES</div></div>
 <div class="stat-box reveal"><div class="stat-number">85%</div><div class="stat-label" data-i18n="stat-split">PLAYER PRIZE SPLIT</div></div>
@@ -250,35 +256,35 @@ footer{border-top:1px solid rgba(255,255,255,.05);background:#000;padding:3rem 1
 <h2 class="section-title" data-i18n="founder-title">FOUNDER & IGL</h2>
 
 <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2rem;align-items:start">
-<div class="card" style="padding:2rem">
+<div class="card" style="padding:1.8rem">
 <div class="age-badge">⚠ <span data-i18n="founder-rule">Minimum member age: 13 years</span></div>
-<div style="display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem">
-<div style="width:60px;height:60px;background:rgba(230,0,18,0.2);border:2px solid var(--red);display:flex;align-items:center;justify-content:center;font-size:1.8rem">👑</div>
+<div style="display:flex;align-items:center;gap:1rem;margin-bottom:1.4rem">
+<div style="width:55px;height:55px;background:rgba(230,0,18,0.2);border:2px solid var(--red);display:flex;align-items:center;justify-content:center;font-size:1.6rem">👑</div>
 <div>
-<h3 style="margin:0;font-size:1.4rem;color:#fff">N1CO</h3>
-<span style="font-family:'Share Tech Mono';font-size:0.7rem;color:var(--red)">nicominecith (Founder / Captain)</span>
+<h3 style="margin:0;font-size:1.3rem;color:#fff">N1CO</h3>
+<span style="font-family:'Share Tech Mono';font-size:0.65rem;color:var(--red)">nicominecith (Founder / Captain)</span>
 </div>
 </div>
-<p style="color:rgba(200,200,208,0.7);line-height:1.6;margin:0" data-i18n="founder-desc">Creator and team captain of NICO GAMING. Passionate about tactical shooter execution, high-end team chemistry, and pushing the boundaries in competitive The Finals and Fortnite.</p>
+<p style="color:rgba(200,200,208,0.7);line-height:1.55;margin:0;font-size:.95rem" data-i18n="founder-desc">Creator and team captain of NICO GAMING. Passionate about tactical shooter execution, high-end team chemistry, and pushing the boundaries in competitive The Finals and Fortnite.</p>
 </div>
 
-<div class="card" style="padding:2rem">
+<div class="card" style="padding:1.8rem">
 <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem">
-<h3 style="margin:0;font-size:1.2rem;color:#fff" data-i18n="setup-title">FOUNDER'S SETUP</h3>
-<span style="font-family:'Share Tech Mono';font-size:0.6rem;background:rgba(255,255,255,0.05);padding:0.25rem 0.5rem">PRO REFERENCE</span>
+<h3 style="margin:0;font-size:1.1rem;color:#fff" data-i18n="setup-title">FOUNDER'S SETUP</h3>
+<span style="font-family:'Share Tech Mono';font-size:0.55rem;background:rgba(255,255,255,0.05);padding:0.2rem 0.4rem">PRO REFERENCE</span>
 </div>
 <div style="display:flex;flex-direction:column">
 <a href="https://www.amazon.de/Microsoft-Xbox-Halo-Infinite-Limited/dp/B09NMWSLR6" target="_blank" rel="noopener" class="gear-item">
 <div class="gear-icon">🎮</div>
-<div><div style="font-family:'Share Tech Mono';font-size:0.55rem;color:var(--red)">CONSOLE</div><div style="font-family:'Orbitron';font-size:0.9rem;color:#fff">Xbox Series X</div><div style="font-size:0.8rem;color:rgba(200,200,208,0.5)">Halo Infinite Limited Edition</div></div>
+<div><div style="font-family:'Share Tech Mono';font-size:0.52rem;color:var(--red)">CONSOLE</div><div style="font-family:'Orbitron';font-size:0.85rem;color:#fff">Xbox Series X</div><div style="font-size:0.75rem;color:rgba(200,200,208,0.5)">Halo Infinite Limited Edition</div></div>
 </a>
 <a href="https://de.turtlebeach.com/products/recon-controller" target="_blank" rel="noopener" class="gear-item">
 <div class="gear-icon">🕹️</div>
-<div><div style="font-family:'Share Tech Mono';font-size:0.55rem;color:var(--red)">CONTROLLER</div><div style="font-family:'Orbitron';font-size:0.9rem;color:#fff">Turtle Beach Recon™</div><div style="font-size:0.8rem;color:rgba(200,200,208,0.5)">Wired Performance Controller</div></div>
+<div><div style="font-family:'Share Tech Mono';font-size:0.52rem;color:var(--red)">CONTROLLER</div><div style="font-family:'Orbitron';font-size:0.85rem;color:#fff">Turtle Beach Recon™</div><div style="font-size:0.75rem;color:rgba(200,200,208,0.5)">Wired Performance Controller</div></div>
 </a>
 <a href="https://de.turtlebeach.com/products/atlas-200-headset" target="_blank" rel="noopener" class="gear-item">
 <div class="gear-icon">🎧</div>
-<div><div style="font-family:'Share Tech Mono';font-size:0.55rem;color:var(--red)">HEADSET</div><div style="font-family:'Orbitron';font-size:0.9rem;color:#fff">Turtle Beach Atlas 200</div><div style="font-size:0.8rem;color:rgba(200,200,208,0.5)">Pro Gaming Headset</div></div>
+<div><div style="font-family:'Share Tech Mono';font-size:0.52rem;color:var(--red)">HEADSET</div><div style="font-family:'Orbitron';font-size:0.85rem;color:#fff">Turtle Beach Atlas 200</div><div style="font-size:0.75rem;color:rgba(200,200,208,0.5)">Pro Gaming Headset</div></div>
 </a>
 </div>
 </div>
@@ -293,87 +299,87 @@ footer{border-top:1px solid rgba(255,255,255,.05);background:#000;padding:3rem 1
 <div class="container">
 <div class="section-label" data-i18n="roster-tag">// TEAM STRUCTURE</div>
 <h2 class="section-title" data-i18n="roster-title">OFFICIAL ROSTER (8/8)</h2>
-<p style="color:rgba(200,200,208,0.6);margin-bottom:2rem" data-i18n="roster-desc">Total capacity including Founder: 2 Professional Coaches (The Finals & Fortnite) and 5 Elite Players (2 Fortnite, 3 The Finals).</p>
+<p style="color:rgba(200,200,208,0.6);margin-bottom:1.8rem;font-size:.95rem" data-i18n="roster-desc">Total capacity including Founder: 2 Professional Coaches (The Finals & Fortnite) and 5 Elite Players (2 Fortnite, 3 The Finals).</p>
 
 <!-- Coaches Subheading -->
-<div style="margin-bottom:1.5rem;display:flex;align-items:center;gap:1rem">
+<div style="margin-bottom:1.4rem;display:flex;align-items:center;gap:1rem">
 <div style="height:1px;background:rgba(230,0,18,0.3);flex-grow:1"></div>
-<span style="font-family:'Orbitron';font-size:0.75rem;color:var(--red);letter-spacing:2px;padding:0.4rem 1rem;background:rgba(230,0,18,0.1);border:1px solid rgba(230,0,18,0.3)" data-i18n="section-coaches">COACHING STAFF (2 SLOTS)</span>
+<span style="font-family:'Orbitron';font-size:0.7rem;color:var(--red);letter-spacing:1px;padding:0.35rem 0.9rem;background:rgba(230,0,18,0.1);border:1px solid rgba(230,0,18,0.3)" data-i18n="section-coaches">COACHING STAFF (2 SLOTS)</span>
 <div style="height:1px;background:rgba(230,0,18,0.3);flex-grow:1"></div>
 </div>
 
-<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;margin-bottom:2.5rem">
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:1.4rem;margin-bottom:2.2rem">
 <div class="roster-card">
 <div class="roster-avatar" style="border-color:rgba(45,125,255,0.5);background:rgba(45,125,255,0.1);color:#2d7dff">📋</div>
-<div style="font-family:'Orbitron';font-size:1.1rem;color:#fff">SLOT OPEN</div>
-<div style="font-family:'Share Tech Mono';font-size:0.65rem;color:#2d7dff;margin:0.25rem 0 0.75rem" data-i18n="coach-finals">COACH: THE FINALS</div>
-<p style="font-size:0.9rem;color:rgba(200,200,208,0.6);margin-bottom:1rem" data-i18n="coach-finals-desc">Responsible for tactical loadouts, map control strategies, and team coordination in The Finals.</p>
-<a href="#sign" class="btn-outline" style="border-color:rgba(45,125,255,0.4);color:#5b9aff;width:100%;font-size:0.6rem;padding:0.6rem" data-i18n="btn-apply-slot">APPLY FOR THIS SLOT</a>
+<div style="font-family:'Orbitron';font-size:1.05rem;color:#fff">SLOT OPEN</div>
+<div style="font-family:'Share Tech Mono';font-size:0.62rem;color:#2d7dff;margin:0.2rem 0 0.6rem" data-i18n="coach-finals">COACH: THE FINALS</div>
+<p style="font-size:0.88rem;color:rgba(200,200,208,0.6);margin-bottom:.9rem" data-i18n="coach-finals-desc">Responsible for tactical loadouts, map control strategies, and team coordination in The Finals.</p>
+<a href="#sign" class="btn-outline" style="border-color:rgba(45,125,255,0.4);color:#5b9aff;width:100%;font-size:0.58rem;padding:0.55rem" data-i18n="btn-apply-slot">APPLY FOR THIS SLOT</a>
 </div>
 
 <div class="roster-card">
 <div class="roster-avatar" style="border-color:rgba(45,125,255,0.5);background:rgba(45,125,255,0.1);color:#2d7dff">📋</div>
-<div style="font-family:'Orbitron';font-size:1.1rem;color:#fff">SLOT OPEN</div>
-<div style="font-family:'Share Tech Mono';font-size:0.65rem;color:#2d7dff;margin:0.25rem 0 0.75rem" data-i18n="coach-fortnite">COACH: FORTNITE</div>
-<p style="font-size:0.9rem;color:rgba(200,200,208,0.6);margin-bottom:1rem" data-i18n="coach-fortnite-desc">Focuses on drop zone analytics, rotation timing, build battles, and tournament execution.</p>
-<a href="#sign" class="btn-outline" style="border-color:rgba(45,125,255,0.4);color:#5b9aff;width:100%;font-size:0.6rem;padding:0.6rem" data-i18n="btn-apply-slot">APPLY FOR THIS SLOT</a>
+<div style="font-family:'Orbitron';font-size:1.05rem;color:#fff">SLOT OPEN</div>
+<div style="font-family:'Share Tech Mono';font-size:0.62rem;color:#2d7dff;margin:0.2rem 0 0.6rem" data-i18n="coach-fortnite">COACH: FORTNITE</div>
+<p style="font-size:0.88rem;color:rgba(200,200,208,0.6);margin-bottom:.9rem" data-i18n="coach-fortnite-desc">Focuses on drop zone analytics, rotation timing, build battles, and tournament execution.</p>
+<a href="#sign" class="btn-outline" style="border-color:rgba(45,125,255,0.4);color:#5b9aff;width:100%;font-size:0.58rem;padding:0.55rem" data-i18n="btn-apply-slot">APPLY FOR THIS SLOT</a>
 </div>
 </div>
 
 <!-- Players Subheading -->
-<div style="margin-bottom:1.5rem;display:flex;align-items:center;gap:1rem">
+<div style="margin-bottom:1.4rem;display:flex;align-items:center;gap:1rem">
 <div style="height:1px;background:rgba(230,0,18,0.3);flex-grow:1"></div>
-<span style="font-family:'Orbitron';font-size:0.75rem;color:var(--red);letter-spacing:2px;padding:0.4rem 1rem;background:rgba(230,0,18,0.1);border:1px solid rgba(230,0,18,0.3)" data-i18n="section-players">ACTIVE PLAYERS & IGL (6 SLOTS)</span>
+<span style="font-family:'Orbitron';font-size:0.7rem;color:var(--red);letter-spacing:1px;padding:0.35rem 0.9rem;background:rgba(230,0,18,0.1);border:1px solid rgba(230,0,18,0.3)" data-i18n="section-players">ACTIVE PLAYERS & IGL (6 SLOTS)</span>
 <div style="height:1px;background:rgba(230,0,18,0.3);flex-grow:1"></div>
 </div>
 
-<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem">
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:1.4rem">
 <div class="roster-card" style="border-color:rgba(230,0,18,0.5);background:rgba(230,0,18,0.05)">
 <div class="roster-avatar">👑</div>
-<div style="font-family:'Orbitron';font-size:1.1rem;color:#fff">N1CO</div>
-<div style="font-family:'Share Tech Mono';font-size:0.65rem;color:var(--red);margin:0.25rem 0 0.75rem">FOUNDER / IGL</div>
-<p style="font-size:0.9rem;color:rgba(200,200,208,0.6);margin-bottom:1rem" data-i18n="player-founder-desc">Team Captain & In-Game Leader for both The Finals and Fortnite divisions.</p>
-<div style="padding:0.6rem;background:rgba(230,0,18,0.2);border:1px solid rgba(230,0,18,0.4);color:var(--red);font-family:'Orbitron';font-size:0.6rem;letter-spacing:2px">LOCKED (OWNER)</div>
+<div style="font-family:'Orbitron';font-size:1.05rem;color:#fff">N1CO</div>
+<div style="font-family:'Share Tech Mono';font-size:0.62rem;color:var(--red);margin:0.2rem 0 0.6rem">FOUNDER / IGL</div>
+<p style="font-size:0.88rem;color:rgba(200,200,208,0.6);margin-bottom:.9rem" data-i18n="player-founder-desc">Team Captain & In-Game Leader for both The Finals and Fortnite divisions.</p>
+<div style="padding:0.55rem;background:rgba(230,0,18,0.2);border:1px solid rgba(230,0,18,0.4);color:var(--red);font-family:'Orbitron';font-size:0.58rem;letter-spacing:1px">LOCKED (OWNER)</div>
 </div>
 
 <div class="roster-card">
 <div class="roster-avatar">🛡️</div>
-<div style="font-family:'Orbitron';font-size:1.1rem;color:#fff">SLOT OPEN</div>
-<div style="font-family:'Share Tech Mono';font-size:0.65rem;color:var(--red);margin:0.25rem 0 0.75rem" data-i18n="slot-finals-1">THE FINALS (HEAVY)</div>
-<p style="font-size:0.9rem;color:rgba(200,200,208,0.6);margin-bottom:1rem" data-i18n="slot-finals-1-desc">Primary cashout defender and destructive anchor.</p>
-<a href="#sign" class="btn-outline" style="width:100%;font-size:0.6rem;padding:0.6rem" data-i18n="btn-apply-slot">APPLY FOR THIS SLOT</a>
+<div style="font-family:'Orbitron';font-size:1.05rem;color:#fff">SLOT OPEN</div>
+<div style="font-family:'Share Tech Mono';font-size:0.62rem;color:var(--red);margin:0.2rem 0 0.6rem" data-i18n="slot-finals-1">THE FINALS (HEAVY)</div>
+<p style="font-size:0.88rem;color:rgba(200,200,208,0.6);margin-bottom:.9rem" data-i18n="slot-finals-1-desc">Primary cashout defender and destructive anchor.</p>
+<a href="#sign" class="btn-outline" style="width:100%;font-size:0.58rem;padding:0.55rem" data-i18n="btn-apply-slot">APPLY FOR THIS SLOT</a>
 </div>
 
 <div class="roster-card">
 <div class="roster-avatar">⚡</div>
-<div style="font-family:'Orbitron';font-size:1.1rem;color:#fff">SLOT OPEN</div>
-<div style="font-family:'Share Tech Mono';font-size:0.65rem;color:var(--red);margin:0.25rem 0 0.75rem" data-i18n="slot-finals-2">THE FINALS (MEDIUM)</div>
-<p style="font-size:0.9rem;color:rgba(200,200,208,0.6);margin-bottom:1rem" data-i18n="slot-finals-2-desc">Support healer, turret strategist, and rifler.</p>
-<a href="#sign" class="btn-outline" style="width:100%;font-size:0.6rem;padding:0.6rem" data-i18n="btn-apply-slot">APPLY FOR THIS SLOT</a>
+<div style="font-family:'Orbitron';font-size:1.05rem;color:#fff">SLOT OPEN</div>
+<div style="font-family:'Share Tech Mono';font-size:0.62rem;color:var(--red);margin:0.2rem 0 0.6rem" data-i18n="slot-finals-2">THE FINALS (MEDIUM)</div>
+<p style="font-size:0.88rem;color:rgba(200,200,208,0.6);margin-bottom:.9rem" data-i18n="slot-finals-2-desc">Support healer, turret strategist, and rifler.</p>
+<a href="#sign" class="btn-outline" style="width:100%;font-size:0.58rem;padding:0.55rem" data-i18n="btn-apply-slot">APPLY FOR THIS SLOT</a>
 </div>
 
 <div class="roster-card">
 <div class="roster-avatar">🎯</div>
-<div style="font-family:'Orbitron';font-size:1.1rem;color:#fff">SLOT OPEN</div>
-<div style="font-family:'Share Tech Mono';font-size:0.65rem;color:var(--red);margin:0.25rem 0 0.75rem" data-i18n="slot-finals-3">THE FINALS (LIGHT)</div>
-<p style="font-size:0.9rem;color:rgba(200,200,208,0.6);margin-bottom:1rem" data-i18n="slot-finals-3-desc">Evasive flanker, recon specialist, and high-mobility fragger.</p>
-<a href="#sign" class="btn-outline" style="width:100%;font-size:0.6rem;padding:0.6rem" data-i18n="btn-apply-slot">APPLY FOR THIS SLOT</a>
+<div style="font-family:'Orbitron';font-size:1.05rem;color:#fff">SLOT OPEN</div>
+<div style="font-family:'Share Tech Mono';font-size:0.62rem;color:var(--red);margin:0.2rem 0 0.6rem" data-i18n="slot-finals-3">THE FINALS (LIGHT)</div>
+<p style="font-size:0.88rem;color:rgba(200,200,208,0.6);margin-bottom:.9rem" data-i18n="slot-finals-3-desc">Evasive flanker, recon specialist, and high-mobility fragger.</p>
+<a href="#sign" class="btn-outline" style="width:100%;font-size:0.58rem;padding:0.55rem" data-i18n="btn-apply-slot">APPLY FOR THIS SLOT</a>
 </div>
 
 <div class="roster-card">
 <div class="roster-avatar">🏗️</div>
-<div style="font-family:'Orbitron';font-size:1.1rem;color:#fff">SLOT OPEN</div>
-<div style="font-family:'Share Tech Mono';font-size:0.65rem;color:var(--red);margin:0.25rem 0 0.75rem" data-i18n="slot-fn-1">FORTNITE (BUILDER / IGL)</div>
-<p style="font-size:0.9rem;color:rgba(200,200,208,0.6);margin-bottom:1rem" data-i18n="slot-fn-1-desc">Main competitive duos builder and endgame caller.</p>
-<a href="#sign" class="btn-outline" style="width:100%;font-size:0.6rem;padding:0.6rem" data-i18n="btn-apply-slot">APPLY FOR THIS SLOT</a>
+<div style="font-family:'Orbitron';font-size:1.05rem;color:#fff">SLOT OPEN</div>
+<div style="font-family:'Share Tech Mono';font-size:0.62rem;color:var(--red);margin:0.2rem 0 0.6rem" data-i18n="slot-fn-1">FORTNITE (BUILDER / IGL)</div>
+<p style="font-size:0.88rem;color:rgba(200,200,208,0.6);margin-bottom:.9rem" data-i18n="slot-fn-1-desc">Main competitive duos builder and endgame caller.</p>
+<a href="#sign" class="btn-outline" style="width:100%;font-size:0.58rem;padding:0.55rem" data-i18n="btn-apply-slot">APPLY FOR THIS SLOT</a>
 </div>
 
 <div class="roster-card">
 <div class="roster-avatar">🔫</div>
-<div style="font-family:'Orbitron';font-size:1.1rem;color:#fff">SLOT OPEN</div>
-<div style="font-family:'Share Tech Mono';font-size:0.65rem;color:var(--red);margin:0.25rem 0 0.75rem" data-i18n="slot-fn-2">FORTNITE (FRAGGER)</div>
-<p style="font-size:0.9rem;color:rgba(200,200,208,0.6);margin-bottom:1rem" data-i18n="slot-fn-2-desc">Entry fragger, mechanical master, and sharpshooter.</p>
-<a href="#sign" class="btn-outline" style="width:100%;font-size:0.6rem;padding:0.6rem" data-i18n="btn-apply-slot">APPLY FOR THIS SLOT</a>
+<div style="font-family:'Orbitron';font-size:1.05rem;color:#fff">SLOT OPEN</div>
+<div style="font-family:'Share Tech Mono';font-size:0.62rem;color:var(--red);margin:0.2rem 0 0.6rem" data-i18n="slot-fn-2">FORTNITE (FRAGGER)</div>
+<p style="font-size:0.88rem;color:rgba(200,200,208,0.6);margin-bottom:.9rem" data-i18n="slot-fn-2-desc">Entry fragger, mechanical master, and sharpshooter.</p>
+<a href="#sign" class="btn-outline" style="width:100%;font-size:0.58rem;padding:0.55rem" data-i18n="btn-apply-slot">APPLY FOR THIS SLOT</a>
 </div>
 </div>
 
@@ -387,29 +393,29 @@ footer{border-top:1px solid rgba(255,255,255,.05);background:#000;padding:3rem 1
 <div class="container">
 <div class="section-label" data-i18n="train-tag">// INTERACTIVE WARM-UP</div>
 <h2 class="section-title" data-i18n="train-title">PRO AIM LABS</h2>
-<p style="color:rgba(200,200,208,0.6);margin-bottom:2rem" data-i18n="train-desc">Test your reflexes and aim precision before tryouts. Fully supports mouse clicks and gamepad controls.</p>
+<p style="color:rgba(200,200,208,0.6);margin-bottom:1.8rem;font-size:.95rem" data-i18n="train-desc">Test your reflexes and aim precision before tryouts. Fully supports mouse clicks and gamepad controls.</p>
 
-<div class="card" style="padding:1.5rem">
+<div class="card" style="padding:1.4rem">
 <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;margin-bottom:1rem">
-<div style="display:flex;gap:1.5rem;font-family:'Share Tech Mono';font-size:0.9rem">
+<div style="display:flex;gap:1.4rem;font-family:'Share Tech Mono';font-size:0.85rem">
 <div><span style="color:rgba(200,200,208,0.5)" data-i18n="lbl-score">SCORE:</span> <span id="aim-score" style="color:var(--red);font-weight:700">0</span></div>
 <div><span style="color:rgba(200,200,208,0.5)" data-i18n="lbl-time">TIME:</span> <span id="aim-time" style="color:#fff;font-weight:700">30</span>s</div>
 <div><span style="color:rgba(200,200,208,0.5)" data-i18n="lbl-acc">ACC:</span> <span id="aim-acc" style="color:#2d7dff;font-weight:700">0%</span></div>
 </div>
-<div id="controller-status" style="font-family:'Share Tech Mono';font-size:0.7rem;padding:0.3rem 0.6rem;background:rgba(0,0,0,0.6);border:1px solid rgba(255,255,255,0.1);color:rgba(200,200,208,0.5)">🎮 GAMEPAD: STANDBY</div>
+<div id="controller-status" style="font-family:'Share Tech Mono';font-size:0.65rem;padding:0.25rem 0.5rem;background:rgba(0,0,0,0.6);border:1px solid rgba(255,255,255,0.1);color:rgba(200,200,208,0.5)">🎮 GAMEPAD: STANDBY</div>
 </div>
 
 <div style="position:relative">
 <canvas id="aim-canvas"></canvas>
 <div id="aim-overlay" style="position:absolute;inset:0;background:rgba(7,7,9,0.9);backdrop-filter:blur(8px);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:1rem">
-<h3 style="font-size:1.5rem;margin:0 0 0.5rem;color:#fff" data-i18n="overlay-title">AIM REFLEX TRAINING</h3>
-<p style="color:rgba(200,200,208,0.6);max-width:400px;font-size:0.95rem;margin:0 0 1.5rem" data-i18n="overlay-desc">Click or tap targets as fast as possible for 30 seconds. Connect your controller for analog crosshair control.</p>
+<h3 style="font-size:1.4rem;margin:0 0 0.4rem;color:#fff" data-i18n="overlay-title">AIM REFLEX TRAINING</h3>
+<p style="color:rgba(200,200,208,0.6);max-width:400px;font-size:0.9rem;margin:0 0 1.2rem" data-i18n="overlay-desc">Click or tap targets as fast as possible for 30 seconds. Connect your controller for analog crosshair control.</p>
 <button onclick="startAimGame()" class="btn-primary" data-i18n="btn-start-aim">⚡ START TRAINING</button>
 </div>
 </div>
 
-<div style="margin-top:2rem">
-<div style="font-family:'Share Tech Mono';font-size:0.65rem;color:var(--red);letter-spacing:2px;margin-bottom:0.5rem" data-i18n="lb-title">// RECENT SESSION HIGHSCORES</div>
+<div style="margin-top:1.8rem">
+<div style="font-family:'Share Tech Mono';font-size:0.62rem;color:var(--red);letter-spacing:1px;margin-bottom:0.4rem" data-i18n="lb-title">// RECENT SESSION HIGHSCORES</div>
 <div style="background:rgba(0,0,0,0.4);border:1px solid rgba(255,255,255,0.05)">
 <div class="lb-row header"><span>RANK</span><span>PLAYER</span><span>ACCURACY</span><span>SCORE</span></div>
 <div id="leaderboard-body">
@@ -429,26 +435,26 @@ footer{border-top:1px solid rgba(255,255,255,.05);background:#000;padding:3rem 1
 <div class="container">
 <div class="section-label" data-i18n="rules-tag">// CLUB STATUTES</div>
 <h2 class="section-title" data-i18n="rules-title">PRO CONTRACT RULES</h2>
-<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.5rem;margin-top:2rem">
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.4rem;margin-top:1.8rem">
 <div class="contract-clause">
 <div class="clause-num">§ 01 — IDENTITY</div>
 <div class="clause-title" data-i18n="rule-1-title">N1CO CLAN TAG</div>
-<p style="color:rgba(200,200,208,0.6);font-size:0.95rem;margin:0" data-i18n="rule-1-desc">All active roster players must carry the official <strong style="color:#fff">"N1CO |"</strong> tag in front of their ingame display names.</p>
+<p style="color:rgba(200,200,208,0.6);font-size:0.9rem;margin:0" data-i18n="rule-1-desc">All active roster players must carry the official <strong style="color:#fff">"N1CO |"</strong> tag in front of their ingame display names.</p>
 </div>
 <div class="contract-clause">
 <div class="clause-num">§ 02 — AGE REQUIREMENT</div>
 <div class="clause-title" data-i18n="rule-2-title">MINIMUM AGE: 13</div>
-<p style="color:rgba(200,200,208,0.6);font-size:0.95rem;margin:0" data-i18n="rule-2-desc">Applicants must be at least 13 years old. Minors under 18 require verbal or written parental consent upon joining.</p>
+<p style="color:rgba(200,200,208,0.6);font-size:0.9rem;margin:0" data-i18n="rule-2-desc">Applicants must be at least 13 years old. Minors under 18 require verbal or written parental consent upon joining.</p>
 </div>
 <div class="contract-clause">
 <div class="clause-num">§ 03 — REVENUE SPLIT</div>
 <div class="clause-title" data-i18n="rule-3-title">85% PLAYER SPLIT</div>
-<p style="color:rgba(200,200,208,0.6);font-size:0.95rem;margin:0" data-i18n="rule-3-desc">We target €500+ in tournament prize pools. 85% of earnings go directly to the participating player.</p>
+<p style="color:rgba(200,200,208,0.6);font-size:0.9rem;margin:0" data-i18n="rule-3-desc">We target €500+ in tournament prize pools. 85% of earnings go directly to the participating player.</p>
 </div>
 <div class="contract-clause">
 <div class="clause-num">§ 04 — EQUIPMENT</div>
 <div class="clause-title" data-i18n="rule-4-title">SELF-PROVIDED GEAR</div>
-<p style="color:rgba(200,200,208,0.6);font-size:0.95rem;margin:0" data-i18n="rule-4-desc">Players are responsible for their own hardware, peripherals, and reliable internet connection.</p>
+<p style="color:rgba(200,200,208,0.6);font-size:0.9rem;margin:0" data-i18n="rule-4-desc">Players are responsible for their own hardware, peripherals, and reliable internet connection.</p>
 </div>
 </div>
 </div>
@@ -461,17 +467,17 @@ footer{border-top:1px solid rgba(255,255,255,.05);background:#000;padding:3rem 1
 <div class="container">
 <div class="section-label" data-i18n="join-tag">// JOIN THE ELITE</div>
 <h2 class="section-title" data-i18n="join-title">RECRUITMENT PORTAL</h2>
-<p style="color:rgba(200,200,208,0.6);margin-bottom:2rem" data-i18n="join-desc">Choose your preferred way to submit your application to NICO GAMING.</p>
+<p style="color:rgba(200,200,208,0.6);margin-bottom:1.8rem;font-size:.95rem" data-i18n="join-desc">Choose your preferred way to submit your application to NICO GAMING.</p>
 
 <div class="application-methods">
 <!-- Gamertransfer Card -->
 <div class="application-card gamertransfer-card">
 <div class="application-glow"></div>
 <div class="application-top">
-<div style="display:flex;align-items:center;gap:1rem">
+<div style="display:flex;align-items:center;gap:.9rem">
 <div class="application-icon gt-icon">🚀</div>
 <div>
-<div class="application-label blue-label" data-i18n="gt-sub">FASTEST RECRUITMENT ROUTE</div>
+<div class="application-label blue-label" data-i18n="gt-sub">FASTEST ROUTE</div>
 <h3>GAMERTRANSFER</h3>
 </div>
 </div>
@@ -480,18 +486,42 @@ footer{border-top:1px solid rgba(255,255,255,.05);background:#000;padding:3rem 1
 <p class="application-description" data-i18n="gt-desc">Apply directly through Gamertransfer. Showcase your player stats, division history, and connect with our team management instantly.</p>
 <div class="application-features">
 <div><span>✓</span> <span data-i18n="gt-f1">Direct submission to NICO GAMING portal</span></div>
-<div><span>✓</span> <span data-i18n="gt-f2">Integrated gaming stats & profile verification</span></div>
+<div><span>✓</span> <span data-i18n="gt-f2">Integrated gaming stats & verification</span></div>
 </div>
 <div class="application-button">
 <a href="https://gamertransfer.com/nico_gaming_the_finals-lfm-2-35968.html" target="_blank" rel="noopener" class="btn-primary btn-gamer" style="width:100%" data-i18n="gt-btn">🚀 APPLY VIA GAMERTRANSFER</a>
 </div>
-<div class="application-note" data-i18n="gt-note">INSTANT REDIRECT TO EXTERNAL SECURE PLATFORM</div>
+<div class="application-note" data-i18n="gt-note">EXTERNAL SECURE PLATFORM</div>
+</div>
+
+<!-- Teamplay Partner Card -->
+<div class="application-card teamplay-card">
+<div class="application-glow teamplay-glow"></div>
+<div class="application-top">
+<div style="display:flex;align-items:center;gap:.9rem">
+<div class="application-icon tp-icon">🤝</div>
+<div>
+<div class="application-label orange-label" data-i18n="tp-sub">OFFICIAL PARTNER</div>
+<h3>TEAMPLAY.GG</h3>
+</div>
+</div>
+<span class="application-status" style="color:#ff9966">PARTNER</span>
+</div>
+<p class="application-description" data-i18n="tp-desc">Explore our official partnership on Teamplay.gg. Connect with community players, view network updates, and network with our partner clubs.</p>
+<div class="application-features">
+<div><span>✓</span> <span data-i18n="tp-f1">Official club partnership listing</span></div>
+<div><span>✓</span> <span data-i18n="tp-f2">Community matchmaking & networking</span></div>
+</div>
+<div class="application-button">
+<a href="https://teamplay.gg/api/og/posts/428c1d2c-3156-49f4-a014-5d9f145f304e/1789319000338" target="_blank" rel="noopener" class="btn-teamplay" style="width:100%" data-i18n="tp-btn">🤝 VISIT TEAMPLAY PARTNER</a>
+</div>
+<div class="application-note" data-i18n="tp-note">OFFICIAL PARTNERSHIP PLATFORM</div>
 </div>
 
 <!-- Email Form Card -->
 <div class="application-card">
 <div class="application-top">
-<div style="display:flex;align-items:center;gap:1rem">
+<div style="display:flex;align-items:center;gap:.9rem">
 <div class="application-icon email-icon">✉️</div>
 <div>
 <div class="application-label" data-i18n="email-sub">CLASSIC APPLICATION</div>
@@ -502,7 +532,7 @@ footer{border-top:1px solid rgba(255,255,255,.05);background:#000;padding:3rem 1
 </div>
 
 <form id="applyForm" onsubmit="sendMail(event)">
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:.8rem">
 <div class="form-group">
 <label data-i18n="form-name">YOUR NAME *</label>
 <input type="text" id="fname" required placeholder="John Doe">
@@ -513,7 +543,7 @@ footer{border-top:1px solid rgba(255,255,255,.05);background:#000;padding:3rem 1
 </div>
 </div>
 
-<div style="display:grid;grid-template-columns:2fr 1fr;gap:1rem">
+<div style="display:grid;grid-template-columns:2fr 1fr;gap:.8rem">
 <div class="form-group">
 <label data-i18n="form-email">E-MAIL ADDRESS *</label>
 <input type="email" id="femail" required placeholder="mail@example.com">
@@ -524,7 +554,7 @@ footer{border-top:1px solid rgba(255,255,255,.05);background:#000;padding:3rem 1
 </div>
 </div>
 
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:.8rem">
 <div class="form-group">
 <label data-i18n="form-role">APPLYING FOR *</label>
 <select id="frole" required>
@@ -544,9 +574,9 @@ footer{border-top:1px solid rgba(255,255,255,.05);background:#000;padding:3rem 1
 </div>
 </div>
 
-<div style="display:flex;align-items:flex-start;gap:0.5rem;margin:1rem 0">
-<input type="checkbox" id="fcheck" required style="margin-top:3px;accent-var:var(--red)">
-<label for="fcheck" style="font-family:'Barlow Condensed';font-size:0.9rem;color:rgba(200,200,208,0.7);cursor:pointer;margin:0" data-i18n="form-check">I confirm that I am at least 13 years old, own proper equipment, and agree to carry the N1CO tag.</label>
+<div style="display:flex;align-items:flex-start;gap:.4rem;margin:.9rem 0">
+<input type="checkbox" id="fcheck" required style="margin-top:3px">
+<label for="fcheck" style="font-family:'Barlow Condensed';font-size:.85rem;color:rgba(200,200,208,.7);cursor:pointer;margin:0" data-i18n="form-check">I confirm that I am at least 13 years old, own proper equipment, and agree to carry the N1CO tag.</label>
 </div>
 
 <button type="submit" class="btn-primary" style="width:100%" data-i18n="form-btn">✉ SEND APPLICATION E-MAIL</button>
@@ -558,13 +588,13 @@ footer{border-top:1px solid rgba(255,255,255,.05);background:#000;padding:3rem 1
 
 <!-- Footer -->
 <footer>
-<div class="container" style="display:flex;flex-direction:column;align-items:center;gap:1rem">
-<div style="display:flex;align-items:center;gap:10px">
-<img src="https://nico-gaming.netlify.app/nico.png" alt="Logo" style="width:28px;height:28px;object-fit:contain">
-<span style="font-family:'Orbitron';font-weight:900;font-size:0.9rem;color:#fff">NICO<span style="color:var(--red)">GAMING</span></span>
+<div class="container" style="display:flex;flex-direction:column;align-items:center;gap:.9rem">
+<div style="display:flex;align-items:center;gap:8px">
+<img src="https://nico-gaming.netlify.app/nico.png" alt="Logo" style="width:26px;height:26px;object-fit:contain">
+<span style="font-family:'Orbitron';font-weight:900;font-size:.85rem;color:#fff">NICO<span style="color:var(--red)">GAMING</span></span>
 </div>
-<p style="font-family:'Share Tech Mono';font-size:0.6rem;color:rgba(200,200,208,0.4);letter-spacing:2px;margin:0" data-i18n="footer-rights">
-© 2026 NICO GAMING ESPORTS · FOUNDER: NICOMINECITH · ALL RIGHTS RESERVED
+<p style="font-family:'Share Tech Mono';font-size:.55rem;color:rgba(200,200,208,.4);letter-spacing:1px;margin:0" data-i18n="footer-rights">
+© 2026 NICO GAMING ESPORTS · FOUNDER: NICOMINECITH · TEAMPLAY PARTNER · ALL RIGHTS RESERVED
 </p>
 </div>
 </footer>
@@ -595,8 +625,9 @@ const translations = {
         "nav-team": "TEAM",
         "nav-rules": "RULES",
         "nav-join": "JOIN",
-        "hero-sub": "Official eSports club for <span class='game'>The Finals</span> & <span class='game'>Fortnite</span>. Founded and led by <span style='color:#fff;font-weight:700'>nicominecith</span>.",
+        "hero-sub": "Official eSports club for <span class='game'>The Finals</span> & <span class='game'>Fortnite</span>. Founded and led by <span style='color:#fff;font-weight:700'>nicominecith</span>. Official Partner of <a href='https://teamplay.gg/api/og/posts/428c1d2c-3156-49f4-a014-5d9f145f304e/1789319000338' target='_blank' rel='noopener' style='color:#ff8844;font-weight:700'>Teamplay.gg</a>.",
         "btn-apply": "⚡ APPLY NOW",
+        "btn-teamplay-partner": "🤝 TEAMPLAY PARTNER",
         "btn-warmup": "🎯 START WARM-UP",
         "stat-slots": "TOTAL SQUAD SLOTS",
         "stat-games": "GAMES",
@@ -651,13 +682,19 @@ const translations = {
         "join-tag": "// JOIN THE ELITE",
         "join-title": "RECRUITMENT PORTAL",
         "join-desc": "Choose your preferred way to submit your application to NICO GAMING.",
-        "gt-sub": "FASTEST RECRUITMENT ROUTE",
+        "gt-sub": "FASTEST ROUTE",
         "gt-badge": "RECOMMENDED",
         "gt-desc": "Apply directly through Gamertransfer. Showcase your player stats, division history, and connect with our team management instantly.",
         "gt-f1": "Direct submission to NICO GAMING portal",
-        "gt-f2": "Integrated gaming stats & profile verification",
+        "gt-f2": "Integrated gaming stats & verification",
         "gt-btn": "🚀 APPLY VIA GAMERTRANSFER",
-        "gt-note": "INSTANT REDIRECT TO EXTERNAL SECURE PLATFORM",
+        "gt-note": "EXTERNAL SECURE PLATFORM",
+        "tp-sub": "OFFICIAL PARTNER",
+        "tp-desc": "Explore our official partnership on Teamplay.gg. Connect with community players, view network updates, and network with our partner clubs.",
+        "tp-f1": "Official club partnership listing",
+        "tp-f2": "Community matchmaking & networking",
+        "tp-btn": "🤝 VISIT TEAMPLAY PARTNER",
+        "tp-note": "OFFICIAL PARTNERSHIP PLATFORM",
         "email-sub": "CLASSIC APPLICATION",
         "email-title": "DIRECT E-MAIL FORM",
         "form-name": "YOUR NAME *",
@@ -668,7 +705,7 @@ const translations = {
         "form-select": "Select Division / Role...",
         "form-check": "I confirm that I am at least 13 years old, own proper equipment, and agree to carry the N1CO tag.",
         "form-btn": "✉ SEND APPLICATION E-MAIL",
-        "footer-rights": "© 2026 NICO GAMING ESPORTS · FOUNDER: NICOMINECITH · ALL RIGHTS RESERVED"
+        "footer-rights": "© 2026 NICO GAMING ESPORTS · FOUNDER: NICOMINECITH · TEAMPLAY PARTNER · ALL RIGHTS RESERVED"
     },
     de: {
         "nav-home": "HOME",
@@ -677,8 +714,9 @@ const translations = {
         "nav-team": "TEAM",
         "nav-rules": "REGELN",
         "nav-join": "MITMACHEN",
-        "hero-sub": "Offizieller eSports-Club für <span class='game'>The Finals</span> & <span class='game'>Fortnite</span>. Gegründet und geleitet von <span style='color:#fff;font-weight:700'>nicominecith</span>.",
+        "hero-sub": "Offizieller eSports-Club für <span class='game'>The Finals</span> & <span class='game'>Fortnite</span>. Gegründet und geleitet von <span style='color:#fff;font-weight:700'>nicominecith</span>. Offizieller Partner von <a href='https://teamplay.gg/api/og/posts/428c1d2c-3156-49f4-a014-5d9f145f304e/1789319000338' target='_blank' rel='noopener' style='color:#ff8844;font-weight:700'>Teamplay.gg</a>.",
         "btn-apply": "⚡ JETZT BEWERBEN",
+        "btn-teamplay-partner": "🤝 TEAMPLAY PARTNER",
         "btn-warmup": "🎯 WARM-UP STARTEN",
         "stat-slots": "GESAMT SQUAD SLOTS",
         "stat-games": "GAMES",
@@ -733,13 +771,19 @@ const translations = {
         "join-tag": "// WERDE TEIL DER ELITE",
         "join-title": "RECRUITING-PORTAL",
         "join-desc": "Wähle deinen bevorzugten Weg, um deine Bewerbung bei NICO GAMING einzureichen.",
-        "gt-sub": "SCHNELLSTER RECRUITING-WEG",
+        "gt-sub": "SCHNELLSTER WEG",
         "gt-badge": "EMPFOHLEN",
         "gt-desc": "Bewirb dich direkt über Gamertransfer. Präsentiere deine Spielerstatistiken, Divisionshistorie und verbinde dich sofort mit unserem Team-Management.",
         "gt-f1": "Direkte Einreichung im NICO GAMING Portal",
-        "gt-f2": "Integrierte Gaming-Statistiken & Profilverifizierung",
+        "gt-f2": "Integrierte Gaming-Statistiken & Verifizierung",
         "gt-btn": "🚀 ÜBER GAMERTRANSFER BEWERBEN",
-        "gt-note": "DIREKTE WEITERLEITUNG ZUR EXTERNEN SICHEREN PLATTFORM",
+        "gt-note": "EXTERNE SICHERE PLATTFORM",
+        "tp-sub": "OFFIZIELLER PARTNER",
+        "tp-desc": "Entdecke unsere offizielle Partnerschaft auf Teamplay.gg. Vernetze dich mit Community-Spielern und Partner-Clubs.",
+        "tp-f1": "Offizieller Club-Partnerschaftseintrag",
+        "tp-f2": "Community-Matchmaking & Vernetzung",
+        "tp-btn": "🤝 TEAMPLAY-PARTNER BESUCHEN",
+        "tp-note": "OFFIZIELLEN PARTNER-PLATTFORM",
         "email-sub": "KLASSISCHE BEWERBUNG",
         "email-title": "DIREKTES E-MAIL-FORMULAR",
         "form-name": "DEIN NAME *",
@@ -750,7 +794,7 @@ const translations = {
         "form-select": "Division / Rolle wählen...",
         "form-check": "Ich bestätige, dass ich mindestens 13 Jahre alt bin, über ordentliches Equipment verfüge und den N1CO-Tag trage.",
         "form-btn": "✉ BEWERBUNGS-E-MAIL SENDEN",
-        "footer-rights": "© 2026 NICO GAMING ESPORTS · GRÜNDER: NICOMINECITH · ALLE RECHTE VORBEHALTEN"
+        "footer-rights": "© 2026 NICO GAMING ESPORTS · GRÜNDER: NICOMINECITH · TEAMPLAY PARTNER · ALLE RECHTE VORBEHALTEN"
     }
 };
 
@@ -807,7 +851,7 @@ let sessionScores = [];
 function resizeCanvas() {
     const rect = canvas.getBoundingClientRect();
     canvas.width = rect.width || 600;
-    canvas.height = 350;
+    canvas.height = 320;
 }
 window.addEventListener('resize', resizeCanvas);
 resizeCanvas();
@@ -849,10 +893,10 @@ function startAimGame() {
             overlay.style.opacity = '1';
             overlay.style.pointerEvents = 'auto';
             overlay.innerHTML = `
-                <div style="font-family:'Orbitron';font-weight:900;font-size:1.5rem;color:#fff;margin-bottom:0.25rem">SESSION FINISHED</div>
-                <div style="font-family:'Share Tech Mono';color:var(--red);font-size:1.1rem;margin-bottom:0.25rem">SCORE: ${score}</div>
-                <div style="font-family:'Share Tech Mono';color:#2d7dff;font-size:0.9rem;margin-bottom:1.5rem">ACCURACY: ${acc}%</div>
-                <button onclick="startAimGame()" class="btn-primary" style="font-size:0.6rem;padding:0.7rem 1.5rem">TRY AGAIN</button>
+                <div style="font-family:'Orbitron';font-weight:900;font-size:1.4rem;color:#fff;margin-bottom:0.2rem">SESSION FINISHED</div>
+                <div style="font-family:'Share Tech Mono';color:var(--red);font-size:1.05rem;margin-bottom:0.2rem">SCORE: ${score}</div>
+                <div style="font-family:'Share Tech Mono';color:#2d7dff;font-size:0.85rem;margin-bottom:1.2rem">ACCURACY: ${acc}%</div>
+                <button onclick="startAimGame()" class="btn-primary" style="font-size:0.58rem;padding:0.6rem 1.4rem">TRY AGAIN</button>
             `;
         }
     }, 1000);
