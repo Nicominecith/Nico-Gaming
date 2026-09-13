@@ -1,514 +1,1000 @@
 <!DOCTYPE html>
-<html lang="en" id="htmlRoot">
+<html lang="en" id="htmlRoot" class="dark">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title id="meta-title">NICO GAMING | Elite eSports Club (The Finals & Fortnite)</title>
+    <meta name="description" id="meta-desc" content="Official eSports club founded by nicominecith. Competing in The Finals and Fortnite with professional coaching and elite rosters.">
+    
+    <!-- Tailwind CSS & Google Fonts -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Orbitron:wght@500;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            red: '#ff003c',
+                            redglow: '#ff003c88',
+                            dark: '#050508',
+                            card: '#0c0c14',
+                            cardhover: '#141421',
+                            border: '#ff003c26',
+                            borderhover: '#ff003c77',
+                            accent: '#00f0ff'
+                        }
+                    },
+                    fontFamily: {
+                        orbitron: ['Orbitron', 'sans-serif'],
+                        rajdhani: ['Rajdhani', 'sans-serif'],
+                        mono: ['Share Tech Mono', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
 
-<!-- SEO & Google Search Console Basics -->
-<title id="meta-title">NICO GAMING | Official eSports Club (The Finals & Fortnite)</title>
-<meta name="description" id="meta-desc" content="NICO GAMING – official eSports club for The Finals and Fortnite, founded by nicominecith. Discover rosters, rules, and apply via Gamertransfer.">
-<link rel="canonical" href="https://nico-gaming.netlify.app/">
-<meta name="robots" content="index, follow">
-<meta name="author" content="nicominecith">
-<meta name="geo.region" content="DE">
-<meta name="geo.placename" content="Hamburg">
+    <style>
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        html { scroll-behavior: smooth; }
+        body { background-color: #050508; color: #b8b8cc; font-family: 'Rajdhani', sans-serif; overflow-x: hidden; }
+        
+        /* Custom Glowing Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #050508; }
+        ::-webkit-scrollbar-thumb { background: #ff003c; border-radius: 3px; }
 
-<!-- Favicon / Tab-Logo -->
-<link rel="icon" type="image/png" href="https://nico-gaming.netlify.app/nico.png">
-<link rel="apple-touch-icon" href="https://nico-gaming.netlify.app/nico.png">
+        /* Cyberpunk Grid Background Effect */
+        .cyber-grid {
+            background-image: 
+                linear-gradient(rgba(255, 0, 60, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 0, 60, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
 
-<!-- Open Graph / Discord / Social Media Metadata -->
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://nico-gaming.netlify.app/">
-<meta property="og:title" content="NICO GAMING | Official eSports Club">
-<meta property="og:description" content="Official eSports club for The Finals and Fortnite. Apply now and become part of the N1CO Elite!">
-<meta property="og:image" content="https://nico-gaming.netlify.app/nico.png">
+        /* Glassmorphism Panels */
+        .glass-panel {
+            background: rgba(12, 12, 20, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 0, 60, 0.18);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+        .glass-panel:hover {
+            border-color: rgba(255, 0, 60, 0.5);
+            box-shadow: 0 0 25px rgba(255, 0, 60, 0.15);
+        }
 
-<!-- Twitter Card Metadata -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:url" content="https://nico-gaming.netlify.app/">
-<meta name="twitter:title" content="NICO GAMING | Official eSports Club">
-<meta name="twitter:description" content="Official eSports club for The Finals and Fortnite. Apply now!">
-<meta name="twitter:image" content="https://nico-gaming.netlify.app/nico.png">
+        /* Glowing text effects */
+        .glow-text {
+            text-shadow: 0 0 15px rgba(255, 0, 60, 0.6);
+        }
+        .glow-cyan {
+            text-shadow: 0 0 15px rgba(0, 240, 255, 0.6);
+        }
 
-<!-- Structured Data (JSON-LD) -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "SportsTeam",
-  "name": "NICO GAMING",
-  "url": "https://nico-gaming.netlify.app/",
-  "logo": "https://nico-gaming.netlify.app/nico.png",
-  "sport": ["The Finals", "Fortnite"],
-  "founder": {
-    "@type": "Person",
-    "name": "nicominecith"
-  }
-}
-</script>
+        /* Custom Clip Paths */
+        .clip-corner {
+            clip-path: polygon(15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%, 0 15px);
+        }
+        .clip-btn {
+            clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+        }
 
-<script src="https://cdn.tailwindcss.com"></script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Barlow+Condensed:wght@300;400;600;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+        @keyframes scanline {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(1000%); }
+        }
+        .scanline::after {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 4px;
+            background: linear-gradient(to bottom, transparent, rgba(255, 0, 60, 0.4), transparent);
+            animation: scanline 6s linear infinite;
+            pointer-events: none;
+        }
 
-<style>
-:root{--red:#e60012;--red2:#ff2940;--dark:#070709;--panel:#0f0f14;--panel2:#16161d;--silver:#c8c8d0;--blue:#2d7dff;--green:#18d889}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;background:var(--dark);color:var(--silver);font-family:'Barlow Condensed',sans-serif;overflow-x:hidden;cursor:none}
-a{text-decoration:none}
-h1,h2,h3,.orb{font-family:'Orbitron',monospace;text-transform:uppercase;letter-spacing:1px}
-body::before{content:"";position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.07) 2px,rgba(0,0,0,.07) 4px);pointer-events:none;z-index:9000}
-
-#cursor{position:fixed;width:20px;height:20px;border:2px solid var(--red);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:.12s}
-#cursor-dot{position:fixed;width:4px;height:4px;background:var(--red);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%)}
-body:has(a:hover) #cursor,body:has(button:hover) #cursor{width:40px;height:40px;background:rgba(230,0,18,.14)}
-@media(max-width:768px){#cursor,#cursor-dot{display:none}body{cursor:auto}}
-
-nav{position:fixed;top:0;left:0;right:0;height:60px;z-index:5000;display:flex;align-items:center;justify-content:space-between;padding:0 1.5rem;background:rgba(7,7,9,.94);backdrop-filter:blur(18px);border-bottom:1px solid rgba(230,0,18,.25)}
-nav .logo{display:flex;align-items:center;gap:10px;font-family:'Orbitron';font-weight:900;font-size:1rem;letter-spacing:2px;color:#fff}
-nav .logo img{width:34px;height:34px;object-fit:contain;filter:drop-shadow(0 0 8px var(--red))}
-.nav-right{display:flex;align-items:center;gap:1.35rem;}
-nav ul{display:flex;gap:1.35rem;list-style:none;margin:0;padding:0}
-nav a{color:var(--silver);font-family:'Orbitron';font-size:.62rem;letter-spacing:2px;position:relative;transition:.2s}
-nav a:after{content:"";position:absolute;left:0;right:100%;bottom:-5px;height:1px;background:var(--red);transition:.25s}
-nav a:hover{color:#fff}nav a:hover:after{right:0}
-
-.lang-btn{background:rgba(230,0,18,.1);border:1px solid rgba(230,0,18,.4);color:#fff;font-family:'Share Tech Mono';font-size:.65rem;padding:.3rem .7rem;cursor:pointer;letter-spacing:1px;transition:.2s}
-.lang-btn:hover{background:var(--red);border-color:var(--red)}
-
-.hamburger{display:none;background:none;border:0;padding:0;cursor:pointer}
-.hamburger span{display:block;width:25px;height:2px;background:#fff;margin:5px}
-
-.mobile-menu{display:none;position:fixed;inset:0;z-index:4999;background:rgba(7,7,9,.98);align-items:center;justify-content:center;flex-direction:column;gap:1.5rem}
-.mobile-menu.open{display:flex}
-.mobile-menu a{font-family:'Orbitron';font-size:1.15rem;color:#fff;letter-spacing:3px}
-.mobile-menu a:hover{color:var(--red)}
-
-.ticker-wrap{position:fixed;top:60px;left:0;right:0;z-index:4000;overflow:hidden;border-bottom:1px solid rgba(230,0,18,.2);background:rgba(230,0,18,.05);padding:.5rem 0}
-.ticker{display:flex;width:max-content;gap:4rem;animation:ticker 28s linear infinite}
-.ticker span{font-family:'Share Tech Mono';font-size:.62rem;letter-spacing:2px;color:rgba(200,200,208,.5);white-space:nowrap}
-.ticker .hl{color:var(--red)}
-@keyframes ticker{to{transform:translateX(-50%)}}
-
-#home{min-height:100vh;padding:130px 1rem 4rem;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
-.grid-bg{position:absolute;inset:0;background-image:linear-gradient(rgba(230,0,18,.065) 1px,transparent 1px),linear-gradient(90deg,rgba(230,0,18,.065) 1px,transparent 1px);background-size:60px 60px;animation:gridMove 20s linear infinite}
-@keyframes gridMove{to{transform:translateY(60px)}}
-.hero-glow{position:absolute;width:min(650px,95vw);height:min(650px,95vw);top:50%;left:50%;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(230,0,18,.16),transparent 70%);animation:pulse 4s ease-in-out infinite}
-@keyframes pulse{50%{opacity:1;transform:translate(-50%,-50%) scale(1.08)}}
-.hero-content{position:relative;z-index:10;text-align:center;width:100%;max-width:950px}
-.hero-logo{width:150px;height:150px;object-fit:contain;margin:0 auto 1.4rem;filter:drop-shadow(0 0 40px rgba(230,0,18,.8));animation:float 6s ease-in-out infinite}
-@keyframes float{50%{transform:translateY(-12px)}}
-.hero-title{font-size:clamp(2.6rem,8vw,6rem);font-weight:900;line-height:.9;margin:0 0 .7rem;background:linear-gradient(135deg,#fff 0%,#888 60%,var(--red) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.glitch{position:relative}
-.glitch:before,.glitch:after{content:attr(data-text);position:absolute;inset:0;background:linear-gradient(135deg,#fff 0%,#888 60%,var(--red) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.glitch:before{animation:glitch1 3.5s infinite;clip-path:polygon(0 0,100% 0,100% 35%,0 35%)}
-.glitch:after{animation:glitch2 3.5s infinite;clip-path:polygon(0 65%,100% 65%,100% 100%,0 100%)}
-@keyframes glitch1{92%{transform:translate(-3px,1px)}94%{transform:translate(3px,-1px)}96%{transform:translate(-2px,2px)}}
-@keyframes glitch2{90%{transform:translate(3px,-2px)}92%{transform:translate(-3px,2px)}94%{transform:translate(2px,-1px)}}
-.hero-sub{font-size:clamp(1rem,2vw,1.3rem);color:rgba(200,200,208,.6);max-width:650px;margin:1rem auto 2rem;line-height:1.5}
-.hero-sub strong{color:#fff}.game{color:var(--red);font-weight:900}
-
-.btn-primary,.btn-outline{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;padding:1rem 1.8rem;font-family:'Orbitron';font-size:.68rem;letter-spacing:2px;font-weight:900;cursor:pointer;clip-path:polygon(8px 0,100% 0,calc(100% - 8px) 100%,0 100%);transition:.2s}
-.btn-primary{background:var(--red);color:#fff;border:0}.btn-primary:hover{background:var(--red2);transform:scale(1.03)}
-.btn-outline{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.2)}.btn-outline:hover{background:rgba(230,0,18,.08);border-color:var(--red)}
-.btn-gamer{background:var(--blue);color:#fff}.btn-gamer:hover{background:#4b91ff}
-
-section{padding:5rem 1.5rem;position:relative}.container{max-width:1200px;margin:auto}
-.divider{border:0;height:1px;background:linear-gradient(90deg,transparent,var(--red),transparent)}
-.section-label{font-family:'Share Tech Mono';font-size:.68rem;color:var(--red);letter-spacing:4px;margin-bottom:.5rem}
-.section-title{font-size:clamp(1.8rem,4vw,3.2rem);font-weight:900;line-height:1;margin:0 0 1.5rem}
-.card{background:var(--panel);border:1px solid rgba(230,0,18,.15);border-radius:2px;transition:.3s}
-.card:hover{border-color:rgba(230,0,18,.55);box-shadow:0 0 30px rgba(230,0,18,.1);transform:translateY(-3px)}
-.stat-box{padding:2rem 1rem;text-align:center;border:1px solid rgba(230,0,18,.15);background:var(--panel);position:relative;overflow:hidden}
-.stat-box:after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--red)}
-.stat-number{font-family:'Orbitron';font-size:2.2rem;font-weight:900;color:#fff}.stat-label{font-family:'Share Tech Mono';font-size:.58rem;letter-spacing:2px;color:var(--red)}
-
-.age-badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(230,0,18,.13);border:1px solid rgba(230,0,18,.4);padding:.4rem 1rem;font-family:'Share Tech Mono';font-size:.62rem;letter-spacing:2px;color:var(--red);margin-bottom:1.5rem}
-.gear-item{display:flex;align-items:center;gap:1rem;padding:1rem;border-bottom:1px solid rgba(255,255,255,.05);border-left:3px solid transparent;color:inherit;transition:.2s}
-.gear-item:hover{background:rgba(230,0,18,.08);border-left-color:var(--red)}.gear-item:last-child{border-bottom:0}
-.gear-icon{width:40px;height:40px;background:rgba(230,0,18,.1);border:1px solid rgba(230,0,18,.3);display:flex;align-items:center;justify-content:center;flex-shrink:0}
-
-.skill-bar{margin-bottom:1rem}.skill-bar .label{display:flex;justify-content:space-between;font-family:'Share Tech Mono';font-size:.65rem;letter-spacing:2px;margin-bottom:.3rem}.track{height:4px;background:rgba(255,255,255,.05)}.fill{height:100%;width:0;background:linear-gradient(90deg,var(--red),#ff4455);transition:width 1.5s;box-shadow:0 0 8px var(--red)}
-
-#aim-canvas{width:100%;height:350px;display:block;background:radial-gradient(ellipse at center,#0a0a12,#000);border:1px solid rgba(230,0,18,.3);touch-action:none}
-.lb-row{display:grid;grid-template-columns:35px 1fr auto auto;gap:.5rem;padding:.75rem 1rem;border-bottom:1px solid rgba(255,255,255,.05);font-family:'Share Tech Mono';font-size:.8rem}.lb-row.header{font-size:.55rem;letter-spacing:2px;color:rgba(200,200,208,.4)}.lb-rank{color:var(--red)}.lb-rank.gold{color:#f5c842}.lb-score{color:var(--red)}
-
-.roster-card{background:var(--panel);border:1px solid rgba(230,0,18,.15);padding:1.5rem;text-align:center;transition:.3s}.roster-card:hover{border-color:var(--red);box-shadow:0 0 20px rgba(230,0,18,.1)}.roster-avatar{width:70px;height:70px;border-radius:50%;border:2px solid rgba(230,0,18,.4);margin:0 auto 1rem;background:rgba(230,0,18,.1);display:flex;align-items:center;justify-content:center;font-size:1.8rem}
-
-.contract-clause{background:var(--panel);border:1px solid rgba(230,0,18,.15);border-left:3px solid var(--red);padding:1.5rem}.clause-num{font-family:'Share Tech Mono';font-size:.6rem;color:var(--red);letter-spacing:3px}.clause-title{font-family:'Orbitron';font-size:1rem;font-weight:700;color:#fff;margin:.25rem 0 .5rem}
-
-.form-group{margin-bottom:1.15rem}.form-group label{display:block;font-family:'Share Tech Mono';font-size:.58rem;letter-spacing:3px;color:rgba(200,200,208,.5);margin-bottom:.4rem}.form-group input,.form-group select{width:100%;background:rgba(0,0,0,.5);border:1px solid rgba(255,255,255,.08);color:#fff;padding:.75rem 1rem;font-family:'Barlow Condensed';font-size:1rem;outline:0}.form-group input:focus,.form-group select:focus{border-color:var(--red);box-shadow:0 0 0 2px rgba(230,0,18,.1)}.form-group select option{background:#111}
-
-.application-methods{display:grid;grid-template-columns:1.15fr .85fr;gap:1.5rem;margin-top:2rem}
-.application-card{position:relative;overflow:hidden;background:linear-gradient(145deg,#12121a,#09090c);border:1px solid rgba(255,255,255,.08);padding:2rem}
-.application-card:hover{transform:translateY(-5px);border-color:rgba(255,255,255,.18);box-shadow:0 20px 50px rgba(0,0,0,.35)}
-.gamertransfer-card{border-color:rgba(45,125,255,.45);background:linear-gradient(145deg,rgba(45,125,255,.13),#0b0c12 55%)}
-.application-glow{position:absolute;width:220px;height:220px;right:-90px;top:-90px;border-radius:50%;background:rgba(45,125,255,.2);filter:blur(35px);pointer-events:none}
-.application-top{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;margin-bottom:1.5rem}
-.application-icon{width:52px;height:52px;display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,.1);font-size:1.4rem;background:rgba(0,0,0,.3)}
-.gt-icon{border-color:rgba(45,125,255,.45);background:rgba(45,125,255,.1)}.email-icon{border-color:rgba(230,0,18,.35);background:rgba(230,0,18,.08)}
-.application-label{font-family:'Share Tech Mono';font-size:.55rem;letter-spacing:2px;color:rgba(200,200,208,.5)}.blue-label{color:#5b9aff}
-.application-card h3{font-size:1.55rem;margin:.25rem 0;color:#fff}.application-status{font-family:'Share Tech Mono';font-size:.6rem;color:var(--green);letter-spacing:1px}
-.application-description{color:rgba(200,200,208,.6);line-height:1.65;margin:0 0 1.3rem}
-.application-features{display:grid;gap:.7rem;margin:1.2rem 0 1.5rem}.application-features div{font-family:'Share Tech Mono';font-size:.62rem;color:rgba(255,255,255,.7)}.application-features span{color:var(--green);margin-right:.4rem}
-.application-button{width:100%;text-align:center}.application-note{font-family:'Share Tech Mono';font-size:.52rem;letter-spacing:1px;color:rgba(200,200,208,.3);margin-top:.8rem;text-align:center}
-.process-bar{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid rgba(255,255,255,.07);margin-top:1.5rem}.process-step{padding:1rem;border-right:1px solid rgba(255,255,255,.07)}.process-step:last-child{border-right:0}.process-step b{font-family:'Share Tech Mono';color:var(--red);font-size:.6rem}.process-step span{display:block;color:#fff;font-family:'Orbitron';font-size:.7rem;margin-top:.25rem}
-
-.reveal{opacity:0;transform:translateY(30px);transition:opacity .7s,transform .7s}.reveal.visible{opacity:1;transform:translateY(0)}
-footer{border-top:1px solid rgba(255,255,255,.05);background:#000;padding:3rem 1.5rem;text-align:center}
-
-@media(max-width:900px){nav ul{gap:.8rem}.application-methods{grid-template-columns:1fr}}
-@media(max-width:768px){.desktop-nav{display:none}.hamburger{display:block}section{padding:4rem 1rem}.hero-logo{width:125px;height:125px}.process-bar{grid-template-columns:1fr}.process-step{border-right:0;border-bottom:1px solid rgba(255,255,255,.07)}.process-step:last-child{border-bottom:0}}
-</style>
+        /* Custom Aim Canvas cursor */
+        #aim-canvas {
+            cursor: crosshair;
+        }
+    </style>
 </head>
+<body class="bg-brand-dark text-slate-300 selection:bg-brand-red selection:text-white">
 
-<body>
-<div id="cursor"></div><div id="cursor-dot"></div>
+    <!-- Navigation Header -->
+    <header class="fixed top-0 left-0 right-0 z-50 glass-panel border-b border-brand-border">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <a href="#home" class="flex items-center gap-3 group">
+                <div class="relative w-10 h-10 flex items-center justify-center bg-brand-red/10 border border-brand-red/40 clip-corner group-hover:scale-105 transition-transform">
+                    <span class="font-orbitron font-black text-brand-red text-lg">N1</span>
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-orbitron font-black text-white text-lg tracking-wider">NICO<span class="text-brand-red">GAMING</span></span>
+                    <span class="font-mono text-[9px] text-slate-400 tracking-widest uppercase">Official eSports Club</span>
+                </div>
+            </a>
 
-<div class="mobile-menu" id="mobileMenu">
-<button onclick="toggleMenu()" style="position:absolute;top:1rem;right:1.4rem;background:none;border:0;color:#fff;font-size:2rem">✕</button>
-<a href="#home" onclick="toggleMenu()" data-i18n="nav-home">HOME</a>
-<a href="#about" onclick="toggleMenu()" data-i18n="nav-founder">FOUNDER</a>
-<a href="#skills" onclick="toggleMenu()" data-i18n="nav-skills">SKILLS</a>
-<a href="#aim-trainer" onclick="toggleMenu()" data-i18n="nav-training">TRAINING</a>
-<a href="#roster" onclick="toggleMenu()" data-i18n="nav-team">TEAM</a>
-<a href="#contract" onclick="toggleMenu()" data-i18n="nav-rules">RULES</a>
-<a href="#sign" onclick="toggleMenu()" data-i18n="nav-join">JOIN</a>
-<a href="#twitch" onclick="toggleMenu()" data-i18n="nav-live">LIVE</a>
-<button class="lang-btn" onclick="toggleLanguage()" id="mobileLangBtn" style="margin-top:1rem;">DE / EN</button>
-</div>
+            <!-- Desktop Nav Links -->
+            <nav class="hidden md:flex items-center gap-6 lg:gap-8">
+                <a href="#home" class="font-orbitron text-xs tracking-widest hover:text-brand-red transition-colors" data-i18n="nav-home">HOME</a>
+                <a href="#founder" class="font-orbitron text-xs tracking-widest hover:text-brand-red transition-colors" data-i18n="nav-founder">FOUNDER</a>
+                <a href="#roster" class="font-orbitron text-xs tracking-widest hover:text-brand-red transition-colors" data-i18n="nav-roster">ROSTER</a>
+                <a href="#training" class="font-orbitron text-xs tracking-widest hover:text-brand-red transition-colors" data-i18n="nav-training">TRAINING</a>
+                <a href="#rules" class="font-orbitron text-xs tracking-widest hover:text-brand-red transition-colors" data-i18n="nav-rules">RULES</a>
+                <a href="#join" class="font-orbitron text-xs tracking-widest hover:text-brand-red transition-colors text-brand-red font-bold" data-i18n="nav-join">JOIN</a>
+            </nav>
 
-<nav>
-<div class="logo"><img src="https://nico-gaming.netlify.app/nico.png" alt="NICO Gaming Logo"><span>NICO<span style="color:var(--red)">GAMING</span></span></div>
-<div class="nav-right">
-<ul class="desktop-nav">
-<li><a href="#home" data-i18n="nav-home">Home</a></li>
-<li><a href="#about" data-i18n="nav-founder">Founder</a></li>
-<li><a href="#skills" data-i18n="nav-skills">Skills</a></li>
-<li><a href="#aim-trainer" data-i18n="nav-training">Training</a></li>
-<li><a href="#roster" data-i18n="nav-team">Team</a></li>
-<li><a href="#contract" data-i18n="nav-rules">Rules</a></li>
-<li><a href="#sign" style="color:var(--red)" data-i18n="nav-join">Join</a></li>
-<li><a href="#twitch" data-i18n="nav-live">Live</a></li>
-</ul>
-<button class="lang-btn desktop-nav" onclick="toggleLanguage()" id="desktopLangBtn">DE</button>
-<button class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
-</div>
-</nav>
+            <div class="flex items-center gap-4">
+                <!-- Language Toggle Button -->
+                <button onclick="toggleLanguage()" id="langToggleBtn" class="px-3 py-1.5 bg-brand-red/10 border border-brand-red/40 hover:bg-brand-red hover:text-white font-mono text-xs font-bold tracking-widest transition-all clip-btn text-brand-red">
+                    DE / EN
+                </button>
 
-<div class="ticker-wrap"><div class="ticker">
-<span class="hl">◆ NICO GAMING ESPORTS</span><span>THE FINALS</span><span class="hl">◆ FORTNITE</span>
-<span>GAMERTRANSFER</span><span class="hl">◆ RECRUITING OPEN</span><span>THE FINALS</span><span class="hl">◆ FORTNITE</span>
-<span class="hl">◆ NICO GAMING ESPORTS</span><span>THE FINALS</span><span class="hl">◆ FORTNITE</span>
-</div></div>
+                <!-- Mobile Menu Toggle Button -->
+                <button onclick="toggleMobileMenu()" class="md:hidden p-2 text-white hover:text-brand-red focus:outline-none" aria-label="Toggle Menu">
+                    <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
 
-<section id="home">
-<div class="grid-bg"></div><div class="hero-glow"></div>
-<div class="hero-content">
-<img src="https://nico-gaming.netlify.app/nico.png" alt="N1CO Logo" class="hero-logo">
-<h1 class="hero-title glitch orb" data-text="NICO GAMING">NICO GAMING</h1>
-<p class="hero-sub" data-i18n="hero-sub">Official E-Sport Club founded by <strong>nicominecith</strong><br><span class="game">The Finals</span> · <span class="game">Fortnite</span></p>
-<div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
-<a href="#sign" class="btn-primary" data-i18n="btn-apply">⚡ APPLY NOW</a>
-<a href="#aim-trainer" class="btn-outline" data-i18n="btn-warmup">🎯 START WARM-UP</a>
-</div>
-</div>
-</section>
+    <!-- Mobile Drawer -->
+    <div id="mobileMenu" class="fixed inset-0 z-50 bg-black/95 backdrop-blur-2xl flex flex-col items-center justify-center gap-6 text-center transform translate-x-full transition-transform duration-300 md:hidden">
+        <button onclick="toggleMobileMenu()" class="absolute top-6 right-6 text-slate-400 hover:text-white p-2">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
+        <a href="#home" onclick="toggleMobileMenu()" class="font-orbitron text-lg text-white hover:text-brand-red tracking-widest" data-i18n="nav-home">HOME</a>
+        <a href="#founder" onclick="toggleMobileMenu()" class="font-orbitron text-lg text-white hover:text-brand-red tracking-widest" data-i18n="nav-founder">FOUNDER</a>
+        <a href="#roster" onclick="toggleMobileMenu()" class="font-orbitron text-lg text-white hover:text-brand-red tracking-widest" data-i18n="nav-roster">ROSTER</a>
+        <a href="#training" onclick="toggleMobileMenu()" class="font-orbitron text-lg text-white hover:text-brand-red tracking-widest" data-i18n="nav-training">TRAINING</a>
+        <a href="#rules" onclick="toggleMobileMenu()" class="font-orbitron text-lg text-white hover:text-brand-red tracking-widest" data-i18n="nav-rules">RULES</a>
+        <a href="#join" onclick="toggleMobileMenu()" class="font-orbitron text-lg text-brand-red tracking-widest font-bold" data-i18n="nav-join">JOIN</a>
+    </div>
 
-<hr class="divider">
+    <!-- Hero Section -->
+    <section id="home" class="relative min-h-screen flex items-center justify-center pt-24 pb-16 px-4 cyber-grid overflow-hidden scanline">
+        <!-- Ambient Glowing Orbs -->
+        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 sm:w-96 h-72 sm:h-96 bg-brand-red/15 rounded-full blur-[120px] pointer-events-none"></div>
+        <div class="absolute bottom-10 right-10 w-60 h-60 bg-cyan-500/10 rounded-full blur-[100px] pointer-events-none"></div>
 
-<section style="padding:2.5rem 1rem"><div class="container"><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:1rem">
-<div class="stat-box reveal"><div class="stat-number" data-count="13">0</div><div class="stat-label" data-i18n="stat-age">MIN. AGE</div></div>
-<div class="stat-box reveal"><div class="stat-number" data-count="85">0</div><div class="stat-label" data-i18n="stat-split">% PLAYER SPLIT</div></div>
-<div class="stat-box reveal"><div class="stat-number" data-count="2">0</div><div class="stat-label" data-i18n="stat-games">GAMES</div></div>
-<div class="stat-box reveal"><div class="stat-number" data-count="500">0</div><div class="stat-label" data-i18n="stat-target">€ 3-MONTH GOAL</div></div>
-<div class="stat-box reveal"><div class="stat-number" data-count="2026">0</div><div class="stat-label" data-i18n="stat-year">FOUNDED YEAR</div></div>
-</div></div></section>
+        <div class="max-w-5xl mx-auto text-center relative z-10">
+            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 mb-6 bg-brand-red/10 border border-brand-red/30 clip-corner">
+                <span class="w-2 h-2 rounded-full bg-brand-red animate-ping"></span>
+                <span class="font-mono text-xs text-brand-red tracking-widest" data-i18n="hero-badge">RECRUITING SEASON 2026 ACTIVE</span>
+            </div>
 
-<hr class="divider">
+            <h1 class="font-orbitron font-black text-4xl sm:text-6xl lg:text-7xl tracking-wider text-white mb-6 uppercase glow-text">
+                NICO <span class="text-brand-red">GAMING</span>
+            </h1>
 
-<section id="about"><div class="container"><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:3rem" class="reveal">
-<div>
-<div class="section-label" data-i18n="about-label">// ABOUT THE FOUNDER</div>
-<h2 class="section-title">NICOMINECITH</h2>
-<div class="age-badge" data-i18n="about-badge">⚠ MINIMUM AGE: 13 YEARS</div>
-<p style="color:rgba(200,200,208,.7);line-height:1.8;font-size:1rem" data-i18n="about-desc">Founder & Team Captain of NICO GAMING. Our club stands for high performance, respect, and a genuine competitive spirit in The Finals and Fortnite.</p>
-</div>
-<div>
-<div class="section-label" data-i18n="gear-label">// FOUNDER'S GEAR</div>
-<h2 class="section-title" style="font-size:1.8rem">SETUP<br><span style="color:var(--red)" data-i18n="gear-title">OVERVIEW</span></h2>
-<div style="background:rgba(230,0,18,.06);border:1px solid rgba(230,0,18,.15);padding:1rem;margin-bottom:1.5rem;font-family:'Share Tech Mono';font-size:.6rem;letter-spacing:1px;color:rgba(200,200,208,.5)" data-i18n="gear-note">⚠ NOTE: This is the founder's personal equipment. Players must acquire their own gear.</div>
-<div class="card" style="overflow:hidden">
-<a href="https://www.amazon.de/Microsoft-Xbox-Halo-Infinite-Limited/dp/B09NMWSLR6" target="_blank" rel="noopener" class="gear-item"><div class="gear-icon">🎮</div><div><div style="font-size:.5rem;letter-spacing:3px;color:var(--red);font-family:'Share Tech Mono'" data-i18n="gear-c1">CONSOLE</div><div style="color:#fff;font-weight:700;font-size:1rem">Xbox Series X</div><div style="color:rgba(200,200,208,.4);font-size:.8rem">Halo Infinite Limited Edition</div></div></a>
-<a href="https://de.turtlebeach.com/products/recon-controller" target="_blank" rel="noopener" class="gear-item"><div class="gear-icon">🕹️</div><div><div style="font-size:.5rem;letter-spacing:3px;color:var(--red);font-family:'Share Tech Mono'" data-i18n="gear-c2">CONTROLLER</div><div style="color:#fff;font-weight:700;font-size:1rem">Turtle Beach Recon™</div><div style="color:rgba(200,200,208,.4);font-size:.8rem">Wired Performance Controller</div></div></a>
-<a href="https://de.turtlebeach.com/products/atlas-200-headset" target="_blank" rel="noopener" class="gear-item"><div class="gear-icon">🎧</div><div><div style="font-size:.5rem;letter-spacing:3px;color:var(--red);font-family:'Share Tech Mono'" data-i18n="gear-c3">HEADSET</div><div style="color:#fff;font-weight:700;font-size:1rem">Turtle Beach Atlas 200</div><div style="color:rgba(200,200,208,.4);font-size:.8rem">Amplified Pro Gaming Headset</div></div></a>
-</div></div></div></div></section>
+            <p class="font-rajdhani text-lg sm:text-2xl text-slate-300 max-w-2xl mx-auto mb-10 leading-relaxed" data-i18n="hero-subtitle">
+                Official competitive eSports club for <span class="text-brand-red font-bold">The Finals</span> & <span class="text-brand-red font-bold">Fortnite</span>. Founded and led by <span class="text-white font-bold">nicominecith</span>.
+            </p>
 
-<hr class="divider">
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="#join" class="w-full sm:w-auto px-8 py-4 bg-brand-red hover:bg-red-700 text-white font-orbitron text-sm font-bold tracking-widest clip-btn shadow-lg shadow-brand-red/30 transition-all hover:scale-105 flex items-center justify-center gap-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                    <span data-i18n="hero-btn-apply">APPLY NOW</span>
+                </a>
+                <a href="#roster" class="w-full sm:w-auto px-8 py-4 glass-panel hover:bg-white/5 text-white font-orbitron text-sm font-bold tracking-widest clip-btn transition-all flex items-center justify-center gap-2">
+                    <svg class="w-5 h-5 text-brand-red" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                    <span data-i18n="hero-btn-roster">VIEW ROSTER</span>
+                </a>
+            </div>
 
-<section id="skills"><div class="container reveal">
-<div class="section-label" data-i18n="skills-label">// GAMER PROFILE</div>
-<h2 class="section-title">SKILL<br><span style="color:var(--red)" data-i18n="skills-title">ANALYSIS</span></h2>
-<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:2rem;margin-top:2rem">
-<div><div class="skill-bar"><div class="label"><span>THE FINALS</span><span>95%</span></div><div class="track"><div class="fill" data-width="95"></div></div></div>
-<div class="skill-bar"><div class="label"><span>FORTNITE</span><span>90%</span></div><div class="track"><div class="fill" data-width="90"></div></div></div></div>
-<div><div class="skill-bar"><div class="label"><span data-i18n="sk-aim">AIM TRAINING</span><span>95%</span></div><div class="track"><div class="fill" data-width="95"></div></div></div>
-<div class="skill-bar"><div class="label"><span data-i18n="sk-iq">GAME IQ</span><span>92%</span></div><div class="track"><div class="fill" data-width="92"></div></div></div>
-<div class="skill-bar"><div class="label"><span data-i18n="sk-team">TEAMWORK</span><span>96%</span></div><div class="track"><div class="fill" data-width="96"></div></div></div></div>
-</div></div></section>
+            <!-- Quick Stats Bar -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-16 max-w-4xl mx-auto">
+                <div class="glass-panel p-4 clip-corner text-center">
+                    <div class="font-orbitron font-black text-2xl text-white">8</div>
+                    <div class="font-mono text-xs text-brand-red tracking-wider mt-1" data-i18n="stat-slots">TOTAL SQUAD SLOTS</div>
+                </div>
+                <div class="glass-panel p-4 clip-corner text-center">
+                    <div class="font-orbitron font-black text-2xl text-white">2</div>
+                    <div class="font-mono text-xs text-brand-red tracking-wider mt-1" data-i18n="stat-games">GAMES</div>
+                </div>
+                <div class="glass-panel p-4 clip-corner text-center">
+                    <div class="font-orbitron font-black text-2xl text-white">85%</div>
+                    <div class="font-mono text-xs text-brand-red tracking-wider mt-1" data-i18n="stat-split">PLAYER PRIZE SPLIT</div>
+                </div>
+                <div class="glass-panel p-4 clip-corner text-center">
+                    <div class="font-orbitron font-black text-2xl text-white">13+</div>
+                    <div class="font-mono text-xs text-brand-red tracking-wider mt-1" data-i18n="stat-age">MINIMUM AGE</div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<hr class="divider">
+    <!-- Founder Section -->
+    <section id="founder" class="py-24 px-4 relative">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col items-center mb-16 text-center">
+                <span class="font-mono text-xs text-brand-red tracking-[0.3em] uppercase mb-2" data-i18n="founder-tag">// LEADERSHIP</span>
+                <h2 class="font-orbitron font-black text-3xl sm:text-5xl text-white tracking-wider" data-i18n="founder-title">FOUNDER & IGL</h2>
+            </div>
 
-<section id="aim-trainer"><div class="container">
-<div class="section-label reveal" data-i18n="train-label">// INTERACTIVE</div>
-<h2 class="section-title reveal">PRO AIM<br><span style="color:var(--red)">TRAINER</span></h2>
-<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;margin-bottom:1.5rem" class="reveal">
-<div style="display:flex;gap:1.5rem;font-family:'Share Tech Mono';font-size:.9rem"><span data-i18n="lbl-score">SCORE</span>: <span id="aim-score" style="color:var(--red)">0</span>&nbsp;&nbsp; <span data-i18n="lbl-time">TIME</span>: <span id="aim-time" style="color:#fff">30</span>s&nbsp;&nbsp; <span data-i18n="lbl-acc">ACC</span>: <span id="aim-acc" style="color:#f5c842">0%</span></div>
-<span id="controller-label" style="background:#1a1a1a;color:#555;font-family:'Share Tech Mono';font-size:.55rem;padding:.25rem .5rem;letter-spacing:1px">◉ CONTROLLER: DISCONNECTED</span>
-</div>
-<div style="position:relative" class="reveal"><canvas id="aim-canvas"></canvas><div id="aim-start-overlay" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.8);backdrop-filter:blur(6px)"><div style="text-align:center"><div style="font-family:'Orbitron';font-size:1.3rem;font-weight:900;color:#fff;margin-bottom:.5rem">AIM TRAINER</div><div style="font-family:'Share Tech Mono';font-size:.65rem;color:rgba(200,200,208,.5);margin-bottom:1.5rem" data-i18n="train-click">CLICK OR TAP TO START</div><button onclick="startAimGame()" class="btn-primary" data-i18n="train-start">⚡ START TRAINING</button></div></div></div>
-<div style="margin-top:2rem" class="reveal">
-<div class="section-label" data-i18n="train-hs">// SESSION HIGHSCORES</div>
-<div class="card" style="margin-top:1rem;overflow:hidden"><div class="lb-row header"><span>#</span><span data-i18n="lb-player">PLAYER</span><span>ACC</span><span>SCORE</span></div><div id="leaderboard"><div class="lb-row"><span class="lb-rank gold">1</span><span>N1CO_PRO</span><span>—</span><span class="lb-score">—</span></div></div></div></div>
-</div></section>
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                <!-- Founder Card -->
+                <div class="lg:col-span-5 glass-panel p-8 clip-corner relative overflow-hidden group">
+                    <div class="absolute -right-16 -top-16 w-48 h-48 bg-brand-red/10 rounded-full blur-2xl group-hover:bg-brand-red/20 transition-all"></div>
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-16 h-16 rounded-full bg-brand-red/20 border-2 border-brand-red flex items-center justify-center text-2xl shadow-lg shadow-brand-red/30">
+                            👑
+                        </div>
+                        <div>
+                            <h3 class="font-orbitron font-bold text-2xl text-white">N1CO</h3>
+                            <span class="font-mono text-xs text-brand-red tracking-widest">nicominecith (Founder / Captain)</span>
+                        </div>
+                    </div>
+                    <p class="font-rajdhani text-base text-slate-300 leading-relaxed mb-6" data-i18n="founder-desc">
+                        Creator and team captain of NICO GAMING. Passionate about tactical shooter execution, high-end team chemistry, and pushing the boundaries in competitive The Finals and Fortnite.
+                    </p>
+                    <div class="flex items-center gap-3 py-3 px-4 bg-brand-red/10 border border-brand-red/30 clip-corner">
+                        <span class="text-brand-red font-mono text-xs">⚠</span>
+                        <span class="font-mono text-xs text-slate-300" data-i18n="founder-rule">Minimum member age: 13 years</span>
+                    </div>
+                </div>
 
-<hr class="divider">
+                <!-- Founder Gear / Setup -->
+                <div class="lg:col-span-7 glass-panel p-8 clip-corner">
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="font-orbitron font-bold text-xl text-white" data-i18n="setup-title">FOUNDER'S SETUP</h3>
+                        <span class="font-mono text-[10px] text-slate-400 bg-white/5 px-2.5 py-1 rounded" data-i18n="setup-note">PRO REFERENCE</span>
+                    </div>
 
-<section id="roster"><div class="container">
-<div class="section-label reveal" data-i18n="roster-label">// THE SQUAD</div>
-<h2 class="section-title reveal">TEAM<br><span style="color:var(--red)">ROSTER</span></h2>
-<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1.5rem;margin-top:2rem">
-<div class="roster-card reveal"><div class="roster-avatar">👑</div><div style="font-family:'Orbitron';font-weight:900;color:#fff">N1CO</div><div style="font-size:.55rem;letter-spacing:2px;color:#f5c842;font-family:'Share Tech Mono';margin:.5rem 0">FOUNDER / IGL</div><div style="font-size:.8rem;color:rgba(200,200,208,.5)">The Finals · Fortnite</div></div>
-<div class="roster-card reveal"><div class="roster-avatar">🎯</div><div style="font-family:'Orbitron';font-weight:900;color:#fff" data-i18n="slot-open">SLOT OPEN</div><div style="font-size:.55rem;letter-spacing:2px;color:var(--red);font-family:'Share Tech Mono';margin:.5rem 0">FRAGGER</div><div style="font-size:.8rem;color:rgba(200,200,208,.5)" data-i18n="slot-apply">Apply now</div></div>
-<div class="roster-card reveal"><div class="roster-avatar">🛡️</div><div style="font-family:'Orbitron';font-weight:900;color:#fff" data-i18n="slot-open">SLOT OPEN</div><div style="font-size:.55rem;letter-spacing:2px;color:var(--red);font-family:'Share Tech Mono';margin:.5rem 0">SUPPORT</div><div style="font-size:.8rem;color:rgba(200,200,208,.5)" data-i18n="slot-apply">Apply now</div></div>
-<div class="roster-card reveal"><div class="roster-avatar">🔍</div><div style="font-family:'Orbitron';font-weight:900;color:#fff" data-i18n="slot-open">SLOT OPEN</div><div style="font-size:.55rem;letter-spacing:2px;color:var(--red);font-family:'Share Tech Mono';margin:.5rem 0">BUILDER / SCOUT</div><div style="font-size:.8rem;color:rgba(200,200,208,.5)" data-i18n="slot-apply">Apply now</div></div>
-</div></div></section>
+                    <div class="space-y-4">
+                        <a href="https://www.amazon.de/Microsoft-Xbox-Halo-Infinite-Limited/dp/B09NMWSLR6" target="_blank" rel="noopener" class="flex items-center justify-between p-4 bg-black/40 border border-white/5 hover:border-brand-red/50 transition-all clip-corner group">
+                            <div class="flex items-center gap-4">
+                                <div class="w-10 h-10 bg-brand-red/10 border border-brand-red/30 flex items-center justify-center text-lg">🎮</div>
+                                <div>
+                                    <div class="font-mono text-[10px] text-brand-red tracking-wider">CONSOLE</div>
+                                    <div class="font-orbitron font-bold text-white text-sm group-hover:text-brand-red transition-colors">Xbox Series X</div>
+                                    <div class="text-xs text-slate-400">Halo Infinite Limited Edition</div>
+                                </div>
+                            </div>
+                            <svg class="w-5 h-5 text-slate-500 group-hover:text-brand-red transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                        </a>
 
-<hr class="divider">
+                        <a href="https://de.turtlebeach.com/products/recon-controller" target="_blank" rel="noopener" class="flex items-center justify-between p-4 bg-black/40 border border-white/5 hover:border-brand-red/50 transition-all clip-corner group">
+                            <div class="flex items-center gap-4">
+                                <div class="w-10 h-10 bg-brand-red/10 border border-brand-red/30 flex items-center justify-center text-lg">🕹️</div>
+                                <div>
+                                    <div class="font-mono text-[10px] text-brand-red tracking-wider">CONTROLLER</div>
+                                    <div class="font-orbitron font-bold text-white text-sm group-hover:text-brand-red transition-colors">Turtle Beach Recon™</div>
+                                    <div class="text-xs text-slate-400">Wired Performance Controller</div>
+                                </div>
+                            </div>
+                            <svg class="w-5 h-5 text-slate-500 group-hover:text-brand-red transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                        </a>
 
-<section id="contract"><div class="container">
-<div class="section-label reveal" data-i18n="rules-label">// OFFICIAL STATUTES</div>
-<h2 class="section-title reveal"><span data-i18n="rules-title">PRO CONTRACT</span><br><span style="color:var(--red)" data-i18n="rules-sub">RULES</span></h2>
-<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1px;background:rgba(230,0,18,.1);margin-top:2rem" class="reveal">
-<div class="contract-clause"><div class="clause-num">§ 01 — IDENTITY</div><div class="clause-title">N1CO TAG</div><p style="color:rgba(200,200,208,.5);line-height:1.7" data-i18n="rule-1">Active members must use the tag <strong style="color:#fff">"N1CO |"</strong> in front of their ingame name.</p></div>
-<div class="contract-clause"><div class="clause-num">§ 02 — AGE</div><div class="clause-title" data-i18n="rule-2-t">MIN. 13 YEARS</div><p style="color:rgba(200,200,208,.5);line-height:1.7"><span data-i18n="rule-2-a">Applicants must be</span> <strong style="color:var(--red)" data-i18n="rule-2-b">at least 13 years old</strong>. <span data-i18n="rule-2-c">Under 18 requires parental consent.</span></p></div>
-<div class="contract-clause"><div class="clause-num">§ 03 — FINANCIAL</div><div class="clause-title">500€ CAP / 85% SPLIT</div><p style="color:rgba(200,200,208,.5);line-height:1.7"><span data-i18n="rule-3-a">Minimum prize pool revenue in 3 months.</span> <strong style="color:#fff">85%</strong> <span data-i18n="rule-3-b">of earnings go directly to the player.</span></p></div>
-<div class="contract-clause"><div class="clause-num">§ 04 — EQUIPMENT</div><div class="clause-title" data-i18n="rule-4-t">SELF-PROVIDED</div><p style="color:rgba(200,200,208,.5);line-height:1.7"><span data-i18n="rule-4-a">Every player is responsible for their own equipment.</span> <strong style="color:var(--red)" data-i18n="rule-4-b">No gear is provided.</strong></p></div>
-</div></div></section>
+                        <a href="https://de.turtlebeach.com/products/atlas-200-headset" target="_blank" rel="noopener" class="flex items-center justify-between p-4 bg-black/40 border border-white/5 hover:border-brand-red/50 transition-all clip-corner group">
+                            <div class="flex items-center gap-4">
+                                <div class="w-10 h-10 bg-brand-red/10 border border-brand-red/30 flex items-center justify-center text-lg">🎧</div>
+                                <div>
+                                    <div class="font-mono text-[10px] text-brand-red tracking-wider">HEADSET</div>
+                                    <div class="font-orbitron font-bold text-white text-sm group-hover:text-brand-red transition-colors">Turtle Beach Atlas 200</div>
+                                    <div class="text-xs text-slate-400">Pro Gaming Headset</div>
+                                </div>
+                            </div>
+                            <svg class="w-5 h-5 text-slate-500 group-hover:text-brand-red transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<hr class="divider">
+    <!-- Roster Section (8 Slots Total: Founder + 2 Coaches + 5 Players) -->
+    <section id="roster" class="py-24 px-4 bg-black/40 relative">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col items-center mb-16 text-center">
+                <span class="font-mono text-xs text-brand-red tracking-[0.3em] uppercase mb-2" data-i18n="roster-tag">// TEAM STRUCTURE</span>
+                <h2 class="font-orbitron font-black text-3xl sm:text-5xl text-white tracking-wider" data-i18n="roster-title">OFFICIAL ROSTER (8/8)</h2>
+                <p class="font-rajdhani text-slate-400 mt-2 max-w-xl" data-i18n="roster-desc">Total capacity including Founder: 2 Professional Coaches (The Finals & Fortnite) and 5 Elite Players (2 Fortnite, 3 The Finals).</p>
+            </div>
 
-<section id="sign" style="background:linear-gradient(180deg,rgba(230,0,18,.045),transparent)">
-<div class="container">
-<div class="section-label reveal" data-i18n="rec-label">// RECRUITING PORTAL</div>
-<h2 class="section-title reveal"><span data-i18n="rec-title">BECOME</span><br><span style="color:var(--red)">N1CO ELITE</span></h2>
-<p class="reveal" style="max-width:700px;color:rgba(200,200,208,.6);font-size:1.05rem;line-height:1.8" data-i18n="rec-desc">Want to join NICO GAMING? Choose your application method. <strong style="color:#fff">Gamertransfer is the recommended way</strong> because you can use your player profile directly for recruitment.</p>
+            <!-- Coaches Subheading -->
+            <div class="mb-6 flex items-center gap-4">
+                <div class="h-px bg-brand-red/30 flex-grow"></div>
+                <span class="font-orbitron text-xs text-brand-red tracking-widest uppercase px-4 py-1 bg-brand-red/10 border border-brand-red/30 clip-corner" data-i18n="section-coaches">COACHING STAFF (2 SLOTS)</span>
+                <div class="h-px bg-brand-red/30 flex-grow"></div>
+            </div>
 
-<div class="application-methods">
-<div class="application-card gamertransfer-card reveal">
-<div class="application-glow"></div>
-<div class="application-top"><div class="application-icon gt-icon">🚀</div><div style="text-align:right"><div class="application-label blue-label" data-i18n="gt-badge">RECOMMENDED METHOD</div><div class="application-status" data-i18n="gt-status">● ACTIVE / OPEN RECRUITING</div></div></div>
-<h3>GAMERTRANSFER</h3>
-<p class="application-description" data-i18n="gt-desc">Apply directly via Gamertransfer to <strong style="color:#fff">NICO GAMING</strong>. Fast, clear, and specifically designed for gamers and teams.</p>
-<div class="application-features">
-<div><span>✓</span> <span data-i18n="gt-f1">Direct application via Gamertransfer</span></div>
-<div><span>✓</span> <span data-i18n="gt-f2">Use player profile & gaming data</span></div>
-<div><span>✓</span> <span data-i18n="gt-f3">Direct contact with recruitment</span></div>
-</div>
-<a class="btn-primary btn-gamer application-button" href="https://gamertransfer.com/nico_gaming_the_finals-lfm-2-35968.html" target="_blank" rel="noopener noreferrer" data-i18n="gt-btn">🚀 APPLY VIA GAMERTRANSFER</a>
-<div class="application-note">
-<a href="https://gamertransfer.com" target="_blank" rel="noopener">Gamertransfer.com</a>GAMERTRANSFER · NICO GAMING · THE FINALS / FORTNITE</div>
-</div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+                <!-- Coach 1: The Finals -->
+                <div class="glass-panel p-6 clip-corner relative group hover:border-brand-red transition-all">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-14 h-14 rounded-full bg-cyan-500/10 border-2 border-cyan-500/50 flex items-center justify-center text-xl">📋</div>
+                        <div>
+                            <div class="font-orbitron font-bold text-lg text-white">SLOT OPEN</div>
+                            <span class="font-mono text-xs text-cyan-400 tracking-wider" data-i18n="coach-finals">COACH: THE FINALS</span>
+                        </div>
+                    </div>
+                    <p class="font-rajdhani text-sm text-slate-400 mb-4" data-i18n="coach-finals-desc">Responsible for tactical loadouts, map control strategies, and team coordination in The Finals.</p>
+                    <a href="#join" class="block text-center py-2.5 bg-cyan-500/10 hover:bg-cyan-500 hover:text-black border border-cyan-500/40 text-cyan-400 font-orbitron text-xs tracking-wider transition-all clip-btn" data-i18n="btn-apply-slot">APPLY FOR THIS SLOT</a>
+                </div>
 
-<div class="application-card reveal">
-<div class="application-top"><div class="application-icon email-icon">✉️</div><div class="application-label" data-i18n="email-label">ALTERNATIVE APPLICATION</div></div>
-<h3 data-i18n="email-title">E-MAIL</h3>
-<p class="application-description" data-i18n="email-desc">Would you prefer a classic email contact? Fill out the form below and your mail client will open.</p>
-<form id="applyForm" onsubmit="sendMail(event)">
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
-<div class="form-group"><label data-i18n="form-name">NAME *</label><input type="text" id="fname" placeholder="Name" required></div>
-<div class="form-group"><label data-i18n="form-nick">INGAME NAME *</label><input type="text" id="fnick" placeholder="Nickname" required></div>
-</div>
-<div class="form-group"><label>E-MAIL *</label><input type="email" id="femail" placeholder="mail@example.com" required></div>
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
-<div class="form-group"><label data-i18n="form-age">AGE *</label><input type="number" id="fage" placeholder="13+" min="13" max="99" required></div>
-<div class="form-group"><label data-i18n="form-game">GAME *</label><select id="fgame" required><option value="" data-i18n="form-select">Select...</option><option>The Finals</option><option>Fortnite</option></select></div>
-</div>
-<div class="form-group"><label>DISCORD TAG</label><input type="text" id="fdisc" placeholder="Optional"></div>
-<label style="display:flex;gap:.65rem;align-items:flex-start;font-size:.78rem;color:rgba(200,200,208,.6);margin-bottom:1rem;line-height:1.4"><input type="checkbox" id="fcheck" required style="accent-color:var(--red);margin-top:3px"> <span data-i18n="form-check">I confirm minimum age and own equipment.</span></label>
-<button type="submit" class="btn-primary application-button" data-i18n="form-btn">✉ APPLY VIA E-MAIL</button>
-</form>
-</div>
-</div>
+                <!-- Coach 2: Fortnite -->
+                <div class="glass-panel p-6 clip-corner relative group hover:border-brand-red transition-all">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-14 h-14 rounded-full bg-cyan-500/10 border-2 border-cyan-500/50 flex items-center justify-center text-xl">📋</div>
+                        <div>
+                            <div class="font-orbitron font-bold text-lg text-white">SLOT OPEN</div>
+                            <span class="font-mono text-xs text-cyan-400 tracking-wider" data-i18n="coach-fortnite">COACH: FORTNITE</span>
+                        </div>
+                    </div>
+                    <p class="font-rajdhani text-sm text-slate-400 mb-4" data-i18n="coach-fortnite-desc">Focuses on drop zone analytics, rotation timing, build battles, and tournament execution.</p>
+                    <a href="#join" class="block text-center py-2.5 bg-cyan-500/10 hover:bg-cyan-500 hover:text-black border border-cyan-500/40 text-cyan-400 font-orbitron text-xs tracking-wider transition-all clip-btn" data-i18n="btn-apply-slot">APPLY FOR THIS SLOT</a>
+                </div>
+            </div>
 
-<div class="process-bar reveal">
-<div class="process-step"><b>01</b><span data-i18n="step-1">APPLY</span></div>
-<div class="process-step"><b>02</b><span data-i18n="step-2">RECRUITING</span></div>
-<div class="process-step"><b>03</b><span data-i18n="step-3">N1CO ELITE</span></div>
-</div>
-</div>
-</section>
+            <!-- Players Subheading -->
+            <div class="mb-6 flex items-center gap-4">
+                <div class="h-px bg-brand-red/30 flex-grow"></div>
+                <span class="font-orbitron text-xs text-brand-red tracking-widest uppercase px-4 py-1 bg-brand-red/10 border border-brand-red/30 clip-corner" data-i18n="section-players">ACTIVE PLAYERS & IGL (6 SLOTS)</span>
+                <div class="h-px bg-brand-red/30 flex-grow"></div>
+            </div>
 
-<hr class="divider">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Slot 1: Founder (N1CO) -->
+                <div class="glass-panel p-6 clip-corner border-brand-red/50 bg-brand-red/5">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-14 h-14 rounded-full bg-brand-red/20 border-2 border-brand-red flex items-center justify-center text-xl">👑</div>
+                        <div>
+                            <div class="font-orbitron font-bold text-lg text-white">N1CO</div>
+                            <span class="font-mono text-xs text-brand-red tracking-wider">FOUNDER / IGL</span>
+                        </div>
+                    </div>
+                    <p class="font-rajdhani text-sm text-slate-400 mb-4" data-i18n="player-founder-desc">Team Captain & In-Game Leader for both The Finals and Fortnite divisions.</p>
+                    <div class="py-2.5 text-center bg-brand-red/20 border border-brand-red/40 text-brand-red font-orbitron text-xs tracking-wider clip-btn">LOCKED (OWNER)</div>
+                </div>
 
-<section id="twitch"><div class="container"><div class="card reveal" style="padding:2.5rem 1.5rem;text-align:center;background:linear-gradient(135deg,rgba(100,65,165,.1),transparent);border-color:rgba(100,65,165,.3)">
-<div style="font-family:'Share Tech Mono';font-size:.6rem;letter-spacing:3px;color:#8060bb;margin-bottom:1rem" data-i18n="twitch-live">// LIVE ON TWITCH</div>
-<div style="font-family:'Orbitron';font-size:clamp(1.2rem,4vw,2.5rem);font-weight:900;color:#fff;margin-bottom:.5rem">NICOMINECITH_TTV</div>
-<div style="margin-bottom:1.5rem;font-family:'Share Tech Mono';font-size:.65rem;color:rgba(200,200,208,.5)">STREAMS: THE FINALS · FORTNITE</div>
-<a href="https://www.twitch.tv/Nicominecith_TTV" target="_blank" rel="noopener" class="btn-primary" style="background:#6441a5" data-i18n="twitch-btn">🎥 WATCH NOW</a>
-</div></div></section>
+                <!-- Slot 2: The Finals Player 1 -->
+                <div class="glass-panel p-6 clip-corner group hover:border-brand-red transition-all">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-14 h-14 rounded-full bg-brand-red/10 border-2 border-brand-red/40 flex items-center justify-center text-xl">🛡️</div>
+                        <div>
+                            <div class="font-orbitron font-bold text-lg text-white">SLOT OPEN</div>
+                            <span class="font-mono text-xs text-brand-red tracking-wider" data-i18n="slot-finals-1">THE FINALS (HEAVY)</span>
+                        </div>
+                    </div>
+                    <p class="font-rajdhani text-sm text-slate-400 mb-4" data-i18n="slot-finals-1-desc">Primary cashout defender and destructive anchor.</p>
+                    <a href="#join" class="block text-center py-2.5 bg-brand-red/10 hover:bg-brand-red hover:text-white border border-brand-red/40 text-brand-red font-orbitron text-xs tracking-wider transition-all clip-btn" data-i18n="btn-apply-slot">APPLY FOR THIS SLOT</a>
+                </div>
 
-<footer><div style="max-width:1200px;margin:auto">
-<div style="font-family:'Orbitron';font-weight:900;color:#fff;margin-bottom:.5rem">NICO<span style="color:var(--red)">GAMING</span></div>
-<div style="font-family:'Share Tech Mono';font-size:.55rem;letter-spacing:2px;color:rgba(200,200,208,.25)" data-i18n="footer-rights">© 2026 NICO GAMING ESPORTS · FOUNDER: NICOMINECITH · MINIMUM AGE: 13 YEARS</div>
-</div></footer>
+                <!-- Slot 3: The Finals Player 2 -->
+                <div class="glass-panel p-6 clip-corner group hover:border-brand-red transition-all">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-14 h-14 rounded-full bg-brand-red/10 border-2 border-brand-red/40 flex items-center justify-center text-xl">⚡</div>
+                        <div>
+                            <div class="font-orbitron font-bold text-lg text-white">SLOT OPEN</div>
+                            <span class="font-mono text-xs text-brand-red tracking-wider" data-i18n="slot-finals-2">THE FINALS (MEDIUM)</span>
+                        </div>
+                    </div>
+                    <p class="font-rajdhani text-sm text-slate-400 mb-4" data-i18n="slot-finals-2-desc">Support healer, turret strategist, and rifler.</p>
+                    <a href="#join" class="block text-center py-2.5 bg-brand-red/10 hover:bg-brand-red hover:text-white border border-brand-red/40 text-brand-red font-orbitron text-xs tracking-wider transition-all clip-btn" data-i18n="btn-apply-slot">APPLY FOR THIS SLOT</a>
+                </div>
 
-<script>
-// Translations Dictionary
-const translations = {
-  en: {
-    "nav-home": "Home", "nav-founder": "Founder", "nav-skills": "Skills", "nav-training": "Training",
-    "nav-team": "Team", "nav-rules": "Rules", "nav-join": "Join", "nav-live": "Live",
-    "hero-sub": "Official E-Sport Club founded by <strong>nicominecith</strong><br><span class=\"game\">The Finals</span> · <span class=\"game\">Fortnite</span>",
-    "btn-apply": "⚡ APPLY NOW", "btn-warmup": "🎯 START WARM-UP",
-    "stat-age": "MIN. AGE", "stat-split": "% PLAYER SPLIT", "stat-games": "GAMES", "stat-target": "€ 3-MONTH GOAL", "stat-year": "FOUNDED YEAR",
-    "about-label": "// ABOUT THE FOUNDER", "about-badge": "⚠ MINIMUM AGE: 13 YEARS",
-    "about-desc": "Founder & Team Captain of NICO GAMING. Our club stands for high performance, respect, and a genuine competitive spirit in The Finals and Fortnite.",
-    "gear-label": "// FOUNDER'S GEAR", "gear-title": "OVERVIEW",
-    "gear-note": "⚠ NOTE: This is the founder's personal equipment. Players must acquire their own gear.",
-    "gear-c1": "CONSOLE", "gear-c2": "CONTROLLER", "gear-c3": "HEADSET",
-    "skills-label": "// GAMER PROFILE", "skills-title": "ANALYSIS",
-    "sk-aim": "AIM TRAINING", "sk-iq": "GAME IQ", "sk-team": "TEAMWORK",
-    "train-label": "// INTERACTIVE", "lbl-score": "SCORE", "lbl-time": "TIME", "lbl-acc": "ACC",
-    "train-click": "CLICK OR TAP TO START", "train-start": "⚡ START TRAINING",
-    "train-hs": "// SESSION HIGHSCORES", "lb-player": "PLAYER",
-    "roster-label": "// THE SQUAD", "slot-open": "SLOT OPEN", "slot-apply": "Apply now",
-    "rules-label": "// OFFICIAL STATUTES", "rules-title": "PRO CONTRACT", "rules-sub": "RULES",
-    "rule-1": "Active members must use the tag <strong style=\"color:#fff\">\"N1CO |\"</strong> in front of their ingame name.",
-    "rule-2-t": "MIN. 13 YEARS", "rule-2-a": "Applicants must be", "rule-2-b": "at least 13 years old", "rule-2-c": ". Under 18 requires parental consent.",
-    "rule-3-a": "Minimum prize pool revenue in 3 months.", "rule-3-b": "of earnings go directly to the player.",
-    "rule-4-t": "SELF-PROVIDED", "rule-4-a": "Every player is responsible for their own equipment.", "rule-4-b": "No gear is provided.",
-    "rec-label": "// RECRUITING PORTAL", "rec-title": "BECOME",
-    "rec-desc": "Want to join NICO GAMING? Choose your application method. <strong style=\"color:#fff\">Gamertransfer is the recommended way</strong> because you can use your player profile directly for recruitment.",
-    "gt-badge": "RECOMMENDED METHOD", "gt-status": "● ACTIVE / OPEN RECRUITING",
-    "gt-desc": "Apply directly via Gamertransfer to <strong style=\"color:#fff\">NICO GAMING</strong>. Fast, clear, and specifically designed for gamers and teams.",
-    "gt-f1": "Direct application via Gamertransfer", "gt-f2": "Use player profile & gaming data", "gt-f3": "Direct contact with recruitment",
-    "gt-btn": "🚀 APPLY VIA GAMERTRANSFER",
-    "email-label": "ALTERNATIVE APPLICATION", "email-title": "E-MAIL",
-    "email-desc": "Would you prefer a classic email contact? Fill out the form below and your mail client will open.",
-    "form-name": "NAME *", "form-nick": "INGAME NAME *", "form-age": "AGE *", "form-game": "GAME *",
-    "form-select": "Select...", "form-check": "I confirm minimum age and own equipment.", "form-btn": "✉ APPLY VIA E-MAIL",
-    "step-1": "APPLY", "step-2": "RECRUITING", "step-3": "N1CO ELITE",
-    "twitch-live": "// LIVE ON TWITCH", "twitch-btn": "🎥 WATCH NOW",
-    "footer-rights": "© 2026 NICO GAMING ESPORTS · FOUNDER: NICOMINECITH · MINIMUM AGE: 13 YEARS",
-    "meta-title": "NICO GAMING | Official eSports Club (The Finals & Fortnite)",
-    "meta-desc": "NICO GAMING – official eSports club for The Finals and Fortnite, founded by nicominecith. Discover rosters, rules, and apply via Gamertransfer."
-  },
-  de: {
-    "nav-home": "Home", "nav-founder": "Founder", "nav-skills": "Skills", "nav-training": "Training",
-    "nav-team": "Team", "nav-rules": "Regeln", "nav-join": "Join", "nav-live": "Live",
-    "hero-sub": "Official E-Sport Club gegründet von <strong>nicominecith</strong><br><span class=\"game\">The Finals</span> · <span class=\"game\">Fortnite</span>",
-    "btn-apply": "⚡ JETZT BEWERBEN", "btn-warmup": "🎯 WARM-UP STARTEN",
-    "stat-age": "MIN. ALTER", "stat-split": "% SPIELER-SPLIT", "stat-games": "GAMES", "stat-target": "€ 3-MONATS-ZIEL", "stat-year": "GRÜNDUNGSJAHR",
-    "about-label": "// ÜBER DEN GRÜNDER", "about-badge": "⚠ MINDESTALTER: 13 JAHRE",
-    "about-desc": "Gründer & Team-Kapitän von NICO GAMING. Unser Club steht für High-Performance, Respekt und echten Competitive Spirit in The Finals und Fortnite.",
-    "gear-label": "// FOUNDER'S GEAR", "gear-title": "ÜBERSICHT",
-    "gear-note": "⚠ HINWEIS: Das Equipment ist persönliches Equipment des Gründers und muss von Spielern selbst angeschafft werden.",
-    "gear-c1": "KONSOLE", "gear-c2": "CONTROLLER", "gear-c3": "HEADSET",
-    "skills-label": "// GAMER PROFIL", "skills-title": "ANALYSE",
-    "sk-aim": "AIM TRAINING", "sk-iq": "GAME IQ", "sk-team": "TEAMWORK",
-    "train-label": "// INTERAKTIV", "lbl-score": "SCORE", "lbl-time": "ZEIT", "lbl-acc": "ACC",
-    "train-click": "KLICK ODER TIPPEN ZUM STARTEN", "train-start": "⚡ TRAINING STARTEN",
-    "train-hs": "// SESSION HIGHSCORES", "lb-player": "SPIELER",
-    "roster-label": "// DAS SQUAD", "slot-open": "SLOT OFFEN", "slot-apply": "Bewirb dich jetzt",
-    "rules-label": "// OFFIZIELLES STATUT", "rules-title": "PRO-VERTRAG", "rules-sub": "REGELN",
-    "rule-1": "Aktive Mitglieder führen das Kürzel <strong style=\"color:#fff\">„N1CO |“</strong> vor ihrem Ingame-Namen.",
-    "rule-2-t": "MIN. 13 JAHRE", "rule-2-a": "Bewerber müssen", "rule-2-b": "mindestens 13 Jahre", "rule-2-c": "alt sein. Unter 18 Jahren ist die Zustimmung der Eltern erforderlich.",
-    "rule-3-a": "Mindestumsatz an Preisgeldern in 3 Monaten.", "rule-3-b": "der Einnahmen gehen direkt an den Spieler.",
-    "rule-4-t": "SELBST BESCHAFFEN", "rule-4-a": "Jeder Spieler ist für eigenes Equipment verantwortlich.", "rule-4-b": "Es werden keine Geräte gestellt.",
-    "rec-label": "// RECRUITING PORTAL", "rec-title": "WERDE",
-    "rec-desc": "Du willst Teil von NICO GAMING werden? Wähle deinen Bewerbungsweg. <strong style=\"color:#fff\">Gamertransfer ist der empfohlene Weg</strong>, weil du dein Spielerprofil direkt für das Recruiting nutzen kannst.",
-    "gt-badge": "EMPFOHLENER BEWERBUNGSWEG", "gt-status": "● AKTIV / OPEN RECRUITING",
-    "gt-desc": "Bewirb dich direkt über Gamertransfer bei <strong style=\"color:#fff\">NICO GAMING</strong>. Schnell, übersichtlich und speziell für Gamer und Teams.",
-    "gt-f1": "Direkte Bewerbung über Gamertransfer", "gt-f2": "Spielerprofil & Gaming-Daten nutzen", "gt-f3": "Direkter Kontakt zum Recruiting",
-    "gt-btn": "🚀 ÜBER GAMERTRANSFER BEWERBEN",
-    "email-label": "ALTERNATIVE BEWERBUNG", "email-title": "E-MAIL",
-    "email-desc": "Du möchtest lieber klassisch per E-Mail Kontakt aufnehmen? Fülle das Formular aus und dein Mailprogramm wird geöffnet.",
-    "form-name": "NAME *", "form-nick": "INGAME NAME *", "form-age": "ALTER *", "form-game": "SPIEL *",
-    "form-select": "Wählen...", "form-check": "Ich bestätige Mindestalter und eigenes Equipment.", "form-btn": "✉ BEWERBUNG PER E-MAIL",
-    "step-1": "BEWERBEN", "step-2": "RECRUITING", "step-3": "N1CO ELITE",
-    "twitch-live": "// LIVE AUF TWITCH", "twitch-btn": "🎥 JETZT ZUSCHAUEN",
-    "footer-rights": "© 2026 NICO GAMING ESPORTS · FOUNDER: NICOMINECITH · MINDESTALTER: 13 JAHRE",
-    "meta-title": "NICO GAMING | Official eSports Club (The Finals & Fortnite)",
-    "meta-desc": "NICO GAMING – offizieller eSports Club für The Finals und Fortnite, gegründet von nicominecith. Entdecke Roster, Regeln und bewirb dich über Gamertransfer."
-  }
-};
+                <!-- Slot 4: The Finals Player 3 -->
+                <div class="glass-panel p-6 clip-corner group hover:border-brand-red transition-all">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-14 h-14 rounded-full bg-brand-red/10 border-2 border-brand-red/40 flex items-center justify-center text-xl">🎯</div>
+                        <div>
+                            <div class="font-orbitron font-bold text-lg text-white">SLOT OPEN</div>
+                            <span class="font-mono text-xs text-brand-red tracking-wider" data-i18n="slot-finals-3">THE FINALS (LIGHT)</span>
+                        </div>
+                    </div>
+                    <p class="font-rajdhani text-sm text-slate-400 mb-4" data-i18n="slot-finals-3-desc">Evasive flanker, recon specialist, and high-mobility fragger.</p>
+                    <a href="#join" class="block text-center py-2.5 bg-brand-red/10 hover:bg-brand-red hover:text-white border border-brand-red/40 text-brand-red font-orbitron text-xs tracking-wider transition-all clip-btn" data-i18n="btn-apply-slot">APPLY FOR THIS SLOT</a>
+                </div>
 
-let currentLang = 'en';
+                <!-- Slot 5: Fortnite Player 1 -->
+                <div class="glass-panel p-6 clip-corner group hover:border-brand-red transition-all">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-14 h-14 rounded-full bg-brand-red/10 border-2 border-brand-red/40 flex items-center justify-center text-xl">🏗️</div>
+                        <div>
+                            <div class="font-orbitron font-bold text-lg text-white">SLOT OPEN</div>
+                            <span class="font-mono text-xs text-brand-red tracking-wider" data-i18n="slot-fn-1">FORTNITE (BUILDER / IGL)</span>
+                        </div>
+                    </div>
+                    <p class="font-rajdhani text-sm text-slate-400 mb-4" data-i18n="slot-fn-1-desc">Main competitive duos builder and endgame caller.</p>
+                    <a href="#join" class="block text-center py-2.5 bg-brand-red/10 hover:bg-brand-red hover:text-white border border-brand-red/40 text-brand-red font-orbitron text-xs tracking-wider transition-all clip-btn" data-i18n="btn-apply-slot">APPLY FOR THIS SLOT</a>
+                </div>
 
-function toggleLanguage() {
-  currentLang = currentLang === 'en' ? 'de' : 'en';
-  document.getElementById('htmlRoot').lang = currentLang;
-  
-  // Update button texts
-  document.getElementById('desktopLangBtn').textContent = currentLang.toUpperCase();
-  document.getElementById('mobileLangBtn').textContent = currentLang.toUpperCase();
-  
-  // Update all elements with data-i18n attribute
-  document.querySelectorAll('[data-i18n]').forEach(el => {
-    const key = el.getAttribute('data-i18n');
-    if (translations[currentLang][key]) {
-      el.innerHTML = translations[currentLang][key];
-    }
-  });
+                <!-- Slot 6: Fortnite Player 2 -->
+                <div class="glass-panel p-6 clip-corner group hover:border-brand-red transition-all">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-14 h-14 rounded-full bg-brand-red/10 border-2 border-brand-red/40 flex items-center justify-center text-xl">🔫</div>
+                        <div>
+                            <div class="font-orbitron font-bold text-lg text-white">SLOT OPEN</div>
+                            <span class="font-mono text-xs text-brand-red tracking-wider" data-i18n="slot-fn-2">FORTNITE (FRAGGER)</span>
+                        </div>
+                    </div>
+                    <p class="font-rajdhani text-sm text-slate-400 mb-4" data-i18n="slot-fn-2-desc">Entry fragger, mechanical master, and sharpshooter.</p>
+                    <a href="#join" class="block text-center py-2.5 bg-brand-red/10 hover:bg-brand-red hover:text-white border border-brand-red/40 text-brand-red font-orbitron text-xs tracking-wider transition-all clip-btn" data-i18n="btn-apply-slot">APPLY FOR THIS SLOT</a>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  // Update meta tags
-  document.getElementById('meta-title').textContent = translations[currentLang]['meta-title'];
-  document.getElementById('meta-desc').setAttribute('content', translations[currentLang]['meta-desc']);
-}
+    <!-- Aim Trainer / Interactive Warm-up Section -->
+    <section id="training" class="py-24 px-4 relative">
+        <div class="max-w-4xl mx-auto">
+            <div class="flex flex-col items-center mb-12 text-center">
+                <span class="font-mono text-xs text-brand-red tracking-[0.3em] uppercase mb-2" data-i18n="train-tag">// INTERACTIVE WARM-UP</span>
+                <h2 class="font-orbitron font-black text-3xl sm:text-5xl text-white tracking-wider" data-i18n="train-title">PRO AIM LABS</h2>
+                <p class="font-rajdhani text-slate-400 mt-2" data-i18n="train-desc">Test your reflexes and aim precision before tryouts. Fully supports mouse clicks and gamepad controls.</p>
+            </div>
 
-// Default set to English on load as requested
-window.addEventListener('DOMContentLoaded', () => {
-  currentLang = 'de'; // start from de to trigger switch to en properly or force en
-  toggleLanguage();
-});
+            <div class="glass-panel p-6 clip-corner">
+                <div class="flex flex-col sm:flex-row justify-between items-center gap-4 mb-6">
+                    <div class="flex items-center gap-6 font-mono text-sm">
+                        <div><span class="text-slate-500" data-i18n="lbl-score">SCORE:</span> <span id="aim-score" class="text-brand-red font-bold text-lg">0</span></div>
+                        <div><span class="text-slate-500" data-i18n="lbl-time">TIME:</span> <span id="aim-time" class="text-white font-bold text-lg">30</span>s</div>
+                        <div><span class="text-slate-500" data-i18n="lbl-acc">ACC:</span> <span id="aim-acc" class="text-cyan-400 font-bold text-lg">0%</span></div>
+                    </div>
+                    <div id="controller-status" class="font-mono text-xs px-3 py-1 bg-black/60 border border-white/10 text-slate-400 clip-corner">
+                        🎮 GAMEPAD: STANDBY
+                    </div>
+                </div>
 
-const cursor=document.getElementById('cursor'),dot=document.getElementById('cursor-dot');
-document.addEventListener('mousemove',e=>{if(innerWidth>768){cursor.style.left=e.clientX+'px';cursor.style.top=e.clientY+'px';dot.style.left=e.clientX+'px';dot.style.top=e.clientY+'px'}});
-function toggleMenu(){document.getElementById('mobileMenu').classList.toggle('open')}
+                <div class="relative w-full h-[350px] bg-black/80 border border-brand-red/35 clip-corner overflow-hidden">
+                    <canvas id="aim-canvas" class="w-full h-full block"></canvas>
+                    
+                    <!-- Overlay Start screen -->
+                    <div id="aim-overlay" class="absolute inset-0 bg-black/85 backdrop-blur-md flex flex-col items-center justify-center text-center p-6">
+                        <div class="font-orbitron font-black text-2xl text-white mb-2" data-i18n="overlay-title">AIM REFLEX TRAINING</div>
+                        <p class="font-rajdhani text-slate-400 mb-6 max-w-sm" data-i18n="overlay-desc">Click or tap targets as fast as possible for 30 seconds. Connect your controller for analog crosshair control.</p>
+                        <button onclick="startAimGame()" class="px-8 py-3.5 bg-brand-red hover:bg-red-700 text-white font-orbitron text-xs font-bold tracking-widest clip-btn shadow-lg shadow-brand-red/30 transition-all">
+                            <span data-i18n="btn-start-aim">⚡ START TRAINING</span>
+                        </button>
+                    </div>
+                </div>
 
-const revealObserver=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');e.target.querySelectorAll('.fill').forEach(f=>f.style.width=f.dataset.width+'%')}}),{threshold:.1});
-document.querySelectorAll('.reveal').forEach(el=>revealObserver.observe(el));
+                <!-- Session Leaderboard -->
+                <div class="mt-8">
+                    <div class="font-mono text-xs text-brand-red tracking-widest mb-3" data-i18n="lb-title">// RECENT SESSION HIGHSCORES</div>
+                    <div class="bg-black/40 border border-white/5 clip-corner overflow-hidden">
+                        <div class="grid grid-cols-4 p-3 font-mono text-[10px] text-slate-500 border-b border-white/5 uppercase">
+                            <span>Rank</span><span>Player</span><span>Accuracy</span><span>Score</span>
+                        </div>
+                        <div id="leaderboard-body">
+                            <div class="grid grid-cols-4 p-3 font-mono text-xs border-b border-white/5 text-slate-300">
+                                <span class="text-brand-red font-bold">#1</span><span>N1CO_ELITE</span><span class="text-cyan-400">98%</span><span class="text-white font-bold">2,800</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-const counterObserver=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.querySelectorAll('[data-count]').forEach(el=>{const target=parseInt(el.dataset.count),duration=1500,step=target/(duration/16);let current=0;const timer=setInterval(()=>{current=Math.min(current+step,target);el.textContent=Math.floor(current);if(current>=target)clearInterval(timer)},16)});counterObserver.unobserve(e.target)}}),{threshold:.5});
-document.querySelectorAll('.stat-box').forEach(el=>counterObserver.observe(el.parentElement));
+    <!-- Rules & Contract Section -->
+    <section id="rules" class="py-24 px-4 bg-black/40 relative">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col items-center mb-16 text-center">
+                <span class="font-mono text-xs text-brand-red tracking-[0.3em] uppercase mb-2" data-i18n="rules-tag">// CLUB STATUTES</span>
+                <h2 class="font-orbitron font-black text-3xl sm:text-5xl text-white tracking-wider" data-i18n="rules-title">PRO CONTRACT RULES</h2>
+            </div>
 
-function sendMail(e){
-e.preventDefault();
-const name=document.getElementById('fname').value,nick=document.getElementById('fnick').value,email=document.getElementById('femail').value,age=document.getElementById('fage').value,game=document.getElementById('fgame').value,disc=document.getElementById('fdisc').value||'None';
-const subject=encodeURIComponent('Application: '+nick+' ('+game+')');
-const body=encodeURIComponent('Hi nicominecith,\n\nhere is a new application for NICO GAMING:\n\n----------------------------------------\n- Name: '+name+'\n- Ingame Name: '+nick+'\n- E-Mail: '+email+'\n- Age: '+age+'\n- Game: '+game+'\n- Discord: '+disc+'\n- Rules/Equipment: Accepted\n----------------------------------------\n\nSent via NICO GAMING Website.');
-location.href='mailto:nicominecithclips@gmail.com?subject='+subject+'&body='+body;
-}
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="glass-panel p-6 clip-corner border-l-4 border-l-brand-red">
+                    <div class="font-mono text-xs text-brand-red tracking-widest mb-2">§ 01 — IDENTITY</div>
+                    <h3 class="font-orbitron font-bold text-lg text-white mb-2" data-i18n="rule-1-title">N1CO CLAN TAG</h3>
+                    <p class="font-rajdhani text-sm text-slate-400 leading-relaxed" data-i18n="rule-1-desc">All active roster players must carry the official <strong class="text-white">"N1CO |"</strong> tag in front of their ingame display names.</p>
+                </div>
 
-const canvas=document.getElementById('aim-canvas'),ctx=canvas.getContext('2d'),scoreEl=document.getElementById('aim-score'),timeEl=document.getElementById('aim-time'),accEl=document.getElementById('aim-acc'),overlay=document.getElementById('aim-start-overlay'),controllerLabel=document.getElementById('controller-label');
-let score=0,timeLeft=30,gameActive=false,target={x:0,y:0,radius:20},crosshair={x:200,y:175},shots=0,hits=0,sessionScores=[];
-function resizeCanvas(){canvas.width=canvas.parentNode.getBoundingClientRect().width;canvas.height=350}
-addEventListener('resize',resizeCanvas);resizeCanvas();
-function spawnTarget(){const m=40;target.x=m+Math.random()*(canvas.width-m*2);target.y=m+Math.random()*(canvas.height-m*2);target.radius=12+Math.random()*14}
-function startAimGame(){
-score=0;timeLeft=30;shots=0;hits=0;gameActive=true;scoreEl.textContent=0;timeEl.textContent=30;accEl.textContent='0%';overlay.style.opacity=0;overlay.style.pointerEvents='none';spawnTarget();requestAnimationFrame(gameLoop);
-const timer=setInterval(()=>{if(!gameActive){clearInterval(timer);return}timeLeft--;timeEl.textContent=timeLeft;if(timeLeft<=0){gameActive=false;const acc=shots?Math.round(hits/shots*100):0;sessionScores.push({score,acc});sessionScores.sort((a,b)=>b.score-a.score);updateLeaderboard();overlay.style.opacity=1;overlay.style.pointerEvents='all';overlay.innerHTML='<div style="text-align:center;padding:1rem"><div style="font-family:Orbitron;font-weight:900;color:white;margin-bottom:.5rem">'+(currentLang==='de'?'SESSION ENDE':'SESSION END')+'</div><div style="font-family:Share Tech Mono;color:var(--red)">SCORE: '+score+'</div><div style="font-family:Share Tech Mono;color:#f5c842;margin-bottom:1.2rem">ACC: '+acc+'%</div><button onclick="startAimGame()" class="btn-primary">🔄 '+(currentLang==='de'?'RE-SESSION':'RE-SESSION')+'</button></div>'}},1000)}
-function updateLeaderboard(){const lb=document.getElementById('leaderboard');lb.innerHTML='';const names=['N1CO_PRO','FINALS_GOD','TARGET_X','RECON_ACE','SNIPER_K'];sessionScores.slice(0,5).forEach((s,i)=>{const row=document.createElement('div');row.className='lb-row';row.innerHTML='<span class="lb-rank '+(i===0?'gold':'')+'">'+(i+1)+'</span><span>'+names[i]+'</span><span style="color:#f5c842">'+s.acc+'%</span><span class="lb-score">'+s.score+'</span>';lb.appendChild(row)})}
-function checkHit(x,y){shots++;if(Math.hypot(x-target.x,y-target.y)<target.radius){hits++;score+=100;scoreEl.textContent=score;spawnTarget()}accEl.textContent=(shots?Math.round(hits/shots*100):0)+'%'}
-canvas.addEventListener('pointerdown',e=>{if(!gameActive)return;const r=canvas.getBoundingClientRect();checkHit(e.clientX-r.left,e.clientY-r.top)});
-addEventListener('gamepadconnected',()=>{controllerLabel.textContent=currentLang==='de'?'◉ CONTROLLER: AKTIV':'◉ CONTROLLER: ACTIVE';controllerLabel.style.background='#18a96d';controllerLabel.style.color='#fff'});
-addEventListener('gamepaddisconnected',()=>{controllerLabel.textContent=currentLang==='de'?'◉ CONTROLLER: GETRENNT':'◉ CONTROLLER: DISCONNECTED';controllerLabel.style.background='#1a1a1a';controllerLabel.style.color='#555'});
-let triggerPressed=false;
-function updateGamepad(){const p=navigator.getGamepads()[0];if(!p||!gameActive)return;const sx=Math.abs(p.axes[0])>.12?p.axes[0]:0,sy=Math.abs(p.axes[1])>.12?p.axes[1]:0;crosshair.x=Math.max(0,Math.min(canvas.width,crosshair.x+sx*10));crosshair.y=Math.max(0,Math.min(canvas.height,crosshair.y+sy*10));const firing=p.buttons[7]?.pressed||p.buttons[0]?.pressed;if(firing&&!triggerPressed){checkHit(crosshair.x,crosshair.y);triggerPressed=true}else if(!firing)triggerPressed=false}
-function gameLoop(){if(!gameActive)return;updateGamepad();ctx.clearRect(0,0,canvas.width,canvas.height);ctx.beginPath();ctx.arc(target.x,target.y,target.radius,0,Math.PI*2);ctx.fillStyle='#e60012';ctx.fill();ctx.beginPath();ctx.arc(target.x,target.y,3,0,Math.PI*2);ctx.fillStyle='#fff';ctx.fill();if(navigator.getGamepads()[0]){ctx.strokeStyle='#00ff88';ctx.lineWidth=1.5;const s=10;ctx.beginPath();ctx.moveTo(crosshair.x-s,crosshair.y);ctx.lineTo(crosshair.x+s,crosshair.y);ctx.moveTo(crosshair.x,crosshair.y-s);ctx.lineTo(crosshair.x,crosshair.y+s);ctx.stroke()}requestAnimationFrame(gameLoop)}
-</script>
+                <div class="glass-panel p-6 clip-corner border-l-4 border-l-brand-red">
+                    <div class="font-mono text-xs text-brand-red tracking-widest mb-2">§ 02 — AGE REQUIREMENT</div>
+                    <h3 class="font-orbitron font-bold text-lg text-white mb-2" data-i18n="rule-2-title">MINIMUM AGE: 13</h3>
+                    <p class="font-rajdhani text-sm text-slate-400 leading-relaxed" data-i18n="rule-2-desc">Applicants must be at least 13 years old. Minors under 18 require verbal or written parental consent upon joining.</p>
+                </div>
+
+                <div class="glass-panel p-6 clip-corner border-l-4 border-l-brand-red">
+                    <div class="font-mono text-xs text-brand-red tracking-widest mb-2">§ 03 — REVENUE SPLIT</div>
+                    <h3 class="font-orbitron font-bold text-lg text-white mb-2" data-i18n="rule-3-title">85% PLAYER SPLIT</h3>
+                    <p class="font-rajdhani text-sm text-slate-400 leading-relaxed" data-i18n="rule-3-desc">We target €500+ in tournament prize pools. 85% of earnings go directly to the participating player.</p>
+                </div>
+
+                <div class="glass-panel p-6 clip-corner border-l-4 border-l-brand-red">
+                    <div class="font-mono text-xs text-brand-red tracking-widest mb-2">§ 04 — EQUIPMENT</div>
+                    <h3 class="font-orbitron font-bold text-lg text-white mb-2" data-i18n="rule-4-title">SELF-PROVIDED GEAR</h3>
+                    <p class="font-rajdhani text-sm text-slate-400 leading-relaxed" data-i18n="rule-4-desc">Players are responsible for their own hardware, peripherals, and reliable internet connection.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Recruiting & Application Section -->
+    <section id="join" class="py-24 px-4 relative">
+        <div class="max-w-6xl mx-auto">
+            <div class="flex flex-col items-center mb-16 text-center">
+                <span class="font-mono text-xs text-brand-red tracking-[0.3em] uppercase mb-2" data-i18n="join-tag">// JOIN THE ELITE</span>
+                <h2 class="font-orbitron font-black text-3xl sm:text-5xl text-white tracking-wider" data-i18n="join-title">RECRUITMENT PORTAL</h2>
+                <p class="font-rajdhani text-slate-400 mt-2 max-w-xl" data-i18n="join-desc">Choose your preferred way to submit your application to NICO GAMING.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Gamertransfer Card (Recommended) -->
+                <div class="glass-panel p-8 clip-corner relative overflow-hidden border-cyan-500/40 bg-gradient-to-br from-cyan-500/10 via-transparent to-transparent">
+                    <div class="absolute top-0 right-0 bg-cyan-500 text-black font-mono text-[10px] font-bold px-4 py-1 tracking-widest uppercase" data-i18n="gt-badge">RECOMMENDED</div>
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-14 h-14 bg-cyan-500/20 border-2 border-cyan-500 flex items-center justify-center text-2xl">🚀</div>
+                        <div>
+                            <h3 class="font-orbitron font-bold text-2xl text-white">GAMERTRANSFER</h3>
+                            <span class="font-mono text-xs text-cyan-400 tracking-widest" data-i18n="gt-sub">FASTEST RECRUITMENT ROUTE</span>
+                        </div>
+                    </div>
+                    <p class="font-rajdhani text-base text-slate-300 mb-6 leading-relaxed" data-i18n="gt-desc">
+                        Apply directly through Gamertransfer. Showcase your player stats, division history, and connect with our team management instantly.
+                    </p>
+                    <ul class="space-y-2 mb-8 font-mono text-xs text-slate-300">
+                        <li class="flex items-center gap-2"><span class="text-cyan-400">✓</span> <span data-i18n="gt-f1">Direct submission to NICO GAMING portal</span></li>
+                        <li class="flex items-center gap-2"><span class="text-cyan-400">✓</span> <span data-i18n="gt-f2">Integrated gaming stats & profile verification</span></li>
+                    </ul>
+                    <a href="https://gamertransfer.com/nico_gaming_the_finals-lfm-2-35968.html" target="_blank" rel="noopener" class="block text-center py-4 bg-cyan-500 hover:bg-cyan-400 text-black font-orbitron text-xs font-bold tracking-widest clip-btn shadow-lg shadow-cyan-500/20 transition-all">
+                        <span data-i18n="gt-btn">🚀 APPLY VIA GAMERTRANSFER</span>
+                    </a>
+                </div>
+
+                <!-- Email Form Card -->
+                <div class="glass-panel p-8 clip-corner">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-14 h-14 bg-brand-red/20 border-2 border-brand-red flex items-center justify-center text-2xl">✉️</div>
+                        <div>
+                            <h3 class="font-orbitron font-bold text-2xl text-white" data-i18n="email-title">DIRECT E-MAIL FORM</h3>
+                            <span class="font-mono text-xs text-brand-red tracking-widest" data-i18n="email-sub">CLASSIC APPLICATION</span>
+                        </div>
+                    </div>
+                    
+                    <form id="applyForm" onsubmit="sendMail(event)" class="space-y-4">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block font-mono text-[10px] text-slate-400 tracking-wider mb-1" data-i18n="form-name">YOUR NAME *</label>
+                                <input type="text" id="fname" required class="w-full bg-black/50 border border-white/10 focus:border-brand-red px-4 py-2.5 text-white font-rajdhani text-sm outline-none clip-corner" placeholder="John Doe">
+                            </div>
+                            <div>
+                                <label class="block font-mono text-[10px] text-slate-400 tracking-wider mb-1" data-i18n="form-nick">INGAME NICKNAME *</label>
+                                <input type="text" id="fnick" required class="w-full bg-black/50 border border-white/10 focus:border-brand-red px-4 py-2.5 text-white font-rajdhani text-sm outline-none clip-corner" placeholder="N1CO_Player">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                            <div class="sm:col-span-2">
+                                <label class="block font-mono text-[10px] text-slate-400 tracking-wider mb-1" data-i18n="form-email">E-MAIL ADDRESS *</label>
+                                <input type="email" id="femail" required class="w-full bg-black/50 border border-white/10 focus:border-brand-red px-4 py-2.5 text-white font-rajdhani text-sm outline-none clip-corner" placeholder="mail@example.com">
+                            </div>
+                            <div>
+                                <label class="block font-mono text-[10px] text-slate-400 tracking-wider mb-1" data-i18n="form-age">AGE *</label>
+                                <input type="number" id="fage" min="13" max="99" required class="w-full bg-black/50 border border-white/10 focus:border-brand-red px-4 py-2.5 text-white font-rajdhani text-sm outline-none clip-corner" placeholder="16">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block font-mono text-[10px] text-slate-400 tracking-wider mb-1" data-i18n="form-role">APPLYING FOR *</label>
+                                <select id="frole" required class="w-full bg-[#0c0c14] border border-white/10 focus:border-brand-red px-4 py-2.5 text-white font-rajdhani text-sm outline-none clip-corner">
+                                    <option value="" data-i18n="form-select">Select Division / Role...</option>
+                                    <option>Coach: The Finals</option>
+                                    <option>Coach: Fortnite</option>
+                                    <option>Player: The Finals (Heavy)</option>
+                                    <option>Player: The Finals (Medium)</option>
+                                    <option>Player: The Finals (Light)</option>
+                                    <option>Player: Fortnite (Builder/IGL)</option>
+                                    <option>Player: Fortnite (Fragger)</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block font-mono text-[10px] text-slate-400 tracking-wider mb-1">DISCORD TAG</label>
+                                <input type="text" id="fdisc" class="w-full bg-black/50 border border-white/10 focus:border-brand-red px-4 py-2.5 text-white font-rajdhani text-sm outline-none clip-corner" placeholder="username#0000">
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-3 pt-2">
+                            <input type="checkbox" id="fcheck" required class="mt-1 accent-brand-red">
+                            <label for="fcheck" class="font-rajdhani text-xs text-slate-400 leading-tight" data-i18n="form-check">I confirm that I am at least 13 years old, own proper equipment, and agree to carry the N1CO tag.</label>
+                        </div>
+
+                        <button type="submit" class="w-full py-4 bg-brand-red hover:bg-red-700 text-white font-orbitron text-xs font-bold tracking-widest clip-btn shadow-lg shadow-brand-red/30 transition-all mt-4">
+                            <span data-i18n="form-btn">✉ SEND APPLICATION E-MAIL</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-brand-border bg-black py-12 px-4 text-center">
+        <div class="max-w-7xl mx-auto flex flex-col items-center justify-center gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 flex items-center justify-center bg-brand-red/10 border border-brand-red/40 clip-corner">
+                    <span class="font-orbitron font-black text-brand-red text-sm">N1</span>
+                </div>
+                <span class="font-orbitron font-black text-white text-base tracking-widest">NICO<span class="text-brand-red">GAMING</span></span>
+            </div>
+            <p class="font-mono text-xs text-slate-500 tracking-wider" data-i18n="footer-rights">
+                © 2026 NICO GAMING ESPORTS · FOUNDER: NICOMINECITH · ALL RIGHTS RESERVED
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Dictionary for live English / German translations
+        const translations = {
+            en: {
+                "nav-home": "HOME",
+                "nav-founder": "FOUNDER",
+                "nav-roster": "ROSTER",
+                "nav-training": "TRAINING",
+                "nav-rules": "RULES",
+                "nav-join": "JOIN",
+                "hero-badge": "RECRUITING SEASON 2026 ACTIVE",
+                "hero-subtitle": "Official competitive eSports club for <span class='text-brand-red font-bold'>The Finals</span> & <span class='text-brand-red font-bold'>Fortnite</span>. Founded and led by <span class='text-white font-bold'>nicominecith</span>.",
+                "hero-btn-apply": "APPLY NOW",
+                "hero-btn-roster": "VIEW ROSTER",
+                "stat-slots": "TOTAL SQUAD SLOTS",
+                "stat-games": "GAMES",
+                "stat-split": "PLAYER PRIZE SPLIT",
+                "stat-age": "MINIMUM AGE",
+                "founder-tag": "// LEADERSHIP",
+                "founder-title": "FOUNDER & IGL",
+                "founder-desc": "Creator and team captain of NICO GAMING. Passionate about tactical shooter execution, high-end team chemistry, and pushing the boundaries in competitive The Finals and Fortnite.",
+                "founder-rule": "Minimum member age: 13 years",
+                "setup-title": "FOUNDER'S SETUP",
+                "setup-note": "PRO REFERENCE",
+                "roster-tag": "// TEAM STRUCTURE",
+                "roster-title": "OFFICIAL ROSTER (8/8)",
+                "roster-desc": "Total capacity including Founder: 2 Professional Coaches (The Finals & Fortnite) and 5 Elite Players (2 Fortnite, 3 The Finals).",
+                "section-coaches": "COACHING STAFF (2 SLOTS)",
+                "coach-finals": "COACH: THE FINALS",
+                "coach-finals-desc": "Responsible for tactical loadouts, map control strategies, and team coordination in The Finals.",
+                "coach-fortnite": "COACH: FORTNITE",
+                "coach-fortnite-desc": "Focuses on drop zone analytics, rotation timing, build battles, and tournament execution.",
+                "section-players": "ACTIVE PLAYERS & IGL (6 SLOTS)",
+                "player-founder-desc": "Team Captain & In-Game Leader for both The Finals and Fortnite divisions.",
+                "slot-finals-1": "THE FINALS (HEAVY)",
+                "slot-finals-1-desc": "Primary cashout defender and destructive anchor.",
+                "slot-finals-2": "THE FINALS (MEDIUM)",
+                "slot-finals-2-desc": "Support healer, turret strategist, and rifler.",
+                "slot-finals-3": "THE FINALS (LIGHT)",
+                "slot-finals-3-desc": "Evasive flanker, recon specialist, and high-mobility fragger.",
+                "slot-fn-1": "FORTNITE (BUILDER / IGL)",
+                "slot-fn-1-desc": "Main competitive duos builder and endgame caller.",
+                "slot-fn-2": "FORTNITE (FRAGGER)",
+                "slot-fn-2-desc": "Entry fragger, mechanical master, and sharpshooter.",
+                "btn-apply-slot": "APPLY FOR THIS SLOT",
+                "train-tag": "// INTERACTIVE WARM-UP",
+                "train-title": "PRO AIM LABS",
+                "train-desc": "Test your reflexes and aim precision before tryouts. Fully supports mouse clicks and gamepad controls.",
+                "lbl-score": "SCORE:",
+                "lbl-time": "TIME:",
+                "lbl-acc": "ACC:",
+                "overlay-title": "AIM REFLEX TRAINING",
+                "overlay-desc": "Click or tap targets as fast as possible for 30 seconds. Connect your controller for analog crosshair control.",
+                "btn-start-aim": "⚡ START TRAINING",
+                "lb-title": "// RECENT SESSION HIGHSCORES",
+                "rules-tag": "// CLUB STATUTES",
+                "rules-title": "PRO CONTRACT RULES",
+                "rule-1-title": "N1CO CLAN TAG",
+                "rule-1-desc": "All active roster players must carry the official <strong class='text-white'>\"N1CO |\"</strong> tag in front of their ingame display names.",
+                "rule-2-title": "MINIMUM AGE: 13",
+                "rule-2-desc": "Applicants must be at least 13 years old. Minors under 18 require verbal or written parental consent upon joining.",
+                "rule-3-title": "85% PLAYER SPLIT",
+                "rule-3-desc": "We target €500+ in tournament prize pools. 85% of earnings go directly to the participating player.",
+                "rule-4-title": "SELF-PROVIDED GEAR",
+                "rule-4-desc": "Players are responsible for their own hardware, peripherals, and reliable internet connection.",
+                "join-tag": "// JOIN THE ELITE",
+                "join-title": "RECRUITMENT PORTAL",
+                "join-desc": "Choose your preferred way to submit your application to NICO GAMING.",
+                "gt-badge": "RECOMMENDED",
+                "gt-sub": "FASTEST RECRUITMENT ROUTE",
+                "gt-desc": "Apply directly through Gamertransfer. Showcase your player stats, division history, and connect with our team management instantly.",
+                "gt-f1": "Direct submission to NICO GAMING portal",
+                "gt-f2": "Integrated gaming stats & profile verification",
+                "gt-btn": "🚀 APPLY VIA GAMERTRANSFER",
+                "email-title": "DIRECT E-MAIL FORM",
+                "email-sub": "CLASSIC APPLICATION",
+                "form-name": "YOUR NAME *",
+                "form-nick": "INGAME NICKNAME *",
+                "form-email": "E-MAIL ADDRESS *",
+                "form-age": "AGE *",
+                "form-role": "APPLYING FOR *",
+                "form-select": "Select Division / Role...",
+                "form-check": "I confirm that I am at least 13 years old, own proper equipment, and agree to carry the N1CO tag.",
+                "form-btn": "✉ SEND APPLICATION E-MAIL",
+                "footer-rights": "© 2026 NICO GAMING ESPORTS · FOUNDER: NICOMINECITH · ALL RIGHTS RESERVED"
+            },
+            de: {
+                "nav-home": "HOME",
+                "nav-founder": "GRÜNDER",
+                "nav-roster": "ROSTER",
+                "nav-training": "TRAINING",
+                "nav-rules": "REGELN",
+                "nav-join": "MITMACHEN",
+                "hero-badge": "RECRUITING SAISON 2026 AKTIV",
+                "hero-subtitle": "Offizieller eSports-Club für <span class='text-brand-red font-bold'>The Finals</span> & <span class='text-brand-red font-bold'>Fortnite</span>. Gegründet und geleitet von <span class='text-white font-bold'>nicominecith</span>.",
+                "hero-btn-apply": "JETZT BEWERBEN",
+                "hero-btn-roster": "ROSTER ANSEHEN",
+                "stat-slots": "GESAMT SQUAD SLOTS",
+                "stat-games": "GAMES",
+                "stat-split": "SPIELER PREISGELD-SPLIT",
+                "stat-age": "MINDESTALTER",
+                "founder-tag": "// LEITUNG",
+                "founder-title": "GRÜNDER & IGL",
+                "founder-desc": "Ersteller und Teamkapitän von NICO GAMING. Leidenschaftlich für taktische Shooter-Ausführung, erstklassige Teamchemie und wettbewerbsorientierte Erfolge in The Finals und Fortnite.",
+                "founder-rule": "Mindestalter der Mitglieder: 13 Jahre",
+                "setup-title": "FOUNDER'S SETUP",
+                "setup-note": "PRO-REFERENZ",
+                "roster-tag": "// TEAMSTRUKTUR",
+                "roster-title": "OFFIZIELLER ROSTER (8/8)",
+                "roster-desc": "Gesamtkapazität inkl. Gründer: 2 professionelle Coaches (The Finals & Fortnite) und 5 Elite-Spieler (2 Fortnite, 3 The Finals).",
+                "section-coaches": "COACHING-STAB (2 SLOTS)",
+                "coach-finals": "COACH: THE FINALS",
+                "coach-finals-desc": "Verantwortlich für taktische Loadouts, Map-Control-Strategien und Teamkoordination in The Finals.",
+                "coach-fortnite": "COACH: FORTNITE",
+                "coach-fortnite-desc": "Fokus auf Drop-Zone-Analysen, Rotations-Timing, Build-Fights und Turnierausführung.",
+                "section-players": "AKTIVE SPIELER & IGL (6 SLOTS)",
+                "player-founder-desc": "Teamkapitän & In-Game-Leader für die Divisions The Finals und Fortnite.",
+                "slot-finals-1": "THE FINALS (HEAVY)",
+                "slot-finals-1-desc": "Haupt-Cashout-Defender und zerstörerischer Anker.",
+                "slot-finals-2": "THE FINALS (MEDIUM)",
+                "slot-finals-2-desc": "Support-Healer, Turm-Stratege und Rifler.",
+                "slot-finals-3": "THE FINALS (LIGHT)",
+                "slot-finals-3-desc": "Ausweichnder Flanker, Aufklärer und High-Mobility-Fragger.",
+                "slot-fn-1": "FORTNITE (BUILDER / IGL)",
+                "slot-fn-1-desc": "Haupt-Duos-Builder im Wettkampf und Endgame-Caller.",
+                "slot-fn-2": "FORTNITE (FRAGGER)",
+                "slot-fn-2-desc": "Entry-Fragger, Mechanik-Master und Scharfschütze.",
+                "btn-apply-slot": "FÜR DIESEN SLOT BEWERBEN",
+                "train-tag": "// INTERAKTIVES WARM-UP",
+                "train-title": "PRO AIM LABS",
+                "train-desc": "Teste deine Reflexe und Aim-Präzision vor Tryouts. Unterstützt Maus-Klicks und Gamepad-Steuerung.",
+                "lbl-score": "PUNKTE:",
+                "lbl-time": "ZEIT:",
+                "lbl-acc": "TREFFER:",
+                "overlay-title": "AIM-REFLEX-TRAINING",
+                "overlay-desc": "Klicke oder tippe Ziele für 30 Sekunden so schnell wie möglich an. Schließe dein Gamepad für analoge Fadenkreuz-Steuerung an.",
+                "btn-start-aim": "⚡ TRAINING STARTEN",
+                "lb-title": "// LETZTE HIGHSCORES",
+                "rules-tag": "// CLUB-STATUTEN",
+                "rules-title": "PRO-VERTRAGSREGELN",
+                "rule-1-title": "N1CO CLAN TAG",
+                "rule-1-desc": "Alle aktiven Roster-Spieler müssen den offiziellen <strong class='text-white'>„N1CO |“</strong> Tag vor ihrem Ingame-Namen tragen.",
+                "rule-2-title": "MINDESTALTER: 13",
+                "rule-2-desc": "Bewerber müssen mindestens 13 Jahre alt sein. Minderjährige unter 18 Jahren benötigen die Erlaubnis der Erziehungsberechtigten.",
+                "rule-3-title": "85% SPIELER-SPLIT",
+                "rule-3-desc": "Wir zielen auf €500+ in Turnier-Preisgeldern ab. 85% der Einnahmen gehen direkt an den teilnehmenden Spieler.",
+                "rule-4-title": "EIGENES EQUIPMENT",
+                "rule-4-desc": "Spieler sind selbst für ihre Hardware, Peripheriegeräte und eine stabile Internetverbindung verantwortlich.",
+                "join-tag": "// WERDE TEIL DER ELITE",
+                "join-title": "RECRUITING-PORTAL",
+                "join-desc": "Wähle deinen bevorzugten Weg, um deine Bewerbung bei NICO GAMING einzureichen.",
+                "gt-badge": "EMPFOHLEN",
+                "gt-sub": "SCHNELLSTER RECRUITING-WEG",
+                "gt-desc": "Bewirb dich direkt über Gamertransfer. Präsentiere deine Spielerstatistiken, Divisionshistorie und verbinde dich sofort mit unserem Team-Management.",
+                "gt-f1": "Direkte Einreichung im NICO GAMING Portal",
+                "gt-f2": "Integrierte Gaming-Statistiken & Profilverifizierung",
+                "gt-btn": "🚀 ÜBER GAMERTRANSFER BEWERBEN",
+                "email-title": "DIREKTES E-MAIL-FORMULAR",
+                "email-sub": "KLASSISCHE BEWERBUNG",
+                "form-name": "DEIN NAME *",
+                "form-nick": "INGAME-NICKNAME *",
+                "form-email": "E-MAIL-ADRESSE *",
+                "form-age": "ALTER *",
+                "form-role": "BEWERBUNG FÜR *",
+                "form-select": "Division / Rolle wählen...",
+                "form-check": "Ich bestätige, dass ich mindestens 13 Jahre alt bin, über ordentliches Equipment verfüge und den N1CO-Tag trage.",
+                "form-btn": "✉ BEWERBUNGS-E-MAIL SENDEN",
+                "footer-rights": "© 2026 NICO GAMING ESPORTS · GRÜNDER: NICOMINECITH · ALLE RECHTE VORBEHALTEN"
+            }
+        };
+
+        let currentLang = 'en';
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'en' ? 'de' : 'en';
+            document.getElementById('htmlRoot').lang = currentLang;
+            document.getElementById('langToggleBtn').textContent = currentLang.toUpperCase();
+            
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[currentLang][key]) {
+                    el.innerHTML = translations[currentLang][key];
+                }
+            });
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('translate-x-full');
+        }
+
+        // Email Form Handler
+        function sendMail(e) {
+            e.preventDefault();
+            const name = document.getElementById('fname').value;
+            const nick = document.getElementById('fnick').value;
+            const email = document.getElementById('femail').value;
+            const age = document.getElementById('fage').value;
+            const role = document.getElementById('frole').value;
+            const disc = document.getElementById('fdisc').value || 'None';
+
+            const subject = encodeURIComponent('NICO GAMING Application: ' + nick + ' (' + role + ')');
+            const body = encodeURIComponent(`Hello NICO GAMING Team,\n\nHere is a new application submission:\n\n- Name: ${name}\n- Ingame Nick: ${nick}\n- Email: ${email}\n- Age: ${age}\n- Applying For: ${role}\n- Discord: ${disc}\n- Terms Accepted: Yes\n\nSent via NICO GAMING Website.`);
+            
+            window.location.href = `mailto:nicominecithclips@gmail.com?subject=${subject}&body=${body}`;
+        }
+
+        // Aim Trainer Game Logic
+        const canvas = document.getElementById('aim-canvas');
+        const ctx = canvas.getContext('2d');
+        const scoreEl = document.getElementById('aim-score');
+        const timeEl = document.getElementById('aim-time');
+        const accEl = document.getElementById('aim-acc');
+        const overlay = document.getElementById('aim-overlay');
+        const controllerStatus = document.getElementById('controller-status');
+
+        let score = 0;
+        let timeLeft = 30;
+        let gameActive = false;
+        let target = { x: 150, y: 150, radius: 22 };
+        let crosshair = { x: 200, y: 175 };
+        let shots = 0;
+        let hits = 0;
+        let sessionScores = [];
+
+        function resizeCanvas() {
+            const rect = canvas.getBoundingClientRect();
+            canvas.width = rect.width || 600;
+            canvas.height = 350;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        function spawnTarget() {
+            const margin = 45;
+            target.x = margin + Math.random() * (canvas.width - margin * 2);
+            target.y = margin + Math.random() * (canvas.height - margin * 2);
+            target.radius = 16 + Math.random() * 12;
+        }
+
+        function startAimGame() {
+            score = 0;
+            timeLeft = 30;
+            shots = 0;
+            hits = 0;
+            gameActive = true;
+            scoreEl.textContent = 0;
+            timeEl.textContent = 30;
+            accEl.textContent = '0%';
+            overlay.style.opacity = '0';
+            overlay.style.pointerEvents = 'none';
+            spawnTarget();
+            requestAnimationFrame(gameLoop);
+
+            const timer = setInterval(() => {
+                if (!gameActive) {
+                    clearInterval(timer);
+                    return;
+                }
+                timeLeft--;
+                timeEl.textContent = timeLeft;
+                if (timeLeft <= 0) {
+                    gameActive = false;
+                    const acc = shots ? Math.round((hits / shots) * 100) : 0;
+                    sessionScores.push({ score, acc });
+                    sessionScores.sort((a, b) => b.score - a.score);
+                    updateLeaderboard();
+                    overlay.style.opacity = '1';
+                    overlay.style.pointerEvents = 'auto';
+                    overlay.innerHTML = `
+                        <div class="font-orbitron font-black text-2xl text-white mb-1">SESSION FINISHED</div>
+                        <div class="font-mono text-brand-red text-lg mb-1">SCORE: ${score}</div>
+                        <div class="font-mono text-cyan-400 text-sm mb-6">ACCURACY: ${acc}%</div>
+                        <button onclick="startAimGame()" class="px-6 py-3 bg-brand-red hover:bg-red-700 text-white font-orbitron text-xs font-bold tracking-widest clip-btn transition-all">TRY AGAIN</button>
+                    `;
+                }
+            }, 1000);
+        }
+
+        function updateLeaderboard() {
+            const body = document.getElementById('leaderboard-body');
+            body.innerHTML = '';
+            sessionScores.slice(0, 3).forEach((s, i) => {
+                const row = document.createElement('div');
+                row.className = 'grid grid-cols-4 p-3 font-mono text-xs border-b border-white/5 text-slate-300';
+                row.innerHTML = `<span class="text-brand-red font-bold">#${i+1}</span><span>PLAYER_ONE</span><span class="text-cyan-400">${s.acc}%</span><span class="text-white font-bold">${s.score}</span>`;
+                body.appendChild(row);
+            });
+        }
+
+        function registerHit(x, y) {
+            shots++;
+            const dist = Math.hypot(x - target.x, y - target.y);
+            if (dist <= target.radius) {
+                hits++;
+                score += 100;
+                scoreEl.textContent = score;
+                spawnTarget();
+            }
+            const acc = shots ? Math.round((hits / shots) * 100) : 0;
+            accEl.textContent = acc + '%';
+        }
+
+        canvas.addEventListener('pointerdown', (e) => {
+            if (!gameActive) return;
+            const rect = canvas.getBoundingClientRect();
+            registerHit(e.clientX - rect.left, e.clientY - rect.top);
+        });
+
+        // Gamepad support for aim trainer
+        window.addEventListener('gamepadconnected', () => {
+            controllerStatus.textContent = "🎮 GAMEPAD: CONNECTED";
+            controllerStatus.classList.add("text-cyan-400", "border-cyan-500/50");
+        });
+        window.addEventListener('gamepaddisconnected', () => {
+            controllerStatus.textContent = "🎮 GAMEPAD: STANDBY";
+            controllerStatus.classList.remove("text-cyan-400", "border-cyan-500/50");
+        });
+
+        let triggerPressed = false;
+        function updateGamepad() {
+            const gp = navigator.getGamepads()[0];
+            if (!gp || !gameActive) return;
+            const ax = Math.abs(gp.axes[0]) > 0.1 ? gp.axes[0] : 0;
+            const ay = Math.abs(gp.axes[1]) > 0.1 ? gp.axes[1] : 0;
+            crosshair.x = Math.max(10, Math.min(canvas.width - 10, crosshair.x + ax * 8));
+            crosshair.y = Math.max(10, Math.min(canvas.height - 10, crosshair.y + ay * 8));
+
+            const firing = gp.buttons[7]?.pressed || gp.buttons[0]?.pressed;
+            if (firing && !triggerPressed) {
+                registerHit(crosshair.x, crosshair.y);
+                triggerPressed = true;
+            } else if (!firing) {
+                triggerPressed = false;
+            }
+        }
+
+        function gameLoop() {
+            if (!gameActive) return;
+            updateGamepad();
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Draw Target
+            ctx.beginPath();
+            ctx.arc(target.x, target.y, target.radius, 0, Math.PI * 2);
+            ctx.fillStyle = '#ff003c';
+            ctx.shadowColor = '#ff003c';
+            ctx.shadowBlur = 15;
+            ctx.fill();
+            ctx.shadowBlur = 0;
+
+            ctx.beginPath();
+            ctx.arc(target.x, target.y, target.radius * 0.4, 0, Math.PI * 2);
+            ctx.fillStyle = '#ffffff';
+            ctx.fill();
+
+            // Draw Controller Crosshair if gamepad active
+            if (navigator.getGamepads()[0]) {
+                ctx.strokeStyle = '#00f0ff';
+                ctx.lineWidth = 2;
+                const size = 12;
+                ctx.beginPath();
+                ctx.moveTo(crosshair.x - size, crosshair.y); ctx.lineTo(crosshair.x + size, crosshair.y);
+                ctx.moveTo(crosshair.x, crosshair.y - size); ctx.lineTo(crosshair.x, crosshair.y + size);
+                ctx.stroke();
+            }
+
+            requestAnimationFrame(gameLoop);
+        }
+    </script>
 </body>
 </html>
