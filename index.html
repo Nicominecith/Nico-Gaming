@@ -37,6 +37,7 @@
 }
 </script>
 <script src="https://cdn.tailwindcss.com"></script>
+<script src="https://elfsightcdn.com/platform.js" async></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Barlow+Condensed:wght@300;400;600;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
@@ -139,6 +140,40 @@ section{padding:5.5rem 1.5rem;position:relative;width:100%;max-width:1280px;marg
 .roster-desc{font-size:.95rem;color:rgba(212,212,220,.7);margin:0 0 1.5rem;line-height:1.5}
 .roster-footer{margin-top:auto}
 
+/* Role accent colors */
+.roster-card.role-coach{border-color:rgba(45,125,255,.35)}
+.roster-card.role-coach::before{background:var(--blue)}
+.roster-card.role-coach:hover{border-color:var(--blue);box-shadow:0 15px 45px rgba(45,125,255,.22)}
+.roster-card.role-finals::before{background:var(--red)}
+.roster-card.role-fortnite{border-color:rgba(145,71,255,.35)}
+.roster-card.role-fortnite::before{background:#9147ff}
+.roster-card.role-fortnite:hover{border-color:#9147ff;box-shadow:0 15px 45px rgba(145,71,255,.22)}
+
+/* Status pill badge, top-right of each card */
+.roster-status-pill{position:absolute;top:1.2rem;right:1.2rem;font-family:'Share Tech Mono';font-size:.55rem;letter-spacing:1px;padding:.3rem .7rem;border-radius:20px;font-weight:700}
+.status-open{background:rgba(24,216,137,.14);color:var(--green);border:1px solid rgba(24,216,137,.4)}
+.status-locked{background:rgba(230,0,18,.16);color:var(--red2);border:1px solid rgba(230,0,18,.4)}
+
+/* Pro/locked avatar glow ring */
+.roster-avatar.pro{box-shadow:0 0 0 3px rgba(230,0,18,.18),0 0 22px rgba(230,0,18,.35);animation:avatarGlow 3s ease-in-out infinite}
+@keyframes avatarGlow{0%,100%{box-shadow:0 0 0 3px rgba(230,0,18,.18),0 0 18px rgba(230,0,18,.3)}50%{box-shadow:0 0 0 3px rgba(230,0,18,.32),0 0 32px rgba(230,0,18,.55)}}
+
+/* Small role/skill tag chips */
+.roster-tags{display:flex;gap:.4rem;flex-wrap:wrap;margin:.2rem 0 1.3rem}
+.roster-tag{font-family:'Share Tech Mono';font-size:.58rem;letter-spacing:.5px;padding:.28rem .6rem;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:20px;color:rgba(212,212,220,.8)}
+
+/* Instagram section */
+.insta-hero{display:flex;align-items:center;justify-content:space-between;gap:1.6rem;flex-wrap:wrap;background:linear-gradient(135deg,rgba(240,60,120,.12),rgba(120,60,220,.12));border:1px solid rgba(240,60,120,.35);padding:2.2rem;border-radius:10px;margin-bottom:2.2rem}
+.insta-btn{background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);color:#fff;border:0;display:inline-flex;align-items:center;gap:.6rem;padding:1rem 1.8rem;font-family:'Orbitron';font-size:.7rem;letter-spacing:1px;font-weight:900;border-radius:6px;transition:all .3s;cursor:pointer}
+.insta-btn:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(220,39,67,.45)}
+.insta-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:1.3rem}
+.insta-card{position:relative;aspect-ratio:9/12;border-radius:8px;overflow:hidden;border:1px solid rgba(255,255,255,.12);background:linear-gradient(160deg,#1a1a22,#0a0a0f);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:1.2rem;transition:all .35s}
+.insta-card:hover{transform:translateY(-6px) scale(1.02);border-color:#e6683c;box-shadow:0 15px 40px rgba(220,39,67,.3)}
+.insta-card .insta-icon-big{font-size:2.4rem;margin-bottom:.8rem;filter:drop-shadow(0 0 10px rgba(220,39,67,.5))}
+.insta-card .insta-type{font-family:'Share Tech Mono';font-size:.6rem;letter-spacing:1px;color:#ff8a5c;margin-bottom:.5rem}
+.insta-card .insta-cta{font-family:'Orbitron';font-size:.6rem;color:#fff;letter-spacing:1px}
+.insta-follow-widget{margin-top:2rem;text-align:center;font-family:'Share Tech Mono';font-size:.65rem;color:rgba(212,212,220,.5);line-height:1.6}
+
 .contract-clause{background:var(--panel);border:1px solid rgba(230,0,18,.2);border-left:3px solid var(--red);padding:1.8rem;border-radius:6px;transition:all .3s}
 .contract-clause:hover{transform:translateY(-4px);box-shadow:0 10px 35px rgba(230,0,18,.15)}
 .clause-num{font-family:'Share Tech Mono';font-size:.65rem;color:var(--red);letter-spacing:2px}
@@ -206,8 +241,9 @@ footer{border-top:1px solid rgba(255,255,255,.08);background:#010102;padding:3.5
 <a href="#roster" onclick="toggleMenu()" data-i18n="nav-team">TEAM</a>
 <a href="#contract" onclick="toggleMenu()" data-i18n="nav-rules">RULES</a>
 <a href="#partners" onclick="toggleMenu()" data-i18n="nav-partners">PARTNERS</a>
+<a href="#instagram" onclick="toggleMenu()" data-i18n="nav-instagram">INSTAGRAM</a>
 <a href="#sign" onclick="toggleMenu()" data-i18n="nav-join">JOIN</a>
-<button class="lang-btn" onclick="toggleLanguage()" id="mobileLangBtn" style="margin-top:1rem;padding:.5rem 1.2rem;font-size:.75rem">DE / EN</button>
+<button class="lang-btn" onclick="toggleLanguage()" id="mobileLangBtn" style="margin-top:1rem;padding:.5rem 1.2rem;font-size:.75rem">EN</button>
 </div>
 
 <nav>
@@ -220,6 +256,7 @@ footer{border-top:1px solid rgba(255,255,255,.08);background:#010102;padding:3.5
 <li><a href="#roster" data-i18n="nav-team">TEAM</a></li>
 <li><a href="#contract" data-i18n="nav-rules">RULES</a></li>
 <li><a href="#partners" data-i18n="nav-partners">PARTNERS</a></li>
+<li><a href="#instagram" data-i18n="nav-instagram">INSTAGRAM</a></li>
 <li><a href="#sign" style="color:var(--red)" data-i18n="nav-join">JOIN</a></li>
 </ul>
 <button class="lang-btn desktop-nav" onclick="toggleLanguage()" id="desktopLangBtn">EN</button>
@@ -229,7 +266,7 @@ footer{border-top:1px solid rgba(255,255,255,.08);background:#010102;padding:3.5
 
 <div class="ticker-wrap"><div class="ticker">
 <span class="hl">◆ NICO GAMING ESPORTS</span><span>THE FINALS & FORTNITE</span><span class="hl">◆ 2 COACHES & 6 PLAYERS + IGL</span>
-<span>TEAMPLAY & GAMERTRANSFER PARTNERS</span><span class="hl">◆ RECRUITING OPEN (7/8 SLOTS)</span><span class="hl">◆ N1CO TAG REQUIRED</span><span>JOIN NOW</span>
+<span>TEAMPLAY & GAMERTRANSFER PARTNERS</span><span class="hl">◆ RECRUITING OPEN (7/8 SLOTS)</span><span class="hl">◆ N1CO TAG REQUIRED</span><span>FOLLOW @NICOGAMINGESPORTS</span><span>JOIN NOW</span>
 </div></div>
 
 <section id="home">
@@ -317,14 +354,20 @@ footer{border-top:1px solid rgba(255,255,255,.08);background:#010102;padding:3.5
 </div>
 
 <div class="roster-grid" style="margin-bottom:2.5rem">
-<div class="roster-card reveal" style="border-color:rgba(45,125,255,0.45)">
+<div class="roster-card role-coach reveal">
+<span class="roster-status-pill status-open" data-i18n="pill-open">OPEN</span>
 <div>
 <div class="roster-header">
 <div class="roster-avatar" style="border-color:rgba(45,125,255,0.55);background:rgba(45,125,255,0.12);color:#2d7dff">📋</div>
 <div class="roster-info">
-<h3>SLOT OPEN</h3>
+<h3 data-i18n="slot-open">SLOT OPEN</h3>
 <div class="roster-role" style="color:#2d7dff" data-i18n="coach-finals">COACH: THE FINALS</div>
 </div>
+</div>
+<div class="roster-tags">
+<span class="roster-tag" data-i18n="tag-coach">Coach</span>
+<span class="roster-tag" data-i18n="tag-finals">The Finals</span>
+<span class="roster-tag" data-i18n="tag-tactics">Tactics</span>
 </div>
 <p class="roster-desc" data-i18n="coach-finals-desc">Dedicated tactical coach for The Finals division, focusing on loadout synergy and cashout maps.</p>
 </div>
@@ -333,14 +376,20 @@ footer{border-top:1px solid rgba(255,255,255,.08);background:#010102;padding:3.5
 </div>
 </div>
 
-<div class="roster-card reveal" style="border-color:rgba(45,125,255,0.45)">
+<div class="roster-card role-coach reveal">
+<span class="roster-status-pill status-open" data-i18n="pill-open">OPEN</span>
 <div>
 <div class="roster-header">
 <div class="roster-avatar" style="border-color:rgba(45,125,255,0.55);background:rgba(45,125,255,0.12);color:#2d7dff">📋</div>
 <div class="roster-info">
-<h3>SLOT OPEN</h3>
+<h3 data-i18n="slot-open">SLOT OPEN</h3>
 <div class="roster-role" style="color:#2d7dff" data-i18n="coach-fortnite">COACH: FORTNITE</div>
 </div>
+</div>
+<div class="roster-tags">
+<span class="roster-tag" data-i18n="tag-coach">Coach</span>
+<span class="roster-tag" data-i18n="tag-fortnite">Fortnite</span>
+<span class="roster-tag" data-i18n="tag-strategy">Strategy</span>
 </div>
 <p class="roster-desc" data-i18n="coach-fortnite-desc">Dedicated coach for Fortnite, analyzing drop zones, rotational timing, and competitive tournament performance.</p>
 </div>
@@ -357,46 +406,63 @@ footer{border-top:1px solid rgba(255,255,255,.08);background:#010102;padding:3.5
 </div>
 
 <div class="roster-grid">
-<div class="roster-card reveal" style="border-color:rgba(230,0,18,0.55);background:linear-gradient(150deg,rgba(230,0,18,0.1),var(--panel))">
+<div class="roster-card role-finals reveal" style="border-color:rgba(230,0,18,0.55);background:linear-gradient(150deg,rgba(230,0,18,0.12),var(--panel))">
+<span class="roster-status-pill status-locked" data-i18n="pill-owner">OWNER</span>
 <div>
 <div class="roster-header">
-<div class="roster-avatar">👑</div>
+<div class="roster-avatar pro">👑</div>
 <div class="roster-info">
 <h3>N1CO 🇩🇪</h3>
 <div class="roster-role">FOUNDER / IGL (THE FINALS PRO)</div>
 </div>
 </div>
+<div class="roster-tags">
+<span class="roster-tag" data-i18n="tag-igl">IGL</span>
+<span class="roster-tag" data-i18n="tag-finals">The Finals</span>
+<span class="roster-tag" data-i18n="tag-captain">Captain</span>
+</div>
 <p class="roster-desc" data-i18n="player-founder-desc">Team Captain & In-Game Leader included in the active player lineup as a top professional.</p>
 </div>
 <div class="roster-footer">
-<div style="padding:0.65rem;background:rgba(230,0,18,0.22);border:1px solid rgba(230,0,18,0.45);color:var(--red);font-family:'Orbitron';font-size:0.65rem;letter-spacing:1px;border-radius:4px;text-align:center">LOCKED (OWNER)</div>
+<div style="padding:0.65rem;background:rgba(230,0,18,0.22);border:1px solid rgba(230,0,18,0.45);color:var(--red2);font-family:'Orbitron';font-size:0.65rem;letter-spacing:1px;border-radius:4px;text-align:center" data-i18n="locked-owner">LOCKED (OWNER)</div>
 </div>
 </div>
 
-<div class="roster-card reveal" style="border-color:rgba(230,0,18,0.55);background:linear-gradient(150deg,rgba(230,0,18,0.1),var(--panel))">
+<div class="roster-card role-finals reveal" style="border-color:rgba(230,0,18,0.55);background:linear-gradient(150deg,rgba(230,0,18,0.12),var(--panel))">
+<span class="roster-status-pill status-locked" data-i18n="pill-pro">PRO</span>
 <div>
 <div class="roster-header">
-<div class="roster-avatar">🔥</div>
+<div class="roster-avatar pro">🔥</div>
 <div class="roster-info">
 <h3>JAK 🇩🇪</h3>
 <div class="roster-role" data-i18n="jak-role">THE FINALS PRO</div>
 </div>
 </div>
+<div class="roster-tags">
+<span class="roster-tag" data-i18n="tag-finals">The Finals</span>
+<span class="roster-tag" data-i18n="tag-pro">Pro Player</span>
+</div>
 <p class="roster-desc" data-i18n="jak-desc">Deutscher Professional The Finals Spieler und Elite-Mitglied im aktiven Roster.</p>
 </div>
 <div class="roster-footer">
-<div style="padding:0.65rem;background:rgba(230,0,18,0.22);border:1px solid rgba(230,0,18,0.45);color:var(--red);font-family:'Orbitron';font-size:0.65rem;letter-spacing:1px;border-radius:4px;text-align:center" data-i18n="locked-member">LOCKED (PRO PLAYER)</div>
+<div style="padding:0.65rem;background:rgba(230,0,18,0.22);border:1px solid rgba(230,0,18,0.45);color:var(--red2);font-family:'Orbitron';font-size:0.65rem;letter-spacing:1px;border-radius:4px;text-align:center" data-i18n="locked-member">LOCKED (PRO PLAYER)</div>
 </div>
 </div>
 
-<div class="roster-card reveal">
+<div class="roster-card role-finals reveal">
+<span class="roster-status-pill status-open" data-i18n="pill-open">OPEN</span>
 <div>
 <div class="roster-header">
 <div class="roster-avatar">🛡️</div>
 <div class="roster-info">
-<h3>SLOT OPEN</h3>
+<h3 data-i18n="slot-open">SLOT OPEN</h3>
 <div class="roster-role" data-i18n="slot-finals-1">THE FINALS — PLAYER 3 (HEAVY)</div>
 </div>
+</div>
+<div class="roster-tags">
+<span class="roster-tag" data-i18n="tag-finals">The Finals</span>
+<span class="roster-tag" data-i18n="tag-heavy">Heavy</span>
+<span class="roster-tag" data-i18n="tag-defense">Defense</span>
 </div>
 <p class="roster-desc" data-i18n="slot-finals-1-desc">Primary cashout defender and destructive anchor.</p>
 </div>
@@ -405,14 +471,20 @@ footer{border-top:1px solid rgba(255,255,255,.08);background:#010102;padding:3.5
 </div>
 </div>
 
-<div class="roster-card reveal">
+<div class="roster-card role-finals reveal">
+<span class="roster-status-pill status-open" data-i18n="pill-open">OPEN</span>
 <div>
 <div class="roster-header">
 <div class="roster-avatar">⚡</div>
 <div class="roster-info">
-<h3>SLOT OPEN</h3>
+<h3 data-i18n="slot-open">SLOT OPEN</h3>
 <div class="roster-role" data-i18n="slot-finals-2">THE FINALS — PLAYER 4 (MEDIUM)</div>
 </div>
+</div>
+<div class="roster-tags">
+<span class="roster-tag" data-i18n="tag-finals">The Finals</span>
+<span class="roster-tag" data-i18n="tag-medium">Medium</span>
+<span class="roster-tag" data-i18n="tag-support">Support</span>
 </div>
 <p class="roster-desc" data-i18n="slot-finals-2-desc">Support healer, turret strategist, and rifler.</p>
 </div>
@@ -421,35 +493,47 @@ footer{border-top:1px solid rgba(255,255,255,.08);background:#010102;padding:3.5
 </div>
 </div>
 
-<div class="roster-card reveal">
+<div class="roster-card role-fortnite reveal">
+<span class="roster-status-pill status-open" data-i18n="pill-open">OPEN</span>
 <div>
 <div class="roster-header">
-<div class="roster-avatar">🏗️</div>
+<div class="roster-avatar" style="border-color:rgba(145,71,255,.55);background:rgba(145,71,255,.12)">🏗️</div>
 <div class="roster-info">
-<h3>SLOT OPEN</h3>
-<div class="roster-role" data-i18n="slot-fn-1">FORTNITE — PLAYER 1 (BUILDER)</div>
+<h3 data-i18n="slot-open">SLOT OPEN</h3>
+<div class="roster-role" style="color:#9147ff" data-i18n="slot-fn-1">FORTNITE — PLAYER 1 (BUILDER)</div>
 </div>
+</div>
+<div class="roster-tags">
+<span class="roster-tag" data-i18n="tag-fortnite">Fortnite</span>
+<span class="roster-tag" data-i18n="tag-builder">Builder</span>
+<span class="roster-tag" data-i18n="tag-duos">Duos</span>
 </div>
 <p class="roster-desc" data-i18n="slot-fn-1-desc">Main competitive duos builder and structural anchor.</p>
 </div>
 <div class="roster-footer">
-<a href="#sign" class="btn-outline" style="width:100%;font-size:0.65rem;padding:0.65rem" data-i18n="btn-apply-slot">APPLY FOR THIS SLOT</a>
+<a href="#sign" class="btn-outline" style="border-color:rgba(145,71,255,0.45);color:#b98fff;width:100%;font-size:0.65rem;padding:0.65rem" data-i18n="btn-apply-slot">APPLY FOR THIS SLOT</a>
 </div>
 </div>
 
-<div class="roster-card reveal">
+<div class="roster-card role-fortnite reveal">
+<span class="roster-status-pill status-open" data-i18n="pill-open">OPEN</span>
 <div>
 <div class="roster-header">
-<div class="roster-avatar">🔫</div>
+<div class="roster-avatar" style="border-color:rgba(145,71,255,.55);background:rgba(145,71,255,.12)">🔫</div>
 <div class="roster-info">
-<h3>SLOT OPEN</h3>
-<div class="roster-role" data-i18n="slot-fn-2">FORTNITE — PLAYER 2 (FRAGGER)</div>
+<h3 data-i18n="slot-open">SLOT OPEN</h3>
+<div class="roster-role" style="color:#9147ff" data-i18n="slot-fn-2">FORTNITE — PLAYER 2 (FRAGGER)</div>
 </div>
+</div>
+<div class="roster-tags">
+<span class="roster-tag" data-i18n="tag-fortnite">Fortnite</span>
+<span class="roster-tag" data-i18n="tag-fragger">Fragger</span>
+<span class="roster-tag" data-i18n="tag-aim">Mechanics</span>
 </div>
 <p class="roster-desc" data-i18n="slot-fn-2-desc">Entry fragger, mechanical master, and sharpshooter.</p>
 </div>
 <div class="roster-footer">
-<a href="#sign" class="btn-outline" style="width:100%;font-size:0.65rem;padding:0.65rem" data-i18n="btn-apply-slot">APPLY FOR THIS SLOT</a>
+<a href="#sign" class="btn-outline" style="border-color:rgba(145,71,255,0.45);color:#b98fff;width:100%;font-size:0.65rem;padding:0.65rem" data-i18n="btn-apply-slot">APPLY FOR THIS SLOT</a>
 </div>
 </div>
 </div>
@@ -555,6 +639,26 @@ footer{border-top:1px solid rgba(255,255,255,.08);background:#010102;padding:3.5
 
 <hr class="divider">
 
+<section id="instagram">
+<div class="container">
+<div class="section-label" data-i18n="insta-tag">// SOCIAL FEED</div>
+<h2 class="section-title" data-i18n="insta-title">INSTAGRAM</h2>
+
+<div class="insta-hero reveal">
+<div>
+<h3 style="margin:0 0 .5rem;font-size:1.3rem;color:#fff;font-family:'Orbitron'">@nicogamingesports</h3>
+<p style="margin:0;color:rgba(212,212,220,.75);max-width:480px" data-i18n="insta-desc">Follow NICO GAMING on Instagram for roster updates, clips, highlight reels and behind-the-scenes content from The Finals & Fortnite squad.</p>
+</div>
+<a href="https://www.instagram.com/nicogamingesports" target="_blank" rel="noopener" class="insta-btn" data-i18n="insta-follow-btn">📸 FOLLOW @NICOGAMINGESPORTS</a>
+</div>
+
+<!-- Elfsight Instagram Feed | Untitled Instagram Feed -->
+<div class="elfsight-app-fed41dfd-5d9d-4726-b367-157a4de211b1" data-elfsight-app-lazy></div>
+</div>
+</section>
+
+<hr class="divider">
+
 <section id="sign">
 <div class="container">
 <div class="section-label" data-i18n="join-tag">// JOIN THE ELITE</div>
@@ -644,12 +748,12 @@ footer{border-top:1px solid rgba(255,255,255,.08);background:#010102;padding:3.5
 <label data-i18n="form-role">APPLYING FOR *</label>
 <select id="frole" required>
 <option value="" data-i18n="form-select">Select Division / Role...</option>
-<option>Coach: The Finals</option>
-<option>Coach: Fortnite</option>
-<option>Player: The Finals (Heavy)</option>
-<option>Player: The Finals (Medium)</option>
-<option>Player: Fortnite (Builder)</option>
-<option>Player: Fortnite (Fragger)</option>
+<option data-i18n="opt-coach-finals">Coach: The Finals</option>
+<option data-i18n="opt-coach-fortnite">Coach: Fortnite</option>
+<option data-i18n="opt-finals-heavy">Player: The Finals (Heavy)</option>
+<option data-i18n="opt-finals-medium">Player: The Finals (Medium)</option>
+<option data-i18n="opt-fn-builder">Player: Fortnite (Builder)</option>
+<option data-i18n="opt-fn-fragger">Player: Fortnite (Fragger)</option>
 </select>
 </div>
 <div class="form-group">
@@ -796,7 +900,45 @@ const translations = {
         "form-nation": "NATION / COUNTRY *",
         "form-check": "I confirm that I am at least 13 years old, own proper equipment, agree to carry the N1CO tag, and accept the Privacy Policy & Legal terms.",
         "form-btn": "✉ SEND APPLICATION E-MAIL",
-        "footer-rights": "© 2026 NICO GAMING ESPORTS · FOUNDER: NICOMINECITH · PARTNERS: TEAMPLAY.GG & GAMERTRANSFER · ALL RIGHTS RESERVED"
+        "footer-rights": "© 2026 NICO GAMING ESPORTS · FOUNDER: NICOMINECITH · PARTNERS: TEAMPLAY.GG & GAMERTRANSFER · ALL RIGHTS RESERVED",
+        "nav-instagram": "INSTAGRAM",
+        "pill-open": "OPEN",
+        "pill-owner": "OWNER",
+        "pill-pro": "PRO",
+        "slot-open": "SLOT OPEN",
+        "locked-owner": "LOCKED (OWNER)",
+        "tag-coach": "Coach",
+        "tag-finals": "The Finals",
+        "tag-fortnite": "Fortnite",
+        "tag-tactics": "Tactics",
+        "tag-strategy": "Strategy",
+        "tag-igl": "IGL",
+        "tag-captain": "Captain",
+        "tag-pro": "Pro Player",
+        "tag-heavy": "Heavy",
+        "tag-defense": "Defense",
+        "tag-medium": "Medium",
+        "tag-support": "Support",
+        "tag-builder": "Builder",
+        "tag-duos": "Duos",
+        "tag-fragger": "Fragger",
+        "tag-aim": "Mechanics",
+        "opt-coach-finals": "Coach: The Finals",
+        "opt-coach-fortnite": "Coach: Fortnite",
+        "opt-finals-heavy": "Player: The Finals (Heavy)",
+        "opt-finals-medium": "Player: The Finals (Medium)",
+        "opt-fn-builder": "Player: Fortnite (Builder)",
+        "opt-fn-fragger": "Player: Fortnite (Fragger)",
+        "insta-tag": "// SOCIAL FEED",
+        "insta-title": "INSTAGRAM",
+        "insta-desc": "Follow NICO GAMING on Instagram for roster updates, clips, highlight reels and behind-the-scenes content from The Finals & Fortnite squad.",
+        "insta-follow-btn": "📸 FOLLOW @NICOGAMINGESPORTS",
+        "insta-latest-post": "LATEST POST",
+        "insta-latest-reel": "LATEST REEL",
+        "insta-highlights": "MATCH HIGHLIGHTS",
+        "insta-roster": "ROSTER NEWS",
+        "insta-view": "VIEW ON INSTAGRAM →",
+        "insta-note": "// A live embedded feed needs a widget service linked to your Instagram account — send real post links and this can show actual previews instead of these cards."
     },
     de: {
         "nav-home": "HOME",
@@ -893,7 +1035,45 @@ const translations = {
         "form-nation": "NATION / LAND *",
         "form-check": "Ich bestätige, dass ich mindestens 13 Jahre alt bin, über ordentliches Equipment verfüge, den N1CO-Tag trage und die Datenschutz- & Rechtsbestimmungen akzeptiere.",
         "form-btn": "✉ BEWERBUNGS-E-MAIL SENDEN",
-        "footer-rights": "© 2026 NICO GAMING ESPORTS · GRÜNDER: NICOMINECITH · PARTNER: TEAMPLAY.GG & GAMERTRANSFER · ALLE RECHTE VORBEHALTEN"
+        "footer-rights": "© 2026 NICO GAMING ESPORTS · GRÜNDER: NICOMINECITH · PARTNER: TEAMPLAY.GG & GAMERTRANSFER · ALLE RECHTE VORBEHALTEN",
+        "nav-instagram": "INSTAGRAM",
+        "pill-open": "OFFEN",
+        "pill-owner": "OWNER",
+        "pill-pro": "PRO",
+        "slot-open": "SLOT OFFEN",
+        "locked-owner": "GESPERRT (OWNER)",
+        "tag-coach": "Coach",
+        "tag-finals": "The Finals",
+        "tag-fortnite": "Fortnite",
+        "tag-tactics": "Taktik",
+        "tag-strategy": "Strategie",
+        "tag-igl": "IGL",
+        "tag-captain": "Kapitän",
+        "tag-pro": "Profi-Spieler",
+        "tag-heavy": "Heavy",
+        "tag-defense": "Verteidigung",
+        "tag-medium": "Medium",
+        "tag-support": "Support",
+        "tag-builder": "Builder",
+        "tag-duos": "Duos",
+        "tag-fragger": "Fragger",
+        "tag-aim": "Mechanik",
+        "opt-coach-finals": "Coach: The Finals",
+        "opt-coach-fortnite": "Coach: Fortnite",
+        "opt-finals-heavy": "Spieler: The Finals (Heavy)",
+        "opt-finals-medium": "Spieler: The Finals (Medium)",
+        "opt-fn-builder": "Spieler: Fortnite (Builder)",
+        "opt-fn-fragger": "Spieler: Fortnite (Fragger)",
+        "insta-tag": "// SOCIAL FEED",
+        "insta-title": "INSTAGRAM",
+        "insta-desc": "Folge NICO GAMING auf Instagram für Roster-Updates, Clips, Highlight-Reels und Behind-the-Scenes-Content aus dem The Finals & Fortnite Kader.",
+        "insta-follow-btn": "📸 @NICOGAMINGESPORTS FOLGEN",
+        "insta-latest-post": "NEUESTER POST",
+        "insta-latest-reel": "NEUESTES REEL",
+        "insta-highlights": "MATCH-HIGHLIGHTS",
+        "insta-roster": "ROSTER-NEWS",
+        "insta-view": "AUF INSTAGRAM ANSEHEN →",
+        "insta-note": "// Ein live eingebetteter Feed benötigt einen mit deinem Instagram-Account verbundenen Widget-Dienst — schick echte Post-Links, dann können hier echte Vorschauen statt dieser Karten erscheinen."
     }
 };
 
