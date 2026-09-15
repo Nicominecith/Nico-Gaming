@@ -174,6 +174,36 @@ section{padding:5.5rem 1.5rem;position:relative;width:100%;max-width:1280px;marg
 .insta-card .insta-cta{font-family:'Orbitron';font-size:.6rem;color:#fff;letter-spacing:1px}
 .insta-follow-widget{margin-top:2rem;text-align:center;font-family:'Share Tech Mono';font-size:.65rem;color:rgba(212,212,220,.5);line-height:1.6}
 
+/* Instagram popup modal */
+.insta-modal-overlay{position:fixed;inset:0;background:rgba(3,3,5,.92);backdrop-filter:blur(8px);z-index:8000;display:flex;align-items:center;justify-content:center;padding:1.2rem;opacity:0;pointer-events:none;transition:opacity .3s ease}
+.insta-modal-overlay.open{opacity:1;pointer-events:auto}
+.insta-modal-box{background:var(--panel2);border:1px solid rgba(230,0,18,.4);border-radius:10px;width:100%;max-width:760px;max-height:88vh;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;position:relative;padding:1.3rem 1.3rem 1.8rem;box-shadow:0 25px 80px rgba(0,0,0,.7)}
+.insta-modal-top{display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;background:var(--panel2);padding-bottom:.8rem;margin-bottom:.4rem;z-index:2}
+.insta-modal-top h3{margin:0;font-size:1rem;color:#fff}
+.insta-modal-close{background:rgba(230,0,18,.15);border:1px solid rgba(230,0,18,.45);color:#fff;width:38px;height:38px;border-radius:50%;font-size:1.1rem;cursor:pointer;transition:all .3s;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.insta-modal-close:hover{background:var(--red);transform:rotate(90deg)}
+
+/* Elfsight-Widget innerhalb des Modals sauber skalieren */
+.insta-modal-box [class*="elfsight-app-"]{width:100%;min-height:340px}
+.insta-modal-loading{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.8rem;min-height:280px;font-family:'Share Tech Mono';font-size:.7rem;letter-spacing:1px;color:rgba(212,212,220,.55);text-align:center;padding:1.5rem}
+.insta-modal-spinner{width:34px;height:34px;border:3px solid rgba(230,0,18,.2);border-top-color:var(--red);border-radius:50%;animation:instaSpin .8s linear infinite}
+@keyframes instaSpin{to{transform:rotate(360deg)}}
+
+/* Handy (Smartphone): Vollbild-Popup */
+@media(max-width:600px){
+  .insta-modal-overlay{padding:0}
+  .insta-modal-box{max-width:100%;max-height:100dvh;height:100dvh;border-radius:0;padding:1rem 1rem 2rem}
+  .insta-modal-close{width:44px;height:44px;font-size:1.25rem}
+}
+/* Tablet (Hoch- & Querformat) */
+@media(min-width:601px) and (max-width:1024px){
+  .insta-modal-box{max-width:88vw;max-height:85vh}
+}
+/* PC / Desktop */
+@media(min-width:1025px){
+  .insta-modal-box{max-width:760px;max-height:82vh}
+}
+
 .contract-clause{background:var(--panel);border:1px solid rgba(230,0,18,.2);border-left:3px solid var(--red);padding:1.8rem;border-radius:6px;transition:all .3s}
 .contract-clause:hover{transform:translateY(-4px);box-shadow:0 10px 35px rgba(230,0,18,.15)}
 .clause-num{font-family:'Share Tech Mono';font-size:.65rem;color:var(--red);letter-spacing:2px}
@@ -241,7 +271,7 @@ footer{border-top:1px solid rgba(255,255,255,.08);background:#010102;padding:3.5
 <a href="#roster" onclick="toggleMenu()" data-i18n="nav-team">TEAM</a>
 <a href="#contract" onclick="toggleMenu()" data-i18n="nav-rules">RULES</a>
 <a href="#partners" onclick="toggleMenu()" data-i18n="nav-partners">PARTNERS</a>
-<a href="#instagram" onclick="toggleMenu()" data-i18n="nav-instagram">INSTAGRAM</a>
+<a href="#instagram" onclick="toggleMenu();openInstaModal();return false;" data-i18n="nav-instagram">INSTAGRAM</a>
 <a href="#sign" onclick="toggleMenu()" data-i18n="nav-join">JOIN</a>
 <button class="lang-btn" onclick="toggleLanguage()" id="mobileLangBtn" style="margin-top:1rem;padding:.5rem 1.2rem;font-size:.75rem">EN</button>
 </div>
@@ -256,7 +286,7 @@ footer{border-top:1px solid rgba(255,255,255,.08);background:#010102;padding:3.5
 <li><a href="#roster" data-i18n="nav-team">TEAM</a></li>
 <li><a href="#contract" data-i18n="nav-rules">RULES</a></li>
 <li><a href="#partners" data-i18n="nav-partners">PARTNERS</a></li>
-<li><a href="#instagram" data-i18n="nav-instagram">INSTAGRAM</a></li>
+<li><a href="#instagram" onclick="openInstaModal();return false;" data-i18n="nav-instagram">INSTAGRAM</a></li>
 <li><a href="#sign" style="color:var(--red)" data-i18n="nav-join">JOIN</a></li>
 </ul>
 <button class="lang-btn desktop-nav" onclick="toggleLanguage()" id="desktopLangBtn">EN</button>
@@ -652,8 +682,12 @@ footer{border-top:1px solid rgba(255,255,255,.08);background:#010102;padding:3.5
 <a href="https://www.instagram.com/nicogamingesports" target="_blank" rel="noopener" class="insta-btn" data-i18n="insta-follow-btn">📸 FOLLOW @NICOGAMINGESPORTS</a>
 </div>
 
-<!-- Elfsight Instagram Feed | Untitled Instagram Feed -->
-<div class="elfsight-app-fed41dfd-5d9d-4726-b367-157a4de211b1" data-elfsight-app-lazy></div>
+<div class="card reveal" style="padding:2.6rem;text-align:center">
+<div style="font-size:2.6rem;margin-bottom:1rem">📲</div>
+<h3 style="color:#fff;margin:0 0 .6rem;font-family:'Orbitron';font-size:1.1rem" data-i18n="insta-feed-title">LIVE FEED</h3>
+<p style="color:rgba(212,212,220,.7);margin:0 auto 1.6rem;max-width:420px" data-i18n="insta-feed-desc">Open the live feed in a popup window — latest posts, reels and stories from @nicogamingesports, without taking over the whole page.</p>
+<button onclick="openInstaModal()" class="btn-primary" style="margin:0 auto" data-i18n="insta-open-btn">📱 OPEN LIVE FEED</button>
+</div>
 </div>
 </section>
 
@@ -789,6 +823,21 @@ footer{border-top:1px solid rgba(255,255,255,.08);background:#010102;padding:3.5
 </div>
 </footer>
 
+<div class="insta-modal-overlay" id="instaModalOverlay" onclick="if(event.target===this)closeInstaModal()">
+<div class="insta-modal-box">
+<div class="insta-modal-top">
+<h3 data-i18n="insta-modal-title">📸 @NICOGAMINGESPORTS — LIVE FEED</h3>
+<button class="insta-modal-close" onclick="closeInstaModal()" aria-label="Close">✕</button>
+</div>
+<div class="insta-modal-loading" id="instaLoading">
+<div class="insta-modal-spinner"></div>
+<span data-i18n="insta-loading">Feed wird geladen …</span>
+</div>
+<!-- Elfsight Instagram Feed | Untitled Instagram Feed -->
+<div class="elfsight-app-fed41dfd-5d9d-4726-b367-157a4de211b1" id="instaWidget" data-elfsight-app-lazy style="display:none"></div>
+</div>
+</div>
+
 <script>
 const cursor = document.getElementById('cursor');
 const cursorDot = document.getElementById('cursor-dot');
@@ -803,6 +852,55 @@ function toggleMenu() {
     const menu = document.getElementById('mobileMenu');
     menu.classList.toggle('open');
 }
+
+let instaScrollY = 0;
+let instaWidgetRevealed = false;
+
+function openInstaModal() {
+    document.getElementById('instaModalOverlay').classList.add('open');
+
+    // Scroll der Hintergrundseite sicher sperren (funktioniert auch auf iOS Safari)
+    instaScrollY = window.scrollY || window.pageYOffset;
+    document.body.style.position = 'fixed';
+    document.body.style.top = -instaScrollY + 'px';
+    document.body.style.left = '0';
+    document.body.style.right = '0';
+    document.body.style.width = '100%';
+
+    // Elfsight-Widget erst beim ersten Öffnen sichtbar machen/anstoßen
+    const widget = document.getElementById('instaWidget');
+    const loading = document.getElementById('instaLoading');
+    if (widget) {
+        widget.style.display = '';
+        if (!instaWidgetRevealed) {
+            instaWidgetRevealed = true;
+            const observer = new MutationObserver(() => {
+                if (widget.children.length > 0) {
+                    if (loading) loading.style.display = 'none';
+                    observer.disconnect();
+                }
+            });
+            observer.observe(widget, { childList: true });
+            // Fallback: Ladeanzeige spätestens nach 8s ausblenden
+            setTimeout(() => { if (loading) loading.style.display = 'none'; }, 8000);
+        } else if (loading) {
+            loading.style.display = 'none';
+        }
+    }
+}
+
+function closeInstaModal() {
+    document.getElementById('instaModalOverlay').classList.remove('open');
+    document.body.style.position = '';
+    document.body.style.top = '';
+    document.body.style.left = '';
+    document.body.style.right = '';
+    document.body.style.width = '';
+    window.scrollTo(0, instaScrollY);
+}
+window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeInstaModal();
+});
 
 const translations = {
     en: {
@@ -938,7 +1036,12 @@ const translations = {
         "insta-highlights": "MATCH HIGHLIGHTS",
         "insta-roster": "ROSTER NEWS",
         "insta-view": "VIEW ON INSTAGRAM →",
-        "insta-note": "// A live embedded feed needs a widget service linked to your Instagram account — send real post links and this can show actual previews instead of these cards."
+        "insta-note": "// A live embedded feed needs a widget service linked to your Instagram account — send real post links and this can show actual previews instead of these cards.",
+        "insta-feed-title": "LIVE FEED",
+        "insta-feed-desc": "Open the live feed in a popup window — latest posts, reels and stories from @nicogamingesports, without taking over the whole page.",
+        "insta-open-btn": "📱 OPEN LIVE FEED",
+        "insta-modal-title": "📸 @NICOGAMINGESPORTS — LIVE FEED",
+        "insta-loading": "Loading feed …"
     },
     de: {
         "nav-home": "HOME",
@@ -1073,7 +1176,12 @@ const translations = {
         "insta-highlights": "MATCH-HIGHLIGHTS",
         "insta-roster": "ROSTER-NEWS",
         "insta-view": "AUF INSTAGRAM ANSEHEN →",
-        "insta-note": "// Ein live eingebetteter Feed benötigt einen mit deinem Instagram-Account verbundenen Widget-Dienst — schick echte Post-Links, dann können hier echte Vorschauen statt dieser Karten erscheinen."
+        "insta-note": "// Ein live eingebetteter Feed benötigt einen mit deinem Instagram-Account verbundenen Widget-Dienst — schick echte Post-Links, dann können hier echte Vorschauen statt dieser Karten erscheinen.",
+        "insta-feed-title": "LIVE FEED",
+        "insta-feed-desc": "Öffne den Live-Feed in einem Popup-Fenster — neueste Posts, Reels und Storys von @nicogamingesports, ohne dass die ganze Seite überladen wird.",
+        "insta-open-btn": "📱 LIVE FEED ÖFFNEN",
+        "insta-modal-title": "📸 @NICOGAMINGESPORTS — LIVE FEED",
+        "insta-loading": "Feed wird geladen …"
     }
 };
 
