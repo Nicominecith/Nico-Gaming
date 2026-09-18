@@ -48,6 +48,7 @@
 <script src="https://elfsightcdn.com/platform.js" async></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="image" href="https://nico-gaming.netlify.app/nico.png">
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Barlow+Condensed:wght@300;400;600;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 <style>
 :root{--red:#e60012;--red2:#ff2940;--dark:#030305;--panel:#0a0a0f;--panel2:#101017;--silver:#d4d4dc;--blue:#2d7dff;--green:#18d889;--teamplay:#ff5500}
@@ -268,6 +269,13 @@ footer{border-top:1px solid rgba(255,255,255,.08);background:#010102;padding:3.5
   section{padding:4rem 1rem}
   .hero-logo{width:120px;height:120px}
   nav{padding:0 1rem}
+}
+
+/* ============ PERFORMANCE: teure Blur-Effekte auf Handy/Tablet abschwächen ============ */
+@media(max-width:1024px){
+  nav{backdrop-filter:blur(8px)}
+  .orb-field span{filter:blur(32px)}
+  .orb-field span:nth-child(3){display:none}
 }
 
 /* ============ RESPONSIVE TUNING: TABLET (Hoch- & Querformat) ============ */
@@ -1590,31 +1598,65 @@ const observer = new IntersectionObserver((entries) => {
 
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-/* ================= SPLASH / BOOT SEQUENCE ================= */
+/* ================= SPLASH / BOOT SEQUENCE (echter Preloader) ================= */
 (function(){
     const word = "N1CO GAMING";
     const wrap = document.getElementById('splashWord');
     wrap.innerHTML = word.split('').map((c,i)=>`<span style="animation-delay:${i*45}ms">${c===' '?'&nbsp;':c}</span>`).join('');
-    window.addEventListener('load', () => {
-        setTimeout(() => document.getElementById('splash').classList.add('hide'), 900);
-    });
-    // Fallback in case load already fired
-    setTimeout(() => document.getElementById('splash').classList.add('hide'), 2600);
+
+    const splash = document.getElementById('splash');
+    const started = Date.now();
+    const MIN_SHOW = 1400; // Boot-Animation (Logo/Text/Balken) nicht abschneiden
+    const MAX_WAIT = 4000; // Sicherheits-Fallback bei langsamer Verbindung
+
+    function hideSplash(){
+        const wait = Math.max(0, MIN_SHOW - (Date.now() - started));
+        setTimeout(() => splash.classList.add('hide'), wait);
+    }
+
+    // Wichtige Assets (Logo, Web-Fonts) wirklich in den Browser-Cache laden,
+    // bevor der Splash ausgeblendet wird - statt nur zu warten/raten.
+    const imageUrls = [
+        'https://nico-gaming.netlify.app/nico.png'
+    ];
+    const imagePromises = imageUrls.map(src => new Promise(resolve => {
+        const img = new Image();
+        img.onload = resolve;
+        img.onerror = resolve; // ein fehlgeschlagenes Bild soll den Splash nicht ewig blockieren
+        img.src = src;
+    }));
+
+    const fontPromise = (window.document && document.fonts && document.fonts.load)
+        ? Promise.all([
+            document.fonts.load('900 1em Orbitron'),
+            document.fonts.load('700 1em "Barlow Condensed"'),
+            document.fonts.load('400 1em "Share Tech Mono"')
+          ]).catch(() => {}).then(() => (document.fonts.ready || Promise.resolve()))
+        : Promise.resolve();
+
+    Promise.race([
+        Promise.all([...imagePromises, fontPromise]),
+        new Promise(resolve => setTimeout(resolve, MAX_WAIT))
+    ]).then(hideSplash);
 })();
 
-/* ================= HERO PARTICLE FIELD ================= */
+/* ================= HERO PARTICLE FIELD (performance-optimiert) ================= */
 (function(){
     const canvas = document.getElementById('particle-canvas');
     if (!canvas) return;
     const pctx = canvas.getContext('2d');
     const home = document.getElementById('home');
     let particles = [];
+    let running = false;
+    let visible = true;
     function sizeCanvas(){
         canvas.width = home.offsetWidth;
         canvas.height = home.offsetHeight;
     }
     function makeParticles(){
-        const count = window.innerWidth < 700 ? 35 : 80;
+        // Weniger Partikel auf schwächeren/kleineren Geräten (Handy & Tablet)
+        const w = window.innerWidth;
+        const count = w < 700 ? 22 : (w <= 1024 ? 40 : 80);
         particles = Array.from({length: count}, () => ({
             x: Math.random() * canvas.width,
             y: Math.random() * canvas.height,
@@ -1626,7 +1668,10 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
     }
     sizeCanvas(); makeParticles();
     window.addEventListener('resize', () => { sizeCanvas(); makeParticles(); });
+    // Verbindungslinien sind der teuerste Teil (O(n^2)) - auf Touch-/kleinen Geräten weglassen
+    const drawLines = !window.matchMedia('(pointer:coarse)').matches && window.innerWidth > 1024;
     function loop(){
+        if (!running) return;
         pctx.clearRect(0,0,canvas.width,canvas.height);
         particles.forEach(p => {
             p.x += p.vx; p.y += p.vy;
@@ -1635,28 +1680,37 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
             pctx.beginPath();
             pctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
             pctx.fillStyle = `rgba(230,0,18,${p.a})`;
-            pctx.shadowColor = '#e60012';
-            pctx.shadowBlur = 6;
             pctx.fill();
         });
-        // connective lines between near particles
-        for (let i=0;i<particles.length;i++){
-            for (let j=i+1;j<particles.length;j++){
-                const dx = particles[i].x-particles[j].x, dy = particles[i].y-particles[j].y;
-                const dist = Math.hypot(dx,dy);
-                if (dist < 110){
-                    pctx.strokeStyle = `rgba(230,0,18,${.12 * (1-dist/110)})`;
-                    pctx.lineWidth = 1;
-                    pctx.beginPath();
-                    pctx.moveTo(particles[i].x, particles[i].y);
-                    pctx.lineTo(particles[j].x, particles[j].y);
-                    pctx.stroke();
+        if (drawLines){
+            for (let i=0;i<particles.length;i++){
+                for (let j=i+1;j<particles.length;j++){
+                    const dx = particles[i].x-particles[j].x, dy = particles[i].y-particles[j].y;
+                    const dist = Math.hypot(dx,dy);
+                    if (dist < 110){
+                        pctx.strokeStyle = `rgba(230,0,18,${.12 * (1-dist/110)})`;
+                        pctx.lineWidth = 1;
+                        pctx.beginPath();
+                        pctx.moveTo(particles[i].x, particles[i].y);
+                        pctx.lineTo(particles[j].x, particles[j].y);
+                        pctx.stroke();
+                    }
                 }
             }
         }
         requestAnimationFrame(loop);
     }
-    loop();
+    function start(){ if (running) return; running = true; requestAnimationFrame(loop); }
+    function stop(){ running = false; }
+    // Nur animieren, solange der Hero-Bereich sichtbar ist UND der Tab aktiv ist
+    new IntersectionObserver((entries) => {
+        visible = entries[0].isIntersecting;
+        if (visible && !document.hidden) start(); else stop();
+    }, { threshold: 0 }).observe(home);
+    document.addEventListener('visibilitychange', () => {
+        if (document.hidden) stop(); else if (visible) start();
+    });
+    start();
 })();
 
 /* ================= CURSOR SPARK TRAIL ================= */
@@ -1749,6 +1803,7 @@ const cctx = confettiCanvas.getContext('2d');
 function fitConfetti(){ confettiCanvas.width = innerWidth; confettiCanvas.height = innerHeight; }
 fitConfetti(); window.addEventListener('resize', fitConfetti);
 let confettiPieces = [];
+let confettiRunning = false;
 function burstConfetti(x, y, n=26){
     const colors = ['#e60012','#ff2940','#2d7dff','#18d889','#ffffff'];
     for (let i=0;i<n;i++){
@@ -1764,6 +1819,7 @@ function burstConfetti(x, y, n=26){
             life: 60
         });
     }
+    if (!confettiRunning){ confettiRunning = true; requestAnimationFrame(confettiLoop); }
 }
 function confettiLoop(){
     cctx.clearRect(0,0,confettiCanvas.width,confettiCanvas.height);
@@ -1778,9 +1834,13 @@ function confettiLoop(){
         cctx.restore();
     });
     confettiPieces = confettiPieces.filter(p => p.life > 0);
-    requestAnimationFrame(confettiLoop);
+    // Loop stoppen statt für immer im Leerlauf zu zeichnen, sobald nichts mehr da ist
+    if (confettiPieces.length > 0){
+        requestAnimationFrame(confettiLoop);
+    } else {
+        confettiRunning = false;
+    }
 }
-confettiLoop();
 
 /* ================= SCREEN SHAKE HOOK for aim trainer hits ================= */
 function shakeAimCard(){
@@ -1844,7 +1904,7 @@ if (/iPhone|iPad|iPod/.test(navigator.userAgent) && !window.navigator.standalone
 
 /* ================= 300× PASS: EXTRA FX ================= */
 
-/* ---- Matrix glyph rain behind hero ---- */
+/* ---- Matrix glyph rain behind hero (performance-optimiert) ---- */
 (function(){
     const mCanvas = document.getElementById('matrix-canvas');
     if (!mCanvas) return;
@@ -1852,28 +1912,44 @@ if (/iPhone|iPad|iPod/.test(navigator.userAgent) && !window.navigator.standalone
     const home = document.getElementById('home');
     const glyphs = 'N1COGAMING◆ξΞΨФ01フォートナイト';
     let cols, drops;
+    let running = false;
+    let visible = true;
     function size(){
         mCanvas.width = home.offsetWidth;
         mCanvas.height = home.offsetHeight;
-        cols = Math.floor(mCanvas.width / 22);
+        // Auf Handy/Tablet gröberes Raster = weniger Zeichen pro Frame
+        const step = window.innerWidth <= 1024 ? 32 : 22;
+        cols = Math.floor(mCanvas.width / step);
         drops = Array.from({length: cols}, () => Math.random() * -50);
+        mCanvas.dataset.step = step;
     }
     size();
     window.addEventListener('resize', size);
     function draw(){
+        if (!running) return;
+        const step = +mCanvas.dataset.step;
         mctx.fillStyle = 'rgba(3,3,5,0.08)';
         mctx.fillRect(0,0,mCanvas.width,mCanvas.height);
         mctx.font = '15px monospace';
         for (let i=0;i<cols;i++){
             const ch = glyphs[Math.floor(Math.random()*glyphs.length)];
             mctx.fillStyle = Math.random() > .95 ? '#fff' : 'rgba(230,0,18,0.65)';
-            mctx.fillText(ch, i*22, drops[i]*22);
-            if (drops[i]*22 > mCanvas.height && Math.random() > .975) drops[i] = 0;
+            mctx.fillText(ch, i*step, drops[i]*step);
+            if (drops[i]*step > mCanvas.height && Math.random() > .975) drops[i] = 0;
             drops[i]++;
         }
         requestAnimationFrame(draw);
     }
-    draw();
+    function start(){ if (running) return; running = true; requestAnimationFrame(draw); }
+    function stop(){ running = false; }
+    new IntersectionObserver((entries) => {
+        visible = entries[0].isIntersecting;
+        if (visible && !document.hidden) start(); else stop();
+    }, { threshold: 0 }).observe(home);
+    document.addEventListener('visibilitychange', () => {
+        if (document.hidden) stop(); else if (visible) start();
+    });
+    start();
 })();
 
 /* ---- Text scramble/decode effect for section titles on reveal ---- */
