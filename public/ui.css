@@ -93,3 +93,17 @@ input,select,textarea{color-scheme:dark}
 .when{color:#fff;font:900 1.15rem Orbitron,sans-serif;margin:.3rem 0 0}
 .past{opacity:.6}
 .hint{color:var(--mute);margin:0}
+
+/* ===== Handy-Fix: kein seitliches Wackeln ===== */
+html,body{max-width:100%;overflow-x:clip}
+.hero h1{font-size:clamp(1.8rem,8.4vw,5.2rem);overflow-wrap:anywhere}
+.hp{left:0;width:1px;height:1px;opacity:0;pointer-events:none}
+.person>div,.card>*{min-width:0}
+.card h3,.when{overflow-wrap:anywhere}
+@media(max-width:520px){
+  header .wrap{gap:.6rem}
+  .brand{font-size:.85rem}.brand img{width:30px;height:30px}
+  header .btn{padding-inline:.9rem;font-size:.66rem;min-height:40px}
+  .lang{padding-inline:.6rem}
+  .btns .btn{flex:1 1 100%}
+}
