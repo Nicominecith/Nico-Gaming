@@ -36,7 +36,7 @@ function draw(){
   for(const x of data.applications){
     const c=el('article',null,'card');c.append(el('h3',x.nick),el('p',x.role,'role'));
     const m=el('dl',null,'meta'),ml=el('a',x.email);ml.href='mailto:'+x.email;
-    for(const [k,v] of [['Name',x.name],['E-Mail',ml],['Alter',x.age],['Nation',x.nation],['Discord',x.discord||'–'],['Eingang',new Date(x.at).toLocaleString('de-DE')]]){const d=el('dd');d.append(v instanceof Node?v:document.createTextNode(v));m.append(el('dt',k),d)}
+    for(const [k,v] of [['Name',x.name],['E-Mail',ml],['Alter',x.age],['Nation',x.nation],['Discord',x.discord||'–'],['Eingang',new Date(x.at).toLocaleString('de-DE')],['Mails',x.mail?((x.mail.admin&&x.mail.confirm)?'✔ beide gesendet':'✘ Fehler: '+(x.mail.error||'nicht gesendet')):'–']]){const d=el('dd');d.append(v instanceof Node?v:document.createTextNode(v));m.append(el('dt',k),d)}
     c.append(m,del('application',x.id,'Bewerbung von '+x.nick));g.append(c);
   }
   a.append(g);

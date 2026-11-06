@@ -107,3 +107,4 @@ html,body{max-width:100%;overflow-x:clip}
   .lang{padding-inline:.6rem}
   .btns .btn{flex:1 1 100%}
 }
+#status.ok{font-size:1.15rem;line-height:1.4}

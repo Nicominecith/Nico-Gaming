@@ -24,20 +24,27 @@ export default async (req) => {
   const rows = [["Name", f.name], ["Ingame-Nick", f.nick], ["E-Mail", f.email], ["Alter", f.age], ["Nation", f.nation], ["Bewerbung als", f.role], ["Discord", f.discord || "–"], ["Eingegangen", new Date(record.at).toLocaleString("de-DE", { timeZone: "Europe/Berlin" })]];
   const attachments = [{ filename: `bewerbung-${f.nick.toLowerCase().replace(/[^a-z0-9]+/g, "-").slice(0, 30) || "spieler"}.html`, contentType: "text/html" }];
 
-  let mailed = true;
+  const { GMAIL_USER, GMAIL_APP_PASSWORD, MAIL_TO } = process.env;
+  const status = { admin: false, confirm: false, error: "" };
   try {
-    const { GMAIL_USER, GMAIL_APP_PASSWORD, MAIL_TO } = process.env;
-    const tx = nodemailer.createTransport({ service: "gmail", auth: { user: GMAIL_USER, pass: GMAIL_APP_PASSWORD } });
+    if (!GMAIL_USER || !GMAIL_APP_PASSWORD) throw new Error("GMAIL_USER / GMAIL_APP_PASSWORD fehlen in Netlify");
+    const tx = nodemailer.createTransport({ service: "gmail", auth: { user: GMAIL_USER, pass: GMAIL_APP_PASSWORD.replace(/\s/g, "") } });
     const from = `NICO GAMING <${GMAIL_USER}>`;
     const sheet = render({ title: "Neue Bewerbung", intro: `${f.nick} bewirbt sich als ${f.role}.`, rows, cta: { url: `mailto:${f.email}`, text: "ANTWORTEN" }, note: "Automatisch erzeugt von der NICO GAMING Website." });
-    const confirm = render({ title: "Bewerbung erhalten", intro: `Hey ${f.nick}, danke für deine Bewerbung! Wir melden uns so schnell wie möglich bei dir.`, rows, cta: { url: SITE, text: "ZUR WEBSITE" }, note: "Du erhältst diese E-Mail, weil du dich bei NICO GAMING beworben hast." });
-    await tx.sendMail({ from, to: MAIL_TO || GMAIL_USER, replyTo: f.email, subject: `Neue Bewerbung: ${f.nick} (${f.role})`, html: sheet, attachments: [{ ...attachments[0], content: sheet }] });
-    await tx.sendMail({ from, to: f.email, subject: "Deine Bewerbung bei NICO GAMING", html: confirm, attachments: [{ ...attachments[0], filename: "deine-bewerbung.html", content: confirm }] });
+    const confirm = render({ title: "Bewerbung erhalten", intro: `Hey ${f.nick}, deine Bewerbung ist erfolgreich bei uns eingegangen! Wir melden uns so schnell wie möglich bei dir.`, rows, cta: { url: SITE, text: "ZUR WEBSITE" }, note: "Du erhältst diese E-Mail, weil du dich bei NICO GAMING beworben hast." });
+    const [a, c] = await Promise.allSettled([
+      tx.sendMail({ from, to: MAIL_TO || GMAIL_USER, replyTo: f.email, subject: `Neue Bewerbung: ${f.nick} (${f.role})`, html: sheet, attachments: [{ ...attachments[0], content: sheet }] }),
+      tx.sendMail({ from, to: f.email, subject: "Deine Bewerbung bei NICO GAMING ist eingegangen", html: confirm, attachments: [{ ...attachments[0], filename: "deine-bewerbung.html", content: confirm }] }),
+    ]);
+    status.admin = a.status === "fulfilled";
+    status.confirm = c.status === "fulfilled";
+    status.error = [a, c].filter((x) => x.status === "rejected").map((x) => x.reason?.message).join(" | ");
   } catch (err) {
-    mailed = false;
-    console.error("Mailversand fehlgeschlagen:", err.message); // Bewerbung ist trotzdem in Blobs gespeichert
+    status.error = err.message;
   }
-  return json({ ok: true, mailed });
+  if (status.error) console.error("Mailversand fehlgeschlagen:", status.error);
+  await getStore("applications").setJSON(id, { ...record, mail: status }); // Mail-Status für die Admin-Seite
+  return json({ ok: true, mailed: status.confirm });
 };
 
 export const config = { path: "/api/apply" };
