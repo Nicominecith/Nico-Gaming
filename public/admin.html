@@ -1,0 +1,64 @@
+<!DOCTYPE html><html lang="de"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="robots" content="noindex,nofollow"><meta name="theme-color" content="#07070a"><link rel="icon" href="/nico.png"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;700&family=Orbitron:wght@700;900&display=swap" rel="stylesheet"><link rel="stylesheet" href="/ui.css"><title>Admin | NICO GAMING</title></head>
+<body><main class="wrap">
+<form id="login" class="login"><h1><img src="/nico.png" alt="">NICO GAMING Admin</h1>
+<input id="pw" type="password" placeholder="Passwort" autocomplete="current-password" required aria-label="Passwort">
+<button class="btn" type="submit">Anmelden</button><p class="err" id="lerr" role="alert"></p></form>
+
+<div id="panel" hidden>
+<div class="bar"><h1>Admin</h1><button class="btn ghost sm" id="reload" type="button">Neu laden</button><button class="btn ghost sm" id="logout" type="button">Abmelden</button></div>
+<div class="tabs" role="tablist"><button class="tab" role="tab" data-tab="apps" aria-selected="true">Bewerbungen <span id="ac"></span></button><button class="tab" role="tab" data-tab="tours" aria-selected="false">Turniere <span id="tc"></span></button></div>
+
+<div id="apps"></div>
+
+<div id="tours" class="cols" hidden>
+<form id="tform" class="card stack"><h3>Neues Turnier</h3>
+<div><label for="title">Titel *</label><input id="title" name="title" required maxlength="100" placeholder="z. B. Cashout Cup – Runde 1"></div>
+<div class="row"><div><label for="game">Game</label><select id="game" name="game"><option>The Finals</option><option>Fortnite</option></select></div>
+<div><label for="when">Datum &amp; Uhrzeit *</label><input id="when" name="when" type="datetime-local" required></div></div>
+<div><label for="location">Wo? *</label><input id="location" name="location" required maxlength="200" placeholder="Online / Discord-Lobby / Ort"></div>
+<div><label for="opponent">Gegner</label><input id="opponent" name="opponent" maxlength="100"></div>
+<div><label for="notes">Hinweise</label><textarea id="notes" name="notes" maxlength="500" placeholder="Treffpunkt, Lobby-Code, Ablauf …"></textarea></div>
+<div><label>Wer spielt mit? *</label><div class="chips" id="plist"></div></div>
+<button class="btn" type="submit">Turnier speichern</button><p class="err" id="terr" role="alert"></p></form>
+<div id="tlist" class="stack"></div>
+</div>
+</div></main>
+<script>
+const $=s=>document.querySelector(s);const el=(t,x,c)=>{const e=document.createElement(t);if(x!=null)e.textContent=x;if(c)e.className=c;return e};const fmt=t=>new Date(t).toLocaleString("de-DE",{dateStyle:"full",timeStyle:"short"})+" Uhr";
+let pw=sessionStorage.getItem('pw'),data;
+const api=(m='GET',q='',b)=>fetch('/api/admin'+q,{method:m,headers:{authorization:'Bearer '+pw,...(b&&{'content-type':'application/json'})},body:b&&JSON.stringify(b)});
+async function load(){const r=await api();const j=await r.json().catch(()=>({}));if(!r.ok)throw new Error(j.error||'Fehler');data=j;sessionStorage.setItem('pw',pw);$('#login').hidden=true;$('#panel').hidden=false;draw()}
+const del=(kind,id,label)=>{const b=el('button','Löschen','btn ghost sm');b.type='button';b.onclick=async()=>{if(!confirm(label+' wirklich löschen?'))return;await api('DELETE','?kind='+kind+'&id='+encodeURIComponent(id));load()};return b};
+function draw(){
+  $('#ac').textContent='('+data.applications.length+')';$('#tc').textContent='('+data.tournaments.length+')';
+  const a=$('#apps');a.replaceChildren();const g=el('div','','grid');
+  if(!data.applications.length)a.append(el('p','Noch keine Bewerbungen.','hint'));
+  for(const x of data.applications){
+    const c=el('article',null,'card');c.append(el('h3',x.nick),el('p',x.role,'role'));
+    const m=el('dl',null,'meta'),ml=el('a',x.email);ml.href='mailto:'+x.email;
+    for(const [k,v] of [['Name',x.name],['E-Mail',ml],['Alter',x.age],['Nation',x.nation],['Discord',x.discord||'–'],['Eingang',new Date(x.at).toLocaleString('de-DE')]]){const d=el('dd');d.append(v instanceof Node?v:document.createTextNode(v));m.append(el('dt',k),d)}
+    c.append(m,del('application',x.id,'Bewerbung von '+x.nick));g.append(c);
+  }
+  a.append(g);
+  const pl=$('#plist');pl.replaceChildren();
+  if(!data.players.length)pl.append(el('p','Noch keine Spieler. In Netlify die Variable PLAYERS setzen.','hint'));
+  for(const p of data.players){const l=el('label',null,'chip'),i=el('input');i.type='checkbox';i.value=p;l.append(i,document.createTextNode(p));pl.append(l)}
+  const tl=$('#tlist');tl.replaceChildren();
+  if(!data.tournaments.length)tl.append(el('p','Noch keine Turniere eingetragen.','hint'));
+  for(const t of data.tournaments){
+    const c=el('article',null,'card');c.append(el('h3',t.title),el('p',t.game,'role'),el('p',fmt(t.when),'when'));
+    const m=el('dl',null,'meta');
+    for(const [k,v] of [['Wo',t.location],['Gegner',t.opponent||'–'],['Spieler',t.players.join(', ')],['Hinweise',t.notes||'–']])m.append(el('dt',k),el('dd',v));
+    c.append(m,del('tournament',t.id,'Turnier „'+t.title+'“'));tl.append(c);
+  }
+}
+document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tab').forEach(x=>x.setAttribute('aria-selected',x===b));$('#apps').hidden=b.dataset.tab!=='apps';$('#tours').hidden=b.dataset.tab!=='tours'});
+$('#tform').addEventListener('submit',async e=>{e.preventDefault();const f=e.target;$('#terr').textContent='';
+  const b=Object.fromEntries(new FormData(f));b.players=[...f.querySelectorAll('#plist input:checked')].map(i=>i.value);
+  const r=await api('POST','',b),j=await r.json().catch(()=>({}));
+  if(!r.ok){$('#terr').textContent=j.error||'Fehler';return}f.reset();load()});
+$('#login').addEventListener('submit',e=>{e.preventDefault();$('#lerr').textContent='';pw=$('#pw').value;load().catch(x=>$('#lerr').textContent=x.message)});
+$('#reload').onclick=()=>load().catch(()=>location.reload());
+$('#logout').onclick=()=>{sessionStorage.removeItem('pw');location.reload()};
+if(pw)load().catch(()=>sessionStorage.removeItem('pw'));
+</script></body></html>
