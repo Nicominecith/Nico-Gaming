@@ -10,11 +10,19 @@ export default async (req, context) => {
   if (r === "locked") return json({ error: "Zu viele Versuche. Bitte 15 Minuten warten." }, 429);
   if (r !== "ok") return json({ error: "Benutzername oder Passwort falsch." }, 401);
 
+  const av = getStore("avatars");
+  if (b.image !== undefined) {
+    if (b.image === null) await av.delete(user);
+    else if (typeof b.image === "string" && b.image.length <= 150000 && /^data:image\/jpeg;base64,\/9j\/[A-Za-z0-9+\/=]+$/.test(b.image)) await av.set(user, b.image);
+    else return json({ error: "Bild ungültig oder zu groß." }, 400);
+  }
+  const avatar = await av.get(user);
+
   const mine = (await all(getStore("tournaments")))
     .filter((t) => t.players?.includes(user))
     .sort((a, c) => a.when.localeCompare(c.when))
     .map((t) => ({ id: t.id, title: t.title, game: t.game, when: t.when, location: t.location, opponent: t.opponent, notes: t.notes, mates: t.players.filter((p) => p !== user) }));
-  return json({ user, tournaments: mine });
+  return json({ user, avatar, tournaments: mine });
 };
 
 export const config = { path: "/api/player" };

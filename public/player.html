@@ -8,6 +8,7 @@
 
 <div id="panel" hidden>
 <div class="bar"><h1 id="hello"></h1><button class="btn ghost sm" id="reload" type="button">Neu laden</button><button class="btn ghost sm" id="logout" type="button">Abmelden</button></div>
+<div class="card me"><div id="avwrap"></div><div class="stack"><div class="chips"><button class="btn sm" id="avbtn" type="button">Bild ändern</button><button class="btn ghost sm" id="avdel" type="button" hidden>Bild entfernen</button></div><input id="avfile" type="file" accept="image/*" hidden><p class="hint" id="avmsg" role="status">Wird quadratisch zugeschnitten. Nur du und N1CO sehen dein Bild – unpassende Bilder löscht N1CO.</p></div></div>
 <div id="next"></div>
 <h2 class="h2" id="moreh" style="margin:2rem 0 1rem" hidden>Weitere Turniere</h2><div id="more" class="grid"></div>
 <h2 class="h2" id="pasth" style="margin:2rem 0 1rem" hidden>Vergangen</h2><div id="past" class="grid"></div>
@@ -26,11 +27,14 @@ function tCard(t,cls){
   if(t.notes)m.append(el('dt','Hinweise'),el('dd',t.notes));
   c.append(m);return c;
 }
-async function load(){
-  const r=await fetch('/api/player',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(cred)});
+async function load(extra){
+  const r=await fetch('/api/player',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({...cred,...extra})});
   const j=await r.json().catch(()=>({}));if(!r.ok)throw new Error(j.error||'Fehler');
   sessionStorage.setItem('cred',JSON.stringify(cred));$('#login').hidden=true;$('#panel').hidden=false;
   $('#hello').textContent='Hi '+j.user.toUpperCase();
+  const w=$('#avwrap');w.replaceChildren();
+  if(j.avatar){const i=el('img',null,'av');i.src=j.avatar;i.alt='Dein Bild';w.append(i)}else w.append(el('div',j.user[0].toUpperCase(),'av'));
+  $('#avdel').hidden=!j.avatar;
   const up=j.tournaments.filter(t=>t.when>=berlin),old=j.tournaments.filter(t=>t.when<berlin).reverse();
   const n=$('#next');n.replaceChildren();
   if(up.length){const h=el('h2','Dein nächstes Turnier','h2');h.style.marginBottom='1rem';n.append(h,tCard(up[0],'next'))}
@@ -40,5 +44,15 @@ async function load(){
 $('#login').addEventListener('submit',e=>{e.preventDefault();$('#lerr').textContent='';cred={user:$('#user').value,password:$('#pw').value};load().catch(x=>$('#lerr').textContent=x.message)});
 $('#reload').onclick=()=>load().catch(()=>location.reload());
 $('#logout').onclick=()=>{sessionStorage.removeItem('cred');location.reload()};
+$('#avbtn').onclick=()=>$('#avfile').click();
+$('#avfile').onchange=async e=>{
+  const f=e.target.files[0];e.target.value='';if(!f)return;const m=$('#avmsg');m.textContent='Wird hochgeladen …';
+  try{
+    const bmp=await createImageBitmap(f),s=Math.min(bmp.width,bmp.height),c=document.createElement('canvas');c.width=c.height=256;
+    c.getContext('2d').drawImage(bmp,(bmp.width-s)/2,(bmp.height-s)/2,s,s,0,0,256,256);
+    await load({image:c.toDataURL('image/jpeg',.82)});m.textContent='✔ Bild gespeichert.';
+  }catch(x){m.textContent='Das hat nicht geklappt: '+(x.message||'Bild konnte nicht gelesen werden.')}
+};
+$('#avdel').onclick=async()=>{if(confirm('Dein Bild wirklich entfernen?'))await load({image:null}).catch(()=>{})};
 if(cred)load().catch(()=>sessionStorage.removeItem('cred'));
 </script></body></html>

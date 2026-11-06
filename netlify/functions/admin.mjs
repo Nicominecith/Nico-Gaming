@@ -16,7 +16,7 @@ export default async (req, context) => {
 
   if (req.method === "DELETE") {
     const q = new URL(req.url).searchParams, id = q.get("id");
-    if (id) await (q.get("kind") === "tournament" ? tours : apps).delete(id);
+    if (id) await ({ tournament: tours, avatar: getStore("avatars") }[q.get("kind")] || apps).delete(id);
     return json({ ok: true });
   }
   if (req.method === "POST") {
@@ -28,10 +28,13 @@ export default async (req, context) => {
     await tours.setJSON(t.id, t);
     return json({ ok: true });
   }
+  const pl = [...players().keys()], av = getStore("avatars");
+  const avatars = Object.fromEntries((await Promise.all(pl.map(async (u) => [u, await av.get(u)]))).filter(([, v]) => v));
   return json({
     applications: (await all(apps)).sort((a, b) => b.at.localeCompare(a.at)),
     tournaments: (await all(tours)).sort((a, b) => a.when.localeCompare(b.when)),
-    players: [...players().keys()],
+    players: pl,
+    avatars,
   });
 };
 

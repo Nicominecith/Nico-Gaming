@@ -6,9 +6,9 @@
 
 <div id="panel" hidden>
 <div class="bar"><h1>Admin</h1><button class="btn ghost sm" id="reload" type="button">Neu laden</button><button class="btn ghost sm" id="logout" type="button">Abmelden</button></div>
-<div class="tabs" role="tablist"><button class="tab" role="tab" data-tab="apps" aria-selected="true">Bewerbungen <span id="ac"></span></button><button class="tab" role="tab" data-tab="tours" aria-selected="false">Turniere <span id="tc"></span></button></div>
+<div class="tabs" role="tablist"><button class="tab" role="tab" data-tab="apps" aria-selected="true">Bewerbungen <span id="ac"></span></button><button class="tab" role="tab" data-tab="tours" aria-selected="false">Turniere <span id="tc"></span></button><button class="tab" role="tab" data-tab="plr" aria-selected="false">Spieler</button></div>
 
-<div id="apps"></div>
+<div id="apps"></div><div id="plr" hidden></div>
 
 <div id="tours" class="cols" hidden>
 <form id="tform" class="card stack"><h3>Neues Turnier</h3>
@@ -43,6 +43,16 @@ function draw(){
   const pl=$('#plist');pl.replaceChildren();
   if(!data.players.length)pl.append(el('p','Noch keine Spieler. In Netlify die Variable PLAYERS setzen.','hint'));
   for(const p of data.players){const l=el('label',null,'chip'),i=el('input');i.type='checkbox';i.value=p;l.append(i,document.createTextNode(p));pl.append(l)}
+  const pp=$('#plr');pp.replaceChildren();const gp=el('div','','grid');
+  if(!data.players.length)pp.append(el('p','Noch keine Spieler. In Netlify die Variable PLAYERS setzen.','hint'));
+  for(const p of data.players){
+    const c=el('article',null,'card person'),a=data.avatars[p];let im;
+    if(a){im=el('img',null,'av');im.src=a;im.alt=p}else im=el('div',p[0].toUpperCase(),'av');
+    const d=el('div');d.append(el('h3',p),el('p',a?'Hat ein Profilbild':'Kein Profilbild','role'));
+    if(a)d.append(del('avatar',p,'Das Profilbild von '+p));
+    c.append(im,d);gp.append(c);
+  }
+  pp.append(gp);
   const tl=$('#tlist');tl.replaceChildren();
   if(!data.tournaments.length)tl.append(el('p','Noch keine Turniere eingetragen.','hint'));
   for(const t of data.tournaments){
@@ -52,7 +62,7 @@ function draw(){
     c.append(m,del('tournament',t.id,'Turnier „'+t.title+'“'));tl.append(c);
   }
 }
-document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tab').forEach(x=>x.setAttribute('aria-selected',x===b));$('#apps').hidden=b.dataset.tab!=='apps';$('#tours').hidden=b.dataset.tab!=='tours'});
+document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tab').forEach(x=>x.setAttribute('aria-selected',x===b));['apps','tours','plr'].forEach(id=>$('#'+id).hidden=b.dataset.tab!==id)});
 $('#tform').addEventListener('submit',async e=>{e.preventDefault();const f=e.target;$('#terr').textContent='';
   const b=Object.fromEntries(new FormData(f));b.players=[...f.querySelectorAll('#plist input:checked')].map(i=>i.value);
   const r=await api('POST','',b),j=await r.json().catch(()=>({}));

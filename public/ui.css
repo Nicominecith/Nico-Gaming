@@ -108,3 +108,7 @@ html,body{max-width:100%;overflow-x:clip}
   .btns .btn{flex:1 1 100%}
 }
 #status.ok{font-size:1.15rem;line-height:1.4}
+
+/* ===== Profilbilder ===== */
+.av,.person .av{width:88px;height:88px;flex:none;border-radius:50%;border:2px solid var(--red);object-fit:cover;background:rgba(230,0,18,.1);display:grid;place-items:center;font:900 1.8rem Orbitron,sans-serif;color:var(--red);overflow:hidden}
+.card.me{display:flex;gap:1.2rem;align-items:center;flex-wrap:wrap;margin-bottom:1.5rem}
