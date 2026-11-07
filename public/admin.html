@@ -6,9 +6,18 @@
 
 <div id="panel" hidden>
 <div class="bar"><h1>Admin</h1><button class="btn ghost sm" id="reload" type="button">Neu laden</button><button class="btn ghost sm" id="logout" type="button">Abmelden</button></div>
-<div class="tabs" role="tablist"><button class="tab" role="tab" data-tab="apps" aria-selected="true">Bewerbungen <span id="ac"></span></button><button class="tab" role="tab" data-tab="tours" aria-selected="false">Turniere <span id="tc"></span></button><button class="tab" role="tab" data-tab="plr" aria-selected="false">Spieler</button></div>
+<div class="tabs" role="tablist"><button class="tab" role="tab" data-tab="apps" aria-selected="true">Bewerbungen <span id="ac"></span></button><button class="tab" role="tab" data-tab="news" aria-selected="false">News <span id="nc"></span></button><button class="tab" role="tab" data-tab="tours" aria-selected="false">Turniere <span id="tc"></span></button><button class="tab" role="tab" data-tab="plr" aria-selected="false">Spieler</button><button class="tab" role="tab" data-tab="clips" aria-selected="false">Clips <span id="cc"></span></button></div>
 
 <div id="apps"></div><div id="plr" hidden></div>
+
+<div id="news" class="cols" hidden>
+<form id="nform" class="card stack"><h3>Neue News</h3>
+<div><label for="ntitle">Titel *</label><input id="ntitle" name="title" required maxlength="120"></div>
+<div><label for="nbody">Text *</label><textarea id="nbody" name="body" required maxlength="2000" rows="6"></textarea></div>
+<label class="chip"><input type="checkbox" name="pinned">Oben anpinnen</label>
+<button class="btn" type="submit">Veröffentlichen</button><p class="err" id="nerr" role="alert"></p></form>
+<div id="nlist" class="stack"></div>
+</div>
 
 <div id="tours" class="cols" hidden>
 <form id="tform" class="card stack"><h3>Neues Turnier</h3>
@@ -17,20 +26,33 @@
 <div><label for="when">Datum &amp; Uhrzeit *</label><input id="when" name="when" type="datetime-local" required></div></div>
 <div><label for="location">Wo? *</label><input id="location" name="location" required maxlength="200" placeholder="Online / Discord-Lobby / Ort"></div>
 <div><label for="opponent">Gegner</label><input id="opponent" name="opponent" maxlength="100"></div>
-<div><label for="notes">Hinweise</label><textarea id="notes" name="notes" maxlength="500" placeholder="Treffpunkt, Lobby-Code, Ablauf …"></textarea></div>
+<div><label for="notes">Hinweise (nur für Spieler, nie öffentlich)</label><textarea id="notes" name="notes" maxlength="500" placeholder="Treffpunkt, Lobby-Code, Ablauf …"></textarea></div>
 <div><label>Wer spielt mit? *</label><div class="chips" id="plist"></div></div>
+<label class="chip"><input type="checkbox" name="pub" checked>Öffentlich im Turnierkalender zeigen</label>
 <button class="btn" type="submit">Turnier speichern</button><p class="err" id="terr" role="alert"></p></form>
 <div id="tlist" class="stack"></div>
+</div>
+
+<div id="clips" class="cols" hidden>
+<form id="cform" class="card stack"><h3>Neuer Clip / neues Video</h3>
+<div><label for="ctitle">Titel *</label><input id="ctitle" name="title" required maxlength="100"></div>
+<div><label for="curl">Link *</label><input id="curl" name="url" type="url" required inputmode="url" placeholder="YouTube-Video/Short, Twitch-Clip oder Twitch-Video"></div>
+<button class="btn" type="submit">Hinzufügen</button><p class="err" id="cerr" role="alert"></p></form>
+<div id="clist" class="stack"></div>
 </div>
 </div></main>
 <script>
 const $=s=>document.querySelector(s);const el=(t,x,c)=>{const e=document.createElement(t);if(x!=null)e.textContent=x;if(c)e.className=c;return e};const fmt=t=>new Date(t).toLocaleString("de-DE",{dateStyle:"full",timeStyle:"short"})+" Uhr";
 let pw=sessionStorage.getItem('pw'),data;
 const api=(m='GET',q='',b)=>fetch('/api/admin'+q,{method:m,headers:{authorization:'Bearer '+pw,...(b&&{'content-type':'application/json'})},body:b&&JSON.stringify(b)});
+const post=async b=>{const r=await api('POST','',b),j=await r.json().catch(()=>({}));if(!r.ok)throw new Error(j.error||'Fehler');return j};
 async function load(){const r=await api();const j=await r.json().catch(()=>({}));if(!r.ok)throw new Error(j.error||'Fehler');data=j;sessionStorage.setItem('pw',pw);$('#login').hidden=true;$('#panel').hidden=false;draw()}
 const del=(kind,id,label)=>{const b=el('button','Löschen','btn ghost sm');b.type='button';b.onclick=async()=>{if(!confirm(label+' wirklich löschen?'))return;await api('DELETE','?kind='+kind+'&id='+encodeURIComponent(id));load()};return b};
+const chip=(label,checked)=>{const l=el('label',null,'chip'),i=el('input');i.type='checkbox';i.checked=!!checked;l.append(i,document.createTextNode(label));return[l,i]};
+const inp=(ph,val,max)=>{const i=el('input');i.placeholder=ph;i.value=val||'';i.maxLength=max;i.setAttribute('aria-label',ph);return i};
+const PROV={yt:'YouTube',tc:'Twitch-Clip',tv:'Twitch-Video'},OUTL={'':'Kein Ergebnis',win:'Sieg',loss:'Niederlage',draw:'Unentschieden'};
 function draw(){
-  $('#ac').textContent='('+data.applications.length+')';$('#tc').textContent='('+data.tournaments.length+')';
+  $('#ac').textContent='('+data.applications.length+')';$('#tc').textContent='('+data.tournaments.length+')';$('#nc').textContent='('+data.news.length+')';$('#cc').textContent='('+data.clips.length+')';
   const a=$('#apps');a.replaceChildren();const g=el('div','','grid');
   if(!data.applications.length)a.append(el('p','Noch keine Bewerbungen.','hint'));
   for(const x of data.applications){
@@ -40,33 +62,59 @@ function draw(){
     c.append(m,del('application',x.id,'Bewerbung von '+x.nick));g.append(c);
   }
   a.append(g);
+
   const pl=$('#plist');pl.replaceChildren();
   if(!data.players.length)pl.append(el('p','Noch keine Spieler. In Netlify die Variable PLAYERS setzen.','hint'));
   for(const p of data.players){const l=el('label',null,'chip'),i=el('input');i.type='checkbox';i.value=p;l.append(i,document.createTextNode(p));pl.append(l)}
+
   const pp=$('#plr');pp.replaceChildren();const gp=el('div','','grid');
   if(!data.players.length)pp.append(el('p','Noch keine Spieler. In Netlify die Variable PLAYERS setzen.','hint'));
   for(const p of data.players){
-    const c=el('article',null,'card person'),a=data.avatars[p];let im;
-    if(a){im=el('img',null,'av');im.src=a;im.alt=p}else im=el('div',p[0].toUpperCase(),'av');
-    const d=el('div');d.append(el('h3',p),el('p',a?'Hat ein Profilbild':'Kein Profilbild','role'));
-    if(a)d.append(del('avatar',p,'Das Profilbild von '+p));
-    c.append(im,d);gp.append(c);
+    const pr=data.profiles[p]||{},av=data.avatars[p],c=el('article',null,'card stack'),top=el('div',null,'person');let im;
+    if(av){im=el('img',null,'av');im.src=av;im.alt=p}else im=el('div',p[0].toUpperCase(),'av');
+    const d=el('div');d.append(el('h3',p.toUpperCase()),el('p',av?'Hat ein Profilbild':'Kein Profilbild','role'));
+    if(av)d.append(del('avatar',p,'Das Profilbild von '+p));
+    top.append(im,d);
+    const f=el('form',null,'stack'),rank=inp('Rang (z. B. Diamond 2)',pr.rank,40),role=inp('Rolle (z. B. IGL, Light)',pr.role,40),kd=inp('K/D (z. B. 1.85)',pr.kd,6);kd.inputMode='decimal';
+    const[pc,pi]=chip('Öffentlich in den Spieler-Stats zeigen (inkl. Profilbild)',pr.pub),sv=el('button','Speichern','btn sm'),msg=el('p','','err');sv.type='submit';
+    f.append(rank,role,kd,pc,sv,msg);
+    f.onsubmit=async e=>{e.preventDefault();msg.textContent='';try{await post({kind:'profile',user:p,rank:rank.value,role:role.value,kd:kd.value,pub:pi.checked});await load()}catch(x){msg.textContent=x.message}};
+    c.append(top,f);gp.append(c);
   }
   pp.append(gp);
+
+  const nl=$('#nlist');nl.replaceChildren();
+  if(!data.news.length)nl.append(el('p','Noch keine News.','hint'));
+  for(const n of data.news){
+    const c=el('article',null,'card');c.append(el('h3',n.title),el('p',(n.pinned?'📌 Angepinnt · ':'')+new Date(n.at).toLocaleString('de-DE'),'role'),el('p',n.body,'hint'),del('news',n.id,'News „'+n.title+'“'));
+    c.querySelector('.hint').style.whiteSpace='pre-line';nl.append(c);
+  }
+
   const tl=$('#tlist');tl.replaceChildren();
   if(!data.tournaments.length)tl.append(el('p','Noch keine Turniere eingetragen.','hint'));
   for(const t of data.tournaments){
-    const c=el('article',null,'card');c.append(el('h3',t.title),el('p',t.game,'role'),el('p',fmt(t.when),'when'));
+    const c=el('article',null,'card');c.append(el('h3',t.title),el('p',t.game+(t.pub?' · öffentlich':' · nur intern'),'role'),el('p',fmt(t.when),'when'));
     const m=el('dl',null,'meta');
     for(const [k,v] of [['Wo',t.location],['Gegner',t.opponent||'–'],['Spieler',t.players.join(', ')],['Hinweise',t.notes||'–']])m.append(el('dt',k),el('dd',v));
-    c.append(m,del('tournament',t.id,'Turnier „'+t.title+'“'));tl.append(c);
+    const f=el('form',null,'stack'),res=inp('Ergebnis (z. B. 2:1 oder Platz 3)',t.result,40),oc=el('select');
+    for(const[k,v]of Object.entries(OUTL)){const o=el('option',v);o.value=k;oc.append(o)}oc.value=t.outcome||'';oc.setAttribute('aria-label','Ausgang');
+    const[pc,pi]=chip('Öffentlich im Kalender zeigen',t.pub),sv=el('button','Ergebnis / Sichtbarkeit speichern','btn sm'),msg=el('p','','err');sv.type='submit';
+    f.append(res,oc,pc,sv,msg);
+    f.onsubmit=async e=>{e.preventDefault();msg.textContent='';try{await post({kind:'tupdate',id:t.id,result:res.value,outcome:oc.value,pub:pi.checked});await load()}catch(x){msg.textContent=x.message}};
+    c.append(m,f,del('tournament',t.id,'Turnier „'+t.title+'“'));tl.append(c);
   }
+
+  const cl=$('#clist');cl.replaceChildren();
+  if(!data.clips.length)cl.append(el('p','Noch keine Clips.','hint'));
+  for(const x of data.clips){const c=el('article',null,'card');c.append(el('h3',x.title),el('p',PROV[x.p]||x.p,'role'),del('clip',x.id,'Clip „'+x.title+'“'));cl.append(c)}
 }
-document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tab').forEach(x=>x.setAttribute('aria-selected',x===b));['apps','tours','plr'].forEach(id=>$('#'+id).hidden=b.dataset.tab!==id)});
-$('#tform').addEventListener('submit',async e=>{e.preventDefault();const f=e.target;$('#terr').textContent='';
-  const b=Object.fromEntries(new FormData(f));b.players=[...f.querySelectorAll('#plist input:checked')].map(i=>i.value);
-  const r=await api('POST','',b),j=await r.json().catch(()=>({}));
-  if(!r.ok){$('#terr').textContent=j.error||'Fehler';return}f.reset();load()});
+const IDS=['apps','news','tours','plr','clips'];
+document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tab').forEach(x=>x.setAttribute('aria-selected',x===b));IDS.forEach(id=>$('#'+id).hidden=b.dataset.tab!==id)});
+function submitter(formSel,errSel,build){$(formSel).addEventListener('submit',async e=>{e.preventDefault();const f=e.target;$(errSel).textContent='';
+  try{await post(build(f));f.reset();await load()}catch(x){$(errSel).textContent=x.message}})}
+submitter('#tform','#terr',f=>({kind:'tournament',...Object.fromEntries(new FormData(f)),pub:f.elements.pub.checked,players:[...f.querySelectorAll('#plist input:checked')].map(i=>i.value)}));
+submitter('#nform','#nerr',f=>({kind:'news',title:f.elements.title.value,body:f.elements.body.value,pinned:f.elements.pinned.checked}));
+submitter('#cform','#cerr',f=>({kind:'clip',title:f.elements.title.value,url:f.elements.url.value}));
 $('#login').addEventListener('submit',e=>{e.preventDefault();$('#lerr').textContent='';pw=$('#pw').value;load().catch(x=>$('#lerr').textContent=x.message)});
 $('#reload').onclick=()=>load().catch(()=>location.reload());
 $('#logout').onclick=()=>{sessionStorage.removeItem('pw');location.reload()};

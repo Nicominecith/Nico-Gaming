@@ -17,7 +17,7 @@
 <header><div class="wrap">
 <a class="brand" href="#top"><img src="/nico.png" alt="">NICO<b>GAMING</b></a>
 <nav>
-<a href="#team" data-en="Team">Team</a><a href="#open" data-en="Open spots">Offene Plätze</a><a href="#rules" data-en="Rules">Regeln</a><a href="#partners" data-en="Partners">Partner</a><a href="/player" data-en="Player login">Spieler-Login</a>
+<a href="#news" data-for="news" data-en="News" hidden>News</a><a href="#calendar" data-for="calendar" data-en="Tournaments" hidden>Turniere</a><a href="#team" data-en="Team">Team</a><a href="#stats" data-for="stats" data-en="Stats" hidden>Stats</a><a href="#clips" data-for="clips" data-en="Clips" hidden>Clips</a><a href="#open" data-en="Open spots">Offene Plätze</a><a href="#rules" data-en="Rules">Regeln</a><a href="#partners" data-en="Partners">Partner</a><a href="/player" data-en="Login">Login</a>
 </nav>
 <a class="btn" href="#apply" data-en="Apply">Bewerben</a>
 <button class="lang" id="lang" type="button" aria-label="Sprache / Language">EN</button>
@@ -33,6 +33,26 @@
 <div class="logo"><img src="/nico.png" alt="NICO GAMING Logo" width="400" height="400"></div>
 </div></section>
 
+<section id="live" hidden><div class="wrap">
+<h2 class="h2"><span class="livedot" aria-hidden="true"></span><span data-en="Live now">Jetzt live</span></h2>
+<p class="sub" id="livetitle"></p>
+<div class="stage" id="livebox"></div>
+<a class="btn ghost" id="livelink" href="https://www.twitch.tv/nicominecith_ttv" target="_blank" rel="noopener" data-en="Open on Twitch">Auf Twitch öffnen</a>
+</div></section>
+
+<section id="news" hidden><div class="wrap">
+<h2 class="h2" data-en="News &amp; announcements">News &amp; Ankündigungen</h2>
+<p class="sub" data-en="What is happening at NICO GAMING.">Das passiert gerade bei NICO GAMING.</p>
+<div class="stack" id="newslist"></div>
+<button class="btn ghost more" id="newsmore" type="button" hidden></button>
+</div></section>
+
+<section id="calendar" hidden><div class="wrap">
+<h2 class="h2" data-en="Tournament calendar">Turnierkalender</h2>
+<p class="sub" data-en="Upcoming matches and results." >Anstehende Matches und Ergebnisse.</p>
+<div class="cal" id="callist"></div>
+</div></section>
+
 <section id="team"><div class="wrap">
 <h2 class="h2" data-en="The team">Das Team</h2>
 <p class="sub" data-en="Founded by N1CO and Jak.">Gegründet von N1CO und Jak.</p>
@@ -44,6 +64,18 @@
 <h3>JAK 🇩🇪</h3><p class="role">The Finals Pro</p>
 <p data-en="German The Finals pro and elite member of the roster.">Deutscher The Finals-Profi und Elite-Mitglied im Roster.</p></div></div>
 </div></div></section>
+
+<section id="stats" hidden><div class="wrap">
+<h2 class="h2" data-en="Player stats">Spieler-Stats</h2>
+<p class="sub" data-en="Rank, role and K/D of our roster.">Rang, Rolle und K/D unseres Rosters.</p>
+<div class="grid" id="statlist"></div>
+</div></section>
+
+<section id="clips" hidden><div class="wrap">
+<h2 class="h2" data-en="Clips &amp; videos">Clips &amp; Videos</h2>
+<p class="sub" data-en="Highlights from YouTube and Twitch. Videos only load after you click play.">Highlights von YouTube und Twitch. Videos werden erst nach dem Klick auf Play geladen.</p>
+<div class="grid" id="cliplist"></div>
+</div></section>
 
 <section id="open"><div class="wrap">
 <h2 class="h2" data-en="We want you">Wir suchen dich</h2>
@@ -104,7 +136,7 @@ function setLang(){
   document.documentElement.lang=en?'en':'de';$('#lang').textContent=en?'DE':'EN';
   document.querySelectorAll('[data-en]').forEach(e=>{e.dataset.de??=e.innerHTML;e.innerHTML=en?e.dataset.en:e.dataset.de});
 }
-$('#lang').onclick=()=>{en=!en;setLang()};setLang();
+$('#lang').onclick=()=>{en=!en;setLang();renderAll()};setLang();
 document.querySelectorAll('[data-role]').forEach(a=>a.addEventListener('click',()=>{$('#role').value=a.dataset.role}));
 $('#form').addEventListener('submit',async e=>{
   e.preventDefault();
@@ -123,6 +155,94 @@ $('#form').addEventListener('submit',async e=>{
   }catch(x){s.className='err';s.textContent=x.message||(en?'Something went wrong. Please try again.':'Etwas ist schiefgelaufen. Bitte versuche es nochmal.')}
   b.disabled=false;
 });
+
+/* ===== Dynamische Bereiche: News, Kalender, Stats, Clips ===== */
+const mk=(t,x,c)=>{const e=document.createElement(t);if(x!=null)e.textContent=x;if(c)e.className=c;return e};
+const loc=()=>en?'en-GB':'de-DE';
+const berlin=()=>new Date().toLocaleString('sv-SE',{timeZone:'Europe/Berlin'}).slice(0,16).replace(' ','T');
+const dayOf=w=>{const[y,m,d]=w.slice(0,10).split('-').map(Number);return new Date(Date.UTC(y,m-1,d))};
+const sec=(id,on)=>{$('#'+id).hidden=!on;const a=document.querySelector('nav a[data-for="'+id+'"]');if(a)a.hidden=!on};
+let pub=null,newsAll=false;
+
+function renderNews(){
+  const n=pub?.news||[];sec('news',n.length>0);
+  const box=$('#newslist');box.replaceChildren();
+  for(const x of n.slice(0,newsAll?n.length:3)){
+    const c=mk('article',null,'card news');
+    const d=new Date(x.at).toLocaleDateString(loc(),{day:'2-digit',month:'long',year:'numeric',timeZone:'Europe/Berlin'});
+    c.append(mk('p',(x.pinned?(en?'📌 Pinned · ':'📌 Angepinnt · '):'')+d,'role'),mk('h3',x.title),mk('p',x.body,'body'));
+    box.append(c);
+  }
+  const b=$('#newsmore');b.hidden=n.length<=3;b.textContent=newsAll?(en?'Show less':'Weniger anzeigen'):(en?'Older news':'Ältere News');
+}
+const OUT={win:['Sieg','Win'],loss:['Niederlage','Loss'],draw:['Unentschieden','Draw']};
+function evCard(x,past){
+  const c=mk('article',null,'card ev'+(past?' done':'')),d=mk('div',null,'d'),b=mk('div');
+  d.append(mk('b',x.when.slice(8,10)),mk('span',dayOf(x.when).toLocaleDateString(loc(),{month:'short',timeZone:'UTC'})));
+  let line=x.game+' · '+x.when.slice(11,16)+(en?'':' Uhr')+' · '+x.location;
+  if(!past){const n=Math.round((dayOf(x.when)-dayOf(berlin()))/864e5);line=new Intl.RelativeTimeFormat(en?'en':'de',{numeric:'auto'}).format(n,'day')+' · '+line}
+  b.append(mk('h3',x.title),mk('p',line,'role'));
+  if(x.opponent)b.append(mk('p','vs '+x.opponent));
+  if(x.players.length){const ch=mk('div',null,'chips');x.players.forEach(p=>ch.append(mk('span',p.toUpperCase(),'chip')));b.append(ch)}
+  const txt=[x.outcome&&OUT[x.outcome][en?1:0],x.result].filter(Boolean).join(' · ');
+  if(past&&txt)b.append(mk('span',txt,'res '+(x.outcome||'')));
+  c.append(d,b);return c;
+}
+function renderCal(){
+  const t=pub?.tournaments||[],now=berlin(),up=t.filter(x=>x.when>=now),old=t.filter(x=>x.when<now).reverse();
+  sec('calendar',t.length>0);
+  const box=$('#callist');box.replaceChildren();
+  if(up.length)box.append(mk('h3',en?'Upcoming':'Anstehend','cal-h'),...up.map(x=>evCard(x,false)));
+  if(old.length)box.append(mk('h3',en?'Results':'Ergebnisse','cal-h'),...old.map(x=>evCard(x,true)));
+}
+function renderStats(){
+  const p=pub?.profiles||[];sec('stats',p.length>0);
+  const box=$('#statlist');box.replaceChildren();
+  for(const x of p){
+    const c=mk('article',null,'card prof'),h=mk('div',null,'head');
+    let im;if(x.avatar){im=mk('img',null,'av');im.src='/api/avatar?u='+encodeURIComponent(x.user);im.alt='';im.loading='lazy'}else im=mk('div',x.user[0].toUpperCase(),'av');
+    const n=mk('div');n.append(mk('h3',x.user.toUpperCase()),x.role?mk('p',x.role,'role'):'');h.append(im,n);
+    const s=mk('div',null,'stats');
+    for(const[k,v]of[[en?'Rank':'Rang',x.rank],[en?'Role':'Rolle',x.role],['K/D',x.kd]]){const e=mk('div',null,'stat');e.append(mk('small',k),mk('b',v||'–'));s.append(e)}
+    c.append(h,s);box.append(c);
+  }
+}
+const embed=c=>c.p==='yt'?'https://www.youtube-nocookie.com/embed/'+c.v+'?autoplay=1&rel=0'
+  :c.p==='tc'?'https://clips.twitch.tv/embed?clip='+encodeURIComponent(c.v)+'&parent='+location.hostname+'&autoplay=true'
+  :'https://player.twitch.tv/?video='+c.v+'&parent='+location.hostname+'&autoplay=true';
+function renderClips(){
+  const l=pub?.clips||[];sec('clips',l.length>0);
+  const box=$('#cliplist');box.replaceChildren();
+  for(const x of l){
+    const c=mk('article',null,'card clip'),f=mk('div',null,'frame'),b=mk('button',null,'thumb');
+    b.type='button';b.setAttribute('aria-label',(en?'Play: ':'Abspielen: ')+x.title);
+    b.append(mk('span',x.p==='yt'?'YouTube':'Twitch'));
+    b.onclick=()=>{const i=document.createElement('iframe');i.src=embed(x);i.title=x.title;i.allow='autoplay; fullscreen; picture-in-picture';i.allowFullscreen=true;i.referrerPolicy='strict-origin-when-cross-origin';f.replaceChildren(i)};
+    f.append(b);c.append(f,mk('h3',x.title));box.append(c);
+  }
+}
+function renderAll(){renderNews();renderCal();renderStats();renderClips()}
+$('#newsmore').onclick=()=>{newsAll=!newsAll;renderNews()};
+fetch('/api/public').then(r=>r.ok?r.json():null).then(j=>{pub=j;renderAll()}).catch(()=>{});
+
+/* ===== Live-Stream: nur wenn live UND Kategorie Events / The Finals ===== */
+let liveOn=false;
+function setLive(j){
+  const s=$('#live');
+  if(j?.show){
+    $('#livetitle').textContent=[j.title,j.game].filter(Boolean).join(' · ');
+    $('#livelink').href='https://www.twitch.tv/'+encodeURIComponent(j.channel);
+    if(!liveOn){
+      const i=document.createElement('iframe');
+      i.src='https://player.twitch.tv/?channel='+encodeURIComponent(j.channel)+'&parent='+location.hostname+'&muted=true';
+      i.title='Twitch: '+j.channel;i.allow='autoplay; fullscreen';i.allowFullscreen=true;
+      $('#livebox').replaceChildren(i);
+    }
+    s.hidden=false;liveOn=true;
+  }else if(liveOn){s.hidden=true;$('#livebox').replaceChildren();liveOn=false}
+}
+const pollLive=()=>{if(!document.hidden)fetch('/api/live').then(r=>r.json()).then(setLive).catch(()=>{})};
+pollLive();setInterval(pollLive,60000);document.addEventListener('visibilitychange',pollLive);
 </script>
 </body>
 </html>
