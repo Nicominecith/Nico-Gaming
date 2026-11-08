@@ -9,7 +9,7 @@ window.NICO = {
   sfxVolume: 0.8,
   endingFadeAfterSec: 75,
   ticker: ["FOLLOW NICHT VERGESSEN","TWITCH.TV/NICOMINECITH_TTV","!COMMANDS IM CHAT","DANKE FÜR DEINEN SUPPORT"],
-  widgets: { music:"", alerts:"", chat:"", sponsor:"", viewers:"" }
+  widgets: { music:"", alerts:"", chat:"https://www.giambaj.it/twitch/jchat/v2/?channel=Nicominecith_ttv&size=2&font=1&fade=30&hide_commands=true&stroke=1&shadow=2", sponsor:"", viewers:"" }
 };
 // URL-Parameter überschreiben Widget-Links:  ?chat=..&alerts=..&viewers=..&music=..&sponsor=..
 (function(){const q=new URLSearchParams(location.search);

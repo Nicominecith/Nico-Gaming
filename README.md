@@ -55,5 +55,5 @@ Liegen unter `public/overlay/`, kein Build nötig. Nach dem Deploy:
 - Starting: `https://nico-gaming.netlify.app/overlay/screen.html?scene=starting&min=5`
 - Pause: `https://nico-gaming.netlify.app/overlay/screen.html?scene=brb`
 - Ending: `https://nico-gaming.netlify.app/overlay/screen.html?scene=ending`
-Quer/Hoch wird automatisch erkannt (`?mode=portrait` erzwingt Hochformat). Einzelne Teile ausblenden: `?hide=chat,music,sponsor,viewers,alerts`.
-Widget-Links (Chat, Alerts) NIE in `assets/config.js` eintragen (Seite ist öffentlich) – nur als URL-Parameter, z. B. `?chat=<URL-kodierter Link>`.
+Füllt jeden Bildschirm (empfohlen: 1280x720). Quer/Hoch wird automatisch erkannt (`?mode=portrait` erzwingt Hochformat). Einzelne Teile ausblenden: `?hide=chat,music,sponsor,viewers,alerts`.
+Widget-Links (Viewer, Sponsor, Musik, Alerts) NIE in `assets/config.js` eintragen (Seite ist öffentlich) – nur als URL-Parameter, z. B. `?chat=<URL-kodierter Link>`.

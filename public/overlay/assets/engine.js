@@ -1,12 +1,15 @@
 /* Stage-Skalierung: passt 1920x1080 (quer) bzw. 1080x1920 (hoch) in jede Bildschirmgröße */
 (function(){const st=document.getElementById('stage');
  function fit(){const q=new URLSearchParams(location.search);const m=q.get('mode');
-  const portrait=m?m==='portrait':innerHeight>innerWidth;document.body.classList.toggle('portrait',portrait);
-  const W=portrait?1080:1920,H=portrait?1920:1080,s=Math.min(innerWidth/W,innerHeight/H);
-  st.style.transform=`scale(${s}) translate(${-W/2}px,${-H/2}px)`;window.NICO_DIM={W,H};
-  const cv=document.getElementById('fx');if(cv&&(cv.width!==W)){cv.width=W;cv.height=H}}
+  const vw=innerWidth,vh=innerHeight;
+  const portrait=m?m==='portrait':vh>vw;document.body.classList.toggle('portrait',portrait);
+  const W0=portrait?1080:1920,H0=portrait?1920:1080,s=Math.min(vw/W0,vh/H0);
+  // Bühne füllt den ganzen Bildschirm (jedes Format/jede Auflösung, z. B. 1280x720), Elemente hängen an den Rändern
+  const W=Math.round(vw/s),H=Math.round(vh/s);
+  st.style.width=W+'px';st.style.height=H+'px';st.style.transform='scale('+s+')';window.NICO_DIM={W,H};
+  const cv=document.getElementById('fx');if(cv&&(cv.width!==W||cv.height!==H)){cv.width=W;cv.height=H}}
  fit();addEventListener('resize',fit);
- // Teile ausblenden: ?hide=chat,music,sponsor,viewers,alerts
+// Teile ausblenden: ?hide=chat,music,sponsor,viewers,alerts
  const h=(new URLSearchParams(location.search).get('hide')||'').split(',');
  h.forEach(k=>document.querySelectorAll('[data-box="'+k+'"]').forEach(e=>e.classList.add('hide')));
 })();
