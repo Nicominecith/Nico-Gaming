@@ -5,8 +5,11 @@
   const portrait=m?m==='portrait':vh>vw;document.body.classList.toggle('portrait',portrait);
   const W0=portrait?1080:1920,H0=portrait?1920:1080,s=Math.min(vw/W0,vh/H0);
   // Bühne füllt den ganzen Bildschirm (jedes Format/jede Auflösung, z. B. 1280x720), Elemente hängen an den Rändern
-  const W=Math.round(vw/s),H=Math.round(vh/s);
-  st.style.width=W+'px';st.style.height=H+'px';st.style.transform='scale('+s+')';window.NICO_DIM={W,H};
+  const Wf=Math.round(vw/s),Hf=Math.round(vh/s);
+  // Sicherheitsrand (Standard 5 %): manche Apps zeigen den Rand der Overlay-Fläche abgeschnitten. Ändern mit ?safe=0..15
+  const sp=parseFloat(q.get('safe')),pct=isNaN(sp)?5:Math.max(0,Math.min(15,sp));
+  const sx=Math.round(Wf*pct/100),sy=Math.round(Hf*pct/100),W=Wf-2*sx,H=Hf-2*sy;
+  st.style.width=W+'px';st.style.height=H+'px';st.style.transform='translate('+(sx*s)+'px,'+(sy*s)+'px) scale('+s+')';window.NICO_DIM={W,H};
   const cv=document.getElementById('fx');if(cv&&(cv.width!==W||cv.height!==H)){cv.width=W;cv.height=H}}
  fit();addEventListener('resize',fit);
 // Teile ausblenden: ?hide=chat,music,sponsor,viewers,alerts

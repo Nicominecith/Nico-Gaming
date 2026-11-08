@@ -1,0 +1,14 @@
+<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Overlay Test</title>
+<style>html,body{margin:0;width:100%;height:100%;overflow:hidden;background:rgba(0,0,0,.25);font:700 3.2vmin monospace;color:#fff}
+body{box-sizing:border-box;border:.8vmin solid #f0f}
+.c{position:absolute;background:#ff0;color:#000;padding:.6vmin 1.2vmin}
+#tl{left:0;top:0}#tr{right:0;top:0}#bl{left:0;bottom:0}#br{right:0;bottom:0}
+#m{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);text-align:center;background:rgba(0,0,0,.6);padding:2vmin}
+.h{position:absolute;left:0;right:0;height:0;border-top:.3vmin dashed #0ff}.v{position:absolute;top:0;bottom:0;width:0;border-left:.3vmin dashed #0ff}
+</style></head><body>
+<div class="h" style="top:25%"></div><div class="h" style="top:50%"></div><div class="h" style="top:75%"></div>
+<div class="v" style="left:25%"></div><div class="v" style="left:50%"></div><div class="v" style="left:75%"></div>
+<div class="c" id="tl">OBEN LINKS</div><div class="c" id="tr">OBEN RECHTS</div><div class="c" id="bl">UNTEN LINKS</div><div class="c" id="br">UNTEN RECHTS</div>
+<div id="m">Overlay-Test<br><span id="s"></span></div>
+<script>function u(){document.getElementById('s').textContent=innerWidth+' x '+innerHeight+' px  (x'+devicePixelRatio+')'}u();addEventListener('resize',u)</script>
+</body></html>
