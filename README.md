@@ -44,7 +44,16 @@ Alle Bereiche blenden sich automatisch aus, solange es nichts anzuzeigen gibt.
 - **Clips & Videos:** `/admin` -> Tab „Clips“ -> Link einfügen (YouTube-Video/Short, Twitch-Clip, Twitch-Video). Videos laden erst nach Klick auf Play.
 
 ## Live-Stream auf der Seite (Twitch)
-Die Seite zeigt den Stream von `nicominecith_ttv` automatisch, sobald du live bist **und** die Kategorie „The Finals“ oder „Events“ gesetzt ist (Prüfung alle 60 Sek.). Sonst bleibt der Bereich unsichtbar.
+Die Seite zeigt den Stream von `nicominecith_ttv` automatisch, sobald du live bist **und** die Kategorie „The Finals“, „Events“, „IRL“, „Just Chatting“ oder „Travel & Outdoors“ gesetzt ist (Prüfung alle 60 Sek.). Sonst bleibt der Bereich unsichtbar.
 1. https://dev.twitch.tv/console -> „Register Your Application“ (Twitch-Konto braucht 2FA). Name frei, OAuth Redirect URL `http://localhost`, Kategorie „Website Integration“, Client-Typ „Confidential“.
 2. Client-ID + „New Secret“ in Netlify als `TWITCH_CLIENT_ID` und `TWITCH_CLIENT_SECRET` eintragen, neu deployen.
-3. Optional: `TWITCH_CHANNEL` (Standard `nicominecith_ttv`) und `LIVE_CATEGORIES` (Standard `the finals,events`, Teilstring-Vergleich, Komma-getrennt). Die Twitch-Kategorie heißt dort „Special Events“ – wird mit `events` mitgefunden.
+3. Optional: `TWITCH_CHANNEL` (Standard `nicominecith_ttv`) und `LIVE_CATEGORIES` (Standard `the finals,events,irl,just chatting,travel & outdoors`, Teilstring-Vergleich, Komma-getrennt). Die Twitch-Kategorie heißt dort „Special Events“ – wird mit `events` mitgefunden.
+
+## IRL-Overlays (IRL Pro / Handy-Streaming)
+Liegen unter `public/overlay/`, kein Build nötig. Nach dem Deploy:
+- Live: `https://nico-gaming.netlify.app/overlay/`
+- Starting: `https://nico-gaming.netlify.app/overlay/screen.html?scene=starting&min=5`
+- Pause: `https://nico-gaming.netlify.app/overlay/screen.html?scene=brb`
+- Ending: `https://nico-gaming.netlify.app/overlay/screen.html?scene=ending`
+Quer/Hoch wird automatisch erkannt (`?mode=portrait` erzwingt Hochformat). Einzelne Teile ausblenden: `?hide=chat,music,sponsor,viewers,alerts`.
+Widget-Links (Chat, Alerts) NIE in `assets/config.js` eintragen (Seite ist öffentlich) – nur als URL-Parameter, z. B. `?chat=<URL-kodierter Link>`.

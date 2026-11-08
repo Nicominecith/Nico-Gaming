@@ -1,0 +1,30 @@
+<!DOCTYPE html><html lang="de"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Nico Gaming - IRL Screen</title>
+<link rel="stylesheet" href="assets/theme.css"><link rel="stylesheet" href="assets/irl.css"><script src="assets/config.js"></script></head><body class="solid">
+<div id="stage">
+<div class="layer grid"></div><div class="layer sweep"></div><canvas id="fx"></canvas><div class="layer vig"></div><div class="layer scan"></div>
+<div class="center">
+<div class="in u" style="--d:.2s;margin-bottom:26px"><div class="logo-wrap"><div class="ring c"></div><div class="ring"></div><div class="ring b"></div><img src="assets/img/logo.png"></div></div>
+<h1 class="title glitch" id="t">STREAM STARTET</h1>
+<div class="in u" style="--d:1.5s"><div id="mid"></div></div>
+<div class="sub in u" style="--d:1.9s"><b id="s">GLEICH GEHT'S LOS</b></div></div>
+<div class="panel cut in l box l-logo" style="--d:.5s"><img src="assets/img/logo.png" style="width:64px;height:64px;filter:drop-shadow(0 0 10px var(--red))"><div><div class="orb" style="font-size:24px;font-weight:900;letter-spacing:3px">NICO GAMING</div><div style="font:600 18px Rajdhani;letter-spacing:2px;color:#ffb3bf" id="h"></div></div></div>
+<div class="ticker in u" style="--d:1.2s"></div>
+<div class="box l-alerts" data-box="alerts"><iframe data-widget="alerts" scrolling="no"></iframe></div>
+</div>
+<script src="assets/engine.js"></script>
+<script>
+document.getElementById('h').textContent=NICO.handle.toUpperCase();
+const sc=NICO_Q.get('scene')||'starting',t=document.getElementById('t'),mid=document.getElementById('mid'),sub=document.getElementById('s');
+Sound.play('hit.ogg',1,.2);Sound.play('whoosh.ogg',.7,0);
+const eq='<div class="eq">'+Array.from({length:14},(_,i)=>'<i style="animation-delay:-'+(i*.13).toFixed(2)+'s;animation-duration:'+[.6,.8,1,1.2,.7,.9,1.1][i%7]+'s"></i>').join('')+'</div>';
+function retitle(s){t.textContent=s;t.dataset.t=s;t.innerHTML=[...s].map((c,i)=>'<span style="animation-delay:'+(.5+i*.06)+'s">'+(c===' '?'&nbsp;':c)+'</span>').join('')}
+if(sc==='brb'){retitle('PAUSE');sub.textContent='BIN GLEICH WIEDER DA';
+ mid.innerHTML=eq+'<div class="orb" style="font-size:22px;letter-spacing:6px;margin-bottom:22px;color:#ffb3bf">PAUSE SEIT <span id="c" style="color:#fff">00:00</span></div>';
+ Sound.loop('ambient_loop.ogg',NICO.musicVolume*.9,3);countup(document.getElementById('c'))}
+else if(sc==='ending'){retitle('STREAM ENDET');sub.textContent='DANKE FÜRS ZUSCHAUEN';
+ mid.innerHTML='<div class="orb" style="font-size:24px;letter-spacing:7px;margin-bottom:26px;color:#ffb3bf">BIS ZUM NÄCHSTEN MAL · FOLGEN NICHT VERGESSEN</div>';
+ const m=Sound.loop('ambient_loop.ogg',NICO.musicVolume,3);setTimeout(()=>Sound.fade(m,0,10),NICO.endingFadeAfterSec*1000)}
+else{mid.innerHTML='<div class="clock" id="c">05:00</div><div class="bar"><i id="b"></i></div>';
+ Sound.loop('ambient_loop.ogg',NICO.musicVolume,4);
+ countdown(document.getElementById('c'),document.getElementById('b'),+NICO_Q.get('min')||NICO.startMinutes,()=>{Sound.play('ding.ogg',1);Sound.play('hit.ogg',1);sub.textContent="LET'S GO!"})}
+</script></body></html>

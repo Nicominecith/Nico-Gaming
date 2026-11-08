@@ -1,6 +1,6 @@
 /** Prüft über die Twitch-API, ob der Kanal live ist UND in einer erlaubten Kategorie streamt.
  *  Env: TWITCH_CLIENT_ID, TWITCH_CLIENT_SECRET (Pflicht), TWITCH_CHANNEL (Standard nicominecith_ttv),
- *       LIVE_CATEGORIES (Standard "the finals,events" – Teilstring-Vergleich, Groß-/Kleinschreibung egal) */
+ *       LIVE_CATEGORIES (Standard "the finals,events,irl,just chatting,travel & outdoors" – Teilstring-Vergleich, Groß-/Kleinschreibung egal) */
 let token = { v: "", exp: 0 }, cache = { t: 0, v: null };
 
 async function appToken(id, secret, force) {
@@ -33,7 +33,7 @@ export default async () => {
   if (cache.v && Date.now() - cache.t < 45000) return out(cache.v);
   try {
     const s = await stream(id, secret, channel);
-    const cats = (process.env.LIVE_CATEGORIES || "the finals,events").split(",").map((x) => x.trim().toLowerCase()).filter(Boolean);
+    const cats = (process.env.LIVE_CATEGORIES || "the finals,events,irl,just chatting,travel & outdoors").split(",").map((x) => x.trim().toLowerCase()).filter(Boolean);
     const game = s?.game_name || "";
     const v = { configured: true, channel, live: !!s && s.type === "live", game, title: s?.title || "", show: !!s && s.type === "live" && cats.some((c) => game.toLowerCase().includes(c)) };
     cache = { t: Date.now(), v };
